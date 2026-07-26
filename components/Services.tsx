@@ -5,13 +5,13 @@ const services = [
     color: "border-purple/20",
     tagColor: "text-purple",
     description:
-      "Support lymphatic flow, circulation, digestion and elimination, immune wellness, and mental clarity. Many clients report feeling lighter, less puffy, and more clear after their first session.",
+      "A gentle, effective therapy that uses controlled suction to improve skin tone and circulation, supporting lymphatic drainage and helping you feel less puffy, heavy, or sluggish.",
     bullets: [
-      "Lymphatic flow support",
-      "Circulation & digestion",
+      "Lymphatic flow & drainage support",
+      "Circulation & blood movement",
+      "Digestion & elimination support",
       "Immune wellness support",
-      "Mental clarity",
-      "Reduced puffiness & heaviness",
+      "Mental clarity & reduced puffiness",
     ],
   },
   {
@@ -30,18 +30,33 @@ const services = [
     ],
   },
   {
-    title: "EMShape Body Sculpting",
+    title: "EMShape Neo Body Sculpting",
     tag: "Body Confidence",
     color: "border-warm/20",
     tagColor: "text-warm",
     description:
-      "Non-invasive body sculpting to support tone, shape, muscle activation, and body confidence — without surgery or downtime. A great next step for women ready to feel stronger and more confident in their body.",
+      "High-intensity electromagnetic technology that simulates an intense workout — toning and strengthening muscles while supporting body contouring. Non-invasive, no surgery, no downtime.",
     bullets: [
       "Muscle activation & tone",
-      "Non-invasive contouring",
-      "Body confidence support",
+      "Body contouring support",
+      "Abdomen, thighs & glutes",
       "No surgery or downtime",
-      "Personalized approach",
+      "Pairs well with other services",
+    ],
+  },
+  {
+    title: "Ultrasonic Cavitation & RF",
+    tag: "Skin & Contouring",
+    color: "border-purple/10",
+    tagColor: "text-purple/70",
+    description:
+      "A dual-action approach using ultrasound waves to support fat cell breakdown while RF energy stimulates collagen production — for firmer, more youthful-feeling skin.",
+    bullets: [
+      "Supports fat cell breakdown",
+      "Collagen stimulation",
+      "Skin tightening & elasticity",
+      "Targets stubborn areas",
+      "Non-invasive treatment",
     ],
   },
 ];
@@ -56,20 +71,20 @@ export default function Services() {
             A supportive place to find your next right step
           </h2>
           <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Susie Sculpts is not a one-size-fits-all clinic. It is a private, personalized wellness studio in Gilbert, AZ where you can explore what your body actually needs — without pressure, judgment, or a hard sell.
+            Susie Sculpts is a private, personalized wellness studio in Gilbert, AZ. With over 30 years in health and wellness, Susie takes a holistic approach — supporting your body, mind, and confidence without pressure or a hard sell.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {services.map((s) => (
             <div
               key={s.title}
-              className={`bg-white/70 backdrop-blur-sm border-t-2 ${s.color} border-l border-r border-b border-stone rounded-sm p-6 md:p-8 flex flex-col`}
+              className={`bg-white/70 backdrop-blur-sm border-t-2 ${s.color} border-l border-r border-b border-stone rounded-sm p-6 flex flex-col`}
             >
               <p className={`font-sans font-medium tracking-widest uppercase text-xs mb-3 ${s.tagColor}`}>
                 {s.tag}
               </p>
-              <h3 className="font-serif text-xl md:text-2xl font-light text-[#2c1f14] mb-4 leading-snug">
+              <h3 className="font-serif text-xl font-light text-[#2c1f14] mb-4 leading-snug">
                 {s.title}
               </h3>
               <p className="font-sans font-light text-sm text-muted leading-relaxed mb-5 flex-1">

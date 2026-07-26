@@ -5,15 +5,15 @@ import { useState } from "react";
 const faqs = [
   {
     q: "What is the Body Reset Experience?",
-    a: "The Body Reset Experience is a private consultation with Susie to understand what you are feeling in your body, what you have already tried, and what kind of wellness support may be the right next step for you. It is not a hard sell — it is a genuine conversation. From there, Susie may recommend Synergy Vacuum Massage for lymphatic and circulation support, PEMF frequency wellness for recovery and inflammation response, EMShape for body sculpting and muscle activation, or a combination based on your goals.",
+    a: "The Body Reset Experience is a private consultation with Susie to understand what you are feeling in your body, what you have already tried, and what kind of wellness support may be the right next step for you. Susie has been in the health and wellness field for over 30 years and takes a holistic approach — supporting not just your physical body, but your mental, emotional, and overall well-being. From there, she may recommend Synergy Vacuum Massage, PEMF frequency wellness, EMShape Neo body sculpting, Ultrasonic Cavitation, or a personalized combination based on your goals.",
   },
   {
     q: "Is this only for body sculpting?",
-    a: "Not at all. While EMShape body sculpting is one of the services available, many clients come to Susie Sculpts for lymphatic support, PEMF wellness, energy recovery, or simply because they feel puffy, heavy, foggy, or stuck and want a safe place to start. The Body Reset Experience is designed to meet you wherever you are.",
+    a: "Not at all. While EMShape Neo and Ultrasonic Cavitation are available for body contouring, many clients come to Susie Sculpts for lymphatic support, PEMF wellness, energy recovery, or simply because they feel puffy, heavy, foggy, or stuck and want a safe place to start. Susie also incorporates holistic nutrition and wellness guidance to help clients feel better from the inside out.",
   },
   {
     q: "What if I'm not sure which service I need?",
-    a: "That is exactly what the Body Reset Consultation is for. You do not need to know what you need before you come in. Susie will listen, ask questions, and help you identify the most supportive next step for your body and goals. There is no pressure and no obligation.",
+    a: "That is exactly what the Body Reset Consultation is for. You do not need to know what you need before you come in. Susie will listen, ask questions, and help you identify the most supportive next step for your body and goals. There is no pressure and no obligation. Call or text Susie directly at (480) 440-0909 if you would like to talk first.",
   },
   {
     q: "Do I need to buy a package right away?",
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "Where is Susie Sculpts located, and who does Susie serve?",
-    a: "Susie Sculpts is located in Gilbert, Arizona and serves women throughout the East Valley including Chandler, Queen Creek, Mesa, and surrounding communities. If you are unsure whether you are in the service area, reach out through the form above and Susie will be happy to connect with you.",
+    a: "Susie Sculpts serves women throughout the East Valley of Arizona including Gilbert, Chandler, Queen Creek, Mesa, and surrounding communities. Susie has been helping women in this area feel and look their very best since 1995. To set up an appointment or ask a question, call or text (480) 440-0909.",
   },
 ];
 
@@ -69,6 +69,17 @@ export default function FAQ() {
               )}
             </div>
           ))}
+        </div>
+
+        {/* Direct CTA */}
+        <div className="mt-10 text-center">
+          <p className="font-sans font-light text-muted text-sm mb-4">Still have questions? Susie is happy to talk.</p>
+          <a
+            href="tel:+14804400909"
+            className="btn-primary inline-block"
+          >
+            Call or Text (480) 440-0909
+          </a>
         </div>
       </div>
     </section>

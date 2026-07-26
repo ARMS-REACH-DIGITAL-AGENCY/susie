@@ -15,9 +15,16 @@ export default function Footer() {
               height={40}
               className="h-9 w-auto mb-4 brightness-0 invert opacity-80"
             />
-            <p className="text-xs font-sans font-light leading-relaxed text-cream/50">
-              Private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.
+            <p className="text-xs font-sans font-light leading-relaxed text-cream/50 mb-4">
+              Private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley. Helping women since 1995.
             </p>
+            <a
+              href="tel:+14804400909"
+              className="inline-flex items-center gap-2 text-sm font-sans font-light text-cream/70 hover:text-cream transition-colors"
+            >
+              <span>📞</span>
+              <span>(480) 440-0909</span>
+            </a>
           </div>
 
           {/* Contact */}
@@ -25,13 +32,12 @@ export default function Footer() {
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-gold mb-4">Contact</p>
             <ul className="space-y-2 text-xs font-sans font-light">
               <li>
-                {/* Replace with real phone */}
-                <a href="tel:+1XXXXXXXXXX" className="hover:text-cream transition-colors">
-                  📞 (000) 000-0000
+                <a href="tel:+14804400909" className="hover:text-cream transition-colors">
+                  📞 (480) 440-0909
                 </a>
               </li>
               <li>
-                {/* Replace with real email */}
+                {/* Replace with real email when available */}
                 <a href="mailto:hello@susiesculpts.com" className="hover:text-cream transition-colors">
                   ✉️ hello@susiesculpts.com
                 </a>
@@ -62,11 +68,12 @@ export default function Footer() {
           {/* Service Area */}
           <div>
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-gold mb-4">Service Area</p>
-            <p className="text-xs font-sans font-light leading-relaxed text-cream/50">
+            <p className="text-xs font-sans font-light leading-relaxed text-cream/50 mb-4">
               Gilbert · Chandler · Queen Creek · Mesa · East Valley Arizona
             </p>
-            <p className="mt-4 text-xs font-sans font-light leading-relaxed text-cream/50">
-              Body sculpting Gilbert AZ · PEMF Gilbert AZ · Lymphatic massage Gilbert AZ · Body reset Gilbert AZ
+            <p className="text-xs font-sans font-medium tracking-widest uppercase text-gold mb-2">Services</p>
+            <p className="text-xs font-sans font-light leading-relaxed text-cream/50">
+              Synergy Vacuum Massage · PEMF Frequency Wellness · EMShape Neo Body Sculpting · Ultrasonic Cavitation & RF · Holistic Wellness & Nutrition
             </p>
           </div>
 
@@ -74,10 +81,10 @@ export default function Footer() {
 
         <div className="border-t border-cream/10 pt-8 space-y-3">
           <p className="text-xs font-sans font-light text-cream/40 leading-relaxed max-w-3xl">
-            <strong className="font-medium text-cream/50">Disclaimer:</strong> Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary.
+            <strong className="font-medium text-cream/50">Disclaimer:</strong> Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary. Results are not guaranteed.
           </p>
           <p className="text-xs font-sans font-light text-cream/30">
-            © {new Date().getFullYear()} Susie Sculpts · susiesculpts.com · Gilbert, AZ
+            © {new Date().getFullYear()} Susie Sculpts · susiesculpts.com · Gilbert, AZ · Helping Women Since 1995
           </p>
         </div>
       </div>

@@ -6,12 +6,12 @@ export default function Trust() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 
-          {/* Photo placeholder */}
+          {/* Photo */}
           <div className="flex justify-center md:justify-start">
             <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-sm overflow-hidden shadow-xl">
               <Image
                 src="/images/susie.jpg"
-                alt="Susie — Susie Sculpts Gilbert AZ"
+                alt="Susie — Susie Sculpts Gilbert AZ, 30 years in health and wellness"
                 fill
                 className="object-cover object-top"
                 sizes="320px"
@@ -21,21 +21,33 @@ export default function Trust() {
 
           {/* Copy */}
           <div>
-            <p className="section-label mb-4">Meet Susie</p>
+            <p className="section-label mb-4">Helping Women Since 1995</p>
             <h2 className="section-heading mb-6">
-              You do not have to know exactly what you need before you start.
+              30 years. Real results.<br />No pressure. Ever.
             </h2>
-            <p className="font-sans font-light text-muted text-base leading-relaxed mb-6">
-              The first step is a private conversation to understand what you are feeling, what you have tried, and what kind of support may make sense for your body right now.
+            <p className="font-sans font-light text-muted text-base leading-relaxed mb-4">
+              I&rsquo;ve been in the health and wellness field for over 30 years, helping people feel and look their very best. My body sculpting business uses advanced, non-invasive technology to target fat, contour the body, and improve overall wellness.
             </p>
-            <p className="font-sans font-light text-muted text-base leading-relaxed mb-8">
-              Susie works with women in Gilbert, Chandler, Queen Creek, Mesa, and the East Valley who are ready to feel better — without the pressure, the hard sell, or the one-size-fits-all approach.
+            <p className="font-sans font-light text-muted text-base leading-relaxed mb-6">
+              But true transformation isn&rsquo;t just physical. I take a holistic approach that supports mental, emotional, and spiritual well-being as well. My goal is to empower women to feel confident, healthy, and balanced in every aspect of their lives.
             </p>
 
+            {/* Phone CTA */}
+            <a
+              href="tel:+14804400909"
+              className="inline-flex items-center gap-3 bg-purple/8 border border-purple/20 rounded-sm px-5 py-4 mb-6 hover:bg-purple/12 transition-colors group"
+            >
+              <span className="text-xl">📞</span>
+              <div>
+                <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple mb-0.5">Call or Text Susie Directly</p>
+                <p className="font-serif text-xl font-light text-[#2c1f14] group-hover:text-purple transition-colors">(480) 440-0909</p>
+              </div>
+            </a>
+
             {/* Testimonial placeholder */}
-            <div className="bg-purple/5 border-l-2 border-purple/30 pl-5 py-4 mb-6">
+            <div className="bg-purple/5 border-l-2 border-purple/30 pl-5 py-4 mb-5">
               <p className="font-serif text-lg font-light italic text-[#2c1f14] leading-relaxed mb-2">
-                &ldquo;Client testimonial coming soon — add yours after your first session.&rdquo;
+                &ldquo;Client testimonial coming soon — your story could be here after your first session.&rdquo;
               </p>
               <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple/60">
                 — Client Name, Gilbert AZ

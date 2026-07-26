@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-gold/8 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-stretch">
 
           {/* Copy */}
           <div className="order-2 md:order-1">
@@ -47,14 +47,15 @@ export default function Hero() {
 
           {/* Susie photo */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-full max-w-sm md:max-w-md h-[420px] sm:h-[500px] md:h-[560px] rounded-sm overflow-hidden shadow-2xl">
+            {/* On mobile: fixed square. On desktop: stretches to match copy column height */}
+            <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-full md:h-full min-h-[320px] rounded-sm overflow-hidden shadow-2xl">
               <Image
                 src="/images/susie.jpg"
                 alt="Susie — founder of Susie Sculpts, body sculpting and wellness in Gilbert AZ"
                 fill
                 className="object-cover object-[center_8%]"
                 priority
-                sizes="(max-width: 768px) 100vw, 448px"
+                sizes="(max-width: 768px) 320px, 448px"
               />
             </div>
           </div>

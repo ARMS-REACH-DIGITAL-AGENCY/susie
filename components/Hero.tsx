@@ -49,7 +49,7 @@ export default function Hero() {
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-sm overflow-hidden shadow-2xl">
               <Image
-                src="/images/susie.png"
+                src="/images/susie.jpg"
                 alt="Susie — founder of Susie Sculpts, body sculpting and wellness in Gilbert AZ"
                 fill
                 className="object-cover object-top"

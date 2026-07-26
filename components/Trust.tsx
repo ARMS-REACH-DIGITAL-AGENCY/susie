@@ -10,7 +10,7 @@ export default function Trust() {
           <div className="flex justify-center md:justify-start">
             <div className="relative w-72 h-80 sm:w-80 sm:h-96 rounded-sm overflow-hidden shadow-xl">
               <Image
-                src="/images/susie.png"
+                src="/images/susie.jpg"
                 alt="Susie — Susie Sculpts Gilbert AZ, 30 years in health and wellness"
                 fill
                 className="object-cover object-top"

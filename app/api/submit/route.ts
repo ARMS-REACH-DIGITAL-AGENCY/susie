@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       page:              "Body Reset Experience",
     };
 
-    const webhookUrl = process.env.HIGHLEVEL_WEBHOOK_URL;
+    const webhookUrl = process.env.HIGHLEVEL_WEBHOOK_URL || "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/undefined";
 
     if (!webhookUrl) {
       console.warn(

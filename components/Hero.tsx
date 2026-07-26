@@ -47,7 +47,7 @@ export default function Hero() {
 
           {/* Susie photo */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-72 h-80 sm:w-80 sm:h-96 md:w-96 md:h-[480px] rounded-sm overflow-hidden shadow-2xl">
+            <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-sm overflow-hidden shadow-2xl">
               <Image
                 src="/images/susie.png"
                 alt="Susie — founder of Susie Sculpts, body sculpting and wellness in Gilbert AZ"
@@ -56,16 +56,6 @@ export default function Hero() {
                 priority
                 sizes="(max-width: 768px) 320px, 384px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple/10 via-transparent to-transparent" />
-              {/* Credential badge */}
-              <div className="absolute bottom-4 left-4 right-4 bg-white/85 backdrop-blur-sm rounded-sm px-4 py-3">
-                <p className="font-serif text-sm font-light text-[#2c1f14] leading-snug">
-                  <em>Helping women feel their best</em>
-                </p>
-                <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple mt-0.5">
-                  Since 1995 · 30+ Years Experience
-                </p>
-              </div>
             </div>
           </div>
 

@@ -175,7 +175,7 @@ export default function BodyResetPage() {
 
   async function captureLead(e: React.FormEvent) {
     e.preventDefault();
-    if (!fields.firstName || !fields.phone || !fields.consent) return;
+    if (!fields.firstName || !fields.email || !fields.consent) return;
     setLeadState("submitting");
     try {
       await postLead("Lead Captured Before Quiz");
@@ -206,33 +206,35 @@ export default function BodyResetPage() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.9fr] gap-5 lg:gap-8 items-start relative">
             <div className="bg-white/75 border border-purple/15 rounded-[22px] p-5 md:p-7 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
-              <div className="flex items-start gap-4 mb-5">
-                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-md shrink-0 border-4 border-white">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shadow-md shrink-0 border-4 border-white">
                   <Image
                     src="/images/susie.jpg"
                     alt="Susie from Susie Sculpts"
                     fill
                     className="object-cover object-[center_8%]"
-                    sizes="96px"
+                    sizes="80px"
                   />
                 </div>
-                <div>
-                  <p className="section-label mb-3">A Message from Susie</p>
-                  <h1 className="font-serif text-[32px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14]">
-                    I can help you figure out where to start today.
-                  </h1>
-                </div>
+                <p className="section-label">A Message from Susie</p>
               </div>
+
+              <h1 className="font-serif text-[32px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14] mb-5">
+                I can help you figure out where to start today.
+              </h1>
 
               <div className="space-y-4 font-sans font-light text-muted text-base md:text-lg leading-relaxed">
                 <p>
-                  Sign up today and you can get $100 off the Full Body Reset Package.
+                  I want to help you feel less stuck and more clear about what your body may need next.
                 </p>
                 <p>
-                  Give me your name and number, then answer a few quick questions about what you are feeling and what you have already tried. I will help you see where I would start - lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
+                  I prepared a few quick questions so I can understand what you are feeling, what you have already tried, and which Body Reset path makes the most sense for you.
+                </p>
+                <p>
+                  After you claim your credit and answer the questions, I can recommend the right starting point - whether that is lymphatic support, PEMF/frequency wellness, sculpting, or the full Body Reset Package.
                 </p>
                 <p className="text-sm md:text-base text-muted/80">
-                  The full $100 credit is available on the recommended package today. Smaller starter options may receive smaller intro credits.
+                  If you decide to begin today, the full $100 credit can be applied to the recommended package. Smaller starter options may receive smaller intro credits.
                 </p>
               </div>
             </div>
@@ -247,11 +249,11 @@ export default function BodyResetPage() {
               ) : (
                 <form onSubmit={captureLead} className="space-y-4">
                   <input className="input-field" placeholder="First name*" value={fields.firstName} onChange={(e) => set("firstName", e.target.value)} required />
-                  <input className="input-field" type="tel" placeholder="Mobile number*" value={fields.phone} onChange={(e) => set("phone", e.target.value)} required />
-                  <input className="input-field" type="email" placeholder="Email address (optional)" value={fields.email} onChange={(e) => set("email", e.target.value)} />
+                  <input className="input-field" type="email" placeholder="Email address*" value={fields.email} onChange={(e) => set("email", e.target.value)} required />
+                  <input className="input-field" type="tel" placeholder="Mobile number (optional)" value={fields.phone} onChange={(e) => set("phone", e.target.value)} />
                   <label className="flex gap-3 items-start text-xs font-sans font-light text-muted leading-relaxed">
                     <input type="checkbox" className="mt-1 accent-purple" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} required />
-                    I agree to receive follow-up messages from Susie Sculpts about my request. Message and data rates may apply. I can opt out anytime.
+                    I agree to receive follow-up messages from Susie Sculpts about my credit and recommendation. If I provide a mobile number, message and data rates may apply. I can opt out anytime.
                   </label>
                   <button type="submit" disabled={leadState === "submitting"} className="btn-primary w-full disabled:opacity-60">
                     {leadState === "submitting" ? "Saving..." : "Claim Your Credit"}

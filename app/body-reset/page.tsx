@@ -92,7 +92,7 @@ export default function BodyResetPage() {
     email: "",
     phone: "",
     symptoms: [] as string[],
-    tried: "",
+    tried: [] as string[],
     goal: "",
     urgency: "",
     consent: false,
@@ -111,6 +111,7 @@ export default function BodyResetPage() {
   }, []);
 
   const symptomsText = fields.symptoms.join(", ");
+  const triedText = fields.tried.join(", ");
 
   const recommendedOffer = useMemo(() => {
     const symptoms = fields.symptoms;
@@ -124,6 +125,7 @@ export default function BodyResetPage() {
   }, [fields.symptoms]);
 
   const set = (key: string, value: string | boolean | string[]) => setFields((prev) => ({ ...prev, [key]: value }));
+
   const toggleSymptom = (value: string) => {
     setFields((prev) => ({
       ...prev,
@@ -133,7 +135,16 @@ export default function BodyResetPage() {
     }));
   };
 
-  const canContinue = step === 1 ? fields.symptoms.length > 0 : step === 2 ? !!fields.tried : step === 3 ? !!fields.goal : step === 4 ? !!fields.urgency : true;
+  const toggleTried = (value: string) => {
+    setFields((prev) => ({
+      ...prev,
+      tried: prev.tried.includes(value)
+        ? prev.tried.filter((item) => item !== value)
+        : [...prev.tried, value],
+    }));
+  };
+
+  const canContinue = step === 1 ? fields.symptoms.length > 0 : step === 2 ? fields.tried.length > 0 : step === 3 ? !!fields.goal : step === 4 ? !!fields.urgency : true;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -148,6 +159,8 @@ export default function BodyResetPage() {
           symptoms: fields.symptoms,
           symptom: symptomsText,
           interest: symptomsText,
+          tried: fields.tried,
+          triedText,
           timeline: fields.urgency,
           preferredNextStep: fields.goal,
           recommendedOffer,
@@ -273,7 +286,15 @@ export default function BodyResetPage() {
                     </div>
                   )}
 
-                  {step === 2 && <OptionStep title="What have you already tried?" options={triedOptions} value={fields.tried} onSelect={(v) => set("tried", v)} />}
+                  {step === 2 && (
+                    <MultiOptionStep
+                      title="What have you already tried?"
+                      helper="Select all that apply. This helps Susie understand what has already been part of your journey."
+                      options={triedOptions}
+                      values={fields.tried}
+                      onToggle={toggleTried}
+                    />
+                  )}
                   {step === 3 && <OptionStep title="What would feel like a real win?" options={goalOptions} value={fields.goal} onSelect={(v) => set("goal", v)} />}
                   {step === 4 && <OptionStep title="How soon do you want help figuring this out?" options={urgencyOptions} value={fields.urgency} onSelect={(v) => set("urgency", v)} />}
 
@@ -367,6 +388,26 @@ function OptionStep({ title, options, value, onSelect }: { title: string; option
             {option}
           </button>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function MultiOptionStep({ title, helper, options, values, onToggle }: { title: string; helper: string; options: string[]; values: string[]; onToggle: (v: string) => void }) {
+  return (
+    <div>
+      <h3 className="font-serif text-3xl font-light mb-3 text-[#2c1f14]">{title}</h3>
+      <p className="font-sans font-light text-muted mb-6">{helper}</p>
+      <div className="grid sm:grid-cols-2 gap-3">
+        {options.map((option) => {
+          const selected = values.includes(option);
+          return (
+            <button key={option} type="button" onClick={() => onToggle(option)} className={`relative text-left rounded-sm px-5 py-4 pr-12 font-sans font-light transition-all duration-200 ${selected ? "bg-purple text-white border-purple" : "bg-stone/50 text-muted border border-stone hover:border-purple/40"}`} aria-pressed={selected}>
+              {option}
+              {selected && <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white">✓</span>}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

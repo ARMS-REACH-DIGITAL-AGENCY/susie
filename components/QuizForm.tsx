@@ -154,10 +154,10 @@ export default function QuizForm() {
         <div className="text-center mb-10">
           <p className="section-label mb-4">Free · No Pressure · Private</p>
           <h2 className="section-heading mb-4">
-            What feels most true for you right now?
+            Take the 60-Second Body Reset Quiz
           </h2>
           <p className="font-sans font-light text-muted text-base leading-relaxed">
-            Choose the experience that sounds most like what your body has been telling you.
+            Tell us a little about what you are feeling and what you are looking for. Susie will personally follow up with the right next step for you.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -85,26 +85,55 @@ function selectedClass(selected: boolean) {
 export default function BodyResetPage() {
   const [step, setStep] = useState(1);
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [arrivedFromSymptom, setArrivedFromSymptom] = useState(false);
   const [fields, setFields] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    symptom: "",
+    symptoms: [] as string[],
     tried: "",
     goal: "",
     urgency: "",
     consent: false,
   });
 
-  const recommendedOffer = useMemo(() => {
-    if (["Puffy or bloated", "Heavy or sluggish", "Foggy or unfocused", "Inflamed or achy", "Tired all the time"].includes(fields.symptom)) return "Lymphatic + PEMF Reset Intro";
-    if (["Uncomfortable in your body", "Don't feel like yourself"].includes(fields.symptom)) return "Body Reset Starter Visit";
-    return "Ask Susie Where To Start";
-  }, [fields.symptom]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const symptom = params.get("symptom");
+    if (symptom && symptomCards.some((card) => card.value === symptom)) {
+      setArrivedFromSymptom(true);
+      setFields((prev) => ({
+        ...prev,
+        symptoms: prev.symptoms.includes(symptom) ? prev.symptoms : [symptom, ...prev.symptoms],
+      }));
+    }
+  }, []);
 
-  const set = (key: string, value: string | boolean) => setFields((prev) => ({ ...prev, [key]: value }));
-  const canContinue = step === 1 ? !!fields.symptom : step === 2 ? !!fields.tried : step === 3 ? !!fields.goal : step === 4 ? !!fields.urgency : true;
+  const symptomsText = fields.symptoms.join(", ");
+
+  const recommendedOffer = useMemo(() => {
+    const symptoms = fields.symptoms;
+    if (symptoms.some((s) => ["Puffy or bloated", "Heavy or sluggish", "Foggy or unfocused", "Inflamed or achy", "Tired all the time"].includes(s))) {
+      return "Lymphatic + PEMF Reset Intro";
+    }
+    if (symptoms.some((s) => ["Uncomfortable in your body", "Don't feel like yourself"].includes(s))) {
+      return "Body Reset Starter Visit";
+    }
+    return "Ask Susie Where To Start";
+  }, [fields.symptoms]);
+
+  const set = (key: string, value: string | boolean | string[]) => setFields((prev) => ({ ...prev, [key]: value }));
+  const toggleSymptom = (value: string) => {
+    setFields((prev) => ({
+      ...prev,
+      symptoms: prev.symptoms.includes(value)
+        ? prev.symptoms.filter((item) => item !== value)
+        : [...prev.symptoms, value],
+    }));
+  };
+
+  const canContinue = step === 1 ? fields.symptoms.length > 0 : step === 2 ? !!fields.tried : step === 3 ? !!fields.goal : step === 4 ? !!fields.urgency : true;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -116,7 +145,9 @@ export default function BodyResetPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...fields,
-          interest: fields.symptom,
+          symptoms: fields.symptoms,
+          symptom: symptomsText,
+          interest: symptomsText,
           timeline: fields.urgency,
           preferredNextStep: fields.goal,
           recommendedOffer,
@@ -136,18 +167,18 @@ export default function BodyResetPage() {
     <>
       <Navbar />
       <main>
-        <section className="relative pt-24 md:pt-32 pb-14 md:pb-20 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
+        <section className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1.05fr_.95fr] gap-10 items-center relative">
             <div>
               <p className="section-label mb-4">For the woman who does not feel like herself</p>
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light leading-tight text-[#2c1f14] mb-6">
+              <h1 className="font-serif text-[44px] sm:text-5xl lg:text-6xl font-light leading-[1.04] text-[#2c1f14] mb-5">
                 Feel puffy, tired, foggy, inflamed, heavy, or stuck?
               </h1>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-5 max-w-2xl">
+              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4 max-w-2xl">
                 You are not broken. Your body may just be asking for a different kind of reset.
               </p>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
+              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-7 max-w-2xl">
                 Tell me what you are feeling, answer a few quick questions, and I will show you where I would start.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -162,7 +193,7 @@ export default function BodyResetPage() {
             <div className="bg-white/75 border border-purple/15 rounded-[26px] p-5 md:p-6 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
               <div className="grid grid-cols-2 gap-3">
                 {symptomCards.slice(0, 4).map((card) => (
-                  <a key={card.value} href="#quiz-funnel" className="rounded-[18px] overflow-hidden bg-[#faf8f5] border border-purple/10 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(60,40,80,0.10)]">
+                  <a key={card.value} href={`?symptom=${encodeURIComponent(card.value)}#quiz-funnel`} className="rounded-[18px] overflow-hidden bg-[#faf8f5] border border-purple/10 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(60,40,80,0.10)]">
                     <div className="relative aspect-square"><Image src={card.image} alt={card.title} fill className="object-cover object-top" sizes="160px" /></div>
                     <p className="px-3 py-2 text-sm font-sans font-medium text-[#6A5A6D] leading-tight">{card.title}</p>
                   </a>
@@ -193,13 +224,13 @@ export default function BodyResetPage() {
           </div>
         </section>
 
-        <section id="quiz-funnel" className="py-16 md:py-24 bg-cream">
+        <section id="quiz-funnel" className="py-14 md:py-24 bg-cream">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-10">
               <p className="section-label mb-4">Step {formState === "success" ? 5 : step} of 5</p>
               <h2 className="section-heading mb-4">Tell me what you are feeling. I will tell you where I would start.</h2>
               <p className="font-sans font-light text-muted max-w-2xl mx-auto">
-                Answer a couple quick questions so Susie has enough context to point you toward the most logical first step.
+                Select everything that applies so Susie has enough context to point you toward the most logical first step.
               </p>
             </div>
 
@@ -217,14 +248,27 @@ export default function BodyResetPage() {
                 <>
                   {step === 1 && (
                     <div>
-                      <h3 className="font-serif text-3xl font-light mb-6 text-[#2c1f14]">What feels most true for you right now?</h3>
+                      <h3 className="font-serif text-3xl font-light mb-3 text-[#2c1f14]">
+                        {arrivedFromSymptom ? "What else have you been feeling too?" : "Which of these have you been feeling lately?"}
+                      </h3>
+                      <p className="font-sans font-light text-muted mb-6">Select all that apply.</p>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {symptomCards.map((card) => (
-                          <button key={card.value} type="button" onClick={() => set("symptom", card.value)} className={`text-left rounded-[18px] overflow-hidden transition-all duration-200 ${selectedClass(fields.symptom === card.value)}`}>
-                            <div className="relative aspect-square"><Image src={card.image} alt={card.title} fill className="object-cover object-top" sizes="(max-width: 640px) 50vw, 25vw" /></div>
-                            <div className="px-4 py-4"><p className="font-sans font-semibold text-[#6A5A6D] text-[18px] leading-snug">{card.title}</p><p className="font-sans text-[13px] text-[#9a8fa0] leading-snug mt-1">{card.microcopy}</p></div>
-                          </button>
-                        ))}
+                        {symptomCards.map((card) => {
+                          const selected = fields.symptoms.includes(card.value);
+                          return (
+                            <button key={card.value} type="button" onClick={() => toggleSymptom(card.value)} className={`relative text-left rounded-[18px] overflow-hidden transition-all duration-200 ${selectedClass(selected)}`} aria-pressed={selected}>
+                              {selected && (
+                                <div className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-purple flex items-center justify-center shadow">
+                                  <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+                                    <path d="M1 4.5L4.5 8L11 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                                  </svg>
+                                </div>
+                              )}
+                              <div className="relative aspect-square"><Image src={card.image} alt={card.title} fill className="object-cover object-top" sizes="(max-width: 640px) 50vw, 25vw" /></div>
+                              <div className="px-4 py-4"><p className="font-sans font-semibold text-[#6A5A6D] text-[18px] leading-snug">{card.title}</p><p className="font-sans text-[13px] text-[#9a8fa0] leading-snug mt-1">{card.microcopy}</p></div>
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
                   )}

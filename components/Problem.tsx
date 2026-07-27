@@ -12,7 +12,7 @@ const feelings = [
 ];
 
 function quizHref(label: string) {
-  return `/body-reset?symptom=${encodeURIComponent(label)}#quiz-funnel`;
+  return `/body-reset?symptom=${encodeURIComponent(label)}#claim`;
 }
 
 export default function Problem() {
@@ -42,7 +42,7 @@ export default function Problem() {
           <p className="font-serif text-xl md:text-2xl font-light text-[#2c1f14] leading-relaxed italic mb-6">
             &ldquo;Your body changed. You are not broken. Tell Susie what you are feeling, and she can help you figure out where to start.&rdquo;
           </p>
-          <a href="/body-reset#quiz-funnel" className="btn-primary">Tell Me What To Try First</a>
+          <a href="/body-reset#claim" className="btn-primary">Claim My $100 Reset Credit</a>
         </div>
       </div>
     </section>

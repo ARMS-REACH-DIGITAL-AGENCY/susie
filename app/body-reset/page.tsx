@@ -204,7 +204,7 @@ export default function BodyResetPage() {
       setTimeout(() => {
         setQuizState("success");
         scrollToElement("results", 80);
-      }, 1800);
+      }, 4000);
     } catch {
       setQuizState("error");
     }

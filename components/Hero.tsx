@@ -17,15 +17,15 @@ export default function Hero() {
               You are not broken. Your body may just be asking for a different kind of reset.
             </p>
             <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-7 max-w-lg">
-              Tell Susie what you are feeling, and she can help you figure out where to start.
+              Susie Sculpts offers private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/body-reset#claim" className="btn-primary">
-                Claim My $100 Reset Credit
+              <a href="#services" className="btn-primary">
+                View Services
               </a>
-              <a href="/body-reset#claim" className="btn-secondary">
-                Tell Me What To Try First
+              <a href="tel:+14804400909" className="btn-secondary">
+                Call Susie
               </a>
             </div>
 

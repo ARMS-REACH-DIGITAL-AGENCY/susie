@@ -63,7 +63,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="py-20 md:py-28 bg-cream">
+    <section id="services" className="py-20 md:py-28 bg-cream scroll-mt-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <p className="section-label mb-4">The Body Reset Experience</p>

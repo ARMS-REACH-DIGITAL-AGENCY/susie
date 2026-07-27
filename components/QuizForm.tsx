@@ -10,49 +10,49 @@ const symptomCards = [
     value: "Puffy or bloated",
     title: "Puffy or bloated",
     microcopy: "You feel swollen, uncomfortable, or like your body is holding onto everything.",
-    image: "/images/symptom-puffy.png",
+    image: "/images/symptom-puffy.png",       // puffy_bloated.png
   },
   {
     value: "Inflamed or achy",
     title: "Inflamed or achy",
     microcopy: "Your body feels sore, irritated, or constantly \"off.\"",
-    image: "/images/symptom-achy.png",
+    image: "/images/symptom-achy.png",        // Inflamed_achy.png
   },
   {
     value: "Heavy or sluggish",
     title: "Heavy or sluggish",
     microcopy: "You feel weighed down, slow, or like your body just isn't moving well.",
-    image: "/images/symptom-heavy.png",
+    image: "/images/symptom-heavy.png",       // heavy_sluggish.png
   },
   {
     value: "Tired all the time",
     title: "Tired all the time",
     microcopy: "Even after resting, your energy still feels low.",
-    image: "/images/symptom-tired.png",
+    image: "/images/symptom-tired.png",       // always_tired.png
   },
   {
     value: "Foggy or unfocused",
     title: "Foggy or unfocused",
     microcopy: "Your mind feels cloudy, scattered, or hard to clear.",
-    image: "/images/symptom-foggy.png",
+    image: "/images/symptom-foggy.png",       // foggy_unfocused.png
   },
   {
     value: "Stuck — nothing works",
     title: "Stuck — nothing works",
     microcopy: "You've tried things before, but nothing seems to create lasting change.",
-    image: "/images/symptom-stuck.png",
+    image: "/images/symptom-stuck.png",       // stuck_nothing_works.png
   },
   {
     value: "Uncomfortable in your body",
     title: "Uncomfortable in your body",
     microcopy: "You don't feel at ease in your skin right now.",
-    image: "/images/symptom-uncomfortable.png",
+    image: "/images/symptom-uncomfortable.png", // uncomfortable_in_body.png
   },
   {
     value: "Don't feel like yourself",
     title: "Don't feel like yourself",
     microcopy: "Something feels off, and you want to feel like you again.",
-    image: "/images/symptom-yourself.png",
+    image: "/images/symptom-yourself.png",    // don't_feel_like_yourself.png
   },
 ];
 

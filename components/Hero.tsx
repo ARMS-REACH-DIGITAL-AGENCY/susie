@@ -32,13 +32,11 @@ export default function Hero() {
             </div>
 
             <div className="mt-6 flex items-center gap-4 md:hidden">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-md shrink-0">
-                <Image
-                  src="/images/susie.jpg"
-                  alt="Susie — founder of Susie Sculpts"
-                  fill
-                  className="object-cover object-[center_8%]"
-                  sizes="64px"
+              <div className="relative w-20 h-16 rounded-md overflow-hidden shadow-md shrink-0 bg-white/70">
+                <img
+                  src={heroTreatmentImage}
+                  alt="Susie providing a Susie Sculpts treatment"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
               <div>

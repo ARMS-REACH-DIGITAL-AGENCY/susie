@@ -199,18 +199,26 @@ export default function BodyResetPage() {
       <main>
         <section id="claim" className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.85fr] gap-10 items-start relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.85fr] gap-8 lg:gap-10 items-start relative">
             <div>
               <p className="section-label mb-4">New Client Reset Credit</p>
-              <h1 className="font-serif text-[42px] sm:text-5xl lg:text-6xl font-light leading-[1.04] text-[#2c1f14] mb-5">
+              <h1 className="font-serif text-[36px] sm:text-5xl lg:text-6xl font-light leading-[1.04] text-[#2c1f14] mb-5">
                 This message is for the woman who feels puffy, tired, foggy, inflamed, heavy, or stuck.
               </h1>
               <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4 max-w-2xl">
                 You are not broken. Your body may just be asking for a different kind of reset.
               </p>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-7 max-w-2xl">
+              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-6 max-w-2xl">
                 Claim your $100 Body Reset Credit, answer a few quick questions, and Susie will help you figure out where she would start.
               </p>
+
+              <div className="bg-white/70 border border-purple/15 rounded-[18px] p-5 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
+                <p className="section-label mb-3">A Message from Susie</p>
+                <h2 className="font-serif text-2xl md:text-3xl font-light text-[#2c1f14] mb-3">I can help you stop guessing.</h2>
+                <p className="font-sans font-light text-muted text-sm md:text-base leading-relaxed">
+                  Tell me what you are feeling and what you have already tried. I cannot diagnose you or promise a magic cure, but I can show you where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
+                </p>
+              </div>
             </div>
 
             <div className="bg-white/85 border border-purple/15 rounded-[26px] p-6 md:p-7 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
@@ -250,82 +258,75 @@ export default function BodyResetPage() {
           </div>
         </section>
 
-        <section id="quiz-funnel" className="py-14 md:py-24 bg-cream">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            {leadState !== "captured" ? (
-              <div className="bg-white/80 border border-purple/15 rounded-[24px] p-6 md:p-8 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
-                <p className="section-label mb-4">First, claim your credit</p>
-                <h2 className="section-heading mb-4">Start with your name and email.</h2>
-                <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-6">
-                  After your credit request is saved, Susie will ask a few quick questions so she can understand what you are feeling.
-                </p>
-                <a href="#claim" className="btn-primary">Claim My $100 Reset Credit</a>
-              </div>
-            ) : quizState === "success" ? (
-              <div id="results" className="bg-white/80 border border-purple/15 rounded-[24px] p-6 md:p-8 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
-                <p className="section-label mb-4">Recommendation Requested</p>
-                <h2 className="section-heading mb-4">Thank you, {fields.firstName}.</h2>
-                <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-6">
-                  Susie has your answers. Your likely starting point is <strong>{recommendedOffer}</strong>. She can follow up personally, or you can choose a reset option below once the Stripe links are connected.
-                </p>
-                <a href="#checkout-options" className="btn-primary">See My Reset Options</a>
-              </div>
-            ) : (
-              <div className="bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
-                <div className="mb-8">
-                  <div className="flex items-center justify-between gap-4 mb-3">
-                    <p className="section-label">Body Reset Questions</p>
-                    <p className="section-label">Question {questionStep} of 4</p>
-                  </div>
-                  <div className="w-full h-2 bg-stone/70 rounded-full overflow-hidden">
-                    <div className="h-full bg-purple rounded-full transition-all duration-300" style={{ width: `${questionStep * 25}%` }} />
-                  </div>
+        {leadState === "captured" && (
+          <section id="quiz-funnel" className="py-14 md:py-24 bg-cream">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6">
+              {quizState === "success" ? (
+                <div id="results" className="bg-white/80 border border-purple/15 rounded-[24px] p-6 md:p-8 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                  <p className="section-label mb-4">Recommendation Requested</p>
+                  <h2 className="section-heading mb-4">Thank you, {fields.firstName}.</h2>
+                  <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-6">
+                    Susie has your answers. Your likely starting point is <strong>{recommendedOffer}</strong>. She can follow up personally, or you can choose a reset option below once the Stripe links are connected.
+                  </p>
+                  <a href="#checkout-options" className="btn-primary">See My Reset Options</a>
                 </div>
-
-                {questionStep === 1 && (
-                  <div>
-                    <h3 className="font-serif text-3xl font-light mb-3 text-[#2c1f14]">
-                      {arrivedFromSymptom ? "What else have you been feeling too?" : "Which of these have you been feeling lately?"}
-                    </h3>
-                    <p className="font-sans font-light text-muted mb-6">Select all that apply.</p>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {symptomCards.map((card) => {
-                        const selected = fields.symptoms.includes(card.value);
-                        return (
-                          <button key={card.value} type="button" onClick={() => toggleArrayValue("symptoms", card.value)} className={`relative text-left rounded-[18px] overflow-hidden transition-all duration-200 ${selectedClass(selected)}`} aria-pressed={selected}>
-                            {selected && <CheckBadge />}
-                            <div className="relative aspect-square"><Image src={card.image} alt={card.title} fill className="object-cover object-top" sizes="(max-width: 640px) 50vw, 25vw" /></div>
-                            <div className="px-4 py-4"><p className="font-sans font-semibold text-[#6A5A6D] text-[18px] leading-snug">{card.title}</p><p className="font-sans text-[13px] text-[#9a8fa0] leading-snug mt-1">{card.microcopy}</p></div>
-                          </button>
-                        );
-                      })}
+              ) : (
+                <div className="bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between gap-4 mb-3">
+                      <p className="section-label">Body Reset Questions</p>
+                      <p className="section-label">Question {questionStep} of 4</p>
+                    </div>
+                    <div className="w-full h-2 bg-stone/70 rounded-full overflow-hidden">
+                      <div className="h-full bg-purple rounded-full transition-all duration-300" style={{ width: `${questionStep * 25}%` }} />
                     </div>
                   </div>
-                )}
 
-                {questionStep === 2 && (
-                  <MultiOptionStep title="What have you already tried?" helper="Select all that apply. This helps Susie understand what has already been part of your journey." options={triedOptions} values={fields.tried} onToggle={(v) => toggleArrayValue("tried", v)} />
-                )}
-                {questionStep === 3 && (
-                  <MultiOptionStep title="What would feel like a real win?" helper="Select everything that would matter to you." options={goalOptions} values={fields.goals} onToggle={(v) => toggleArrayValue("goals", v)} />
-                )}
-                {questionStep === 4 && <OptionStep title="How soon do you want help figuring this out?" options={urgencyOptions} value={fields.urgency} onSelect={(v) => set("urgency", v)} />}
-
-                <div className="flex justify-between gap-4 mt-8">
-                  <button type="button" onClick={() => setQuestionStep(Math.max(1, questionStep - 1))} className="btn-secondary opacity-80" disabled={questionStep === 1}>Back</button>
-                  {questionStep < 4 ? (
-                    <button type="button" onClick={() => canContinue && setQuestionStep(questionStep + 1)} className="btn-primary disabled:opacity-40" disabled={!canContinue}>Continue</button>
-                  ) : (
-                    <button type="button" onClick={finishQuiz} className="btn-primary disabled:opacity-40" disabled={!canContinue || quizState === "submitting"}>
-                      {quizState === "submitting" ? "Saving..." : "Show Me Where To Start"}
-                    </button>
+                  {questionStep === 1 && (
+                    <div>
+                      <h3 className="font-serif text-3xl font-light mb-3 text-[#2c1f14]">
+                        {arrivedFromSymptom ? "What else have you been feeling too?" : "Which of these have you been feeling lately?"}
+                      </h3>
+                      <p className="font-sans font-light text-muted mb-6">Select all that apply.</p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {symptomCards.map((card) => {
+                          const selected = fields.symptoms.includes(card.value);
+                          return (
+                            <button key={card.value} type="button" onClick={() => toggleArrayValue("symptoms", card.value)} className={`relative text-left rounded-[18px] overflow-hidden transition-all duration-200 ${selectedClass(selected)}`} aria-pressed={selected}>
+                              {selected && <CheckBadge />}
+                              <div className="relative aspect-square"><Image src={card.image} alt={card.title} fill className="object-cover object-top" sizes="(max-width: 640px) 50vw, 25vw" /></div>
+                              <div className="px-4 py-4"><p className="font-sans font-semibold text-[#6A5A6D] text-[18px] leading-snug">{card.title}</p><p className="font-sans text-[13px] text-[#9a8fa0] leading-snug mt-1">{card.microcopy}</p></div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   )}
+
+                  {questionStep === 2 && (
+                    <MultiOptionStep title="What have you already tried?" helper="Select all that apply. This helps Susie understand what has already been part of your journey." options={triedOptions} values={fields.tried} onToggle={(v) => toggleArrayValue("tried", v)} />
+                  )}
+                  {questionStep === 3 && (
+                    <MultiOptionStep title="What would feel like a real win?" helper="Select everything that would matter to you." options={goalOptions} values={fields.goals} onToggle={(v) => toggleArrayValue("goals", v)} />
+                  )}
+                  {questionStep === 4 && <OptionStep title="How soon do you want help figuring this out?" options={urgencyOptions} value={fields.urgency} onSelect={(v) => set("urgency", v)} />}
+
+                  <div className="flex justify-between gap-4 mt-8">
+                    <button type="button" onClick={() => setQuestionStep(Math.max(1, questionStep - 1))} className="btn-secondary opacity-80" disabled={questionStep === 1}>Back</button>
+                    {questionStep < 4 ? (
+                      <button type="button" onClick={() => canContinue && setQuestionStep(questionStep + 1)} className="btn-primary disabled:opacity-40" disabled={!canContinue}>Continue</button>
+                    ) : (
+                      <button type="button" onClick={finishQuiz} className="btn-primary disabled:opacity-40" disabled={!canContinue || quizState === "submitting"}>
+                        {quizState === "submitting" ? "Saving..." : "Show Me Where To Start"}
+                      </button>
+                    )}
+                  </div>
+                  {quizState === "error" && <p className="text-center mt-4 text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
                 </div>
-                {quizState === "error" && <p className="text-center mt-4 text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
-              </div>
-            )}
-          </div>
-        </section>
+              )}
+            </div>
+          </section>
+        )}
 
         {quizState === "success" && (
           <section id="checkout-options" className="py-16 md:py-24 bg-white/50">
@@ -351,21 +352,6 @@ export default function BodyResetPage() {
             </div>
           </section>
         )}
-
-        <section className="py-16 md:py-24 bg-cream">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <p className="section-label mb-4">A Message from Susie</p>
-            <h2 className="section-heading mb-6">I can help you stop guessing.</h2>
-            <div className="card text-left space-y-4 font-sans font-light text-muted leading-relaxed text-base md:text-lg">
-              <p>Many women reach a point where they wake up and think, "This does not feel like me anymore." They feel puffy, inflamed, heavy, tired, foggy, or uncomfortable in their own body.</p>
-              <p>The frustrating part is that they have usually tried to fix it. They have tried eating better, exercising more, taking supplements, booking appointments, and pushing through with willpower.</p>
-              <p>I cannot diagnose you, and I am not going to promise a magic cure. But I can help you stop guessing. Tell me what you are feeling, and I will show you where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.</p>
-            </div>
-            <p className="text-center mt-8 text-xs font-sans font-light text-muted/60 max-w-xl mx-auto">
-              Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary. $100 credit applies toward a qualifying Body Reset package if purchased.
-            </p>
-          </div>
-        </section>
       </main>
       <Footer />
     </>

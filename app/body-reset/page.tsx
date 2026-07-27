@@ -240,13 +240,10 @@ export default function BodyResetPage() {
                   I want to help you feel less stuck and more clear about what your body may need next.
                 </p>
                 <p>
-                  I prepared a few quick questions so I can understand what you are feeling, what you have already tried, and which Body Reset path makes the most sense for you.
+                  After you answer a few questions I prepared and claim the offer, I can recommend the right starting point.
                 </p>
                 <p>
-                  After you claim your credit and answer the questions, I can recommend the right starting point - whether that is lymphatic support, PEMF/frequency wellness, sculpting, or the full Body Reset Package.
-                </p>
-                <p className="text-sm md:text-base text-muted/80">
-                  If you decide to begin today with the recommended package, you can earn a $100 service credit after your appointment to use toward your next service.
+                  If you decide to begin today, you&apos;ll receive a $100 rebate toward your next service.
                 </p>
               </div>
             </div>
@@ -295,7 +292,7 @@ export default function BodyResetPage() {
                 <div id="results" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="text-center mb-10">
                     <p className="section-label mb-4">Susie's Recommendation</p>
-                    <h2 className="section-heading mb-4">I'm recommending the Full Body Reset Package.</h2>
+                    <h2 className="section-heading mb-4">I&apos;m recommending the Full Body Reset Package.</h2>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
                       Based on what you shared, I would start with the Full Body Reset Package because it gives us the most complete way to work with what you are feeling instead of guessing from one single service.
                     </p>

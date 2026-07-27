@@ -21,11 +21,11 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/body-reset#quiz-funnel" className="btn-primary">
-                Tell Me What To Try First
+              <a href="/body-reset#claim" className="btn-primary">
+                Claim My $100 Reset Credit
               </a>
-              <a href="/body-reset#checkout-options" className="btn-secondary">
-                See Reset Options
+              <a href="/body-reset#claim" className="btn-secondary">
+                Tell Me What To Try First
               </a>
             </div>
 

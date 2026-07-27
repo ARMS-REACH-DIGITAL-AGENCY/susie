@@ -44,30 +44,33 @@ const urgencyOptions = [
 const offers = [
   {
     name: "Full Body Reset Package",
-    price: "$497",
+    price: "$497 today",
     label: "Susie's Recommendation",
-    credit: "$100 credit today",
-    copy: "The full reset path for women ready to combine consultation, Synergy, PEMF, sculpting, and personalized next steps.",
-    href: "#checkout-options",
-    button: "Add Stripe Link",
+    credit: "Earn a $100 service credit after your appointment",
+    copy: "The full reset path for women ready to combine consultation, Synergy, PEMF, sculpting, and personalized next steps. Use the $100 credit toward your next service after this appointment is completed.",
+    href: "tel:+14804400909",
+    button: "Reserve Full Reset",
+    featured: true,
   },
   {
     name: "Lymphatic + PEMF Reset Intro",
     price: "$297",
-    label: "Smaller Reset Option",
-    credit: "$50 credit today",
+    label: "Focused Reset Intro",
+    credit: "Earn a $50 service credit after your appointment",
     copy: "A focused intro path for women feeling puffy, inflamed, tired, heavy, foggy, or stuck.",
-    href: "#checkout-options",
-    button: "Add Stripe Link",
+    href: "tel:+14804400909",
+    button: "Choose Reset Intro",
+    featured: false,
   },
   {
     name: "Body Reset Starter Visit",
     price: "$49",
     label: "Low-Commitment Start",
-    credit: "50% off today",
+    credit: "Earn 50% back as service credit after your visit",
     copy: "A private starter visit to review what you are feeling and choose the best first session.",
-    href: "#checkout-options",
-    button: "Add Stripe Link",
+    href: "tel:+14804400909",
+    button: "Choose Starter Visit",
+    featured: false,
   },
   {
     name: "15-Minute Call With Susie",
@@ -77,6 +80,7 @@ const offers = [
     copy: "Book a quick call to ask questions and find out whether a Body Reset path makes sense for you.",
     href: "tel:+14804400909",
     button: "Call Susie",
+    featured: false,
   },
 ];
 
@@ -89,7 +93,7 @@ function selectedClass(selected: boolean) {
 export default function BodyResetPage() {
   const [questionStep, setQuestionStep] = useState(1);
   const [leadState, setLeadState] = useState<"idle" | "submitting" | "captured" | "error">("idle");
-  const [quizState, setQuizState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [quizState, setQuizState] = useState<"idle" | "submitting" | "analyzing" | "success" | "error">("idle");
   const [arrivedFromSymptom, setArrivedFromSymptom] = useState(false);
   const [fields, setFields] = useState({
     firstName: "",
@@ -137,15 +141,19 @@ export default function BodyResetPage() {
     questionStep === 3 ? fields.goals.length > 0 :
     questionStep === 4 ? !!fields.urgency : true;
 
-  function scrollToQuizTop() {
+  function scrollToElement(id: string, delay = 60) {
     setTimeout(() => {
-      document.getElementById("quiz-card")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
+      const element = document.getElementById(id);
+      if (!element) return;
+      const stickyOffset = 118;
+      const top = element.getBoundingClientRect().top + window.scrollY - stickyOffset;
+      window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+    }, delay);
   }
 
   function goToQuestionStep(nextStep: number) {
     setQuestionStep(nextStep);
-    scrollToQuizTop();
+    scrollToElement("quiz-card");
   }
 
   async function postLead(stage: string) {
@@ -180,7 +188,7 @@ export default function BodyResetPage() {
     try {
       await postLead("Lead Captured Before Quiz");
       setLeadState("captured");
-      setTimeout(() => document.getElementById("quiz-funnel")?.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+      scrollToElement("quiz-card", 180);
     } catch {
       setLeadState("error");
     }
@@ -191,8 +199,12 @@ export default function BodyResetPage() {
     setQuizState("submitting");
     try {
       await postLead("Quiz Completed - Recommendation Requested");
-      setQuizState("success");
-      setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
+      setQuizState("analyzing");
+      scrollToElement("analysis-card", 90);
+      setTimeout(() => {
+        setQuizState("success");
+        scrollToElement("results", 80);
+      }, 1800);
     } catch {
       setQuizState("error");
     }
@@ -234,7 +246,7 @@ export default function BodyResetPage() {
                   After you claim your credit and answer the questions, I can recommend the right starting point - whether that is lymphatic support, PEMF/frequency wellness, sculpting, or the full Body Reset Package.
                 </p>
                 <p className="text-sm md:text-base text-muted/80">
-                  If you decide to begin today, the full $100 credit can be applied to the recommended package. Smaller starter options may receive smaller intro credits.
+                  If you decide to begin today with the recommended package, you can earn a $100 service credit after your appointment to use toward your next service.
                 </p>
               </div>
             </div>
@@ -244,7 +256,7 @@ export default function BodyResetPage() {
                 <div className="rounded-sm bg-purple/5 border border-purple/15 p-5 text-center">
                   <p className="font-serif text-2xl font-light text-[#2c1f14] mb-2">You are in, {fields.firstName}.</p>
                   <p className="font-sans font-light text-muted text-sm mb-4">Now answer the quick questions below.</p>
-                  <a href="#quiz-funnel" className="btn-primary w-full">Start the Questions</a>
+                  <a href="#quiz-funnel" onClick={(e) => { e.preventDefault(); scrollToElement("quiz-card", 0); }} className="btn-primary w-full">Start the Questions</a>
                 </div>
               ) : (
                 <form onSubmit={captureLead} className="space-y-4">
@@ -268,17 +280,45 @@ export default function BodyResetPage() {
         {leadState === "captured" && (
           <section id="quiz-funnel" className="py-14 md:py-24 bg-cream">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
-              {quizState === "success" ? (
-                <div id="results" className="bg-white/80 border border-purple/15 rounded-[24px] p-6 md:p-8 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
-                  <p className="section-label mb-4">Susie's Recommendation</p>
-                  <h2 className="section-heading mb-4">Start with the Full Body Reset Package.</h2>
-                  <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-6">
-                    Based on your answers, Susie recommends the <strong>Full Body Reset Package</strong> as the best starting point. This is the option that unlocks the full <strong>$100 credit today</strong>.
+              {quizState === "analyzing" ? (
+                <div id="analysis-card" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-8 md:p-10 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                  <div className="mx-auto mb-6 w-14 h-14 rounded-full bg-purple/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full border-4 border-purple/20 border-t-purple animate-spin" />
+                  </div>
+                  <p className="section-label mb-4">Reviewing your answers</p>
+                  <h2 className="section-heading mb-4">Susie is looking at what you shared.</h2>
+                  <p className="font-sans font-light text-muted max-w-xl mx-auto">
+                    Give her a moment to match your symptoms, what you have already tried, and the result you want most.
                   </p>
-                  <a href="#checkout-options" className="btn-primary">See My Options</a>
+                </div>
+              ) : quizState === "success" ? (
+                <div id="results" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                  <div className="text-center mb-10">
+                    <p className="section-label mb-4">Susie's Recommendation</p>
+                    <h2 className="section-heading mb-4">I'm recommending the Full Body Reset Package.</h2>
+                    <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
+                      Based on what you shared, I would start with the Full Body Reset Package because it gives us the most complete way to work with what you are feeling instead of guessing from one single service.
+                    </p>
+                    <p className="font-sans font-light text-muted max-w-2xl mx-auto">
+                      Pay $497 today. After you complete your service, you will receive a $100 service credit that can be used toward your next service. That makes your first reset worth $397 after the credit is earned.
+                    </p>
+                  </div>
+
+                  <div className="grid md:grid-cols-4 gap-5">
+                    {offers.map((offer) => (
+                      <div key={offer.name} className={`card flex flex-col ${offer.featured ? "border-2 border-purple shadow-[0_14px_34px_rgba(60,40,80,0.14)]" : ""}`}>
+                        <p className="section-label mb-3">{offer.label}</p>
+                        <h3 className="font-serif text-2xl font-light text-[#2c1f14] mb-2">{offer.name}</h3>
+                        <p className="font-serif text-4xl font-light text-purple mb-2">{offer.price}</p>
+                        <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>
+                        <p className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6">{offer.copy}</p>
+                        <a href={offer.href} className="btn-primary text-[10px] px-4">{offer.button}</a>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
-                <div id="quiz-card" className="bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="quiz-card" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="mb-8">
                     <div className="flex items-center justify-between gap-4 mb-3">
                       <p className="section-label">Body Reset Questions</p>
@@ -331,32 +371,6 @@ export default function BodyResetPage() {
                   {quizState === "error" && <p className="text-center mt-4 text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
                 </div>
               )}
-            </div>
-          </section>
-        )}
-
-        {quizState === "success" && (
-          <section id="checkout-options" className="py-16 md:py-24 bg-white/50">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
-              <div className="text-center mb-12">
-                <p className="section-label mb-4">Choose Your Next Step</p>
-                <h2 className="section-heading mb-4">Susie recommends the Full Body Reset Package.</h2>
-                <p className="font-sans font-light text-muted max-w-2xl mx-auto">
-                  The biggest package gets the full $100 credit. Smaller options are available below if you want a lower-commitment start.
-                </p>
-              </div>
-              <div className="grid md:grid-cols-4 gap-5">
-                {offers.map((offer) => (
-                  <div key={offer.name} className="card flex flex-col">
-                    <p className="section-label mb-3">{offer.label}</p>
-                    <h3 className="font-serif text-2xl font-light text-[#2c1f14] mb-2">{offer.name}</h3>
-                    <p className="font-serif text-4xl font-light text-purple mb-2">{offer.price}</p>
-                    <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>
-                    <p className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6">{offer.copy}</p>
-                    <a href={offer.href} className="btn-primary text-[10px] px-4">{offer.button}</a>
-                  </div>
-                ))}
-              </div>
             </div>
           </section>
         )}

@@ -5,6 +5,11 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const FULL_RESET_CHECKOUT_URL = "#stripe-checkout-link-needed";
+const RESET_INTRO_CHECKOUT_URL = "#stripe-checkout-link-needed";
+const STARTER_VISIT_CHECKOUT_URL = "#stripe-checkout-link-needed";
+const INITIAL_CONSULT_BOOKING_URL = "#calendar-booking-link-needed";
+
 const symptomCards = [
   { value: "Puffy or bloated", title: "Puffy or bloated", microcopy: "Swollen, heavy, or like your body is holding onto everything.", image: "/images/symptom-puffy.png" },
   { value: "Inflamed or achy", title: "Inflamed or achy", microcopy: "Sore, irritated, stiff, or constantly off.", image: "/images/symptom-achy.png" },
@@ -46,9 +51,9 @@ const offers = [
     name: "Full Body Reset Package",
     price: "$497 today",
     label: "Susie's Recommendation",
-    credit: "Earn a $100 service credit after your appointment",
-    copy: "The full reset path for women ready to combine consultation, Synergy, PEMF, sculpting, and personalized next steps. Use the $100 credit toward your next service after this appointment is completed.",
-    href: "tel:+14804400909",
+    credit: "Earn a $100 rebate toward your next service",
+    copy: "The premium starter plan gives us the most complete way to work with what you are feeling instead of guessing from one single service.",
+    href: FULL_RESET_CHECKOUT_URL,
     button: "Reserve Full Reset",
     featured: true,
   },
@@ -56,9 +61,9 @@ const offers = [
     name: "Lymphatic + PEMF Reset Intro",
     price: "$297",
     label: "Focused Reset Intro",
-    credit: "Earn a $50 service credit after your appointment",
+    credit: "Earn a $50 rebate toward your next service",
     copy: "A focused intro path for women feeling puffy, inflamed, tired, heavy, foggy, or stuck.",
-    href: "tel:+14804400909",
+    href: RESET_INTRO_CHECKOUT_URL,
     button: "Choose Reset Intro",
     featured: false,
   },
@@ -66,20 +71,20 @@ const offers = [
     name: "Body Reset Starter Visit",
     price: "$49",
     label: "Low-Commitment Start",
-    credit: "Earn 50% back as service credit after your visit",
+    credit: "Earn 50% back as a rebate toward your next service",
     copy: "A private starter visit to review what you are feeling and choose the best first session.",
-    href: "tel:+14804400909",
+    href: STARTER_VISIT_CHECKOUT_URL,
     button: "Choose Starter Visit",
     featured: false,
   },
   {
-    name: "15-Minute Call With Susie",
+    name: "Initial Face-to-Face Consult With Susie",
     price: "Free",
-    label: "Not Ready To Buy",
+    label: "Book First",
     credit: "No purchase required",
-    copy: "Book a quick call to ask questions and find out whether a Body Reset path makes sense for you.",
-    href: "tel:+14804400909",
-    button: "Call Susie",
+    copy: "Schedule either a Zoom or in-person evaluation at Susie's place before choosing a Body Reset path.",
+    href: INITIAL_CONSULT_BOOKING_URL,
+    button: "Book Initial Consult",
     featured: false,
   },
 ];
@@ -145,7 +150,7 @@ export default function BodyResetPage() {
     setTimeout(() => {
       const element = document.getElementById(id);
       if (!element) return;
-      const stickyOffset = 118;
+      const stickyOffset = 132;
       const top = element.getBoundingClientRect().top + window.scrollY - stickyOffset;
       window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
     }, delay);
@@ -214,7 +219,7 @@ export default function BodyResetPage() {
     <>
       <Navbar />
       <main>
-        <section id="claim" className="relative pt-20 md:pt-28 pb-10 md:pb-16 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
+        <section id="claim" className="relative pt-20 md:pt-28 pb-8 md:pb-12 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.9fr] gap-5 lg:gap-8 items-start relative">
             <div className="bg-white/75 border border-purple/15 rounded-[22px] p-5 md:p-7 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
@@ -231,19 +236,16 @@ export default function BodyResetPage() {
                 <p className="section-label">A Message from Susie</p>
               </div>
 
-              <h1 className="font-serif text-[32px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14] mb-5">
-                I can help you figure out where to start today.
+              <h1 className="font-serif text-[30px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14] mb-5">
+                Let&apos;s figure out where you should start and get to feeling better!
               </h1>
 
               <div className="space-y-4 font-sans font-light text-muted text-base md:text-lg leading-relaxed">
                 <p>
-                  I want to help you feel less stuck and more clear about what your body may need next.
+                  After you submit the answers to a few very basic questions to accept my gracious offer, I&apos;ll be able to recommend the right solution for what&apos;s weighing you down.
                 </p>
                 <p>
-                  After you answer a few questions I prepared and claim the offer, I can recommend the right starting point.
-                </p>
-                <p>
-                  If you decide to begin today, you&apos;ll receive a $100 rebate toward your next service.
+                  If you decide to accept the $100 rebate toward your next service, I look forward to meeting you!
                 </p>
               </div>
             </div>
@@ -275,10 +277,10 @@ export default function BodyResetPage() {
         </section>
 
         {leadState === "captured" && (
-          <section id="quiz-funnel" className="py-14 md:py-24 bg-cream">
+          <section id="quiz-funnel" className="py-6 md:py-12 bg-cream">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
               {quizState === "analyzing" ? (
-                <div id="analysis-card" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-8 md:p-10 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="analysis-card" className="scroll-mt-36 bg-white/80 border border-purple/15 rounded-[24px] p-8 md:p-10 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="mx-auto mb-6 w-14 h-14 rounded-full bg-purple/10 flex items-center justify-center">
                     <div className="w-8 h-8 rounded-full border-4 border-purple/20 border-t-purple animate-spin" />
                   </div>
@@ -289,15 +291,21 @@ export default function BodyResetPage() {
                   </p>
                 </div>
               ) : quizState === "success" ? (
-                <div id="results" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="results" className="scroll-mt-36 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="text-center mb-10">
-                    <p className="section-label mb-4">Susie's Recommendation</p>
-                    <h2 className="section-heading mb-4">I&apos;m recommending the Full Body Reset Package.</h2>
+                    <p className="section-label mb-4">Susie&apos;s Recommendation</p>
+                    <h2 className="section-heading mb-4">I&apos;m going to recommend my Full Body Reset Package.</h2>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
-                      Based on what you shared, I would start with the Full Body Reset Package because it gives us the most complete way to work with what you are feeling instead of guessing from one single service.
+                      The procedures included in this premium starter plan will give us the most complete way to work with what you are feeling instead of guessing from one single service.
                     </p>
-                    <p className="font-sans font-light text-muted max-w-2xl mx-auto">
-                      Pay $497 today. After you complete your service, you will receive a $100 service credit that can be used toward your next service. That makes your first reset worth $397 after the credit is earned.
+                    <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
+                      As a way to show you my commitment to your health and wellness goals, I&apos;m confident you&apos;re going to want more.
+                    </p>
+                    <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
+                      So, for a limited time for just a select few qualified ladies, I&apos;ve decided to add a $100 rebate offer that can be used toward your next service!
+                    </p>
+                    <p className="font-serif text-2xl font-light text-[#2c1f14] max-w-2xl mx-auto">
+                      Congratulations on taking the first step!<br />You&apos;ve got this!
                     </p>
                   </div>
 
@@ -315,11 +323,11 @@ export default function BodyResetPage() {
                   </div>
                 </div>
               ) : (
-                <div id="quiz-card" className="scroll-mt-32 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="quiz-card" className="scroll-mt-36 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="mb-8">
                     <div className="flex items-center justify-between gap-4 mb-3">
-                      <p className="section-label">Body Reset Questions</p>
-                      <p className="section-label">Question {questionStep} of 4</p>
+                      <p className="section-label">Survey</p>
+                      <p className="section-label whitespace-nowrap">{questionStep} of 4</p>
                     </div>
                     <div className="w-full h-2 bg-stone/70 rounded-full overflow-hidden">
                       <div className="h-full bg-purple rounded-full transition-all duration-300" style={{ width: `${questionStep * 25}%` }} />

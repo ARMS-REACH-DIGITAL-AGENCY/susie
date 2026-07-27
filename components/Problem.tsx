@@ -35,8 +35,10 @@ export default function Problem() {
           ))}
         </div>
         <div className="bg-purple/5 border border-purple/15 rounded-sm px-6 py-8 max-w-2xl mx-auto">
-          <p className="font-serif text-xl md:text-2xl font-light text-[#2c1f14] leading-relaxed italic mb-6">&ldquo;Your body changed. You are not broken. Start with a free Body Reset evaluation and find the best next step for your body, energy, confidence, and recovery.&rdquo;</p>
-          <a href="/body-reset#quiz-funnel" className="btn-primary">Get My Free Body Reset Evaluation</a>
+          <p className="font-serif text-xl md:text-2xl font-light text-[#2c1f14] leading-relaxed italic mb-6">
+            &ldquo;Your body changed. You are not broken. Tell Susie what you are feeling, and she can help you figure out where to start.&rdquo;
+          </p>
+          <a href="/body-reset#quiz-funnel" className="btn-primary">Tell Me What To Try First</a>
         </div>
       </div>
     </section>

@@ -11,7 +11,7 @@ const symptomCards = [
   { value: "Heavy or sluggish", title: "Heavy or sluggish", microcopy: "Weighed down, slow, or like your body is not moving well.", image: "/images/symptom-heavy.png" },
   { value: "Tired all the time", title: "Tired all the time", microcopy: "Low energy even after you rest.", image: "/images/symptom-tired.png" },
   { value: "Foggy or unfocused", title: "Foggy or unfocused", microcopy: "Cloudy, scattered, or hard to clear your head.", image: "/images/symptom-foggy.png" },
-  { value: "Stuck — nothing works", title: "Stuck — nothing works", microcopy: "You have tried things before, but nothing seems to last.", image: "/images/symptom-stuck.png" },
+  { value: "Stuck - nothing works", title: "Stuck - nothing works", microcopy: "You have tried things before, but nothing seems to last.", image: "/images/symptom-stuck.png" },
   { value: "Uncomfortable in your body", title: "Uncomfortable in your body", microcopy: "You do not feel at ease in your skin right now.", image: "/images/symptom-uncomfortable.png" },
   { value: "Don't feel like yourself", title: "Don't feel like yourself", microcopy: "Something feels off, and you want to feel like you again.", image: "/images/symptom-yourself.png" },
 ];
@@ -22,7 +22,7 @@ const triedOptions = [
   "Supplements, detoxes, or wellness trends",
   "Massage, bodywork, or lymphatic support",
   "Med spa, body contouring, or sculpting",
-  "Nothing consistently yet — I just know something feels off",
+  "Nothing consistently yet - I just know something feels off",
 ];
 
 const goalOptions = [
@@ -43,36 +43,40 @@ const urgencyOptions = [
 
 const offers = [
   {
-    name: "Ask Susie Where To Start",
-    price: "Free",
-    label: "Start Here",
-    copy: "Susie reviews your answers and points you toward the most logical first step.",
-    href: "tel:+14804400909",
-    button: "Call Susie",
-  },
-  {
-    name: "Body Reset Starter Visit",
-    price: "$49",
-    label: "Easy First Step",
-    copy: "A private starter visit to review what you are feeling and choose the best first session.",
+    name: "Full Body Reset Package",
+    price: "$497",
+    label: "Susie's Recommendation",
+    credit: "$100 credit today",
+    copy: "The full reset path for women ready to combine consultation, Synergy, PEMF, sculpting, and personalized next steps.",
     href: "#checkout-options",
     button: "Add Stripe Link",
   },
   {
     name: "Lymphatic + PEMF Reset Intro",
     price: "$297",
-    label: "Most Natural Fit",
+    label: "Smaller Reset Option",
+    credit: "$50 credit today",
     copy: "A focused intro path for women feeling puffy, inflamed, tired, heavy, foggy, or stuck.",
     href: "#checkout-options",
     button: "Add Stripe Link",
   },
   {
-    name: "Full Body Reset Package",
-    price: "$497",
-    label: "Best Reset Path",
-    copy: "For women ready to combine consultation, Synergy, PEMF, sculpting, and personalized next steps.",
+    name: "Body Reset Starter Visit",
+    price: "$49",
+    label: "Low-Commitment Start",
+    credit: "50% off today",
+    copy: "A private starter visit to review what you are feeling and choose the best first session.",
     href: "#checkout-options",
     button: "Add Stripe Link",
+  },
+  {
+    name: "15-Minute Call With Susie",
+    price: "Free",
+    label: "Not Ready To Buy",
+    credit: "No purchase required",
+    copy: "Book a quick call to ask questions and find out whether a Body Reset path makes sense for you.",
+    href: "tel:+14804400909",
+    button: "Call Susie",
   },
 ];
 
@@ -114,17 +118,7 @@ export default function BodyResetPage() {
   const symptomsText = fields.symptoms.join(", ");
   const triedText = fields.tried.join(", ");
   const goalsText = fields.goals.join(", ");
-
-  const recommendedOffer = useMemo(() => {
-    const symptoms = fields.symptoms;
-    if (symptoms.some((s) => ["Puffy or bloated", "Heavy or sluggish", "Foggy or unfocused", "Inflamed or achy", "Tired all the time"].includes(s))) {
-      return "Lymphatic + PEMF Reset Intro";
-    }
-    if (symptoms.some((s) => ["Uncomfortable in your body", "Don't feel like yourself"].includes(s))) {
-      return "Body Reset Starter Visit";
-    }
-    return "Ask Susie Where To Start";
-  }, [fields.symptoms]);
+  const recommendedOffer = useMemo(() => "Full Body Reset Package", []);
 
   const set = (key: string, value: string | boolean | string[]) => setFields((prev) => ({ ...prev, [key]: value }));
 
@@ -142,6 +136,17 @@ export default function BodyResetPage() {
     questionStep === 2 ? fields.tried.length > 0 :
     questionStep === 3 ? fields.goals.length > 0 :
     questionStep === 4 ? !!fields.urgency : true;
+
+  function scrollToQuizTop() {
+    setTimeout(() => {
+      document.getElementById("quiz-card")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+  }
+
+  function goToQuestionStep(nextStep: number) {
+    setQuestionStep(nextStep);
+    scrollToQuizTop();
+  }
 
   async function postLead(stage: string) {
     const res = await fetch("/api/submit", {
@@ -213,21 +218,21 @@ export default function BodyResetPage() {
                 </div>
                 <div>
                   <p className="section-label mb-3">A Message from Susie</p>
-                  <h1 className="font-serif text-[34px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14]">
-                    I can help you figure out where to start.
+                  <h1 className="font-serif text-[32px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14]">
+                    I can help you figure out where to start today.
                   </h1>
                 </div>
               </div>
 
               <div className="space-y-4 font-sans font-light text-muted text-base md:text-lg leading-relaxed">
                 <p>
-                  Tell me your name and number, then answer a few quick questions about what you are feeling and what you have already tried.
+                  Sign up today and you can get $100 off the Full Body Reset Package.
                 </p>
                 <p>
-                  I will help you see where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
+                  Give me your name and number, then answer a few quick questions about what you are feeling and what you have already tried. I will help you see where I would start - lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
                 </p>
                 <p className="text-sm md:text-base text-muted/80">
-                  Your credit can be applied toward a qualifying Body Reset package if you decide to move forward.
+                  The full $100 credit is available on the recommended package today. Smaller starter options may receive smaller intro credits.
                 </p>
               </div>
             </div>
@@ -263,15 +268,15 @@ export default function BodyResetPage() {
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
               {quizState === "success" ? (
                 <div id="results" className="bg-white/80 border border-purple/15 rounded-[24px] p-6 md:p-8 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
-                  <p className="section-label mb-4">Recommendation Requested</p>
-                  <h2 className="section-heading mb-4">Thank you, {fields.firstName}.</h2>
+                  <p className="section-label mb-4">Susie's Recommendation</p>
+                  <h2 className="section-heading mb-4">Start with the Full Body Reset Package.</h2>
                   <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-6">
-                    Susie has your answers. Your likely starting point is <strong>{recommendedOffer}</strong>. She can follow up personally, or you can choose a reset option below once the Stripe links are connected.
+                    Based on your answers, Susie recommends the <strong>Full Body Reset Package</strong> as the best starting point. This is the option that unlocks the full <strong>$100 credit today</strong>.
                   </p>
-                  <a href="#checkout-options" className="btn-primary">See My Reset Options</a>
+                  <a href="#checkout-options" className="btn-primary">See My Options</a>
                 </div>
               ) : (
-                <div className="bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="quiz-card" className="bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="mb-8">
                     <div className="flex items-center justify-between gap-4 mb-3">
                       <p className="section-label">Body Reset Questions</p>
@@ -312,9 +317,9 @@ export default function BodyResetPage() {
                   {questionStep === 4 && <OptionStep title="How soon do you want help figuring this out?" options={urgencyOptions} value={fields.urgency} onSelect={(v) => set("urgency", v)} />}
 
                   <div className="flex justify-between gap-4 mt-8">
-                    <button type="button" onClick={() => setQuestionStep(Math.max(1, questionStep - 1))} className="btn-secondary opacity-80" disabled={questionStep === 1}>Back</button>
+                    <button type="button" onClick={() => goToQuestionStep(Math.max(1, questionStep - 1))} className="btn-secondary opacity-80" disabled={questionStep === 1}>Back</button>
                     {questionStep < 4 ? (
-                      <button type="button" onClick={() => canContinue && setQuestionStep(questionStep + 1)} className="btn-primary disabled:opacity-40" disabled={!canContinue}>Continue</button>
+                      <button type="button" onClick={() => canContinue && goToQuestionStep(questionStep + 1)} className="btn-primary disabled:opacity-40" disabled={!canContinue}>Continue</button>
                     ) : (
                       <button type="button" onClick={finishQuiz} className="btn-primary disabled:opacity-40" disabled={!canContinue || quizState === "submitting"}>
                         {quizState === "submitting" ? "Saving..." : "Show Me Where To Start"}
@@ -333,9 +338,9 @@ export default function BodyResetPage() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
               <div className="text-center mb-12">
                 <p className="section-label mb-4">Choose Your Next Step</p>
-                <h2 className="section-heading mb-4">Start with Susie's recommendation, or choose a reset path.</h2>
+                <h2 className="section-heading mb-4">Susie recommends the Full Body Reset Package.</h2>
                 <p className="font-sans font-light text-muted max-w-2xl mx-auto">
-                  The paid options are ready for Stripe links once Susie approves the offer structure.
+                  The biggest package gets the full $100 credit. Smaller options are available below if you want a lower-commitment start.
                 </p>
               </div>
               <div className="grid md:grid-cols-4 gap-5">
@@ -343,7 +348,8 @@ export default function BodyResetPage() {
                   <div key={offer.name} className="card flex flex-col">
                     <p className="section-label mb-3">{offer.label}</p>
                     <h3 className="font-serif text-2xl font-light text-[#2c1f14] mb-2">{offer.name}</h3>
-                    <p className="font-serif text-4xl font-light text-purple mb-4">{offer.price}</p>
+                    <p className="font-serif text-4xl font-light text-purple mb-2">{offer.price}</p>
+                    <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>
                     <p className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6">{offer.copy}</p>
                     <a href={offer.href} className="btn-primary text-[10px] px-4">{offer.button}</a>
                   </div>

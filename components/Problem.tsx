@@ -11,9 +11,13 @@ const feelings = [
   { label: "Don't feel like yourself", microcopy: "Something feels off, and you want to feel like you again.", image: "/images/symptom-yourself.png" },
 ];
 
+function quizHref(label: string) {
+  return `/body-reset?symptom=${encodeURIComponent(label)}#quiz-funnel`;
+}
+
 export default function Problem() {
   return (
-    <section className="py-16 md:py-24 bg-white/50">
+    <section className="py-14 md:py-24 bg-white/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
         <p className="section-label mb-4">You Are Not Alone</p>
         <h2 className="section-heading mb-5">Does any of this sound familiar?</h2>
@@ -23,7 +27,7 @@ export default function Problem() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
           {feelings.map((f) => (
-            <a key={f.label} href="/body-reset#quiz-funnel" className="group flex flex-col text-left rounded-[18px] overflow-hidden border border-[rgba(120,90,150,0.12)] bg-[#faf8f5] shadow-[0_6px_20px_rgba(60,40,80,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(60,40,80,0.11)] hover:border-purple/25">
+            <a key={f.label} href={quizHref(f.label)} className="group flex flex-col text-left rounded-[18px] overflow-hidden border border-[rgba(120,90,150,0.12)] bg-[#faf8f5] shadow-[0_6px_20px_rgba(60,40,80,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(60,40,80,0.11)] hover:border-purple/25">
               <div className="relative w-full aspect-square">
                 <Image src={f.image} alt={f.label} fill className="object-cover object-top rounded-t-[18px]" sizes="(max-width: 640px) 50vw, 25vw" />
               </div>

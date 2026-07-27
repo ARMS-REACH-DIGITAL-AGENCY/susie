@@ -16,11 +16,11 @@ export default function Navbar() {
             className="h-9 md:h-11 w-auto"
           />
         </Link>
-        <a href="/body-reset" className="btn-primary hidden sm:inline-block text-[10px] px-5 py-3">
-          Reserve Your Reset
+        <a href="#services" className="btn-primary hidden sm:inline-block text-[10px] px-5 py-3">
+          View Services
         </a>
-        <a href="/body-reset" className="sm:hidden btn-primary text-[10px] px-4 py-3">
-          Reserve
+        <a href="#services" className="sm:hidden btn-primary text-[10px] px-4 py-3">
+          Services
         </a>
       </div>
     </header>

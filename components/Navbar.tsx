@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Navbar() {
-  const bookingLink = process.env.NEXT_PUBLIC_BOOKING_LINK || "#quiz";
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-stone/60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
@@ -18,11 +16,11 @@ export default function Navbar() {
             className="h-9 md:h-11 w-auto"
           />
         </Link>
-        <a href={bookingLink} className="btn-primary hidden sm:inline-block text-[10px] px-5 py-3">
-          Book a Consultation
+        <a href="/body-reset" className="btn-primary hidden sm:inline-block text-[10px] px-5 py-3">
+          Reserve Your Reset
         </a>
-        <a href="#quiz" className="sm:hidden btn-primary text-[10px] px-4 py-3">
-          Get Started
+        <a href="/body-reset" className="sm:hidden btn-primary text-[10px] px-4 py-3">
+          Reserve
         </a>
       </div>
     </header>

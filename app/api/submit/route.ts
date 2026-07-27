@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const symptoms = normalizeList(body.symptoms) || body.symptom || body.interest || "";
+    const tried = normalizeList(body.tried) || body.triedText || "";
 
     const payload = {
       firstName: body.firstName || "",
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
       preferredNextStep: body.preferredNextStep || body.goal || body.recommendedOffer || "",
       symptom: body.symptom || symptoms,
       symptoms,
-      tried: body.tried || "",
+      tried,
       goal: body.goal || "",
       urgency: body.urgency || body.timeline || "",
       recommendedOffer: body.recommendedOffer || "",

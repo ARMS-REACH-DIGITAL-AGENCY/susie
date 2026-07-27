@@ -17,9 +17,9 @@ export async function POST(req: NextRequest) {
       goal: body.goal || "",
       urgency: body.urgency || body.timeline || "",
       recommendedOffer: body.recommendedOffer || "",
-      quizPath: body.quizPath || "Body Reset Quiz Funnel",
+      quizPath: body.quizPath || "Tell Me What To Try First Funnel",
       source: body.source || "Susie Sculpts Quiz Funnel",
-      page: body.page || "Free Body Reset Evaluation",
+      page: body.page || "Tell Me What To Try First",
     };
 
     const webhookUrl = process.env.HIGHLEVEL_WEBHOOK_URL || "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/14c03571-59aa-4b47-92f4-bf437144fb78";

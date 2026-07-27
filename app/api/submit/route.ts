@@ -5,24 +5,27 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const payload = {
-      firstName:         body.firstName || "",
-      lastName:          body.lastName || "",
-      email:             body.email || "",
-      phone:             body.phone || "",
-      interest:          body.interest || "",
-      timeline:          body.timeline || "",
-      preferredNextStep: body.preferredNextStep || "",
-      source:            "Susie Sculpts Landing Page",
-      page:              "Body Reset Experience",
+      firstName: body.firstName || "",
+      lastName: body.lastName || "",
+      email: body.email || "",
+      phone: body.phone || "",
+      interest: body.interest || body.symptom || "",
+      timeline: body.timeline || body.urgency || "",
+      preferredNextStep: body.preferredNextStep || body.goal || body.recommendedOffer || "",
+      symptom: body.symptom || body.interest || "",
+      tried: body.tried || "",
+      goal: body.goal || "",
+      urgency: body.urgency || body.timeline || "",
+      recommendedOffer: body.recommendedOffer || "",
+      quizPath: body.quizPath || "Body Reset Quiz Funnel",
+      source: body.source || "Susie Sculpts Quiz Funnel",
+      page: body.page || "Free Body Reset Evaluation",
     };
 
     const webhookUrl = process.env.HIGHLEVEL_WEBHOOK_URL || "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/14c03571-59aa-4b47-92f4-bf437144fb78";
 
     if (!webhookUrl) {
-      console.warn(
-        "[Susie Sculpts] HIGHLEVEL_WEBHOOK_URL is not set. " +
-          "Add it to your Vercel environment variables. Submission logged below:"
-      );
+      console.warn("[Susie Sculpts] HIGHLEVEL_WEBHOOK_URL is not set.");
       console.log("[Susie Sculpts] Form submission:", JSON.stringify(payload, null, 2));
       return NextResponse.json({ success: true, note: "webhook_not_configured" });
     }
@@ -34,19 +37,13 @@ export async function POST(req: NextRequest) {
     });
 
     if (!hlRes.ok) {
-      console.error(
-        `[Susie Sculpts] HighLevel webhook returned ${hlRes.status}: ${await hlRes.text()}`
-      );
-      // Still return success to the user — don't expose backend errors
+      console.error(`[Susie Sculpts] HighLevel webhook returned ${hlRes.status}: ${await hlRes.text()}`);
       return NextResponse.json({ success: true, note: "webhook_error_logged" });
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("[Susie Sculpts] Submit error:", err);
-    return NextResponse.json(
-      { success: false, error: "server_error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: "server_error" }, { status: 500 });
   }
 }

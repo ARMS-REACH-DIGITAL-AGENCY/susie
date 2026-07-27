@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const heroTreatmentImage = "/images/susie-treatment-hero.svg";
+const heroTreatmentImage = "/images/susie-treatment-hero.png";
 
 export default function Hero() {
   return (

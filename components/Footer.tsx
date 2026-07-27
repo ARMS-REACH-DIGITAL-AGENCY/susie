@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 export default function Footer() {
@@ -37,7 +39,6 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                {/* Replace with real email when available */}
                 <a href="mailto:hello@susiesculpts.com" className="hover:text-cream transition-colors">
                   ✉️ hello@susiesculpts.com
                 </a>

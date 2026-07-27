@@ -17,15 +17,18 @@ export default function Hero() {
               Feel Lighter, Clearer,<br />
               <em className="text-purple not-italic font-normal">and More Like Yourself Again</em>
             </h1>
+            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-5 max-w-lg">
+              Private body reset, lymphatic, PEMF, and sculpting support for women whose bodies have changed — and who want a safe, simple place to begin.
+            </p>
             <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-              Private body reset, lymphatic, PEMF, and sculpting support for women whose bodies have changed — and who want a safe, simple place to begin. Over 30 years helping women feel and look their very best.
+              If you feel puffy, tired, foggy, inflamed, heavy, or stuck, Susie can help you figure out where to start.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#quiz" className="btn-primary">
-                Take the 60-Second Body Reset Quiz
+              <a href="/body-reset#quiz-funnel" className="btn-primary">
+                Tell Me What To Try First
               </a>
               <a href="/body-reset" className="btn-secondary">
-                Reserve a Body Reset Consultation
+                Let Susie Help Me
               </a>
             </div>
             <div className="mt-6 flex items-center gap-4">

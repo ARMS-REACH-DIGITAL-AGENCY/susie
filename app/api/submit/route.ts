@@ -1,18 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 
+function normalizeList(value: unknown): string {
+  if (Array.isArray(value)) return value.filter(Boolean).join(", ");
+  if (typeof value === "string") return value;
+  return "";
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    const symptoms = normalizeList(body.symptoms) || body.symptom || body.interest || "";
 
     const payload = {
       firstName: body.firstName || "",
       lastName: body.lastName || "",
       email: body.email || "",
       phone: body.phone || "",
-      interest: body.interest || body.symptom || "",
+      interest: body.interest || symptoms,
       timeline: body.timeline || body.urgency || "",
       preferredNextStep: body.preferredNextStep || body.goal || body.recommendedOffer || "",
-      symptom: body.symptom || body.interest || "",
+      symptom: body.symptom || symptoms,
+      symptoms,
       tried: body.tried || "",
       goal: body.goal || "",
       urgency: body.urgency || body.timeline || "",

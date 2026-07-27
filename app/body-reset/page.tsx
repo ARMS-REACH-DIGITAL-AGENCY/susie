@@ -52,7 +52,13 @@ const offers = [
     price: "$497 today",
     label: "Susie's Recommendation",
     credit: "Earn a $100 rebate toward your next service",
-    copy: "The premium starter plan gives us the most complete way to work with what you are feeling instead of guessing from one single service.",
+    procedures: [
+      "Private Body Reset consultation",
+      "Synergy Vacuum Massage / lymphatic support",
+      "PEMF frequency wellness",
+      "EMShape Neo body sculpting",
+      "Personalized next-service recommendation",
+    ],
     href: FULL_RESET_CHECKOUT_URL,
     button: "Reserve Full Reset",
     featured: true,
@@ -61,8 +67,12 @@ const offers = [
     name: "Lymphatic + PEMF Reset Intro",
     price: "$297",
     label: "Focused Reset Intro",
-    credit: "Earn a $50 rebate toward your next service",
-    copy: "A focused intro path for women feeling puffy, inflamed, tired, heavy, foggy, or stuck.",
+    credit: "",
+    procedures: [
+      "Synergy Vacuum Massage / lymphatic support",
+      "PEMF frequency wellness",
+      "Reset-focused wellness check-in with Susie",
+    ],
     href: RESET_INTRO_CHECKOUT_URL,
     button: "Choose Reset Intro",
     featured: false,
@@ -71,8 +81,12 @@ const offers = [
     name: "Body Reset Starter Visit",
     price: "$49",
     label: "Low-Commitment Start",
-    credit: "Earn 50% back as a rebate toward your next service",
-    copy: "A private starter visit to review what you are feeling and choose the best first session.",
+    credit: "",
+    procedures: [
+      "Private starter evaluation with Susie",
+      "Review of what you are feeling and what you have tried",
+      "Recommendation for your best first treatment path",
+    ],
     href: STARTER_VISIT_CHECKOUT_URL,
     button: "Choose Starter Visit",
     featured: false,
@@ -82,7 +96,11 @@ const offers = [
     price: "Free",
     label: "Book First",
     credit: "No purchase required",
-    copy: "Schedule either a Zoom or in-person evaluation at Susie's place before choosing a Body Reset path.",
+    procedures: [
+      "Zoom or in-person evaluation",
+      "Review of symptoms, goals, and questions",
+      "Guidance before choosing a Body Reset path",
+    ],
     href: INITIAL_CONSULT_BOOKING_URL,
     button: "Book Initial Consult",
     featured: false,
@@ -315,8 +333,15 @@ export default function BodyResetPage() {
                         <p className="section-label mb-3">{offer.label}</p>
                         <h3 className="font-serif text-2xl font-light text-[#2c1f14] mb-2">{offer.name}</h3>
                         <p className="font-serif text-4xl font-light text-purple mb-2">{offer.price}</p>
-                        <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>
-                        <p className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6">{offer.copy}</p>
+                        {offer.credit && <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>}
+                        <ul className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6 space-y-2">
+                          {offer.procedures.map((procedure) => (
+                            <li key={procedure} className="flex gap-2">
+                              <span className="text-purple mt-[1px]">•</span>
+                              <span>{procedure}</span>
+                            </li>
+                          ))}
+                        </ul>
                         <a href={offer.href} className="btn-primary text-[10px] px-4">{offer.button}</a>
                       </div>
                     ))}

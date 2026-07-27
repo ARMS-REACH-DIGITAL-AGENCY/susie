@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+import Link from "next/link";
 import Footer from "@/components/Footer";
 
 const FULL_RESET_CHECKOUT_URL = "#stripe-checkout-link-needed";
@@ -111,6 +111,39 @@ function selectedClass(selected: boolean) {
   return selected
     ? "border-2 border-purple bg-purple/5 shadow-[0_0_0_3px_rgba(140,110,180,0.15),0_8px_24px_rgba(60,40,80,0.10)]"
     : "border border-[rgba(120,90,150,0.12)] bg-[#faf8f5] shadow-[0_6px_20px_rgba(60,40,80,0.06)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(60,40,80,0.10)] hover:border-purple/25";
+}
+
+function BodyResetHeader({ showHomeCta }: { showHomeCta: boolean }) {
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-stone/60">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-20">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Susie Sculpts — Empowered Transformations"
+            width={180}
+            height={44}
+            priority
+            className="h-9 md:h-11 w-auto"
+          />
+        </Link>
+
+        {showHomeCta ? (
+          <Link href="/#testimonials" className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight">
+            Read Testimonials
+          </Link>
+        ) : (
+          <button
+            type="submit"
+            form="body-reset-lead-form"
+            className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight"
+          >
+            Claim My $100 Offer
+          </button>
+        )}
+      </div>
+    </header>
+  );
 }
 
 export default function BodyResetPage() {
@@ -235,7 +268,7 @@ export default function BodyResetPage() {
 
   return (
     <>
-      <Navbar />
+      <BodyResetHeader showHomeCta={quizState === "success"} />
       <main>
         <section id="claim" className="relative pt-20 md:pt-28 pb-6 md:pb-10 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />

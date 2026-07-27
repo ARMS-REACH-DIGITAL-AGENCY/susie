@@ -150,7 +150,7 @@ export default function BodyResetPage() {
     setTimeout(() => {
       const element = document.getElementById(id);
       if (!element) return;
-      const stickyOffset = 132;
+      const stickyOffset = 84;
       const top = element.getBoundingClientRect().top + window.scrollY - stickyOffset;
       window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
     }, delay);
@@ -219,7 +219,7 @@ export default function BodyResetPage() {
     <>
       <Navbar />
       <main>
-        <section id="claim" className="relative pt-20 md:pt-28 pb-8 md:pb-12 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
+        <section id="claim" className="relative pt-20 md:pt-28 pb-6 md:pb-10 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.9fr] gap-5 lg:gap-8 items-start relative">
             <div className="bg-white/75 border border-purple/15 rounded-[22px] p-5 md:p-7 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
@@ -258,7 +258,7 @@ export default function BodyResetPage() {
                   <a href="#quiz-funnel" onClick={(e) => { e.preventDefault(); scrollToElement("quiz-card", 0); }} className="btn-primary w-full">Start the Questions</a>
                 </div>
               ) : (
-                <form onSubmit={captureLead} className="space-y-4">
+                <form id="body-reset-lead-form" onSubmit={captureLead} className="space-y-4">
                   <input className="input-field" placeholder="First name*" value={fields.firstName} onChange={(e) => set("firstName", e.target.value)} required />
                   <input className="input-field" type="email" placeholder="Email address*" value={fields.email} onChange={(e) => set("email", e.target.value)} required />
                   <input className="input-field" type="tel" placeholder="Mobile number (optional)" value={fields.phone} onChange={(e) => set("phone", e.target.value)} />
@@ -267,7 +267,7 @@ export default function BodyResetPage() {
                     I agree to receive follow-up messages from Susie Sculpts about my credit and recommendation. If I provide a mobile number, message and data rates may apply. I can opt out anytime.
                   </label>
                   <button type="submit" disabled={leadState === "submitting"} className="btn-primary w-full disabled:opacity-60">
-                    {leadState === "submitting" ? "Saving..." : "Claim Your Credit"}
+                    {leadState === "submitting" ? "Saving..." : "Claim My $100 Offer"}
                   </button>
                   {leadState === "error" && <p className="text-center text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
                 </form>
@@ -277,10 +277,10 @@ export default function BodyResetPage() {
         </section>
 
         {leadState === "captured" && (
-          <section id="quiz-funnel" className="py-6 md:py-12 bg-cream">
+          <section id="quiz-funnel" className="py-2 md:py-8 bg-cream">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
               {quizState === "analyzing" ? (
-                <div id="analysis-card" className="scroll-mt-36 bg-white/80 border border-purple/15 rounded-[24px] p-8 md:p-10 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="analysis-card" className="scroll-mt-24 bg-white/80 border border-purple/15 rounded-[24px] p-8 md:p-10 text-center shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="mx-auto mb-6 w-14 h-14 rounded-full bg-purple/10 flex items-center justify-center">
                     <div className="w-8 h-8 rounded-full border-4 border-purple/20 border-t-purple animate-spin" />
                   </div>
@@ -291,7 +291,7 @@ export default function BodyResetPage() {
                   </p>
                 </div>
               ) : quizState === "success" ? (
-                <div id="results" className="scroll-mt-36 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="results" className="scroll-mt-24 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="text-center mb-10">
                     <p className="section-label mb-4">Susie&apos;s Recommendation</p>
                     <h2 className="section-heading mb-4">I&apos;m going to recommend my Full Body Reset Package.</h2>
@@ -323,10 +323,10 @@ export default function BodyResetPage() {
                   </div>
                 </div>
               ) : (
-                <div id="quiz-card" className="scroll-mt-36 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                <div id="quiz-card" className="scroll-mt-24 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="mb-8">
                     <div className="flex items-center justify-between gap-4 mb-3">
-                      <p className="section-label">Survey</p>
+                      <p className="section-label">Evaluation</p>
                       <p className="section-label whitespace-nowrap">{questionStep} of 4</p>
                     </div>
                     <div className="w-full h-2 bg-stone/70 rounded-full overflow-hidden">

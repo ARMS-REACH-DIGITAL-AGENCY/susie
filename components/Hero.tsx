@@ -1,8 +1,6 @@
 import Image from "next/image";
 
 export default function Hero() {
-  const bookingLink = process.env.NEXT_PUBLIC_BOOKING_LINK || "#quiz";
-
   return (
     <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
       {/* Soft background blobs */}
@@ -23,11 +21,11 @@ export default function Hero() {
               Private body reset, lymphatic, PEMF, and sculpting support for women whose bodies have changed — and who want a safe, simple place to begin. Over 30 years helping women feel and look their very best.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href={bookingLink} className="btn-primary">
-                Book Your Body Reset Consultation
-              </a>
-              <a href="#quiz" className="btn-secondary">
+              <a href="#quiz" className="btn-primary">
                 Take the 60-Second Body Reset Quiz
+              </a>
+              <a href="/body-reset" className="btn-secondary">
+                Reserve a Body Reset Consultation
               </a>
             </div>
             <div className="mt-6 flex items-center gap-4">

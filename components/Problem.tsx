@@ -11,10 +11,6 @@ const feelings = [
   { label: "Don't feel like yourself", microcopy: "Something feels off, and you want to feel like you again.", image: "/images/symptom-yourself.png" },
 ];
 
-function quizHref(label: string) {
-  return `/body-reset?symptom=${encodeURIComponent(label)}#claim`;
-}
-
 export default function Problem() {
   return (
     <section className="py-14 md:py-24 bg-white/50">
@@ -27,7 +23,7 @@ export default function Problem() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
           {feelings.map((f) => (
-            <a key={f.label} href={quizHref(f.label)} className="group flex flex-col text-left rounded-[18px] overflow-hidden border border-[rgba(120,90,150,0.12)] bg-[#faf8f5] shadow-[0_6px_20px_rgba(60,40,80,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(60,40,80,0.11)] hover:border-purple/25">
+            <div key={f.label} className="group flex flex-col text-left rounded-[18px] overflow-hidden border border-[rgba(120,90,150,0.12)] bg-[#faf8f5] shadow-[0_6px_20px_rgba(60,40,80,0.06)]">
               <div className="relative w-full aspect-square">
                 <Image src={f.image} alt={f.label} fill className="object-cover object-top rounded-t-[18px]" sizes="(max-width: 640px) 50vw, 25vw" />
               </div>
@@ -35,14 +31,14 @@ export default function Problem() {
                 <p className="font-sans font-semibold leading-snug text-[#6A5A6D] text-[18px] sm:text-[20px]">{f.label}</p>
                 <p className="font-sans font-normal text-[13px] text-[#9a8fa0] leading-snug">{f.microcopy}</p>
               </div>
-            </a>
+            </div>
           ))}
         </div>
         <div className="bg-purple/5 border border-purple/15 rounded-sm px-6 py-8 max-w-2xl mx-auto">
           <p className="font-serif text-xl md:text-2xl font-light text-[#2c1f14] leading-relaxed italic mb-6">
-            &ldquo;Your body changed. You are not broken. Tell Susie what you are feeling, and she can help you figure out where to start.&rdquo;
+            &ldquo;Your body changed. You are not broken. Susie can help you find a supportive next step.&rdquo;
           </p>
-          <a href="/body-reset#claim" className="btn-primary">Claim My $100 Reset Credit</a>
+          <a href="#services" className="btn-primary">View Services</a>
         </div>
       </div>
     </section>

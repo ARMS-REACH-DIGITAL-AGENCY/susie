@@ -161,7 +161,7 @@ export default function BodyResetPage() {
         recommendedOffer,
         quizPath: "Body Reset Credit Lead-First Funnel",
         source: "Susie Sculpts Quiz Funnel",
-        page: "Claim $100 Body Reset Credit",
+        page: "Claim Your Credit",
         leadStage: stage,
       }),
     });
@@ -170,7 +170,7 @@ export default function BodyResetPage() {
 
   async function captureLead(e: React.FormEvent) {
     e.preventDefault();
-    if (!fields.firstName || !fields.email || !fields.consent) return;
+    if (!fields.firstName || !fields.phone || !fields.consent) return;
     setLeadState("submitting");
     try {
       await postLead("Lead Captured Before Quiz");
@@ -200,58 +200,47 @@ export default function BodyResetPage() {
         <section id="claim" className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.85fr] gap-8 lg:gap-10 items-start relative">
-            <div>
-              <p className="section-label mb-4">New Client Reset Credit</p>
-              <h1 className="font-serif text-[36px] sm:text-5xl lg:text-6xl font-light leading-[1.04] text-[#2c1f14] mb-5">
-                This message is for the woman who feels puffy, tired, foggy, inflamed, heavy, or stuck.
+            <div className="bg-white/70 border border-purple/15 rounded-[22px] p-6 md:p-8 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
+              <p className="section-label mb-4">A Message from Susie</p>
+              <h1 className="font-serif text-[42px] sm:text-5xl lg:text-6xl font-light leading-[1.04] text-[#2c1f14] mb-5">
+                I can help you figure out where to start.
               </h1>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4 max-w-2xl">
-                You are not broken. Your body may just be asking for a different kind of reset.
+              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4">
+                Tell me what you are feeling and what you have already tried.
               </p>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-6 max-w-2xl">
-                Claim your $100 Body Reset Credit, answer a few quick questions, and Susie will help you figure out where she would start.
+              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed">
+                I cannot diagnose you or promise a magic cure, but I can show you where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
               </p>
-
-              <div className="bg-white/70 border border-purple/15 rounded-[18px] p-5 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
-                <p className="section-label mb-3">A Message from Susie</p>
-                <h2 className="font-serif text-2xl md:text-3xl font-light text-[#2c1f14] mb-3">I can help you stop guessing.</h2>
-                <p className="font-sans font-light text-muted text-sm md:text-base leading-relaxed">
-                  Tell me what you are feeling and what you have already tried. I cannot diagnose you or promise a magic cure, but I can show you where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
-                </p>
-              </div>
             </div>
 
             <div className="bg-white/85 border border-purple/15 rounded-[26px] p-6 md:p-7 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
-              <p className="section-label mb-3">Claim Your Credit</p>
+              <p className="section-label mb-3">Start Here</p>
               <h2 className="font-serif text-3xl md:text-4xl font-light leading-tight text-[#2c1f14] mb-4">
-                Get $100 toward your first qualifying Body Reset package.
+                Where should Susie reach you?
               </h2>
               <p className="font-sans font-light text-muted text-sm leading-relaxed mb-6">
-                Start by telling Susie where to send your reset credit. Then answer four quick questions so she can point you toward the best first step.
+                Enter your name and mobile number. Then answer four quick questions so Susie can point you toward the best first step.
               </p>
 
               {leadState === "captured" ? (
                 <div className="rounded-sm bg-purple/5 border border-purple/15 p-5 text-center">
                   <p className="font-serif text-2xl font-light text-[#2c1f14] mb-2">You are in, {fields.firstName}.</p>
-                  <p className="font-sans font-light text-muted text-sm mb-4">Your credit request is saved. Now answer the quick questions below.</p>
+                  <p className="font-sans font-light text-muted text-sm mb-4">Now answer the quick questions below.</p>
                   <a href="#quiz-funnel" className="btn-primary w-full">Start the Questions</a>
                 </div>
               ) : (
                 <form onSubmit={captureLead} className="space-y-4">
                   <input className="input-field" placeholder="First name*" value={fields.firstName} onChange={(e) => set("firstName", e.target.value)} required />
-                  <input className="input-field" type="email" placeholder="Email address*" value={fields.email} onChange={(e) => set("email", e.target.value)} required />
-                  <input className="input-field" type="tel" placeholder="Mobile number (optional)" value={fields.phone} onChange={(e) => set("phone", e.target.value)} />
+                  <input className="input-field" type="tel" placeholder="Mobile number*" value={fields.phone} onChange={(e) => set("phone", e.target.value)} required />
+                  <input className="input-field" type="email" placeholder="Email address (optional)" value={fields.email} onChange={(e) => set("email", e.target.value)} />
                   <label className="flex gap-3 items-start text-xs font-sans font-light text-muted leading-relaxed">
                     <input type="checkbox" className="mt-1 accent-purple" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} required />
-                    I agree to receive follow-up messages from Susie Sculpts about my Body Reset Credit and recommendation. Message and data rates may apply if I provide a mobile number. I can opt out anytime.
+                    I agree to receive follow-up messages from Susie Sculpts about my request. Message and data rates may apply. I can opt out anytime.
                   </label>
                   <button type="submit" disabled={leadState === "submitting"} className="btn-primary w-full disabled:opacity-60">
-                    {leadState === "submitting" ? "Saving..." : "Claim My $100 Reset Credit"}
+                    {leadState === "submitting" ? "Saving..." : "Claim Your Credit"}
                   </button>
                   {leadState === "error" && <p className="text-center text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
-                  <p className="text-xs font-sans font-light text-muted/60 text-center">
-                    Credit applies toward a qualifying Body Reset package if purchased. Individual experiences vary.
-                  </p>
                 </form>
               )}
             </div>

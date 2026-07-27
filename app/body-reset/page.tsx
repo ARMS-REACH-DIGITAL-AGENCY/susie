@@ -51,7 +51,8 @@ const offers = [
     name: "Full Body Reset Package",
     price: "$497 today",
     label: "Susie's Recommendation",
-    credit: "Earn a $100 rebate toward your next service",
+    credit: "Includes a $100 promotional credit toward your next qualifying service",
+    terms: "Credit is issued after completion of the Full Body Reset Package. It has no cash value, is not transferable, cannot be applied to today's purchase, and cannot be combined with other offers.",
     procedures: [
       "Private Body Reset consultation",
       "Synergy Vacuum Massage / lymphatic support",
@@ -68,6 +69,7 @@ const offers = [
     price: "$297",
     label: "Focused Reset Intro",
     credit: "",
+    terms: "",
     procedures: [
       "Synergy Vacuum Massage / lymphatic support",
       "PEMF frequency wellness",
@@ -82,6 +84,7 @@ const offers = [
     price: "$49",
     label: "Low-Commitment Start",
     credit: "",
+    terms: "",
     procedures: [
       "Private starter evaluation with Susie",
       "Review of what you are feeling and what you have tried",
@@ -96,6 +99,7 @@ const offers = [
     price: "Free",
     label: "Book First",
     credit: "No purchase required",
+    terms: "",
     procedures: [
       "Zoom or in-person evaluation",
       "Review of symptoms, goals, and questions",
@@ -138,7 +142,7 @@ function BodyResetHeader({ showHomeCta }: { showHomeCta: boolean }) {
             form="body-reset-lead-form"
             className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight"
           >
-            Claim My $100 Offer
+            Claim My $100 Credit
           </button>
         )}
       </div>
@@ -296,7 +300,7 @@ export default function BodyResetPage() {
                   After you submit the answers to a few very basic questions to accept my gracious offer, I&apos;ll be able to recommend the right solution for what&apos;s weighing you down.
                 </p>
                 <p>
-                  If you decide to accept the $100 rebate toward your next service, I look forward to meeting you!
+                  If you decide to begin with the Full Body Reset Package, you can receive a $100 promotional credit toward your next qualifying service after your package is completed.
                 </p>
               </div>
             </div>
@@ -318,7 +322,7 @@ export default function BodyResetPage() {
                     I agree to receive follow-up messages from Susie Sculpts about my credit and recommendation. If I provide a mobile number, message and data rates may apply. I can opt out anytime.
                   </label>
                   <button type="submit" disabled={leadState === "submitting"} className="btn-primary w-full disabled:opacity-60">
-                    {leadState === "submitting" ? "Saving..." : "Claim My $100 Offer"}
+                    {leadState === "submitting" ? "Saving..." : "Claim My $100 Credit"}
                   </button>
                   {leadState === "error" && <p className="text-center text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
                 </form>
@@ -353,7 +357,7 @@ export default function BodyResetPage() {
                       As a way to show you my commitment to your health and wellness goals, I&apos;m confident you&apos;re going to want more.
                     </p>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
-                      So, for a limited time for just a select few qualified ladies, I&apos;ve decided to add a $100 rebate offer that can be used toward your next service!
+                      So, for a limited time for just a select few qualified ladies, I&apos;ve decided to include a $100 promotional credit that can be used toward your next qualifying service after your Full Body Reset Package is completed.
                     </p>
                     <p className="font-serif text-2xl font-light text-[#2c1f14] max-w-2xl mx-auto">
                       Congratulations on taking the first step!<br />You&apos;ve got this!
@@ -367,6 +371,7 @@ export default function BodyResetPage() {
                         <h3 className="font-serif text-2xl font-light text-[#2c1f14] mb-2">{offer.name}</h3>
                         <p className="font-serif text-4xl font-light text-purple mb-2">{offer.price}</p>
                         {offer.credit && <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>}
+                        {offer.terms && <p className="font-sans font-light text-[11px] text-muted/75 leading-relaxed mb-4">{offer.terms}</p>}
                         <ul className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6 space-y-2">
                           {offer.procedures.map((procedure) => (
                             <li key={procedure} className="flex gap-2">

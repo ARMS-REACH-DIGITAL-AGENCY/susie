@@ -44,13 +44,20 @@ export default function Trust() {
               </div>
             </a>
 
-            {/* Testimonial placeholder */}
+            {/* Testimonial */}
             <div className="bg-purple/5 border-l-2 border-purple/30 pl-5 py-4 mb-5">
-              <p className="font-serif text-lg font-light italic text-[#2c1f14] leading-relaxed mb-2">
-                &ldquo;Client testimonial coming soon — your story could be here after your first session.&rdquo;
+              <div className="text-gold text-lg mb-3">★★★★★</div>
+              <p className="font-serif text-lg font-light italic text-[#2c1f14] leading-relaxed mb-4">
+                &ldquo;I am so grateful to Susie and her expertise on Synergie. I lost 26 pounds and went down 2 sizes.
               </p>
-              <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple/60">
-                — Client Name, Gilbert AZ
+              <p className="font-serif text-lg font-light italic text-[#2c1f14] leading-relaxed mb-4">
+                I must admit I was skeptical in the beginning, but I trusted her. I am thrilled with the results and I feel great. Added bonus — my skin is so much softer. It&rsquo;s safe and gets wonderful results.&rdquo;
+              </p>
+              <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple/60 mb-2">
+                — Leslie Y.
+              </p>
+              <p className="text-[11px] font-sans font-light text-muted/70 leading-relaxed">
+                Individual results vary. Testimonial shared from a Susie Sculpts client.
               </p>
             </div>
 

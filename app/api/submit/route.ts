@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const symptoms = normalizeList(body.symptoms) || body.symptom || body.interest || "";
     const tried = normalizeList(body.tried) || body.triedText || "";
+    const goals = normalizeList(body.goals) || body.goal || body.preferredNextStep || "";
 
     const payload = {
       firstName: body.firstName || "",
@@ -19,16 +20,18 @@ export async function POST(req: NextRequest) {
       phone: body.phone || "",
       interest: body.interest || symptoms,
       timeline: body.timeline || body.urgency || "",
-      preferredNextStep: body.preferredNextStep || body.goal || body.recommendedOffer || "",
+      preferredNextStep: body.preferredNextStep || goals || body.recommendedOffer || "",
       symptom: body.symptom || symptoms,
       symptoms,
       tried,
-      goal: body.goal || "",
+      goal: goals,
+      goals,
       urgency: body.urgency || body.timeline || "",
       recommendedOffer: body.recommendedOffer || "",
-      quizPath: body.quizPath || "Tell Me What To Try First Funnel",
+      quizPath: body.quizPath || "Body Reset Credit Lead-First Funnel",
+      leadStage: body.leadStage || "Lead Captured",
       source: body.source || "Susie Sculpts Quiz Funnel",
-      page: body.page || "Tell Me What To Try First",
+      page: body.page || "Claim $100 Body Reset Credit",
     };
 
     const webhookUrl = process.env.HIGHLEVEL_WEBHOOK_URL || "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/14c03571-59aa-4b47-92f4-bf437144fb78";

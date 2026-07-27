@@ -197,31 +197,42 @@ export default function BodyResetPage() {
     <>
       <Navbar />
       <main>
-        <section id="claim" className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
+        <section id="claim" className="relative pt-20 md:pt-28 pb-10 md:pb-16 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
           <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.85fr] gap-8 lg:gap-10 items-start relative">
-            <div className="bg-white/70 border border-purple/15 rounded-[22px] p-6 md:p-8 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
-              <p className="section-label mb-4">A Message from Susie</p>
-              <h1 className="font-serif text-[42px] sm:text-5xl lg:text-6xl font-light leading-[1.04] text-[#2c1f14] mb-5">
-                I can help you figure out where to start.
-              </h1>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4">
-                Tell me what you are feeling and what you have already tried.
-              </p>
-              <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed">
-                I cannot diagnose you or promise a magic cure, but I can show you where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
-              </p>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_.9fr] gap-5 lg:gap-8 items-start relative">
+            <div className="bg-white/75 border border-purple/15 rounded-[22px] p-5 md:p-7 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
+              <div className="flex items-start gap-4 mb-5">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-md shrink-0 border-4 border-white">
+                  <Image
+                    src="/images/susie.jpg"
+                    alt="Susie from Susie Sculpts"
+                    fill
+                    className="object-cover object-[center_8%]"
+                    sizes="96px"
+                  />
+                </div>
+                <div>
+                  <p className="section-label mb-3">A Message from Susie</p>
+                  <h1 className="font-serif text-[34px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14]">
+                    I can help you figure out where to start.
+                  </h1>
+                </div>
+              </div>
+
+              <div className="space-y-4 font-sans font-light text-muted text-base md:text-lg leading-relaxed">
+                <p>
+                  Tell me your name and number, then answer a few quick questions about what you are feeling and what you have already tried.
+                </p>
+                <p>
+                  I will help you see where I would start — lymphatic support, PEMF/frequency wellness, sculpting, or a full Body Reset path.
+                </p>
+                <p className="text-sm md:text-base text-muted/80">
+                  Your credit can be applied toward a qualifying Body Reset package if you decide to move forward.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white/85 border border-purple/15 rounded-[26px] p-6 md:p-7 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
-              <p className="section-label mb-3">Start Here</p>
-              <h2 className="font-serif text-3xl md:text-4xl font-light leading-tight text-[#2c1f14] mb-4">
-                Where should Susie reach you?
-              </h2>
-              <p className="font-sans font-light text-muted text-sm leading-relaxed mb-6">
-                Enter your name and mobile number. Then answer four quick questions so Susie can point you toward the best first step.
-              </p>
-
+            <div className="bg-white/90 border border-purple/15 rounded-[22px] p-5 md:p-6 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
               {leadState === "captured" ? (
                 <div className="rounded-sm bg-purple/5 border border-purple/15 p-5 text-center">
                   <p className="font-serif text-2xl font-light text-[#2c1f14] mb-2">You are in, {fields.firstName}.</p>

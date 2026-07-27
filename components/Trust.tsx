@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Trust() {
   return (
-    <section className="py-20 md:py-28 bg-cream">
+    <section id="testimonials" className="py-20 md:py-28 bg-cream">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 

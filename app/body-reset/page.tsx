@@ -319,9 +319,17 @@ export default function BodyResetPage() {
 
               <div className="mt-6 rounded-[18px] bg-purple/5 border border-purple/15 p-4">
                 <p className="section-label mb-2">Why this became personal</p>
-                <p className="font-sans font-light text-sm md:text-base text-muted leading-relaxed">
-                  Susie&apos;s personal frequency wellness story can go here after tomorrow&apos;s visit: what changed for her, why this work matters, and why she wants women to feel heard before choosing a treatment path.
-                </p>
+                <div className="space-y-3 font-sans font-light text-sm md:text-base text-muted leading-relaxed">
+                  <p>
+                    After nearly 20 years of living with pain, I experienced frequency wellness and woke up pain-free for the first time on January 1st.
+                  </p>
+                  <p>
+                    That moment changed the direction of my work.
+                  </p>
+                  <p>
+                    I wanted to help other women discover supportive therapies that may help their bodies recover, reset, and feel better naturally.
+                  </p>
+                </div>
               </div>
             </div>
 

@@ -24,8 +24,8 @@ export default function Hero() {
               <a href="#services" className="btn-primary">
                 View Services
               </a>
-              <a href="tel:+14804400909" className="btn-secondary">
-                Call Susie
+              <a href="#meet-susie" className="btn-secondary">
+                Meet Susie
               </a>
             </div>
 

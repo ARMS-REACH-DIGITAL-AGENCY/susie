@@ -142,7 +142,7 @@ function BodyResetHeader({ showHomeCta }: { showHomeCta: boolean }) {
             form="body-reset-lead-form"
             className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight"
           >
-            Claim My $100 Credit
+            Find My Best First Step
           </button>
         )}
       </div>
@@ -232,9 +232,9 @@ export default function BodyResetPage() {
         timeline: fields.urgency,
         preferredNextStep: goalsText,
         recommendedOffer,
-        quizPath: "Body Reset Credit Lead-First Funnel",
+        quizPath: "Body Reset Evaluation Lead-First Funnel",
         source: "Susie Sculpts Quiz Funnel",
-        page: "Claim Your Credit",
+        page: "Find My Best First Step",
         leadStage: stage,
       }),
     });
@@ -288,19 +288,39 @@ export default function BodyResetPage() {
                     sizes="80px"
                   />
                 </div>
-                <p className="section-label">A Message from Susie</p>
+                <div>
+                  <p className="section-label mb-1">A Message from Susie</p>
+                  <p className="font-sans font-medium text-[12px] tracking-[0.18em] uppercase text-purple/70">Since 1995</p>
+                </div>
               </div>
 
+              <p className="font-sans font-medium text-purple/80 text-sm md:text-base mb-3">
+                Over 30 years helping women look and feel their best.
+              </p>
+
               <h1 className="font-serif text-[30px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14] mb-5">
-                Let&apos;s figure out where you should start and get to feeling better!
+                Feel puffy, tired, foggy, inflamed, heavy, stuck, or just not like yourself?
               </h1>
 
               <div className="space-y-4 font-sans font-light text-muted text-base md:text-lg leading-relaxed">
                 <p>
-                  After you submit the answers to a few very basic questions to accept my gracious offer, I&apos;ll be able to recommend the right solution for what&apos;s weighing you down.
+                  Let&apos;s figure out where you should start and get to feeling better. I don&apos;t believe every woman needs the same treatment, and I don&apos;t want you guessing from one service to the next.
                 </p>
                 <p>
-                  If you decide to begin with the Full Body Reset Package, you can receive a $100 promotional credit toward your next qualifying service after your package is completed.
+                  I&apos;ll personally look at what you&apos;re feeling, what you&apos;ve already tried, and what you want most. If I don&apos;t think something is right for you, I&apos;ll tell you.
+                </p>
+                <p className="font-medium text-[#2c1f14]">
+                  No pressure. Ever.
+                </p>
+                <p className="text-sm md:text-base text-muted/85">
+                  If you begin with the Full Body Reset Package, you can receive a $100 promotional credit toward your next qualifying service after your package is completed.
+                </p>
+              </div>
+
+              <div className="mt-6 rounded-[18px] bg-purple/5 border border-purple/15 p-4">
+                <p className="section-label mb-2">Why this became personal</p>
+                <p className="font-sans font-light text-sm md:text-base text-muted leading-relaxed">
+                  Susie&apos;s personal frequency wellness story can go here after tomorrow&apos;s visit: what changed for her, why this work matters, and why she wants women to feel heard before choosing a treatment path.
                 </p>
               </div>
             </div>
@@ -309,8 +329,8 @@ export default function BodyResetPage() {
               {leadState === "captured" ? (
                 <div className="rounded-sm bg-purple/5 border border-purple/15 p-5 text-center">
                   <p className="font-serif text-2xl font-light text-[#2c1f14] mb-2">You are in, {fields.firstName}.</p>
-                  <p className="font-sans font-light text-muted text-sm mb-4">Now answer the quick questions below.</p>
-                  <a href="#quiz-funnel" onClick={(e) => { e.preventDefault(); scrollToElement("quiz-card", 0); }} className="btn-primary w-full">Start the Questions</a>
+                  <p className="font-sans font-light text-muted text-sm mb-4">Now tell Susie what you&apos;ve been feeling.</p>
+                  <a href="#quiz-funnel" onClick={(e) => { e.preventDefault(); scrollToElement("quiz-card", 0); }} className="btn-primary w-full">Start My Evaluation</a>
                 </div>
               ) : (
                 <form id="body-reset-lead-form" onSubmit={captureLead} className="space-y-4">
@@ -319,11 +339,14 @@ export default function BodyResetPage() {
                   <input className="input-field" type="tel" placeholder="Mobile number (optional)" value={fields.phone} onChange={(e) => set("phone", e.target.value)} />
                   <label className="flex gap-3 items-start text-xs font-sans font-light text-muted leading-relaxed">
                     <input type="checkbox" className="mt-1 accent-purple" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} required />
-                    I agree to receive follow-up messages from Susie Sculpts about my credit and recommendation. If I provide a mobile number, message and data rates may apply. I can opt out anytime.
+                    I agree to receive follow-up messages from Susie Sculpts about my evaluation and recommendation. If I provide a mobile number, message and data rates may apply. I can opt out anytime.
                   </label>
                   <button type="submit" disabled={leadState === "submitting"} className="btn-primary w-full disabled:opacity-60">
-                    {leadState === "submitting" ? "Saving..." : "Claim My $100 Credit"}
+                    {leadState === "submitting" ? "Saving..." : "Find My Best First Step"}
                   </button>
+                  <p className="text-center text-xs font-sans font-light text-muted/80 leading-relaxed">
+                    The $100 credit is a bonus if the Full Body Reset Package is the right fit for you.
+                  </p>
                   {leadState === "error" && <p className="text-center text-sm text-red-500">Something went wrong. Please try again or call Susie at (480) 440-0909.</p>}
                 </form>
               )}
@@ -349,18 +372,18 @@ export default function BodyResetPage() {
                 <div id="results" className="scroll-mt-24 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
                   <div className="text-center mb-10">
                     <p className="section-label mb-4">Susie&apos;s Recommendation</p>
-                    <h2 className="section-heading mb-4">I&apos;m going to recommend my Full Body Reset Package.</h2>
+                    <h2 className="section-heading mb-4">Based on what you shared with me, I think the Full Body Reset Package is the best place to start.</h2>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
-                      The procedures included in this premium starter plan will give us the most complete way to work with what you are feeling instead of guessing from one single service.
+                      I don&apos;t believe every woman needs the same treatment. I want to understand what you&apos;re feeling, what you&apos;ve already tried, and what your body may be asking for before I recommend anything.
                     </p>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
-                      As a way to show you my commitment to your health and wellness goals, I&apos;m confident you&apos;re going to want more.
+                      This gives us the most complete way to start instead of guessing from one single service.
                     </p>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
-                      So, for a limited time for just a select few qualified ladies, I&apos;ve decided to include a $100 promotional credit that can be used toward your next qualifying service after your Full Body Reset Package is completed.
+                      If you decide to begin with the Full Body Reset Package, I&apos;ll also include a $100 promotional credit that can be used toward your next qualifying service after your package is completed.
                     </p>
                     <p className="font-serif text-2xl font-light text-[#2c1f14] max-w-2xl mx-auto">
-                      Congratulations on taking the first step!<br />You&apos;ve got this!
+                      No pressure. Ever.<br />I just want to help you find the right place to start.
                     </p>
                   </div>
 

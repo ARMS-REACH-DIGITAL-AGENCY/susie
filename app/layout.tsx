@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
+import AnalyticsScripts from "@/components/AnalyticsScripts";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -18,15 +19,15 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Susie Sculpts | Body Reset, PEMF, Lymphatic & Sculpting in Gilbert AZ",
+  title: "Susie Sculpts | Body Reset, PEMF, Synergie & Sculpting in Gilbert AZ",
   description:
-    "Private body reset, lymphatic, PEMF, and body sculpting support for women in Gilbert and the East Valley who want to feel lighter, clearer, and more like themselves again.",
+    "Private body reset, Synergie Vacuum Massage, lymphatic, PEMF, and body sculpting support for women in Gilbert, Queen Creek, and the East Valley who want to feel lighter, clearer, and more like themselves again.",
   keywords:
-    "body sculpting Gilbert AZ, PEMF Gilbert AZ, lymphatic massage Gilbert AZ, body reset Gilbert AZ, wellness support East Valley, non-invasive body sculpting Gilbert",
+    "Synergie Vacuum Massage Gilbert AZ, Synergie Vacuum Massage Queen Creek AZ, body sculpting Gilbert AZ, PEMF Gilbert AZ, lymphatic massage Gilbert AZ, body reset Gilbert AZ, wellness support East Valley, non-invasive body sculpting Gilbert",
   openGraph: {
-    title: "Susie Sculpts | Body Reset, PEMF, Lymphatic & Sculpting in Gilbert AZ",
+    title: "Susie Sculpts | Body Reset, PEMF, Synergie & Sculpting in Gilbert AZ",
     description:
-      "Private body reset, lymphatic, PEMF, and body sculpting support for women in Gilbert and the East Valley.",
+      "Private body reset, Synergie Vacuum Massage, lymphatic, PEMF, and body sculpting support for women in Gilbert, Queen Creek, and the East Valley.",
     url: "https://susiesculpts.com",
     siteName: "Susie Sculpts",
     locale: "en_US",
@@ -41,7 +42,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
-      <body className="bg-cream font-sans antialiased">{children}</body>
+      <body className="bg-cream font-sans antialiased">
+        <AnalyticsScripts />
+        {children}
+      </body>
     </html>
   );
 }

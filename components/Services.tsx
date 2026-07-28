@@ -1,6 +1,6 @@
 const services = [
   {
-    title: "Synergy Vacuum Massage",
+    title: "Synergie Vacuum Massage",
     tag: "Lymphatic Support",
     color: "border-purple/20",
     tagColor: "text-purple",

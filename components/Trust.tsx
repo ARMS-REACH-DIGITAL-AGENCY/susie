@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Trust() {
   return (
-    <section id="testimonials" className="py-20 md:py-28 bg-cream">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section id="meet-susie" className="py-16 md:py-24 bg-cream scroll-mt-24">
+      <div id="testimonials" className="max-w-5xl mx-auto px-4 sm:px-6 scroll-mt-24">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 
           {/* Photo */}
           <div className="flex justify-center md:justify-start">
@@ -21,7 +21,7 @@ export default function Trust() {
 
           {/* Copy */}
           <div>
-            <p className="section-label mb-4">Helping Women Since 1995</p>
+            <p className="section-label mb-4">Meet Susie</p>
             <h2 className="section-heading mb-6">
               30 years. Real results.<br />No pressure. Ever.
             </h2>
@@ -32,25 +32,13 @@ export default function Trust() {
               But true transformation isn&rsquo;t just physical. I take a holistic approach that supports mental, emotional, and spiritual well-being as well. My goal is to empower women to feel confident, healthy, and balanced in every aspect of their lives.
             </p>
 
-            {/* Phone CTA */}
-            <a
-              href="tel:+14804400909"
-              className="inline-flex items-center gap-3 bg-purple/8 border border-purple/20 rounded-sm px-5 py-4 mb-6 hover:bg-purple/12 transition-colors group"
-            >
-              <span className="text-xl">📞</span>
-              <div>
-                <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple mb-0.5">Call or Text Susie Directly</p>
-                <p className="font-serif text-xl font-light text-[#2c1f14] group-hover:text-purple transition-colors">(480) 440-0909</p>
-              </div>
-            </a>
-
             {/* Testimonial */}
-            <div className="bg-purple/5 border-l-2 border-purple/30 pl-5 py-4 mb-5">
+            <div className="bg-white/75 border border-purple/15 rounded-sm px-5 py-5 mb-5 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
               <div className="text-gold text-lg mb-3">★★★★★</div>
-              <p className="font-serif text-lg font-light italic text-[#2c1f14] leading-relaxed mb-4">
+              <p className="font-serif text-lg md:text-xl font-light italic text-[#2c1f14] leading-relaxed mb-4">
                 &ldquo;I am so grateful to Susie and her expertise on Synergie. I lost 26 pounds and went down 2 sizes.
               </p>
-              <p className="font-serif text-lg font-light italic text-[#2c1f14] leading-relaxed mb-4">
+              <p className="font-serif text-lg md:text-xl font-light italic text-[#2c1f14] leading-relaxed mb-4">
                 I must admit I was skeptical in the beginning, but I trusted her. I am thrilled with the results and I feel great. Added bonus — my skin is so much softer. It&rsquo;s safe and gets wonderful results.&rdquo;
               </p>
               <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple/60 mb-2">

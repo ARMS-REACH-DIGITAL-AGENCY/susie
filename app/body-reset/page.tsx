@@ -55,7 +55,7 @@ const offers = [
     terms: "Credit is issued after completion. No cash value, not transferable, cannot be applied to today's purchase, and cannot be combined with other offers.",
     procedures: [
       "Private Body Reset consultation",
-      "Synergy Vacuum Massage / lymphatic support",
+      "Synergie Vacuum Massage / lymphatic support",
       "PEMF frequency wellness",
       "EMShape Neo body sculpting",
       "Personalized next-service recommendation",
@@ -71,7 +71,7 @@ const offers = [
     credit: "",
     terms: "",
     procedures: [
-      "Synergy Vacuum Massage / lymphatic support",
+      "Synergie Vacuum Massage / lymphatic support",
       "PEMF frequency wellness",
       "Reset-focused wellness check-in with Susie",
     ],

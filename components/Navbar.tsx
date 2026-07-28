@@ -27,17 +27,22 @@ export default function Navbar() {
             form="body-reset-lead-form"
             className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight"
           >
-            Claim My $100 Offer
+            Find My Best First Step
           </button>
         ) : (
-          <>
+          <div className="flex items-center gap-4 md:gap-6">
+            <nav className="hidden md:flex items-center gap-5 font-sans text-[11px] font-medium tracking-[0.16em] uppercase text-muted">
+              <a href="#meet-susie" className="hover:text-purple transition-colors">Meet Susie</a>
+              <a href="#services" className="hover:text-purple transition-colors">Services</a>
+              <a href="#testimonials" className="hover:text-purple transition-colors">Reviews</a>
+            </nav>
             <a href="#services" className="btn-primary hidden sm:inline-block text-[10px] px-5 py-3">
               View Services
             </a>
-            <a href="#services" className="sm:hidden btn-primary text-[10px] px-4 py-3">
-              Services
+            <a href="#meet-susie" className="sm:hidden btn-primary text-[10px] px-4 py-3">
+              Meet Susie
             </a>
-          </>
+          </div>
         )}
       </div>
     </header>

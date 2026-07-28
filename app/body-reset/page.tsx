@@ -264,7 +264,7 @@ export default function BodyResetPage() {
       setTimeout(() => {
         setQuizState("success");
         scrollToElement("results", 80);
-      }, 4000);
+      }, 7000);
     } catch {
       setQuizState("error");
     }
@@ -316,21 +316,6 @@ export default function BodyResetPage() {
                   If you begin with the Full Body Reset Package, you can receive a $100 promotional credit toward your next qualifying service after your package is completed.
                 </p>
               </div>
-
-              <div className="mt-6 rounded-[18px] bg-purple/5 border border-purple/15 p-4">
-                <p className="section-label mb-2">Why this became personal</p>
-                <div className="space-y-3 font-sans font-light text-sm md:text-base text-muted leading-relaxed">
-                  <p>
-                    After nearly 20 years of living with pain, I experienced frequency wellness and woke up pain-free for the first time on January 1st.
-                  </p>
-                  <p>
-                    That moment changed the direction of my work.
-                  </p>
-                  <p>
-                    I wanted to help other women discover supportive therapies that may help their bodies recover, reset, and feel better naturally.
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div className="bg-white/90 border border-purple/15 rounded-[22px] p-5 md:p-6 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
@@ -372,9 +357,15 @@ export default function BodyResetPage() {
                   </div>
                   <p className="section-label mb-4">Reviewing your answers</p>
                   <h2 className="section-heading mb-4">Susie is looking at what you shared.</h2>
-                  <p className="font-sans font-light text-muted max-w-xl mx-auto">
+                  <p className="font-sans font-light text-muted max-w-xl mx-auto mb-5">
                     Give her a moment to match your symptoms, what you have already tried, and the result you want most.
                   </p>
+                  <div className="max-w-xl mx-auto rounded-[18px] bg-purple/5 border border-purple/15 p-4 text-left">
+                    <p className="section-label mb-2">A quick note from Susie</p>
+                    <p className="font-sans font-light text-sm md:text-base text-muted leading-relaxed">
+                      My own frequency wellness experience changed the direction of my work. It&apos;s why I care so much about helping women find the right place to start.
+                    </p>
+                  </div>
                 </div>
               ) : quizState === "success" ? (
                 <div id="results" className="scroll-mt-24 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
@@ -387,6 +378,20 @@ export default function BodyResetPage() {
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
                       This gives us the most complete way to start instead of guessing from one single service.
                     </p>
+                    <div className="max-w-2xl mx-auto rounded-[18px] bg-purple/5 border border-purple/15 p-5 text-left mb-5">
+                      <p className="section-label mb-3">Why this became personal</p>
+                      <div className="space-y-3 font-sans font-light text-sm md:text-base text-muted leading-relaxed">
+                        <p>
+                          After nearly 20 years of living with pain, I experienced frequency wellness and woke up pain-free for the first time on January 1st.
+                        </p>
+                        <p>
+                          That moment changed the direction of my work.
+                        </p>
+                        <p>
+                          I wanted to help other women discover supportive therapies that may help their bodies recover, reset, and feel better naturally.
+                        </p>
+                      </div>
+                    </div>
                     <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">
                       If you decide to begin with the Full Body Reset Package, I&apos;ll also include a $100 promotional credit that can be used toward your next qualifying service after your package is completed.
                     </p>

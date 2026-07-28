@@ -74,7 +74,7 @@ export default function Footer() {
             </p>
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-gold mb-2">Services</p>
             <p className="text-xs font-sans font-light leading-relaxed text-cream/50">
-              Synergy Vacuum Massage · PEMF Frequency Wellness · EMShape Neo Body Sculpting · Ultrasonic Cavitation & RF · Holistic Wellness & Nutrition
+              Synergie Vacuum Massage · PEMF Frequency Wellness · EMShape Neo Body Sculpting · Ultrasonic Cavitation & RF · Holistic Wellness & Nutrition
             </p>
           </div>
 

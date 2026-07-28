@@ -49,7 +49,7 @@ const urgencyOptions = [
 const offers = [
   {
     name: "Full Body Reset Package",
-    price: "$497 today",
+    price: "$1,197 today",
     label: "Susie's Recommendation",
     credit: "$100 future service credit included",
     terms: "Credit is issued after completion. No cash value, not transferable, cannot be applied to today's purchase, and cannot be combined with other offers.",
@@ -66,7 +66,7 @@ const offers = [
   },
   {
     name: "Lymphatic + PEMF Reset Intro",
-    price: "$297",
+    price: "$497",
     label: "Focused Reset Intro",
     credit: "",
     terms: "",
@@ -81,7 +81,7 @@ const offers = [
   },
   {
     name: "Body Reset Starter Visit",
-    price: "$49",
+    price: "$99",
     label: "Low-Commitment Start",
     credit: "",
     terms: "",

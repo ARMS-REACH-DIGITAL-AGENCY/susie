@@ -39,3 +39,12 @@ body {
     @apply w-full bg-stone/60 border border-[#d4c4b0] rounded-sm px-4 py-3 font-sans text-sm font-light text-[#2c1f14] focus:outline-none focus:border-purple focus:ring-2 focus:ring-purple/10 transition-all duration-200 appearance-none cursor-pointer;
   }
 }
+
+@layer utilities {
+  @media (min-width: 768px) {
+    main p.font-sans.font-light.text-muted.leading-relaxed {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+}

@@ -51,8 +51,8 @@ const offers = [
     name: "Full Body Reset Package",
     price: "$497 today",
     label: "Susie's Recommendation",
-    credit: "Includes a $100 promotional credit toward your next qualifying service",
-    terms: "Credit is issued after completion of the Full Body Reset Package. It has no cash value, is not transferable, cannot be applied to today's purchase, and cannot be combined with other offers.",
+    credit: "$100 future service credit included",
+    terms: "Credit is issued after completion. No cash value, not transferable, cannot be applied to today's purchase, and cannot be combined with other offers.",
     procedures: [
       "Private Body Reset consultation",
       "Synergy Vacuum Massage / lymphatic support",
@@ -364,15 +364,14 @@ export default function BodyResetPage() {
                     </p>
                   </div>
 
-                  <div className="grid md:grid-cols-4 gap-5">
+                  <div className="grid md:grid-cols-4 gap-5 items-start">
                     {offers.map((offer) => (
                       <div key={offer.name} className={`card flex flex-col ${offer.featured ? "border-2 border-purple shadow-[0_14px_34px_rgba(60,40,80,0.14)]" : ""}`}>
                         <p className="section-label mb-3">{offer.label}</p>
                         <h3 className="font-serif text-2xl font-light text-[#2c1f14] mb-2">{offer.name}</h3>
                         <p className="font-serif text-4xl font-light text-purple mb-2">{offer.price}</p>
-                        {offer.credit && <p className="font-sans font-semibold text-sm text-purple mb-4">{offer.credit}</p>}
-                        {offer.terms && <p className="font-sans font-light text-[11px] text-muted/75 leading-relaxed mb-4">{offer.terms}</p>}
-                        <ul className="font-sans font-light text-sm text-muted leading-relaxed flex-1 mb-6 space-y-2">
+                        {offer.credit && <p className="font-sans font-medium text-[12px] text-purple/80 leading-snug mb-3">{offer.credit}</p>}
+                        <ul className="font-sans font-light text-sm text-muted leading-relaxed mb-5 space-y-2">
                           {offer.procedures.map((procedure) => (
                             <li key={procedure} className="flex gap-2">
                               <span className="text-purple mt-[1px]">•</span>
@@ -381,6 +380,7 @@ export default function BodyResetPage() {
                           ))}
                         </ul>
                         <a href={offer.href} className="btn-primary text-[10px] px-4">{offer.button}</a>
+                        {offer.terms && <p className="font-sans font-light text-[10px] text-muted/65 leading-relaxed mt-3">{offer.terms}</p>}
                       </div>
                     ))}
                   </div>

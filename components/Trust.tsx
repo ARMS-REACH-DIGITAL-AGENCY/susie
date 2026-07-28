@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Trust() {
   return (
-    <section id="meet-susie" className="py-16 md:py-24 bg-cream scroll-mt-24">
+    <section id="meet-susie" className="py-14 md:py-20 bg-cream scroll-mt-24">
       <div id="testimonials" className="max-w-5xl mx-auto px-4 sm:px-6 scroll-mt-24">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
 
           {/* Photo */}
           <div className="flex justify-center md:justify-start">
@@ -21,7 +21,7 @@ export default function Trust() {
 
           {/* Copy */}
           <div>
-            <p className="section-label mb-4">Meet Susie</p>
+            <p className="section-label mb-4">Meet Susie · Helping Women Since 1995</p>
             <h2 className="section-heading mb-6">
               30 years. Real results.<br />No pressure. Ever.
             </h2>

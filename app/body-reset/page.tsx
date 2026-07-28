@@ -321,8 +321,8 @@ export default function BodyResetPage() {
             <div className="bg-white/90 border border-purple/15 rounded-[22px] p-5 md:p-6 shadow-[0_12px_34px_rgba(60,40,80,0.10)]">
               {leadState === "captured" ? (
                 <div className="rounded-sm bg-purple/5 border border-purple/15 p-5 text-center">
-                  <p className="font-serif text-2xl font-light text-[#2c1f14] mb-2">You are in, {fields.firstName}.</p>
-                  <p className="font-sans font-light text-muted text-sm mb-4">Now tell Susie what you&apos;ve been feeling.</p>
+                  <p className="font-serif text-2xl font-light text-[#2c1f14] mb-2">Hi, {fields.firstName}. Tell me what&apos;s been going on.</p>
+                  <p className="font-sans font-light text-muted text-sm mb-4">Do any of these feel familiar? I&apos;ll make a recommendation, but first I want to understand a little more about what you&apos;ve been feeling.</p>
                   <a href="#quiz-funnel" onClick={(e) => { e.preventDefault(); scrollToElement("quiz-card", 0); }} className="btn-primary w-full">Start My Evaluation</a>
                 </div>
               ) : (

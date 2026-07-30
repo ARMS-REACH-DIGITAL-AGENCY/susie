@@ -18,7 +18,7 @@ const jost = Jost({
   display: "swap",
 });
 
-const faviconPath = "/images/Susie_favicon.png?v=3";
+const faviconPath = "/images/Susie_favicon.png?v=4";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.susiesculpts.com"),
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     "Private body reset, Synergie Vacuum Massage, lymphatic, PEMF, and body sculpting support for women in Gilbert, Queen Creek, and the East Valley who want to feel lighter, clearer, and more like themselves again.",
   keywords:
     "Synergie Vacuum Massage Gilbert AZ, Synergie Vacuum Massage Queen Creek AZ, body sculpting Gilbert AZ, PEMF Gilbert AZ, lymphatic massage Gilbert AZ, body reset Gilbert AZ, wellness support East Valley, non-invasive body sculpting Gilbert",
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
       {
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/susie.jpg?v=2",
+        url: faviconPath,
         width: 512,
         height: 512,
         alt: "Susie from Susie Sculpts",
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
     title: "Susie Sculpts | Body Reset, PEMF, Synergie & Sculpting in Gilbert AZ",
     description:
       "Private body reset, lymphatic, PEMF, and body sculpting support for women in Gilbert and the East Valley.",
-    images: ["/images/susie.jpg?v=2"],
+    images: [faviconPath],
   },
 };
 

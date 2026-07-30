@@ -18,6 +18,8 @@ const jost = Jost({
   display: "swap",
 });
 
+const faviconPath = "/images/Susie_favicon.png?v=3";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.susiesculpts.com"),
   title: "Susie Sculpts | Body Reset, PEMF, Synergie & Sculpting in Gilbert AZ",
@@ -28,24 +30,20 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon.svg?v=2",
-        type: "image/svg+xml",
-      },
-      {
-        url: "/images/susie.jpg?v=2",
-        type: "image/jpeg",
+        url: faviconPath,
+        type: "image/png",
       },
     ],
     shortcut: [
       {
-        url: "/favicon.svg?v=2",
-        type: "image/svg+xml",
+        url: faviconPath,
+        type: "image/png",
       },
     ],
     apple: [
       {
-        url: "/images/susie.jpg?v=2",
-        type: "image/jpeg",
+        url: faviconPath,
+        type: "image/png",
       },
     ],
   },

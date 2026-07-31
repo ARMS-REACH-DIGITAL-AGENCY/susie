@@ -1,14 +1,46 @@
 import Image from "next/image";
 
 const feelings = [
-  { label: "Puffy or bloated", microcopy: "You feel swollen, uncomfortable, or like your body is holding onto everything.", image: "/images/symptom-puffy.png" },
-  { label: "Inflamed or achy", microcopy: "Your body feels sore, irritated, or constantly off.", image: "/images/symptom-achy.png" },
-  { label: "Heavy or sluggish", microcopy: "You feel weighed down, slow, or like your body just isn't moving well.", image: "/images/symptom-heavy.png" },
-  { label: "Tired all the time", microcopy: "Even after resting, your energy still feels low.", image: "/images/symptom-tired.png" },
-  { label: "Foggy or unfocused", microcopy: "Your mind feels cloudy, scattered, or hard to clear.", image: "/images/symptom-foggy.png" },
-  { label: "Stuck — nothing works", microcopy: "You've tried things before, but nothing seems to create lasting change.", image: "/images/symptom-stuck.png" },
-  { label: "Uncomfortable in your body", microcopy: "You don't feel at ease in your skin right now.", image: "/images/symptom-uncomfortable.png" },
-  { label: "Don't feel like yourself", microcopy: "Something feels off, and you want to feel like you again.", image: "/images/symptom-yourself.png" },
+  {
+    label: "Puffy or bloated",
+    microcopy: "\u201cMy rings are tight. My clothes don\u2019t fit the same. I just feel puffy.\u201d Let\u2019s support healthy lymphatic flow so you can feel lighter again.",
+    image: "/images/symptom-puffy.png",
+  },
+  {
+    label: "Inflamed or achy",
+    microcopy: "\u201cEverything aches. I wake up stiff. My body hurts for no reason.\u201d Let\u2019s help support recovery naturally.",
+    image: "/images/symptom-achy.png",
+  },
+  {
+    label: "Heavy or sluggish",
+    microcopy: "\u201cI feel like I\u2019m dragging all day. Even simple things feel harder.\u201d Your body deserves better support.",
+    image: "/images/symptom-heavy.png",
+  },
+  {
+    label: "Always exhausted?",
+    microcopy: "\u201cI slept, but I still feel exhausted. Coffee isn\u2019t helping anymore.\u201d Let\u2019s help your body recover and recharge.",
+    image: "/images/symptom-tired.png",
+  },
+  {
+    label: "Brain fog",
+    microcopy: "\u201cI walk into a room and forget why. I can\u2019t focus like I used to.\u201d Let\u2019s help you feel clear and focused again.",
+    image: "/images/symptom-foggy.png",
+  },
+  {
+    label: "Stuck \u2014 nothing works",
+    microcopy: "\u201cI\u2019ve tried things before, but nothing seems to last.\u201d Stop guessing and find the right first step.",
+    image: "/images/symptom-stuck.png",
+  },
+  {
+    label: "Uncomfortable in your body",
+    microcopy: "\u201cMy body doesn\u2019t feel like mine anymore.\u201d Let\u2019s help you feel more comfortable and at home again.",
+    image: "/images/symptom-uncomfortable.png",
+  },
+  {
+    label: "Don\u2019t feel like yourself",
+    microcopy: "\u201cI don\u2019t recognize the woman in the mirror.\u201d Susie is here to help you rediscover that woman.",
+    image: "/images/symptom-yourself.png",
+  },
 ];
 
 export default function Problem() {
@@ -16,26 +48,26 @@ export default function Problem() {
     <section id="testimonials" className="py-12 md:py-20 bg-white/50 scroll-mt-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
         <div className="bg-purple/5 border border-purple/15 rounded-sm px-5 md:px-8 py-6 md:py-7 max-w-4xl mx-auto mb-12 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
-          <div className="text-gold text-lg mb-3">★★★★★</div>
+          <div className="text-gold text-lg mb-3">\u2605\u2605\u2605\u2605\u2605</div>
           <p className="font-serif text-xl md:text-2xl font-light italic text-[#2c1f14] leading-relaxed mb-4">
             &ldquo;I am so grateful to Susie and her expertise on Synergie. I lost 26 pounds and went down 2 sizes.
           </p>
           <p className="font-serif text-lg md:text-xl font-light italic text-[#2c1f14] leading-relaxed mb-4">
-            I must admit I was skeptical in the beginning, but I trusted her. I am thrilled with the results and I feel great. Added bonus — my skin is so much softer. It&rsquo;s safe and gets wonderful results.&rdquo;
+            I must admit I was skeptical in the beginning, but I trusted her. I am thrilled with the results and I feel great. Added bonus \u2014 my skin is so much softer. It&rsquo;s safe and gets wonderful results.&rdquo;
           </p>
           <p className="text-xs font-sans font-medium tracking-widest uppercase text-purple/60 mb-2">
-            — Leslie Y.
+            \u2014 Leslie Y.
           </p>
           <p className="text-[11px] font-sans font-light text-muted/70 leading-relaxed">
             Individual results vary. Testimonial shared from a Susie Sculpts client.
           </p>
         </div>
 
-        <p className="section-label mb-4">You Are Not Alone</p>
-        <h2 className="section-heading mb-5">Does any of this sound familiar?</h2>
+        <p className="section-label mb-4">For the woman who feels lost in her own body</p>
+        <h2 className="section-heading mb-5">Do you still recognize the woman in the mirror?</h2>
         <div className="font-sans font-light text-muted text-base md:text-lg leading-relaxed max-w-3xl mx-auto space-y-4 mb-8">
-          <p>Many women come to Susie feeling puffy, inflamed, tired, foggy, heavy, stuck, or disconnected from their body.</p>
-          <p>Not because they stopped caring. Because their body changed — and what used to work no longer feels like enough.</p>
+          <p>If you&rsquo;ve been feeling like your body isn&rsquo;t your own anymore, you&rsquo;re not alone. Many women tell Susie they don&rsquo;t recognize the woman looking back at them.</p>
+          <p>This isn&rsquo;t about what is wrong with you. It is about naming what changed so you can start finding your way back.</p>
         </div>
 
         <div className="-mx-4 sm:mx-0 overflow-x-auto pb-4 snap-x snap-mandatory">

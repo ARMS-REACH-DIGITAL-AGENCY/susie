@@ -189,10 +189,12 @@ const resultOrder: RecommendationKey[] = ["full", "synergie", "pemf", "contour",
 function buildRecommendation(fields: Fields) {
   const scores: Record<RecommendationKey, number> = { full: 0, synergie: 0, pemf: 0, contour: 0, cavitation: 0, roller: 0 };
   const reasons: Record<RecommendationKey, string[]> = { full: [], synergie: [], pemf: [], contour: [], cavitation: [], roller: [] };
+
   const add = (key: RecommendationKey, points: number, reason: string) => {
     scores[key] += points;
     if (!reasons[key].includes(reason)) reasons[key].push(reason);
   };
+
   const hasSymptom = (value: string) => fields.symptoms.includes(value);
   const hasTried = (value: string) => fields.tried.includes(value);
   const hasGoal = (value: string) => fields.goals.includes(value);
@@ -422,26 +424,65 @@ export default function BodyResetPage() {
                   <p className="font-sans font-light text-muted max-w-xl mx-auto mb-5">The evaluation is weighing your symptoms, what you have already tried, your goals, and how much guidance you want before making a recommendation.</p>
                 </div>
               ) : quizState === "success" ? (
-                <div id="results" className="scroll-mt-24 bg-white/80 border border-purple/15 rounded-[24px] p-5 md:p-8 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
-                  <div className="text-center mb-8">
-                    <p className="section-label mb-4">Susie&apos;s Smart Recommendation</p>
-                    <h2 className="section-heading mb-4">Based on what you shared, I would start with the {recommendation.package.name}.</h2>
-                    <p className="font-sans font-light text-muted max-w-2xl mx-auto mb-4">This is not a diagnosis. It is a package recommendation designed to start the right in-person conversation with Susie.</p>
-                    <div className="max-w-2xl mx-auto rounded-[18px] bg-purple/5 border border-purple/15 p-5 text-left mb-5">
-                      <p className="section-label mb-3">Why this recommendation came up</p>
-                      <ul className="space-y-3 font-sans font-light text-sm md:text-base text-muted leading-relaxed">{recommendation.reasons.map((reason) => <li key={reason} className="flex gap-3"><span className="text-purple mt-[2px]">•</span><span>{reason}</span></li>)}</ul>
+                <div id="results" className="scroll-mt-24 bg-white/85 border border-purple/15 rounded-[24px] p-4 md:p-6 shadow-[0_10px_30px_rgba(60,40,80,0.08)]">
+                  <div className="mb-5 rounded-[20px] border border-purple/15 bg-white/80 p-4 md:p-5">
+                    <div className="flex flex-col md:flex-row md:items-start gap-4">
+                      <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-4 border-white shadow-md shrink-0 mx-auto md:mx-0">
+                        <Image src="/images/susie.jpg" alt="Susie from Susie Sculpts" fill className="object-cover object-[center_8%]" sizes="80px" />
+                      </div>
+                      <div className="text-center md:text-left flex-1">
+                        <p className="section-label mb-2">Susie&apos;s Smart Recommendation</p>
+                        <h2 className="font-serif text-3xl md:text-4xl font-light leading-tight text-[#2c1f14] mb-3">
+                          &ldquo;Based on what you shared, I would start with the {recommendation.package.name}.&rdquo;
+                        </h2>
+                        <p className="font-sans font-light text-sm md:text-base text-muted leading-relaxed">
+                          This is the package path I would discuss with you first. If your budget or comfort level points somewhere smaller, I gave you those options too.
+                        </p>
+                      </div>
                     </div>
-                    <p className="font-serif text-2xl font-light text-[#2c1f14] max-w-2xl mx-auto">Ask for the best path first. If you want a smaller start, Susie gives you options below.</p>
                   </div>
 
-                  <div className="mb-8 bg-purple/5 border-2 border-purple/25 rounded-[22px] p-5 md:p-7">
-                    <p className="section-label mb-3">Recommended Package</p>
-                    <h3 className="font-serif text-3xl md:text-4xl font-light text-[#2c1f14] mb-3">{topTier.name}</h3>
-                    <p className="font-serif text-5xl font-light text-purple mb-4">{topTier.price}</p>
-                    <p className="font-sans font-light text-muted leading-relaxed mb-5">{recommendation.package.shortFit}</p>
-                    <ul className="grid md:grid-cols-2 gap-2 mb-6 font-sans font-light text-sm text-muted">{recommendation.package.includes.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">•</span><span>{item}</span></li>)}</ul>
+                  <div className="mb-5 bg-purple/5 border-2 border-purple/25 rounded-[22px] p-5 md:p-6">
+                    <p className="section-label mb-2">Recommended Package</p>
+                    <div className="grid md:grid-cols-[1fr_auto] md:items-start gap-4 mb-4">
+                      <div>
+                        <h3 className="font-serif text-3xl md:text-4xl font-light leading-tight text-[#2c1f14] mb-2">{topTier.name}</h3>
+                        <p className="font-sans font-light text-sm md:text-base text-muted leading-relaxed">{recommendation.package.shortFit}</p>
+                      </div>
+                      <div className="md:text-right">
+                        <p className="font-serif text-5xl font-light text-purple leading-none mb-2">{topTier.price}</p>
+                        <p className="font-sans font-medium text-xs tracking-[0.12em] uppercase text-purple/70">Top recommendation</p>
+                      </div>
+                    </div>
+                    <ul className="grid md:grid-cols-2 gap-2 mb-5 font-sans font-light text-sm text-muted">
+                      {recommendation.package.includes.map((item) => (
+                        <li key={item} className="flex gap-2"><span className="text-purple">•</span><span>{item}</span></li>
+                      ))}
+                    </ul>
                     <p className="font-sans font-medium text-purple mb-5">{topTier.note}</p>
                     <a href={topTier.href} className="btn-primary w-full md:w-auto">{topTier.button}</a>
+                  </div>
+
+                  <div className="mb-6 rounded-[18px] bg-stone/45 border border-stone/80 p-4 md:p-5">
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <div>
+                        <p className="section-label mb-3">Why this recommendation came up</p>
+                        <ul className="space-y-2 font-sans font-light text-sm text-muted leading-relaxed">
+                          {recommendation.reasons.map((reason) => (
+                            <li key={reason} className="flex gap-3"><span className="text-purple mt-[2px]">•</span><span>{reason}</span></li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="section-label mb-3">Important note</p>
+                        <p className="font-sans font-light text-sm text-muted leading-relaxed mb-3">
+                          This is not a diagnosis. It is a starting-point recommendation designed to make the first conversation with Susie more useful.
+                        </p>
+                        <p className="font-sans font-light text-sm text-muted leading-relaxed">
+                          Susie will confirm the right plan after she talks with you and understands your goals, comfort level, and budget.
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="grid md:grid-cols-3 gap-5">
@@ -450,10 +491,15 @@ export default function BodyResetPage() {
                   </div>
 
                   {recommendation.alternateKeys.length > 0 && (
-                    <div className="mt-8 rounded-[18px] bg-stone/50 border border-stone p-5">
+                    <div className="mt-6 rounded-[18px] bg-stone/50 border border-stone p-5">
                       <p className="section-label mb-3">Other paths Susie may discuss with you</p>
                       <div className="grid md:grid-cols-2 gap-4">
-                        {recommendation.alternateKeys.map((key) => <div key={key}><p className="font-serif text-xl text-[#2c1f14]">{packages[key].name}</p><p className="font-sans font-light text-sm text-muted">{packages[key].shortFit}</p></div>)}
+                        {recommendation.alternateKeys.map((key) => (
+                          <div key={key}>
+                            <p className="font-serif text-xl text-[#2c1f14]">{packages[key].name}</p>
+                            <p className="font-sans font-light text-sm text-muted">{packages[key].shortFit}</p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}

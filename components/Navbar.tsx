@@ -10,7 +10,7 @@ function EvaluationCta({ asButton = false }: { asButton?: boolean }) {
     <>
       <span className="text-[11px] sm:text-[12px] tracking-[0.18em]">Ask Susie</span>
       <span className="mt-0.5 text-[8px] sm:text-[9px] tracking-[0.12em] opacity-85 normal-case">
-        Answer 4 Quick Questions
+        5 Question Evaluation
       </span>
     </>
   );
@@ -56,6 +56,7 @@ export default function Navbar() {
               <a href="#meet-susie" className="hover:text-purple transition-colors">Meet Susie</a>
               <a href="#services" className="hover:text-purple transition-colors">Services</a>
               <a href="#testimonials" className="hover:text-purple transition-colors">Reviews</a>
+              <a href="#faq" className="hover:text-purple transition-colors">FAQ</a>
             </nav>
             <EvaluationCta />
           </div>

@@ -3,6 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+function EvaluationCta({ asButton = false }: { asButton?: boolean }) {
+  const className = "btn-primary inline-flex flex-col items-center justify-center text-center leading-tight px-4 sm:px-5 py-2.5 min-w-[126px]";
+
+  const content = (
+    <>
+      <span className="text-[11px] sm:text-[12px] tracking-[0.18em]">Ask Susie</span>
+      <span className="mt-0.5 text-[8px] sm:text-[9px] tracking-[0.12em] opacity-85 normal-case">
+        Answer 4 Quick Questions
+      </span>
+    </>
+  );
+
+  if (asButton) {
+    return (
+      <button type="submit" form="body-reset-lead-form" className={className}>
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <Link href="/body-reset" className={className}>
+      {content}
+    </Link>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const isBodyReset = pathname === "/body-reset";
@@ -22,13 +49,7 @@ export default function Navbar() {
         </Link>
 
         {isBodyReset ? (
-          <button
-            type="submit"
-            form="body-reset-lead-form"
-            className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight"
-          >
-            Find My Best First Step
-          </button>
+          <EvaluationCta asButton />
         ) : (
           <div className="flex items-center gap-4 md:gap-6">
             <nav className="hidden md:flex items-center gap-5 font-sans text-[11px] font-medium tracking-[0.16em] uppercase text-muted">
@@ -36,12 +57,7 @@ export default function Navbar() {
               <a href="#services" className="hover:text-purple transition-colors">Services</a>
               <a href="#testimonials" className="hover:text-purple transition-colors">Reviews</a>
             </nav>
-            <a href="#services" className="btn-primary hidden sm:inline-block text-[10px] px-5 py-3">
-              View Services
-            </a>
-            <a href="#meet-susie" className="sm:hidden btn-primary text-[10px] px-4 py-3">
-              Meet Susie
-            </a>
+            <EvaluationCta />
           </div>
         )}
       </div>

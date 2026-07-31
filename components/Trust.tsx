@@ -34,14 +34,14 @@ export default function Trust() {
             <div className="bg-purple/5 border border-purple/15 rounded-sm px-5 py-5 my-6">
               <p className="section-label mb-3">Why this became personal</p>
               <div className="space-y-3 font-sans font-light text-muted text-base leading-relaxed">
-                <p>
-                  After nearly 20 years of living with pain, I experienced frequency wellness and woke up pain-free for the first time on January 1st.
+                <p className="font-serif text-2xl font-light text-[#2c1f14] leading-snug">
+                  On January 1st, after living with pain for nearly 20 years, I woke up pain-free for the first time.
                 </p>
                 <p>
-                  That moment changed the direction of my work.
+                  That moment changed everything — and it is why I am so passionate about helping other women discover therapies that support recovery, hope, and feeling like themselves again.
                 </p>
-                <p>
-                  I wanted to help other women discover supportive therapies that may help their bodies recover, reset, and feel better naturally.
+                <p className="text-xs text-muted/70">
+                  This is Susie&rsquo;s personal experience. Individual experiences vary, and services are wellness-focused.
                 </p>
               </div>
             </div>

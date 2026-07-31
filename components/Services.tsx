@@ -20,7 +20,7 @@ const services = [
     color: "border-gold/30",
     tagColor: "text-gold",
     description:
-      "Support your body&rsquo;s natural recovery using pulsed electromagnetic field therapy. Many clients use PEMF to support circulation, relaxation, recovery, and whole-body wellness.",
+      "Support your body's natural recovery using pulsed electromagnetic field therapy. Many clients use PEMF to support circulation, relaxation, recovery, and whole-body wellness.",
     bullets: [
       "Recovery",
       "Circulation",
@@ -72,19 +72,19 @@ const whyWomenChooseSusie = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 md:py-28 bg-cream scroll-mt-24">
+    <section className="pt-10 md:pt-14 pb-12 md:pb-16 bg-cream">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-12">
-          <p className="section-label mb-4">The Body Reset Experience</p>
-          <h2 className="section-heading mb-6">
+        <div id="services" className="text-center mb-9 scroll-mt-20 md:scroll-mt-24">
+          <p className="section-label mb-3">The Body Reset Experience</p>
+          <h2 className="section-heading mb-5">
             A supportive place to find your next right step
           </h2>
           <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            For over 30 years, Susie has helped women feel stronger, healthier, and more confident through non-invasive therapies that support the body&rsquo;s natural recovery and wellness process.
+            For over 30 years, Susie has helped women feel stronger, healthier, and more confident through non-invasive therapies that support the body's natural recovery and wellness process.
           </p>
         </div>
 
-        <div className="bg-white/70 border border-purple/15 rounded-sm p-6 md:p-8 mb-12 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
+        <div className="bg-white/70 border border-purple/15 rounded-sm p-5 md:p-7 mb-10 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
           <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-6 md:gap-10 items-start">
             <div>
               <p className="section-label mb-3">Why women choose Susie</p>
@@ -130,7 +130,7 @@ export default function Services() {
           ))}
         </div>
 
-        <p className="text-center mt-10 text-xs font-sans font-light text-muted/60 max-w-xl mx-auto">
+        <p className="text-center mt-8 text-xs font-sans font-light text-muted/60 max-w-xl mx-auto">
           Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary.
         </p>
       </div>

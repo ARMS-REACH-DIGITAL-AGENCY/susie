@@ -26,12 +26,16 @@ export async function POST(req: NextRequest) {
       tried,
       goal: goals,
       goals,
+      priority: body.priority || "",
       urgency: body.urgency || body.timeline || "",
       recommendedOffer: body.recommendedOffer || "",
-      quizPath: body.quizPath || "Body Reset Credit Lead-First Funnel",
+      recommendationKey: body.recommendationKey || "",
+      recommendationReasons: body.recommendationReasons || "",
+      recommendationScoreSummary: body.recommendationScoreSummary || "",
+      quizPath: body.quizPath || "Smart Body Reset Evaluation Lead-First Funnel",
       leadStage: body.leadStage || "Lead Captured",
       source: body.source || "Susie Sculpts Quiz Funnel",
-      page: body.page || "Claim $100 Body Reset Credit",
+      page: body.page || "Find My Best First Step",
     };
 
     const webhookUrl = process.env.HIGHLEVEL_WEBHOOK_URL || "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/14c03571-59aa-4b47-92f4-bf437144fb78";

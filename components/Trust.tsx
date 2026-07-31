@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Trust() {
   return (
-    <section id="meet-susie" className="py-16 md:py-24 bg-cream scroll-mt-24">
+    <section className="pt-10 md:pt-14 pb-12 md:pb-16 bg-cream">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-[0.95fr_1.05fr] gap-10 md:gap-16 items-start">
+        <div id="meet-susie" className="grid md:grid-cols-[0.95fr_1.05fr] gap-10 md:gap-16 items-start scroll-mt-20 md:scroll-mt-24">
 
           {/* Photo */}
           <div className="flex justify-center md:justify-start">

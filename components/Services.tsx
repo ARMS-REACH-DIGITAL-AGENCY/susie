@@ -5,27 +5,27 @@ const services = [
     color: "border-purple/20",
     tagColor: "text-purple",
     description:
-      "A gentle, effective therapy that uses controlled suction to improve skin tone and circulation, supporting lymphatic drainage and helping you feel less puffy, heavy, or sluggish.",
+      "A gentle, effective therapy that uses controlled suction to support healthy lymphatic flow, improve circulation, and help you feel lighter, more energized, and refreshed.",
     bullets: [
-      "Lymphatic flow & drainage support",
-      "Circulation & blood movement",
-      "Digestion & elimination support",
-      "Immune wellness support",
-      "Mental clarity & reduced puffiness",
+      "Supports healthy lymphatic flow",
+      "Supports circulation and overall wellness",
+      "Helps you feel lighter and less puffy",
+      "Supports healthy digestion and elimination",
+      "Helps your body feel refreshed",
     ],
   },
   {
-    title: "PEMF / Frequency Wellness",
+    title: "PEMF Recovery & Wellness",
     tag: "Recovery & Reset",
     color: "border-gold/30",
     tagColor: "text-gold",
     description:
-      "Pulsed electromagnetic field therapy to support recovery, circulation, inflammation response, stress reset, and whole-body wellness. A gentle, non-invasive way to support your body at the cellular level.",
+      "Support your body&rsquo;s natural recovery using pulsed electromagnetic field therapy. Many clients use PEMF to support circulation, relaxation, recovery, and whole-body wellness.",
     bullets: [
-      "Inflammation response support",
-      "Circulation & blood movement",
-      "Recovery & energy",
-      "Stress & body reset",
+      "Recovery",
+      "Circulation",
+      "Relaxation",
+      "Energy support",
       "Whole-body wellness",
     ],
   },
@@ -35,13 +35,13 @@ const services = [
     color: "border-warm/20",
     tagColor: "text-warm",
     description:
-      "High-intensity electromagnetic technology that simulates an intense workout — toning and strengthening muscles while supporting body contouring. Non-invasive, no surgery, no downtime.",
+      "A non-invasive body sculpting treatment that uses electromagnetic technology to activate muscles, support tone, and help you feel stronger and more confident in your body.",
     bullets: [
-      "Muscle activation & tone",
+      "Muscle activation and tone",
       "Body contouring support",
-      "Abdomen, thighs & glutes",
+      "Abdomen, thighs, and glutes",
       "No surgery or downtime",
-      "Pairs well with other services",
+      "Pairs well with reset services",
     ],
   },
   {
@@ -50,29 +50,57 @@ const services = [
     color: "border-purple/10",
     tagColor: "text-purple/70",
     description:
-      "A dual-action approach using ultrasound waves to support fat cell breakdown while RF energy stimulates collagen production — for firmer, more youthful-feeling skin.",
+      "A gentle contouring approach that supports smoother, firmer-feeling skin and helps target stubborn areas without surgery or downtime.",
     bullets: [
-      "Supports fat cell breakdown",
-      "Collagen stimulation",
-      "Skin tightening & elasticity",
+      "Supports body contouring",
+      "Supports firmer-feeling skin",
       "Targets stubborn areas",
       "Non-invasive treatment",
+      "Complements wellness plans",
     ],
   },
+];
+
+const whyWomenChooseSusie = [
+  "30+ years of health and wellness experience",
+  "Private one-on-one appointments",
+  "Non-invasive therapies",
+  "No pressure or hard sell",
+  "Personalized wellness plans",
+  "Serving Gilbert and the East Valley since 1995",
 ];
 
 export default function Services() {
   return (
     <section id="services" className="py-20 md:py-28 bg-cream scroll-mt-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
+        <div className="text-center mb-12">
           <p className="section-label mb-4">The Body Reset Experience</p>
           <h2 className="section-heading mb-6">
             A supportive place to find your next right step
           </h2>
           <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Susie Sculpts is a private, personalized wellness studio in Gilbert, AZ. With over 30 years in health and wellness, Susie takes a holistic approach — supporting your body, mind, and confidence without pressure or a hard sell.
+            For over 30 years, Susie has helped women feel stronger, healthier, and more confident through non-invasive therapies that support the body&rsquo;s natural recovery and wellness process.
           </p>
+        </div>
+
+        <div className="bg-white/70 border border-purple/15 rounded-sm p-6 md:p-8 mb-12 shadow-[0_8px_24px_rgba(60,40,80,0.06)]">
+          <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-6 md:gap-10 items-start">
+            <div>
+              <p className="section-label mb-3">Why women choose Susie</p>
+              <h3 className="font-serif text-3xl font-light text-[#2c1f14] leading-tight">
+                Private, personal, and built around how you want to feel.
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {whyWomenChooseSusie.map((item) => (
+                <div key={item} className="flex items-start gap-3 font-sans font-light text-muted text-sm leading-relaxed">
+                  <span className="text-purple font-medium shrink-0">✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">

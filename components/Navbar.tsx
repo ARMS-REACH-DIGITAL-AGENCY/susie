@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-function EvaluationCta({ compact = false, onClick }: { compact?: boolean; onClick?: () => void }) {
+function HeaderCta({ isEvaluationPage, compact = false, onClick }: { isEvaluationPage: boolean; compact?: boolean; onClick?: () => void }) {
+  const href = isEvaluationPage ? "/#testimonials" : "/body-reset";
+
   return (
     <Link
-      href="/body-reset"
+      href={href}
       onClick={onClick}
       className={`btn-primary inline-flex flex-col items-center justify-center text-center leading-tight ${
         compact
@@ -15,17 +18,27 @@ function EvaluationCta({ compact = false, onClick }: { compact?: boolean; onClic
           : "min-w-[126px] px-4 py-2.5 sm:px-5"
       }`}
     >
-      <span className={`${compact ? "text-[9px]" : "text-[11px] sm:text-[12px]"} tracking-[0.16em]`}>
-        Ask Susie
-      </span>
-      <span className={`${compact ? "text-[7px]" : "text-[8px] sm:text-[9px]"} mt-0.5 whitespace-nowrap tracking-[0.08em] normal-case opacity-90`}>
-        5 Question Evaluation
-      </span>
+      {isEvaluationPage ? (
+        <span className={`${compact ? "text-[8px] sm:text-[9px]" : "text-[11px] sm:text-[12px]"} tracking-[0.14em] whitespace-nowrap`}>
+          Read Testimonials
+        </span>
+      ) : (
+        <>
+          <span className={`${compact ? "text-[9px]" : "text-[11px] sm:text-[12px]"} tracking-[0.16em]`}>
+            Ask Susie
+          </span>
+          <span className={`${compact ? "text-[7px]" : "text-[8px] sm:text-[9px]"} mt-0.5 whitespace-nowrap tracking-[0.08em] normal-case opacity-90`}>
+            5 Question Evaluation
+          </span>
+        </>
+      )}
     </Link>
   );
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isEvaluationPage = pathname === "/body-reset";
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -36,6 +49,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
+  const anchorPrefix = isEvaluationPage ? "/" : "";
 
   return (
     <>
@@ -54,13 +68,13 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2 md:gap-6">
             <nav className="hidden md:flex items-center gap-5 font-sans text-[11px] font-medium tracking-[0.16em] uppercase text-muted">
-              <a href="#meet-susie" className="hover:text-purple transition-colors">Meet Susie</a>
-              <a href="#services" className="hover:text-purple transition-colors">Services</a>
-              <a href="#testimonials" className="hover:text-purple transition-colors">Reviews</a>
-              <a href="#faq" className="hover:text-purple transition-colors">FAQ</a>
+              <a href={`${anchorPrefix}#meet-susie`} className="hover:text-purple transition-colors">Meet Susie</a>
+              <a href={`${anchorPrefix}#services`} className="hover:text-purple transition-colors">Services</a>
+              <a href={`${anchorPrefix}#testimonials`} className="hover:text-purple transition-colors">Reviews</a>
+              <a href={`${anchorPrefix}#faq`} className="hover:text-purple transition-colors">FAQ</a>
             </nav>
 
-            <EvaluationCta compact />
+            <HeaderCta isEvaluationPage={isEvaluationPage} compact />
 
             <button
               type="button"
@@ -110,7 +124,7 @@ export default function Navbar() {
             </nav>
 
             <div className="mt-7">
-              <EvaluationCta onClick={closeMenu} />
+              <HeaderCta isEvaluationPage={isEvaluationPage} onClick={closeMenu} />
             </div>
 
             <a

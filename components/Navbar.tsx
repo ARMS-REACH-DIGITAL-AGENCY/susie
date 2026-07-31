@@ -10,7 +10,9 @@ function EvaluationCta({ compact = false, onClick }: { compact?: boolean; onClic
       href="/body-reset"
       onClick={onClick}
       className={`btn-primary inline-flex flex-col items-center justify-center text-center leading-tight ${
-        compact ? "min-w-[98px] px-2 py-2" : "min-w-[126px] px-4 py-2.5 sm:px-5"
+        compact
+          ? "h-8 sm:h-9 md:h-11 min-w-[98px] px-2 py-0"
+          : "min-w-[126px] px-4 py-2.5 sm:px-5"
       }`}
     >
       <span className={`${compact ? "text-[9px]" : "text-[11px] sm:text-[12px]"} tracking-[0.16em]`}>

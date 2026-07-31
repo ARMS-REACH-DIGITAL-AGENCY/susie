@@ -258,11 +258,7 @@ function BodyResetHeader({ showHomeCta }: { showHomeCta: boolean }) {
         <Link href="/" className="flex items-center">
           <Image src="/images/logo.png" alt="Susie Sculpts" width={180} height={44} priority className="h-9 md:h-11 w-auto" />
         </Link>
-        {showHomeCta ? (
-          <Link href="/#testimonials" className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight">Read Testimonials</Link>
-        ) : (
-          <button type="submit" form="body-reset-lead-form" className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight">Find My Best Step</button>
-        )}
+        <Link href="/#testimonials" className="btn-primary text-[9px] sm:text-[10px] px-3 sm:px-5 py-3 leading-tight">Read Testimonials</Link>
       </div>
     </header>
   );
@@ -378,7 +374,6 @@ export default function BodyResetPage() {
                   <p className="font-sans font-medium text-[12px] tracking-[0.18em] uppercase text-purple/70">Since 1995</p>
                 </div>
               </div>
-              <p className="font-sans font-medium text-purple/80 text-sm md:text-base mb-3">A smarter first-step evaluation - not the same answer for every woman.</p>
               <h1 className="font-serif text-[30px] sm:text-4xl lg:text-5xl font-light leading-[1.05] text-[#2c1f14] mb-5">Feel puffy, tired, foggy, inflamed, heavy, stuck, or just not like yourself?</h1>
               <div className="space-y-4 font-sans font-light text-muted text-base md:text-lg leading-relaxed">
                 <p>I want to help you figure out where you should start. Every woman does not need the same treatment, and I do not want you guessing from one service to the next.</p>

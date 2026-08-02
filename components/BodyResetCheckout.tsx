@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 type Product = { name: string; count: number; price: number; duration: number | null; href: string };
 type FamilyKey = "ultimate" | "muscle" | "body" | "fascia" | "pelvic" | "lymphatic" | "pemf";
 type ProductFamily = { key: FamilyKey; name: string; description: string; included: string[]; products: Product[]; image: string };
+type RecommendationContext = { reasons: string[]; notes: string[] };
 
 const families: ProductFamily[] = [
   { key: "ultimate", name: 'The Ultimate "YOU" Experience', description: "Susie’s most complete six-treatment series.", image: "/images/susie.jpg", included: ["(1) 55-minute Body Contouring Treatment", "(1) 55-minute Fascia and Skin Revival Treatment", "(1) 45-minute Lymphatic Wellness Treatment", "(1) 50-minute Muscle + Strength + Tone Treatment", "(1) 45-minute Pelvic Floor Strengthening Treatment", "(1) 30-minute PEMF Recovery and Wellness Treatment"], products: [{ name: 'The Ultimate "YOU" Experience', count: 6, price: 1297, duration: null, href: "https://api.armsreachdigital.com/payment-link/6a6da6b87b99151a54041af5" }] },
@@ -62,6 +63,30 @@ function money(value: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: value % 1 === 0 ? 0 : 2, maximumFractionDigits: 2 }).format(value);
 }
 
+function loadSavedContext(): RecommendationContext | null {
+  try {
+    const saved = localStorage.getItem("susie-sculpts-recommendation-context");
+    if (!saved) return null;
+    const parsed = JSON.parse(saved) as RecommendationContext;
+    if (!Array.isArray(parsed.reasons) || !Array.isArray(parsed.notes)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function extractRecommendationContext(element?: HTMLElement): RecommendationContext | null {
+  if (!element) return null;
+  const reasons = Array.from(element.querySelectorAll("ul li"))
+    .map((item) => item.textContent?.trim() ?? "")
+    .filter(Boolean);
+  const notes = Array.from(element.querySelectorAll("p"))
+    .map((item) => item.textContent?.trim() ?? "")
+    .filter((text) => text && text.toLowerCase() !== "why this recommendation came up" && text.toLowerCase() !== "important note");
+  if (!reasons.length && !notes.length) return null;
+  return { reasons, notes };
+}
+
 function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
   const perTreatment = product.price / product.count;
   const isSingle = product.count === 1;
@@ -71,6 +96,20 @@ function ProductCard({ product, featured = false }: { product: Product; featured
 
 function FamilySection({ family, recommended = false }: { family: ProductFamily; recommended?: boolean }) {
   return <section className={`rounded-[22px] border p-5 md:p-6 ${recommended ? "border-purple/25 bg-white/90" : "border-stone bg-stone/25"}`}><div className="mb-5"><p className="section-label mb-2">{recommended ? "Susie’s Recommended Series" : "Treatment Series Options"}</p><h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-4xl">{family.name}</h3><p className="mt-2 font-sans text-sm font-light leading-relaxed text-muted md:text-base">{family.description}</p></div><div className="mb-5 rounded-[18px] border border-purple/15 bg-white/75 p-5"><p className="section-label mb-3">What&apos;s Included</p><ul className="space-y-2 font-sans text-sm font-light text-muted">{family.included.map(item=><li key={item} className="flex items-start gap-3"><span className="mt-0.5 text-purple">✦</span><span>{item}</span></li>)}</ul></div><div className={`grid gap-4 ${family.products.length===1?"md:grid-cols-1":"md:grid-cols-2"}`}>{family.products.map((product,index)=><ProductCard key={`${family.key}-${product.count}`} product={product} featured={recommended&&index===0}/>)}</div></section>;
+}
+
+function RecommendationExplanation({ family, context }: { family: ProductFamily; context: RecommendationContext | null }) {
+  const reasons = context?.reasons.length ? context.reasons : [
+    `Your answers point to ${family.name} as the most logical place to begin.`,
+    "This recommendation is based on the symptoms, goals, and priorities you shared.",
+    "Susie will confirm the right series and number of sessions with you.",
+  ];
+  const notes = context?.notes.length ? context.notes : [
+    "This is not a diagnosis. It is a starting-point recommendation designed to make the first conversation with Susie more useful.",
+    "Susie will confirm the right series and number of sessions after she understands your goals, comfort level, and budget.",
+  ];
+
+  return <section className="rounded-[18px] border border-stone/80 bg-stone/45 p-5 md:p-6"><div className="grid gap-6 md:grid-cols-2"><div><p className="section-label mb-3">Why This Recommendation Came Up</p><ul className="space-y-2 font-sans text-sm font-light leading-relaxed text-muted">{reasons.map((reason)=><li key={reason} className="flex gap-3"><span className="mt-[2px] text-purple">•</span><span>{reason}</span></li>)}</ul></div><div><p className="section-label mb-3">Important Note</p><div className="space-y-3 font-sans text-sm font-light leading-relaxed text-muted">{notes.map((note)=><p key={note}>{note}</p>)}</div></div></div></section>;
 }
 
 function FlipFamilyCard({ family }: { family: ProductFamily }) {
@@ -85,6 +124,7 @@ function Testimonials() {
 export default function BodyResetCheckout() {
   const [portalTarget,setPortalTarget]=useState<HTMLElement|null>(null);
   const [recommendedKey,setRecommendedKey]=useState<FamilyKey>("ultimate");
+  const [recommendationContext,setRecommendationContext]=useState<RecommendationContext|null>(null);
 
   useEffect(()=>{
     let activeHost:HTMLElement|null=null;
@@ -104,6 +144,7 @@ export default function BodyResetCheckout() {
       claim.insertAdjacentElement("afterend",host);
       activeHost=host;
       setRecommendedKey(saved);
+      setRecommendationContext(loadSavedContext());
       document.body.dataset.evaluationComplete="true";
       window.dispatchEvent(new Event("evaluation-complete"));
       setPortalTarget(host);
@@ -117,7 +158,10 @@ export default function BodyResetCheckout() {
       activeHost=null;
       hiddenChildren.forEach(c=>c.removeAttribute("data-checkout-legacy"));
       const children=Array.from(root.children) as HTMLElement[];
-      hiddenChildren=children.filter((_,i)=>[0,1,3,4].includes(i));
+      const context=extractRecommendationContext(children[2])??loadSavedContext();
+      setRecommendationContext(context);
+      if(context) localStorage.setItem("susie-sculpts-recommendation-context",JSON.stringify(context));
+      hiddenChildren=children.filter((_,i)=>[0,1,2,3,4].includes(i));
       hiddenChildren.forEach(c=>c.setAttribute("data-checkout-legacy","hidden"));
       const host=document.createElement("div");
       host.id="live-stripe-checkout";
@@ -141,5 +185,5 @@ export default function BodyResetCheckout() {
   const otherTreatmentFamilies=useMemo(()=>families.filter(f=>f.key!==recommendedFamily.key),[recommendedFamily.key]);
   if(!portalTarget) return null;
 
-  return createPortal(<><style>{`[data-checkout-legacy="hidden"]{display:none!important;}`}</style><div className="space-y-8 pb-8"><FamilySection family={recommendedFamily} recommended/><section id="full-treatment-list" className="scroll-mt-24"><div className="mb-6 text-center"><p className="section-label mb-3">Full Treatment Option List</p><h2 className="font-serif text-4xl font-light text-[#2c1f14]">Explore Every Susie Sculpts Series</h2><p className="mx-auto mt-3 max-w-2xl font-sans text-sm font-light text-muted">Tap each photo to flip the card and view its treatment descriptions, series prices, per-treatment cost, and checkout links.</p></div><div className="grid gap-7 lg:grid-cols-2">{otherTreatmentFamilies.map(f=><FlipFamilyCard key={f.key} family={f}/>)}</div></section><Testimonials/></div></>,portalTarget);
+  return createPortal(<><style>{`[data-checkout-legacy="hidden"]{display:none!important;}`}</style><div className="space-y-8 pb-8"><FamilySection family={recommendedFamily} recommended/><RecommendationExplanation family={recommendedFamily} context={recommendationContext}/><section id="full-treatment-list" className="scroll-mt-24"><div className="mb-6 text-center"><p className="section-label mb-3">Full Treatment Option List</p><h2 className="font-serif text-4xl font-light text-[#2c1f14]">Explore Every Susie Sculpts Series</h2><p className="mx-auto mt-3 max-w-2xl font-sans text-sm font-light text-muted">Tap each photo to flip the card and view its treatment descriptions, series prices, per-treatment cost, and checkout links.</p></div><div className="grid gap-7 lg:grid-cols-2">{otherTreatmentFamilies.map(f=><FlipFamilyCard key={f.key} family={f}/>)}</div></section><Testimonials/></div></>,portalTarget);
 }

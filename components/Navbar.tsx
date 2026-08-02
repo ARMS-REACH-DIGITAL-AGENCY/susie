@@ -38,7 +38,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:gap-6">
             <nav className="hidden md:flex items-center gap-5 font-sans text-[11px] font-medium tracking-[0.16em] uppercase text-muted">
               <a href={`${anchorPrefix}#meet-susie`} className="hover:text-purple transition-colors">Meet Susie</a>
-              <a href={`${anchorPrefix}#services`} className="hover:text-purple transition-colors">Services</a>
+              <a href={`${anchorPrefix}#treatments`} className="hover:text-purple transition-colors">Treatments</a>
               <a href={`${anchorPrefix}#testimonials`} className="hover:text-purple transition-colors">Reviews</a>
               <a href={`${anchorPrefix}#faq`} className="hover:text-purple transition-colors">FAQ</a>
             </nav>
@@ -85,7 +85,7 @@ export default function Navbar() {
             <nav className="flex flex-col font-sans text-sm font-medium tracking-[0.14em] uppercase text-[#2c1f14]">
               <Link href="/" onClick={closeMenu} className="border-b border-stone py-4">Home</Link>
               <a href="/#meet-susie" onClick={closeMenu} className="border-b border-stone py-4">Meet Susie</a>
-              <a href="/#services" onClick={closeMenu} className="border-b border-stone py-4">Services</a>
+              <a href="/#treatments" onClick={closeMenu} className="border-b border-stone py-4">Treatments</a>
               <a href="/#testimonials" onClick={closeMenu} className="border-b border-stone py-4">Reviews</a>
               <a href="/#faq" onClick={closeMenu} className="border-b border-stone py-4">FAQ</a>
             </nav>

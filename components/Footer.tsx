@@ -4,11 +4,9 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#2c1f14] text-cream/70 py-14">
+    <footer className="bg-purple-dark text-cream/70 py-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
-
-          {/* Brand */}
           <div>
             <Image
               src="/images/logo.png"
@@ -29,44 +27,24 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Contact */}
           <div>
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-gold mb-4">Contact</p>
             <ul className="space-y-2 text-xs font-sans font-light">
+              <li><a href="tel:+14804400909" className="hover:text-cream transition-colors">📞 (480) 440-0909</a></li>
+              <li><a href="mailto:hello@susiesculpts.com" className="hover:text-cream transition-colors">✉️ hello@susiesculpts.com</a></li>
               <li>
-                <a href="tel:+14804400909" className="hover:text-cream transition-colors">
-                  📞 (480) 440-0909
-                </a>
-              </li>
-              <li>
-                <a href="mailto:hello@susiesculpts.com" className="hover:text-cream transition-colors">
-                  ✉️ hello@susiesculpts.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/susiesculpts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-cream transition-colors"
-                >
+                <a href="https://www.instagram.com/susiesculpts" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">
                   📸 @susiesculpts on Instagram
                 </a>
               </li>
               <li>
-                <a
-                  href="https://g.page/susiesculpts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-cream transition-colors"
-                >
+                <a href="https://g.page/susiesculpts" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">
                   📍 Google Business Profile
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Service Area */}
           <div>
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-gold mb-4">Service Area</p>
             <p className="text-xs font-sans font-light leading-relaxed text-cream/50 mb-4">
@@ -77,7 +55,6 @@ export default function Footer() {
               Synergie Vacuum Massage · PEMF Frequency Wellness · EMShape Neo Body Sculpting · Ultrasonic Cavitation & RF · Holistic Wellness & Nutrition
             </p>
           </div>
-
         </div>
 
         <div className="border-t border-cream/10 pt-8 space-y-3">

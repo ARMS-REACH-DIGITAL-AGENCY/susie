@@ -138,7 +138,7 @@ export default function BodyResetCheckout() {
   },[]);
 
   const recommendedFamily=useMemo(()=>families.find(f=>f.key===recommendedKey)??families[0],[recommendedKey]);
-  const otherTreatmentFamilies=useMemo(()=>families.filter(f=>f.key!==recommendedFamily.key&&f.key!=="ultimate"),[recommendedFamily.key]);
+  const otherTreatmentFamilies=useMemo(()=>families.filter(f=>f.key!==recommendedFamily.key),[recommendedFamily.key]);
   if(!portalTarget) return null;
 
   return createPortal(<><style>{`[data-checkout-legacy="hidden"]{display:none!important;}`}</style><div className="space-y-8 pb-8"><FamilySection family={recommendedFamily} recommended/><section id="full-treatment-list" className="scroll-mt-24"><div className="mb-6 text-center"><p className="section-label mb-3">Full Treatment Option List</p><h2 className="font-serif text-4xl font-light text-[#2c1f14]">Explore Every Susie Sculpts Series</h2><p className="mx-auto mt-3 max-w-2xl font-sans text-sm font-light text-muted">Tap each photo to flip the card and view its treatment descriptions, series prices, per-treatment cost, and checkout links.</p></div><div className="grid gap-7 lg:grid-cols-2">{otherTreatmentFamilies.map(f=><FlipFamilyCard key={f.key} family={f}/>)}</div></section><Testimonials/></div></>,portalTarget);

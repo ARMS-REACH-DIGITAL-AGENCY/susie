@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const services = [
+const treatments = [
   {
-    title: "Synergie Vacuum Massage",
-    tag: "Lymphatic Support",
+    title: "Lymphatic Wellness Series",
+    tag: "Lymphatic",
     icon: "lymphatic",
     description:
-      "A gentle, effective therapy that uses controlled suction to support healthy lymphatic flow, improve circulation, and help you feel lighter, more energized, and refreshed.",
+      "A gentle, effective treatment using controlled suction to support healthy lymphatic flow, improve circulation, and help you feel lighter, more energized, and refreshed.",
     bullets: [
       "Supports healthy lymphatic flow",
       "Supports circulation and overall wellness",
@@ -19,8 +19,8 @@ const services = [
     ],
   },
   {
-    title: "PEMF Recovery & Wellness",
-    tag: "Recovery & Reset",
+    title: "PEMF Recovery and Wellness Series",
+    tag: "PEMF",
     icon: "pemf",
     description:
       "Pulsed electromagnetic field sessions designed to support circulation, relaxation, recovery, energy, and whole-body wellness.",
@@ -29,15 +29,15 @@ const services = [
       "Supports circulation",
       "Supports energy and clarity",
       "Non-invasive wellness session",
-      "Pairs well with other reset services",
+      "Pairs well with other treatments",
     ],
   },
   {
-    title: "EMShape Neo Body Sculpting",
-    tag: "Muscle + Strength + Tone",
+    title: "Muscle + Strength + Tone Series",
+    tag: "Muscle",
     icon: "muscle",
     description:
-      "A non-invasive body sculpting treatment that uses electromagnetic technology to activate muscles, support tone, and help you feel stronger and more confident.",
+      "A non-invasive treatment using electromagnetic technology to activate muscles, support tone, and help you feel stronger and more confident.",
     bullets: [
       "Muscle activation and tone",
       "Body contouring support",
@@ -47,8 +47,8 @@ const services = [
     ],
   },
   {
-    title: "Ultrasonic Cavitation & RF",
-    tag: "Body Contouring",
+    title: "Body Contouring Series",
+    tag: "Contour",
     icon: "contour",
     description:
       "A gentle contouring approach that supports smoother, firmer-feeling skin and helps target stubborn areas without surgery or downtime.",
@@ -61,8 +61,8 @@ const services = [
     ],
   },
   {
-    title: "Fascia & Skin Revival",
-    tag: "Texture + Circulation",
+    title: "Fascia and Skin Revival Series",
+    tag: "Fascia",
     icon: "fascia",
     description:
       "Focused bodywork designed to support circulation, fascia mobility, smoother-looking skin, and a more refreshed feeling in treated areas.",
@@ -71,12 +71,12 @@ const services = [
       "Supports circulation",
       "Targets areas of visible texture",
       "Supports fascia mobility",
-      "Pairs well with contouring services",
+      "Pairs well with contouring treatments",
     ],
   },
   {
-    title: "Pelvic Floor Strengthening",
-    tag: "Core + Pelvic Support",
+    title: "Pelvic Floor Strengthening Series",
+    tag: "Pelvic",
     icon: "pelvic",
     description:
       "A non-invasive strengthening option focused on the pelvic floor and deep core support, designed for comfort and privacy.",
@@ -90,8 +90,8 @@ const services = [
   },
 ];
 
-function ServiceIcon({ type }: { type: string }) {
-  const common = "h-12 w-12 md:h-16 md:w-16";
+function TreatmentIcon({ type, compact = false }: { type: string; compact?: boolean }) {
+  const common = compact ? "h-6 w-6" : "h-12 w-12 md:h-16 md:w-16";
 
   if (type === "pemf") {
     return (
@@ -150,16 +150,16 @@ function ServiceIcon({ type }: { type: string }) {
   );
 }
 
-function ServiceDetails({ service }: { service: (typeof services)[number] }) {
+function TreatmentDetails({ treatment }: { treatment: (typeof treatments)[number] }) {
   return (
     <div className="flex h-full flex-col">
-      <p className="section-label mb-3">{service.tag}</p>
-      <h3 className="font-serif text-2xl font-light leading-tight text-[#2c1f14] mb-4">{service.title}</h3>
-      <p className="font-sans font-light text-sm text-muted leading-relaxed mb-5">{service.description}</p>
-      <ul className="space-y-2 mb-6">
-        {service.bullets.map((bullet) => (
-          <li key={bullet} className="flex items-start gap-2 font-sans font-light text-xs text-muted">
-            <span className="text-purple mt-0.5">✦</span>
+      <p className="section-label mb-3">{treatment.tag}</p>
+      <h3 className="mb-4 font-serif text-2xl font-light leading-tight text-[#2c1f14]">{treatment.title}</h3>
+      <p className="mb-5 font-sans text-sm font-light leading-relaxed text-muted">{treatment.description}</p>
+      <ul className="mb-6 space-y-2">
+        {treatment.bullets.map((bullet) => (
+          <li key={bullet} className="flex items-start gap-2 font-sans text-xs font-light text-muted">
+            <span className="mt-0.5 text-purple">✦</span>
             <span>{bullet}</span>
           </li>
         ))}
@@ -175,64 +175,67 @@ export default function Services() {
   const [selected, setSelected] = useState(0);
 
   return (
-    <section className="pt-10 md:pt-14 pb-12 md:pb-16 bg-cream">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div id="services" className="text-center mb-9 scroll-mt-20 md:scroll-mt-24">
-          <p className="section-label mb-3">The Body Reset Experience</p>
-          <h2 className="section-heading mb-5">Explore Susie&apos;s six treatment paths</h2>
-          <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Every service supports a different goal. Choose a treatment below to learn more, then let Susie&apos;s evaluation help identify the best place to start.
+    <section className="bg-cream pb-12 pt-10 md:pb-16 md:pt-14">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div id="treatments" className="mb-6 scroll-mt-20 text-center md:mb-9 md:scroll-mt-24">
+          <p className="section-label mb-3">The Ultimate &quot;YOU&quot; Experience</p>
+          <h2 className="section-heading mb-5">Explore Susie&apos;s six treatments</h2>
+          <p className="mx-auto max-w-2xl font-sans text-base font-light leading-relaxed text-muted md:text-lg">
+            Every treatment supports a different goal. Choose one below to learn more, then let Susie&apos;s evaluation help identify the best place to start.
           </p>
         </div>
 
         <div className="md:hidden">
-          <div className="grid grid-cols-3 gap-3 mb-5">
-            {services.map((service, index) => (
-              <button
-                key={service.title}
-                type="button"
-                onClick={() => setSelected(index)}
-                className={`flex min-h-[92px] flex-col items-center justify-center rounded-[16px] border px-2 py-3 text-center transition ${
-                  selected === index
-                    ? "border-purple bg-purple/10 text-purple shadow-sm"
-                    : "border-stone bg-white/70 text-muted"
-                }`}
-                aria-pressed={selected === index}
-              >
-                <ServiceIcon type={service.icon} />
-                <span className="mt-2 font-sans text-[10px] font-medium leading-tight uppercase tracking-[0.08em]">
-                  {service.tag}
-                </span>
-              </button>
-            ))}
+          <div className="sticky top-16 z-30 -mx-4 mb-3 border-y border-purple/10 bg-cream/95 px-2 py-2 shadow-sm backdrop-blur-md">
+            <div className="grid grid-cols-6 gap-1">
+              {treatments.map((treatment, index) => (
+                <button
+                  key={treatment.title}
+                  type="button"
+                  onClick={() => setSelected(index)}
+                  className={`flex min-h-[56px] flex-col items-center justify-center rounded-[10px] border px-0.5 py-1.5 text-center transition ${
+                    selected === index
+                      ? "border-purple bg-purple/10 text-purple shadow-sm"
+                      : "border-stone/80 bg-white/75 text-muted"
+                  }`}
+                  aria-pressed={selected === index}
+                  aria-label={treatment.title}
+                >
+                  <TreatmentIcon type={treatment.icon} compact />
+                  <span className="mt-1 max-w-full truncate font-sans text-[6.5px] font-medium uppercase leading-none tracking-[0.04em]">
+                    {treatment.tag}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="rounded-[22px] border border-purple/15 bg-white/85 p-5 shadow-[0_10px_28px_rgba(60,40,80,0.08)]">
-            <ServiceDetails service={services[selected]} />
+            <TreatmentDetails treatment={treatments[selected]} />
           </div>
         </div>
 
-        <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {services.map((service) => (
-            <div key={service.title} className="group h-[430px] [perspective:1200px]">
+        <div className="hidden gap-6 md:grid md:grid-cols-2 xl:grid-cols-3">
+          {treatments.map((treatment) => (
+            <div key={treatment.title} className="group h-[430px] [perspective:1200px]">
               <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
                 <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[22px] border border-purple/15 bg-gradient-to-br from-white via-cream to-purple/5 p-8 text-center shadow-[0_10px_28px_rgba(60,40,80,0.08)] [backface-visibility:hidden]">
-                  <div className="mb-6 text-purple"><ServiceIcon type={service.icon} /></div>
-                  <p className="section-label mb-3">{service.tag}</p>
-                  <h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14]">{service.title}</h3>
+                  <div className="mb-6 text-purple"><TreatmentIcon type={treatment.icon} /></div>
+                  <p className="section-label mb-3">{treatment.tag}</p>
+                  <h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14]">{treatment.title}</h3>
                   <p className="mt-5 font-sans text-xs font-medium uppercase tracking-[0.12em] text-purple/70">Hover or tap to learn more</p>
                 </div>
 
                 <div className="absolute inset-0 rounded-[22px] border border-purple/20 bg-white p-7 shadow-[0_10px_28px_rgba(60,40,80,0.10)] [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                  <ServiceDetails service={service} />
+                  <TreatmentDetails treatment={treatment} />
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <p className="text-center mt-8 text-xs font-sans font-light text-muted/60 max-w-xl mx-auto">
-          Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary.
+        <p className="mx-auto mt-8 max-w-xl text-center font-sans text-xs font-light text-muted/60">
+          Treatments are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary.
         </p>
       </div>
     </section>

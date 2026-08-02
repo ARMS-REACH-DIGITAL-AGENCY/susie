@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ReturningVisitorResults from "@/components/ReturningVisitorResults";
 import BodyResetCheckout from "@/components/BodyResetCheckout";
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export default function BodyResetLayout({ children }: { children: React.ReactNod
   return (
     <>
       {children}
+      <ReturningVisitorResults />
       <BodyResetCheckout />
     </>
   );

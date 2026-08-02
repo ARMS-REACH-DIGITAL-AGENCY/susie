@@ -5,6 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const consultationBookingUrl =
+  "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
+
 export default function Navbar() {
   const pathname = usePathname();
   const isEvaluationPage = pathname === "/body-reset";
@@ -63,7 +66,13 @@ export default function Navbar() {
             <a href="tel:+14804400909" onClick={closeMenu} className="mt-7 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple">
               Call or Text Susie
             </a>
-            <a href="#calendar-booking-link-needed" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-white">
+            <a
+              href={consultationBookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+              className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-white"
+            >
               Schedule a FREE Consultation
             </a>
           </aside>

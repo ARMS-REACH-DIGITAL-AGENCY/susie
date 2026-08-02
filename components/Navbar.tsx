@@ -5,37 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-function HeaderCta({ isEvaluationPage, compact = false, onClick }: { isEvaluationPage: boolean; compact?: boolean; onClick?: () => void }) {
-  const href = isEvaluationPage ? "/#testimonials" : "/body-reset";
-
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={`btn-primary inline-flex flex-col items-center justify-center text-center leading-tight ${
-        compact
-          ? "h-8 sm:h-9 md:h-11 min-w-[98px] px-2 py-0"
-          : "min-w-[126px] px-4 py-2.5 sm:px-5"
-      }`}
-    >
-      {isEvaluationPage ? (
-        <span className={`${compact ? "text-[8px] sm:text-[9px]" : "text-[11px] sm:text-[12px]"} tracking-[0.14em] whitespace-nowrap`}>
-          Read Testimonials
-        </span>
-      ) : (
-        <>
-          <span className={`${compact ? "text-[9px]" : "text-[11px] sm:text-[12px]"} tracking-[0.16em]`}>
-            Ask Susie
-          </span>
-          <span className={`${compact ? "text-[7px]" : "text-[8px] sm:text-[9px]"} mt-0.5 whitespace-nowrap tracking-[0.08em] normal-case opacity-90`}>
-            5 Question Evaluation
-          </span>
-        </>
-      )}
-    </Link>
-  );
-}
-
 export default function Navbar() {
   const pathname = usePathname();
   const isEvaluationPage = pathname === "/body-reset";
@@ -73,8 +42,6 @@ export default function Navbar() {
               <a href={`${anchorPrefix}#testimonials`} className="hover:text-purple transition-colors">Reviews</a>
               <a href={`${anchorPrefix}#faq`} className="hover:text-purple transition-colors">FAQ</a>
             </nav>
-
-            <HeaderCta isEvaluationPage={isEvaluationPage} compact />
 
             <button
               type="button"
@@ -123,14 +90,10 @@ export default function Navbar() {
               <a href="/#faq" onClick={closeMenu} className="border-b border-stone py-4">FAQ</a>
             </nav>
 
-            <div className="mt-7">
-              <HeaderCta isEvaluationPage={isEvaluationPage} onClick={closeMenu} />
-            </div>
-
             <a
               href="tel:+14804400909"
               onClick={closeMenu}
-              className="mt-4 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple"
+              className="mt-7 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple"
             >
               Call or Text Susie
             </a>

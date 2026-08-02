@@ -40,8 +40,8 @@ export default function Hero() {
               <a href="#meet-susie" className="btn-primary">
                 Meet Susie
               </a>
-              <a href="#services" className="btn-secondary">
-                View Services
+              <a href="#treatments" className="btn-secondary">
+                View Treatments
               </a>
             </div>
 

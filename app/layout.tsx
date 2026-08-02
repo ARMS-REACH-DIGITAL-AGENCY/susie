@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
+import StickyEvaluationFooter from "@/components/StickyEvaluationFooter";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -29,24 +30,9 @@ export const metadata: Metadata = {
     "Synergie Vacuum Massage Gilbert AZ, Synergie Vacuum Massage Queen Creek AZ, body sculpting Gilbert AZ, PEMF Gilbert AZ, lymphatic massage Gilbert AZ, body reset Gilbert AZ, wellness support East Valley, non-invasive body sculpting Gilbert",
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: [
-      {
-        url: faviconPath,
-        type: "image/png",
-      },
-    ],
-    shortcut: [
-      {
-        url: faviconPath,
-        type: "image/png",
-      },
-    ],
-    apple: [
-      {
-        url: faviconPath,
-        type: "image/png",
-      },
-    ],
+    icon: [{ url: faviconPath, type: "image/png" }],
+    shortcut: [{ url: faviconPath, type: "image/png" }],
+    apple: [{ url: faviconPath, type: "image/png" }],
   },
   openGraph: {
     title: "Susie Sculpts | Body Reset, PEMF, Synergie & Sculpting in Gilbert AZ",
@@ -56,14 +42,7 @@ export const metadata: Metadata = {
     siteName: "Susie Sculpts",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: faviconPath,
-        width: 512,
-        height: 512,
-        alt: "Susie from Susie Sculpts",
-      },
-    ],
+    images: [{ url: faviconPath, width: 512, height: 512, alt: "Susie from Susie Sculpts" }],
   },
   twitter: {
     card: "summary",
@@ -74,16 +53,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
-      <body className="bg-cream font-sans antialiased">
+      <body className="bg-cream pb-[72px] font-sans antialiased sm:pb-[78px]">
         <AnalyticsScripts />
         {children}
+        <StickyEvaluationFooter />
       </body>
     </html>
   );

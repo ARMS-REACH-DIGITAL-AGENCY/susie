@@ -119,15 +119,20 @@ export default function Navbar() {
               <a href="/#faq" onClick={closeMenu} className="border-b border-stone py-4">
                 FAQ
               </a>
-              <Link href="/body-reset" onClick={closeMenu} className="border-b border-stone py-4 text-purple">
-                See What Susie Says
-              </Link>
             </nav>
+
+            <Link
+              href="/body-reset"
+              onClick={closeMenu}
+              className="mt-7 flex items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]"
+            >
+              See What Susie Says
+            </Link>
 
             <a
               href="tel:+14804400909"
               onClick={closeMenu}
-              className="mt-7 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple"
+              className="mt-3 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple"
             >
               Call or Text Susie
             </a>

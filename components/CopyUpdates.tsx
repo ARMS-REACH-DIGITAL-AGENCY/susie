@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 
+const consultationBookingUrl =
+  "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
+
 const exactNameReplacements: Array<[string, string]> = [
   ["Synergie Vacuum Massage", "Lymphatic Wellness Series"],
   ["PEMF Recovery & Wellness", "PEMF Recovery and Wellness Series"],
@@ -26,6 +29,47 @@ function replaceExactTextNodes(element: HTMLElement, from: string, to: string) {
   });
 }
 
+function restoreConsultationLinks() {
+  if (window.location.pathname !== "/body-reset") return;
+
+  Array.from(document.querySelectorAll<HTMLAnchorElement>("a")).forEach((anchor) => {
+    const text = anchor.textContent?.trim().toLowerCase() ?? "";
+    const href = anchor.getAttribute("href") ?? "";
+
+    if (text === "read testimonials") {
+      anchor.setAttribute("href", "#evaluation-testimonials");
+    }
+
+    if (
+      href === "#calendar-booking-link-needed" ||
+      text === "book consult" ||
+      text === "book your free professional consult"
+    ) {
+      anchor.setAttribute("href", consultationBookingUrl);
+      anchor.setAttribute("target", "_blank");
+      anchor.setAttribute("rel", "noopener noreferrer");
+      anchor.textContent = "Book Your FREE Professional Consult";
+    }
+  });
+
+  const evaluationParagraph = Array.from(document.querySelectorAll("p")).find((paragraph) =>
+    paragraph.textContent?.includes("either schedule a time for a free consultation"),
+  );
+
+  const evaluationCopyContainer = evaluationParagraph?.parentElement;
+  if (evaluationCopyContainer && !document.getElementById("free-professional-consult-cta")) {
+    const bookingLink = document.createElement("a");
+    bookingLink.id = "free-professional-consult-cta";
+    bookingLink.href = consultationBookingUrl;
+    bookingLink.target = "_blank";
+    bookingLink.rel = "noopener noreferrer";
+    bookingLink.className =
+      "btn-secondary mt-2 inline-flex w-full items-center justify-center text-center sm:w-auto";
+    bookingLink.textContent = "Book Your FREE Professional Consult";
+    evaluationCopyContainer.appendChild(bookingLink);
+  }
+}
+
 function applyCopyUpdates() {
   const body = document.body;
   if (!body) return;
@@ -40,14 +84,6 @@ function applyCopyUpdates() {
       node.nodeValue = node.nodeValue.replaceAll("Series Series", "Series");
     }
   });
-
-  if (window.location.pathname === "/body-reset") {
-    Array.from(document.querySelectorAll("a")).forEach((anchor) => {
-      if (anchor.textContent?.trim().toLowerCase() === "read testimonials") {
-        anchor.setAttribute("href", "#evaluation-testimonials");
-      }
-    });
-  }
 
   const paragraphs = Array.from(document.querySelectorAll("p"));
   const firstEvaluationParagraph = paragraphs.find((paragraph) =>
@@ -73,6 +109,8 @@ function applyCopyUpdates() {
     submitButton.innerHTML =
       '<span class="block text-[10px] sm:text-xs tracking-[0.12em]">RECEIVE YOUR FREE</span><span class="block mt-1 text-sm sm:text-base tracking-[0.08em]">PROFESSIONAL EVALUATION TODAY!</span>';
   }
+
+  restoreConsultationLinks();
 }
 
 export default function CopyUpdates() {

@@ -29,7 +29,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="py-20 md:py-28 bg-white/50">
+    <section id="faq" className="scroll-mt-20 py-20 md:scroll-mt-24 md:py-28 bg-white/50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <p className="section-label mb-4">Common Questions</p>
@@ -71,13 +71,9 @@ export default function FAQ() {
           ))}
         </div>
 
-        {/* Direct CTA */}
         <div className="mt-10 text-center">
           <p className="font-sans font-light text-muted text-sm mb-4">Still have questions? Susie is happy to talk.</p>
-          <a
-            href="tel:+14804400909"
-            className="btn-primary inline-block"
-          >
+          <a href="tel:+14804400909" className="btn-primary inline-block">
             Call or Text (480) 440-0909
           </a>
         </div>

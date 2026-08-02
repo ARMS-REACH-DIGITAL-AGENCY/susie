@@ -15,6 +15,9 @@ const serviceNameReplacements: Array<[string, string]> = [
 const evaluationCopy =
   "I wanna help you figure out where you should start. Everyone doesn't need the same treatment, and I don't want you guessing. So, either schedule a time for a free consultation, or just answer these six questions so I can get to know you a little bit better and tell you what I think might work.";
 
+const treatmentDisclaimer =
+  "Every treatment supports a different goal, are wellness-focused, and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary.";
+
 function replaceTextInElement(element: HTMLElement, from: string, to: string) {
   const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
   const textNodes: Text[] = [];
@@ -35,6 +38,42 @@ function applyCopyUpdates() {
   if (!body) return;
 
   serviceNameReplacements.forEach(([from, to]) => replaceTextInElement(body, from, to));
+
+  const treatmentsHeader = document.getElementById("treatments");
+  if (treatmentsHeader) {
+    const headingParagraphs = Array.from(treatmentsHeader.querySelectorAll("p"));
+    headingParagraphs.forEach((paragraph) => {
+      const text = paragraph.textContent ?? "";
+      if (
+        text.includes("Every treatment supports a different goal") ||
+        text.includes("Choose one below to learn more")
+      ) {
+        paragraph.remove();
+      }
+    });
+  }
+
+  const treatmentSection = treatmentsHeader?.closest("section");
+  if (treatmentSection) {
+    const disclaimer = Array.from(treatmentSection.querySelectorAll("p")).find((paragraph) =>
+      paragraph.textContent?.includes("Treatments are wellness-focused"),
+    );
+    if (disclaimer) disclaimer.textContent = treatmentDisclaimer;
+  }
+
+  const mobileTreatmentWrapper = treatmentSection?.querySelector(".md\\:hidden");
+  if (mobileTreatmentWrapper instanceof HTMLElement) {
+    mobileTreatmentWrapper.classList.add("sticky", "top-16", "z-30");
+    const iconBar = mobileTreatmentWrapper.firstElementChild as HTMLElement | null;
+    const detailsPanel = mobileTreatmentWrapper.children.item(1) as HTMLElement | null;
+    iconBar?.classList.remove("sticky", "top-16");
+    if (iconBar) iconBar.style.marginBottom = "0";
+    if (detailsPanel) {
+      detailsPanel.style.borderTopLeftRadius = "0";
+      detailsPanel.style.borderTopRightRadius = "0";
+      detailsPanel.style.marginTop = "0";
+    }
+  }
 
   const paragraphs = Array.from(document.querySelectorAll("p"));
   const firstEvaluationParagraph = paragraphs.find((paragraph) =>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
+import CopyUpdates from "@/components/CopyUpdates";
 import StickyEvaluationFooter from "@/components/StickyEvaluationFooter";
 import "./globals.css";
 
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="bg-cream pb-[72px] font-sans antialiased sm:pb-[78px]">
         <AnalyticsScripts />
+        <CopyUpdates />
         {children}
         <StickyEvaluationFooter />
       </body>

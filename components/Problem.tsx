@@ -94,7 +94,7 @@ export default function Problem() {
           <p className="hidden md:block">This isn’t about what is wrong with you. It is about naming what changed so you can start finding your way back.</p>
         </div>
 
-        <a href="#first-service" className="btn-primary">View Services</a>
+        <a href="#treatments" className="btn-primary">View Treatments</a>
       </div>
     </section>
   );

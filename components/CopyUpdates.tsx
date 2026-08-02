@@ -2,14 +2,80 @@
 
 import { useEffect } from "react";
 
-const exactTextReplacements: Record<string, string> = {
-  "Synergie Vacuum Massage": "Lymphatic Wellness Series",
-  "PEMF Recovery & Wellness": "PEMF Recovery and Wellness Series",
-  "EMShape Neo Body Sculpting": "Muscle + Strength + Tone Series",
-  "Ultrasonic Cavitation & RF": "Body Contouring Series",
-  "Fascia & Skin Revival": "Fascia and Skin Revival Series",
-  "Pelvic Floor Strengthening": "Pelvic Floor Strengthening Series",
-  "Find My Best First Step": "RECEIVE YOUR FREE\nPROFESSIONAL EVALUATION TODAY!",
-};
+const serviceNameReplacements: Array<[string, string]> = [
+  ["Synergie Vacuum Massage", "Lymphatic Wellness Series"],
+  ["PEMF Recovery & Wellness", "PEMF Recovery and Wellness Series"],
+  ["EMShape Neo Body Sculpting", "Muscle + Strength + Tone Series"],
+  ["Muscle and Strength and Tone Series", "Muscle + Strength + Tone Series"],
+  ["Ultrasonic Cavitation & RF", "Body Contouring Series"],
+  ["Fascia & Skin Revival", "Fascia and Skin Revival Series"],
+  ["Pelvic Floor Strengthening", "Pelvic Floor Strengthening Series"],
+];
 
-const oldEvaluationParagraph
+const evaluationCopy =
+  "I wanna help you figure out where you should start. Everyone doesn't need the same treatment, and I don't want you guessing. So, either schedule a time for a free consultation, or just answer these six questions so I can get to know you a little bit better and tell you what I think might work.";
+
+function replaceTextInElement(element: HTMLElement, from: string, to: string) {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  const textNodes: Text[] = [];
+
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode as Text);
+  }
+
+  textNodes.forEach((node) => {
+    if (node.nodeValue?.includes(from)) {
+      node.nodeValue = node.nodeValue.replaceAll(from, to);
+    }
+  });
+}
+
+function applyCopyUpdates() {
+  const body = document.body;
+  if (!body) return;
+
+  serviceNameReplacements.forEach(([from, to]) => replaceTextInElement(body, from, to));
+
+  const paragraphs = Array.from(document.querySelectorAll("p"));
+  const firstEvaluationParagraph = paragraphs.find((paragraph) =>
+    paragraph.textContent?.includes("I want to help you figure out where you should start."),
+  );
+
+  if (firstEvaluationParagraph) {
+    firstEvaluationParagraph.textContent = evaluationCopy;
+
+    const nextParagraph = firstEvaluationParagraph.nextElementSibling as HTMLElement | null;
+    if (nextParagraph?.textContent?.includes("Answer five quick questions")) {
+      nextParagraph.remove();
+    }
+  }
+
+  const emailNote = paragraphs.find((paragraph) =>
+    paragraph.textContent?.includes(
+      "Email is required so Susie can send your recommendation and follow up if you do not book today.",
+    ),
+  );
+  emailNote?.remove();
+
+  const submitButton = Array.from(document.querySelectorAll("button")).find((button) =>
+    button.textContent?.includes("Find My Best First Step"),
+  );
+
+  if (submitButton) {
+    submitButton.innerHTML =
+      '<span class="block text-[10px] sm:text-xs tracking-[0.12em]">RECEIVE YOUR FREE</span><span class="block mt-1 text-sm sm:text-base tracking-[0.08em]">PROFESSIONAL EVALUATION TODAY!</span>';
+  }
+}
+
+export default function CopyUpdates() {
+  useEffect(() => {
+    applyCopyUpdates();
+
+    const observer = new MutationObserver(() => applyCopyUpdates());
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return null;
+}

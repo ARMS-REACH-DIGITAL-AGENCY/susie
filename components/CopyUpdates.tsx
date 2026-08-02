@@ -36,7 +36,7 @@ function restoreConsultationLinks() {
     const text = anchor.textContent?.trim().toLowerCase() ?? "";
     const href = anchor.getAttribute("href") ?? "";
 
-    if (text === "read testimonials") {
+    if (text === "read testimonials" && href !== "#evaluation-testimonials") {
       anchor.setAttribute("href", "#evaluation-testimonials");
     }
 
@@ -45,10 +45,18 @@ function restoreConsultationLinks() {
       text === "book consult" ||
       text === "book your free professional consult"
     ) {
-      anchor.setAttribute("href", consultationBookingUrl);
-      anchor.setAttribute("target", "_blank");
-      anchor.setAttribute("rel", "noopener noreferrer");
-      anchor.textContent = "Book Your FREE Professional Consult";
+      if (anchor.getAttribute("href") !== consultationBookingUrl) {
+        anchor.setAttribute("href", consultationBookingUrl);
+      }
+      if (anchor.getAttribute("target") !== "_blank") {
+        anchor.setAttribute("target", "_blank");
+      }
+      if (anchor.getAttribute("rel") !== "noopener noreferrer") {
+        anchor.setAttribute("rel", "noopener noreferrer");
+      }
+      if (anchor.textContent?.trim() !== "Book Your FREE Professional Consult") {
+        anchor.textContent = "Book Your FREE Professional Consult";
+      }
     }
   });
 
@@ -91,7 +99,9 @@ function applyCopyUpdates() {
   );
 
   if (firstEvaluationParagraph) {
-    firstEvaluationParagraph.textContent = evaluationCopy;
+    if (firstEvaluationParagraph.textContent !== evaluationCopy) {
+      firstEvaluationParagraph.textContent = evaluationCopy;
+    }
     const nextParagraph = firstEvaluationParagraph.nextElementSibling as HTMLElement | null;
     if (nextParagraph?.textContent?.includes("Answer five quick questions")) nextParagraph.remove();
   }
@@ -115,10 +125,26 @@ function applyCopyUpdates() {
 
 export default function CopyUpdates() {
   useEffect(() => {
+    let applying = false;
+    const observerOptions: MutationObserverInit = { childList: true, subtree: true };
+
+    const observer = new MutationObserver(() => {
+      if (applying) return;
+      applying = true;
+      observer.disconnect();
+      try {
+        applyCopyUpdates();
+      } finally {
+        observer.observe(document.body, observerOptions);
+        applying = false;
+      }
+    });
+
     applyCopyUpdates();
-    const observer = new MutationObserver(applyCopyUpdates);
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, observerOptions);
+
     return () => observer.disconnect();
   }, []);
+
   return null;
 }

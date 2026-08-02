@@ -29,7 +29,7 @@ export default function StickyEvaluationFooter() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[65] border-t border-white/15 bg-[#2c1f14] text-white shadow-[0_-8px_24px_rgba(44,31,20,0.22)]">
       <Link
-        href={evaluationComplete ? "/#treatments" : "/body-reset"}
+        href={evaluationComplete ? "#full-treatment-list" : "/body-reset"}
         className="mx-auto flex min-h-[72px] max-w-6xl flex-col items-center justify-center px-4 py-2 text-center sm:min-h-[78px]"
       >
         {evaluationComplete ? (

@@ -89,12 +89,10 @@ export default function Problem() {
           </div>
         </div>
 
-        <div className="font-sans font-light text-muted text-[15px] md:text-lg leading-relaxed max-w-3xl mx-auto space-y-3 md:space-y-4 mb-5 md:mb-8">
+        <div className="font-sans font-light text-muted text-[15px] md:text-lg leading-relaxed max-w-3xl mx-auto space-y-3 md:space-y-4 md:mb-3">
           <p>If you’ve been feeling like your body isn’t your own anymore, you’re not alone. Many women tell Susie they don’t recognize the woman looking back at them.</p>
           <p className="hidden md:block">This isn’t about what is wrong with you. It is about naming what changed so you can start finding your way back.</p>
         </div>
-
-        <a href="#treatments" className="btn-primary">View Treatments</a>
       </div>
     </section>
   );

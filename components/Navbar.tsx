@@ -52,17 +52,20 @@ export default function Navbar() {
               <a href={`${anchorPrefix}#faq`} className="hover:text-purple transition-colors whitespace-nowrap">
                 FAQ
               </a>
-              <Link href="/body-reset" className="hover:text-purple transition-colors whitespace-nowrap">
-                See What Susie Says
-              </Link>
               <a
                 href={consultationBookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="hover:text-purple transition-colors whitespace-nowrap"
+              >
+                Book Your Free Professional Consult
+              </a>
+              <Link
+                href="/body-reset"
                 className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap"
               >
-                Book Consult
-              </a>
+                See What Susie Says
+              </Link>
             </nav>
 
             <button
@@ -141,9 +144,9 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMenu}
-              className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-white"
+              className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 text-center font-sans text-xs font-medium tracking-[0.12em] uppercase text-white"
             >
-              Schedule a FREE Consultation
+              Book Your Free Professional Consult
             </a>
           </aside>
         </div>

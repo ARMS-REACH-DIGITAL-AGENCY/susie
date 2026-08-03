@@ -51,6 +51,19 @@ function ensureBodyResetStyles() {
     #quiz-card .grid.grid-cols-2 button p:last-child { margin-top: .2rem !important; font-size: .7rem !important; line-height: 1.15 !important; }
     #quiz-card .grid.grid-cols-2 button .relative.aspect-square { aspect-ratio: 1.35 / 1 !important; }
     #quiz-card > div:last-child { margin-top: .85rem !important; }
+    #deferred-urgency-choice[data-custom-selected="true"] {
+      background: #6b4fa0 !important;
+      border-color: #6b4fa0 !important;
+      color: #fff !important;
+      outline: none !important;
+    }
+    #quiz-card button[data-custom-suppressed="true"] {
+      background: #f7f3ef !important;
+      border-color: rgba(107,79,160,.14) !important;
+      color: #8d8178 !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
     #compact-recommendation-reasons { margin-top: .65rem; border-top: 1px solid rgba(107,79,160,.18); padding-top: .65rem; }
     #compact-recommendation-reasons p, #compact-recommendation-reasons li { font-size: .72rem; line-height: 1.3; }
     #compact-recommendation-reasons ul { display: grid; gap: .25rem; margin-top: .35rem; }
@@ -108,33 +121,47 @@ function compactQuizChoices() {
 function addDeferredUrgencyChoice() {
   const quiz = document.getElementById("quiz-card");
   if (!quiz || !quiz.textContent?.includes("How soon do you want help figuring this out?")) return;
-  if (document.getElementById("deferred-urgency-choice")) return;
 
-  const existingChoice = Array.from(quiz.querySelectorAll<HTMLButtonElement>("button")).find((button) =>
-    button.textContent?.trim() === "I am curious, but not urgent yet",
+  const existingChoice = Array.from(quiz.querySelectorAll<HTMLButtonElement>("button")).find(
+    (button) => button.textContent?.trim() === "I am curious, but not urgent yet",
   );
   const grid = existingChoice?.parentElement;
   if (!existingChoice || !grid) return;
 
-  const button = document.createElement("button");
-  button.id = "deferred-urgency-choice";
-  button.type = "button";
-  button.textContent = deferredUrgency;
-  button.className = existingChoice.className;
-  button.style.padding = ".7rem .85rem";
-  button.style.fontSize = ".82rem";
-  button.style.lineHeight = "1.2";
+  let button = document.getElementById("deferred-urgency-choice") as HTMLButtonElement | null;
+
+  if (!button) {
+    button = document.createElement("button");
+    button.id = "deferred-urgency-choice";
+    button.type = "button";
+    button.textContent = deferredUrgency;
+    button.className = existingChoice.className;
+    grid.appendChild(button);
+  }
+
+  if (grid.dataset.deferredChoiceBound === "true") return;
+  grid.dataset.deferredChoiceBound = "true";
+
+  const clearDeferredSelection = () => {
+    document.body.dataset.deferredUrgency = "false";
+    button?.removeAttribute("data-custom-selected");
+    existingChoice.removeAttribute("data-custom-suppressed");
+  };
+
+  Array.from(grid.querySelectorAll<HTMLButtonElement>("button")).forEach((candidate) => {
+    if (candidate === button) return;
+    candidate.addEventListener("click", clearDeferredSelection);
+  });
+
   button.addEventListener("click", () => {
     document.body.dataset.deferredUrgency = "true";
     existingChoice.click();
-    Array.from(grid.querySelectorAll("button")).forEach((candidate) => {
-      candidate.removeAttribute("data-custom-selected");
-      candidate.style.outline = "";
+
+    window.requestAnimationFrame(() => {
+      existingChoice.setAttribute("data-custom-suppressed", "true");
+      button?.setAttribute("data-custom-selected", "true");
     });
-    button.setAttribute("data-custom-selected", "true");
-    button.style.outline = "2px solid #6b4fa0";
   });
-  grid.appendChild(button);
 }
 
 function rewritePurchaseButtons() {
@@ -151,8 +178,8 @@ function rewritePurchaseButtons() {
 }
 
 function moveRecommendationReasons() {
-  const heading = Array.from(document.querySelectorAll<HTMLElement>("p, h2, h3, h4")).find((element) =>
-    element.textContent?.trim().toLowerCase() === "why this recommendation came up",
+  const heading = Array.from(document.querySelectorAll<HTMLElement>("p, h2, h3, h4")).find(
+    (element) => element.textContent?.trim().toLowerCase() === "why this recommendation came up",
   );
   if (!heading) return;
 

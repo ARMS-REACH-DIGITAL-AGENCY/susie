@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
-import BodyResetPresentationFixes from "@/components/BodyResetPresentationFixes";
 import CopyUpdates from "@/components/CopyUpdates";
 import StickyEvaluationFooter from "@/components/StickyEvaluationFooter";
 import "./globals.css";
@@ -61,7 +60,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-cream pb-[72px] font-sans antialiased sm:pb-[78px]">
         <AnalyticsScripts />
         <CopyUpdates />
-        <BodyResetPresentationFixes />
         {children}
         <StickyEvaluationFooter />
       </body>

@@ -13,12 +13,12 @@ const treatments = [
 ];
 
 const treatmentIconSources: Record<string, string> = {
-  lymphatic: "/images/treatment-lymphatic.png",
-  pemf: "/images/treatment-pemf.png",
-  muscle: "/images/treatment-muscle.png",
-  contour: "/images/treatment-contour.png",
-  fascia: "/images/treatment-fascia.png",
-  pelvic: "/images/treatment-pelvic.png",
+  lymphatic: "/images/treatment-lymphatic.svg",
+  pemf: "/images/treatment-pemf.svg",
+  muscle: "/images/treatment-muscle.svg",
+  contour: "/images/treatment-contour.svg",
+  fascia: "/images/treatment-fascia.svg",
+  pelvic: "/images/pelvic.png",
 };
 
 function TreatmentIcon({ type, compact = false }: { type: string; compact?: boolean }) {

@@ -19,7 +19,7 @@ const exactNameReplacements: Array<[string, string]> = [
 ];
 
 const evaluationCopy =
-  "I wanna help you figure out where you should start. Everyone doesn't need the same treatment, and I don't want you guessing. So, either schedule a time for a free consultation, or just answer these five questions so I can get to know you a little bit better and tell you what I think might work.";
+  "I wanna help you figure out where you should start. Everyone doesn't need the same treatment, and I don't want you guessing. Answer these five questions so I can get to know you a little bit better and tell you what I think might work.";
 
 function replaceExactTextNodes(element: HTMLElement, from: string, to: string) {
   const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
@@ -92,23 +92,6 @@ function restoreConsultationLinks() {
       anchor.textContent = "Book Your FREE Professional Consult";
     }
   });
-
-  const evaluationParagraph = Array.from(document.querySelectorAll("p")).find((paragraph) =>
-    paragraph.textContent?.includes("either schedule a time for a free consultation"),
-  );
-
-  const evaluationCopyContainer = evaluationParagraph?.parentElement;
-  if (evaluationCopyContainer && !document.getElementById("free-professional-consult-cta")) {
-    const bookingLink = document.createElement("a");
-    bookingLink.id = "free-professional-consult-cta";
-    bookingLink.href = consultationBookingUrl;
-    bookingLink.target = "_blank";
-    bookingLink.rel = "noopener noreferrer";
-    bookingLink.className =
-      "btn-secondary mt-2 inline-flex w-full items-center justify-center text-center sm:w-auto";
-    bookingLink.textContent = "Book Your FREE Professional Consult";
-    evaluationCopyContainer.appendChild(bookingLink);
-  }
 }
 
 function compactQuizChoices() {

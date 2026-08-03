@@ -18,7 +18,7 @@ const treatmentIconSources: Record<string, string> = {
   muscle: "/images/treatment-muscle.png",
   contour: "/images/treatment-contour.png",
   fascia: "/images/treatment-fascia.png",
-  pelvic: "/images/treatment-pelvic.svg",
+  pelvic: "/images/treatment-pelvic.png?v=20260803-2",
 };
 
 function TreatmentIcon({ type, compact = false }: { type: string; compact?: boolean }) {

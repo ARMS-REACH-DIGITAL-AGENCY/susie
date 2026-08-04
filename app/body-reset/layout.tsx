@@ -19,7 +19,7 @@ export default function BodyResetLayout({ children }: { children: React.ReactNod
     <>
       <Navbar />
       <EvaluationPageController />
-      <div className="body-reset-route [&>footer]:hidden">{children}</div>
+      <div className="body-reset-route [&>main]:!pt-0 [&>footer]:hidden">{children}</div>
       <EvaluationTrustSections />
       <Footer />
     </>

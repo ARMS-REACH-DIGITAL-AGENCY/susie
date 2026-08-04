@@ -2,25 +2,25 @@ const heroTreatmentImage = "/images/susie-treatment-hero.png";
 
 export default function Hero() {
   return (
-    <section className="relative pt-24 md:pt-32 pb-12 md:pb-24 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
+    <section className="relative pt-8 sm:pt-10 md:pt-32 pb-8 md:pb-24 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-gold/8 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-16 items-center">
           <div className="order-1">
-            <p className="section-label mb-4">Gilbert &amp; East Valley Arizona · Since 1995</p>
-            <h1 className="font-serif text-[39px] sm:text-5xl lg:text-6xl font-light leading-[1.02] text-[#2c1f14] mb-5">
+            <p className="section-label mb-3 md:mb-4">Gilbert &amp; East Valley Arizona · Since 1995</p>
+            <h1 className="font-serif text-[39px] sm:text-5xl lg:text-6xl font-light leading-[1.02] text-[#2c1f14] mb-4 md:mb-5">
               Feel puffy, tired, foggy, inflamed, heavy, or stuck?
             </h1>
-            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4 max-w-lg">
+            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-3 md:mb-4 max-w-lg">
               You don&rsquo;t have to settle for feeling this way. Let&rsquo;s help your body feel like itself again.
             </p>
-            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-5 md:mb-7 max-w-lg">
+            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4 md:mb-7 max-w-lg">
               Susie Sculpts offers private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.
             </p>
 
-            <div className="mb-5 flex items-center gap-4 md:hidden">
+            <div className="mb-4 flex items-center gap-4 md:hidden">
               <div className="relative w-24 h-20 rounded-md overflow-hidden shadow-md shrink-0 bg-white/70">
                 <img
                   src={heroTreatmentImage}
@@ -45,7 +45,7 @@ export default function Hero() {
               </a>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className="mt-5 md:mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
               <a
                 href="tel:+14804400909"
                 className="flex items-center gap-2 text-sm font-sans font-light text-muted hover:text-purple transition-colors"

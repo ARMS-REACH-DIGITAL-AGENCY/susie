@@ -13,9 +13,9 @@ const credentials = [
 
 export default function Trust() {
   return (
-    <section className="bg-cream pb-10 pt-8 md:pb-12 md:pt-10">
+    <section id="meet-susie" className="scroll-mt-[72px] bg-cream pb-10 pt-6 md:scroll-mt-[88px] md:pb-12 md:pt-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div id="meet-susie" className="grid scroll-mt-24 items-start gap-7 md:grid-cols-[0.76fr_1.24fr] md:gap-12">
+        <div className="grid items-start gap-7 md:grid-cols-[0.76fr_1.24fr] md:gap-12">
           <div className="md:order-1">
             <div className="mb-4 md:hidden">
               <p className="section-label mb-2">Helping Women Since 1995</p>

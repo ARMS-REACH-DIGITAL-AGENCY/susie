@@ -21,7 +21,7 @@ export default function Hero() {
             <p>Susie Sculpts offers private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.</p>
           </div>
 
-          <div className="mt-4 grid grid-cols-[minmax(0,1.05fr)_minmax(0,1.2fr)] items-start gap-3">
+          <div className="mt-4 grid grid-cols-[minmax(0,1.12fr)_minmax(0,1.08fr)] items-start gap-3">
             <div className="overflow-hidden rounded-md border border-purple/10 bg-white/85 shadow-[0_8px_22px_rgba(60,40,80,0.10)]">
               <div className="aspect-square w-full overflow-hidden bg-white/70">
                 <img
@@ -30,18 +30,18 @@ export default function Hero() {
                   className="h-full w-full object-cover object-center"
                 />
               </div>
-              <div className="px-2.5 py-2 text-left">
-                <p className="font-sans text-[12px] font-semibold leading-tight text-[#2c1f14]">Private help from Susie</p>
+              <div className="px-2 py-2 text-left">
+                <p className="whitespace-nowrap font-sans text-[11px] font-semibold leading-tight text-[#2c1f14]">Private help from Susie</p>
                 <p className="mt-0.5 font-sans text-[10px] font-light leading-snug text-muted">A personal, professional first step based on what your body needs.</p>
               </div>
             </div>
 
             <div className="flex min-h-full flex-col">
               <div className="flex flex-col gap-2.5">
-                <a href="#meet-susie" className="btn-primary flex min-h-[62px] items-center justify-center px-3 py-3 text-center">
+                <a href="#meet-susie" className="btn-primary flex min-h-[52px] items-center justify-center px-3 py-3 text-center">
                   Meet Susie
                 </a>
-                <a href="#treatments" className="btn-secondary flex min-h-[62px] items-center justify-center px-3 py-3 text-center">
+                <a href="#treatments" className="btn-secondary flex min-h-[52px] items-center justify-center px-3 py-3 text-center">
                   View Treatments
                 </a>
               </div>

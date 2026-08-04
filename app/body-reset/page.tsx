@@ -58,65 +58,35 @@ function ProductCard({ offer, product, featured = false }: { offer: Offer; produ
   const isSingle = product.count === 1;
   const lymphaticAdjustment = offer.key === "lymphatic" && product.count > 1 ? 50 : 0;
   const each = product.count > 1 ? (product.price - lymphaticAdjustment) / product.count : product.price;
-  const label = product.count === 6 ? "I WANT THE ULTIMATE YOU EXPERIENCE" : `I WANT ${product.count} ${offer.name.toUpperCase().replace(" SERIES", "")} ${isSingle ? "TREATMENT" : "TREATMENTS"}`;
-  return <div className={`flex flex-col rounded-[16px] border p-4 ${featured ? "border-purple/40 bg-purple/5 shadow-md" : "border-stone bg-white"}`}>
-    <p className="section-label mb-1">{product.count === 6 ? "Complete Experience" : isSingle ? "Single Treatment" : `${product.count}-Treatment Series`}</p>
-    <p className="font-serif text-4xl font-light text-purple">{money(product.price)}</p>
-    <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-muted">{product.duration ? (isSingle ? `${product.duration}-minute treatment` : `${money(each)} per ${product.duration}-minute treatment${lymphaticAdjustment ? " after removing the included $50 suit value" : ""}`) : "Six treatments scheduled over approximately one week"}</p>
-    {product.count === 6 && <p className="mt-3 rounded-sm bg-gold/10 p-3 text-xs font-light leading-relaxed text-muted"><strong className="text-[#2c1f14]">Scheduling note:</strong> This package is not intended to be completed in one day. Susie generally recommends two treatments per day, every other day—such as Monday, Wednesday, and Friday—over approximately one week.</p>}
-    <a href={product.href} className={`${featured ? "btn-primary" : "btn-secondary"} mt-4 w-full px-3 py-3 text-center text-[10px]`}>{label}</a>
-  </div>;
+  return <div className={`rounded-[16px] border p-3 ${featured ? "border-purple/30 bg-purple/5 shadow-sm" : "border-stone bg-white"}`}><p className="section-label mb-2">{isSingle ? "Single Treatment" : `${product.count}-Treatment Series`}</p><div className="rounded-[12px] border border-purple/10 bg-white/80 p-3 text-center"><p className="font-serif text-3xl text-purple">{money(product.price)}</p><p className="mt-1 text-[10px] uppercase tracking-wide text-muted">{isSingle ? `${product.duration}-minute treatment` : `${money(each)} per ${product.duration}-minute treatment`}</p></div><a href={product.href} className={featured ? "btn-primary mt-3 block w-full text-center" : "btn-secondary mt-3 block w-full text-center"}>{isSingle ? `I want 1 ${offer.name.replace("Series", "Treatment")}` : `I want ${product.count} ${offer.name.replace("Series", "Treatments")}`}</a></div>;
 }
 
 function FamilySection({ offer, recommended = false }: { offer: Offer; recommended?: boolean }) {
-  return <section className={`rounded-[22px] border p-5 md:p-7 ${recommended ? "border-purple/25 bg-white" : "border-stone bg-stone/25"}`}>
-    <div className="flex items-start gap-4"><div className="relative h-16 w-16 shrink-0"><Image src={offer.icon} alt="" fill className="object-contain" /></div><div><p className="section-label mb-1">{recommended ? "Susie’s Recommended Series" : "Treatment Series"}</p><h2 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-4xl">{offer.name}</h2></div></div>
-    <p className="mt-3 text-sm font-light leading-relaxed text-muted md:text-base">{offer.description}</p>
-    <div className="mt-4 rounded-[14px] border border-purple/15 bg-white/75 p-4"><p className="section-label mb-2">What&apos;s Included</p><ul className="grid gap-1.5 text-sm font-light text-muted md:grid-cols-2">{offer.included.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">✦</span><span>{item}</span></li>)}</ul></div>
-    <div className={`mt-4 grid gap-3 ${offer.products.length === 1 ? "" : "md:grid-cols-2"}`}>{offer.products.map((product, index) => <ProductCard key={`${offer.key}-${product.count}`} offer={offer} product={product} featured={recommended && index === 0} />)}</div>
-  </section>;
+  return <section className={`rounded-[22px] border p-5 md:p-6 ${recommended ? "border-purple/25 bg-white" : "border-stone bg-stone/25"}`}><div className="mb-4 flex items-start gap-3"><div className="relative mt-1 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-white"><Image src={offer.icon} alt="" fill className="object-contain" /></div><div><p className="section-label mb-1">{recommended ? "Susie’s Recommended Series" : "Treatment Series"}</p><h3 className="font-serif text-3xl font-light text-[#2c1f14]">{offer.name}</h3></div></div><p className="mb-4 text-sm font-light text-muted">{offer.description}</p><div className="mb-4 rounded-[16px] border border-purple/10 bg-white/80 p-4"><p className="section-label mb-2">What’s Included</p><ul className="grid gap-2 text-sm font-light text-muted sm:grid-cols-2">{offer.included.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">✦</span><span>{item}</span></li>)}</ul></div><div className={`grid gap-3 ${offer.products.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>{offer.products.map((product, index) => <ProductCard key={`${offer.key}-${product.count}`} offer={offer} product={product} featured={recommended && index === 0} />)}</div></section>;
 }
 
 function FlipCard({ offer }: { offer: Offer }) {
   const [flipped, setFlipped] = useState(false);
-  return <div className="min-h-[520px] [perspective:1400px]"><div className={`relative min-h-[520px] transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
-    <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col items-center justify-center rounded-[22px] border border-purple/15 bg-white p-6 text-center shadow-md [backface-visibility:hidden]"><div className="relative h-52 w-52"><Image src={offer.icon} alt={offer.name} fill className="object-contain" /></div><p className="section-label mb-2 mt-3">Treatment Series</p><h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3><p className="mt-4 text-xs font-medium uppercase tracking-widest text-purple">Tap to Learn More</p></button>
-    <div className="absolute inset-0 overflow-y-auto rounded-[22px] bg-cream p-2 [backface-visibility:hidden] [transform:rotateY(180deg)]"><button type="button" onClick={() => setFlipped(false)} className="sticky top-1 z-10 ml-auto flex h-9 w-9 items-center justify-center rounded-full border border-purple/20 bg-white text-purple">×</button><FamilySection offer={offer} /></div>
-  </div></div>;
+  return <div className="min-h-[760px] [perspective:1400px]"><div className={`relative min-h-[760px] transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}><button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 overflow-hidden rounded-[24px] border border-purple/15 bg-white text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden]"><div className="relative h-[600px]"><Image src={offer.icon} alt={offer.name} fill className="object-contain p-16" /></div><div className="p-5 text-center"><p className="section-label mb-2">Treatment Series</p><h3 className="font-serif text-3xl font-light text-[#2c1f14]">{offer.name}</h3><p className="mt-3 text-xs uppercase tracking-[0.14em] text-purple">Tap to learn more</p></div></button><div className="absolute inset-0 overflow-y-auto rounded-[24px] bg-cream p-1 [backface-visibility:hidden] [transform:rotateY(180deg)]"><button type="button" onClick={() => setFlipped(false)} className="sticky top-2 z-10 ml-auto mr-2 mt-2 flex h-9 w-9 items-center justify-center rounded-full border border-purple/20 bg-white text-purple">×</button><FamilySection offer={offer} /></div></div></div>;
 }
 
 export default function BodyResetPage() {
   const [hydrated, setHydrated] = useState(false);
   const [leadCaptured, setLeadCaptured] = useState(false);
   const [step, setStep] = useState(1);
-  const [status, setStatus] = useState<"idle" | "saving" | "results" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "saving" | "error" | "results">("idle");
   const [fields, setFields] = useState<Fields>(emptyFields);
+
+  useEffect(() => { try { const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as SavedState | null; if (saved?.version === 2) { setLeadCaptured(saved.leadCaptured); setStep(saved.step); setStatus(saved.status === "results" ? "results" : "idle"); setFields(saved.fields); } } finally { setHydrated(true); } }, []);
+  useEffect(() => { if (!hydrated) return; const saved: SavedState = { version: 2, leadCaptured, step, status: status === "results" ? "results" : "quiz", fields }; localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); }, [hydrated, leadCaptured, step, status, fields]);
+
   const result = useMemo(() => calculate(fields), [fields]);
-
-  useEffect(() => {
-    try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) { const saved = JSON.parse(raw) as SavedState; if (saved.version === 2) { setLeadCaptured(saved.leadCaptured); setStep(saved.step); setFields(saved.fields); if (saved.status === "results") setStatus("results"); } } } catch {}
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    const saved: SavedState = { version: 2, leadCaptured, step, status: status === "results" ? "results" : "quiz", fields };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-  }, [hydrated, leadCaptured, step, status, fields]);
-
-  useEffect(() => {
-    if (status === "results") { document.body.dataset.evaluationComplete = "true"; window.dispatchEvent(new Event("evaluation-complete")); }
-    else { delete document.body.dataset.evaluationComplete; window.dispatchEvent(new Event("evaluation-complete")); }
-    return () => { delete document.body.dataset.evaluationComplete; };
-  }, [status]);
-
-  const set = <K extends keyof Fields>(key: K, value: Fields[K]) => setFields((current) => ({ ...current, [key]: value }));
-  const toggle = (key: "symptoms" | "tried" | "goals", value: string) => setFields((current) => ({ ...current, [key]: current[key].includes(value) ? current[key].filter((item) => item !== value) : [...current[key], value] }));
   const canContinue = step === 1 ? fields.symptoms.length > 0 : step === 2 ? fields.tried.length > 0 : step === 3 ? fields.goals.length > 0 : step === 4 ? Boolean(fields.priority) : Boolean(fields.urgency);
+  function set<K extends keyof Fields>(key: K, value: Fields[K]) { setFields((current) => ({ ...current, [key]: value })); }
+  function toggle(key: "symptoms" | "tried" | "goals", value: string) { setFields((current) => ({ ...current, [key]: current[key].includes(value) ? current[key].filter((item) => item !== value) : [...current[key], value] })); }
 
   async function submit(stage: string) {
-    const complete = stage === "Quiz Completed";
-    const response = await fetch("/api/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...fields, firstName: fields.firstName.trim().split(/\s+/)[0], symptom: fields.symptoms.join(", "), interest: fields.symptoms.join(", "), triedText: fields.tried.join(", "), goal: fields.goals.join(", "), timeline: fields.urgency, preferredNextStep: "Book Your FREE Professional Consult", recommendedOffer: complete ? result.offer.name : "Pending Susie Evaluation", recommendationKey: complete ? result.key : "pending", recommendationReasons: complete ? result.reasons.join(" | ") : "Pending quiz answers", recommendationScoreSummary: complete ? result.summary : "Pending quiz answers", quizPath: "Official Susie Sculpts Series Evaluation", source: "Susie Sculpts Quiz Funnel", page: "/body-reset", leadStage: stage }) });
+    const response = await fetch("/api/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ firstName: fields.firstName, email: fields.email, phone: fields.phone, consent: fields.consent, symptoms: fields.symptoms.join(", "), previouslyTried: fields.tried.join(", "), goals: fields.goals.join(", "), priority: fields.priority, urgency: fields.urgency, recommendedTreatment: result.offer.name, recommendationReasons: result.reasons.join(" | "), scoreSummary: result.summary, source: "website-evaluation", page: "/body-reset", stage }) });
     if (!response.ok) throw new Error("submit_failed");
   }
 
@@ -152,9 +122,28 @@ export default function BodyResetPage() {
   }
 
   return <><main className="min-h-screen bg-cream pb-10 pt-20 md:pt-24">
-    {!leadCaptured ? <section className="mx-auto max-w-6xl px-4 sm:px-6"><div className="grid overflow-hidden rounded-[24px] border border-purple/15 bg-white shadow-[0_12px_36px_rgba(60,40,80,0.09)] lg:grid-cols-[1.05fr_.95fr]">
-      <div className="relative flex min-h-[270px] items-end overflow-hidden p-5 md:min-h-[430px] md:p-8"><Image src="/images/susie-treatment-hero.png" alt="Susie providing professional wellness care" fill priority className="object-cover object-center opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-cream via-cream/75 to-cream/20" /><div className="relative"><p className="section-label mb-2">See What Susie Says</p><h1 className="font-serif text-[35px] font-light leading-[1.02] text-[#2c1f14] md:text-5xl">Feel puffy, tired, foggy, inflamed, heavy, stuck, or unlike yourself?</h1><p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">Enter your information, answer five quick questions, and receive Susie’s professional starting-point recommendation.</p><p className="mt-2 font-medium text-[#2c1f14]">Free. Private. No pressure.</p></div></div>
-      <form onSubmit={captureLead} className="flex flex-col justify-center p-5 md:p-8"><p className="section-label mb-2">Free Professional Evaluation</p><h2 className="mb-4 font-serif text-3xl font-light text-[#2c1f14]">Start here</h2><div className="space-y-3"><input className="input-field" placeholder="First name*" value={fields.firstName} onChange={(e) => set("firstName", e.target.value)} required /><input className="input-field" type="email" placeholder="Email address*" value={fields.email} onChange={(e) => set("email", e.target.value)} required /><input className="input-field" type="tel" placeholder="Mobile number" value={fields.phone} onChange={(e) => set("phone", e.target.value)} /><label className="flex items-start gap-2 text-[11px] font-light leading-relaxed text-muted"><input type="checkbox" className="mt-0.5 accent-purple" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} required />I agree to receive follow-up messages about my evaluation and recommendation.</label><button type="submit" className="btn-primary w-full py-3" disabled={status === "saving"}>{status === "saving" ? "Saving..." : "Receive My FREE Evaluation"}</button>{status === "error" && <p className="text-center text-xs text-red-500">Something went wrong. Please try again or call Susie.</p>}</div></form>
+    {!leadCaptured ? <section className="mx-auto max-w-6xl px-0 sm:px-6"><div className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#2c1f14] sm:rounded-[24px] sm:border sm:border-purple/15 sm:shadow-[0_12px_36px_rgba(60,40,80,0.12)]">
+      <Image src="/images/symptom-yourself.png" alt="Woman looking thoughtfully in the mirror" fill priority className="object-cover object-center" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(30,20,16,0.18)_0%,rgba(30,20,16,0.34)_38%,rgba(30,20,16,0.88)_100%)]" />
+      <div className="relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-end px-5 pb-5 pt-7 sm:px-7 sm:pb-7 lg:grid lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:gap-10 lg:px-10 lg:pb-10">
+        <div className="text-white">
+          <p className="mb-3 inline-flex rounded-full border border-white/30 bg-black/20 px-3 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] backdrop-blur-sm">See What Susie Says</p>
+          <h1 className="max-w-2xl font-serif text-[38px] font-light leading-[0.98] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] sm:text-5xl lg:text-6xl">Feel puffy, tired, foggy, inflamed, heavy, stuck, or unlike yourself?</h1>
+          <p className="mt-3 max-w-xl font-sans text-[14px] font-light leading-relaxed text-white/90 sm:text-base">Enter your information, answer five quick questions, and receive Susie’s professional starting-point recommendation.</p>
+          <p className="mt-2 font-sans text-sm font-medium text-white">Free. Private. No pressure.</p>
+        </div>
+
+        <form onSubmit={captureLead} className="mt-5 rounded-[20px] border border-white/25 bg-white/94 p-4 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur-sm sm:p-5 lg:mt-0">
+          <div className="space-y-2.5">
+            <input className="input-field bg-white/95" placeholder="First name*" value={fields.firstName} onChange={(e) => set("firstName", e.target.value)} required />
+            <input className="input-field bg-white/95" type="email" placeholder="Email address*" value={fields.email} onChange={(e) => set("email", e.target.value)} required />
+            <input className="input-field bg-white/95" type="tel" placeholder="Mobile number" value={fields.phone} onChange={(e) => set("phone", e.target.value)} />
+            <label className="flex items-start gap-2 font-sans text-[10px] font-light leading-relaxed text-muted sm:text-[11px]"><input type="checkbox" className="mt-0.5 accent-purple" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} required />I agree to receive follow-up messages about my evaluation and recommendation.</label>
+            <button type="submit" className="btn-primary w-full py-3" disabled={status === "saving"}>{status === "saving" ? "Saving..." : "Receive My FREE Evaluation"}</button>
+            {status === "error" && <p className="text-center text-xs text-red-500">Something went wrong. Please try again or call Susie.</p>}
+          </div>
+        </form>
+      </div>
     </div></section> : <section className="mx-auto max-w-5xl px-3 sm:px-6"><div className="rounded-[20px] border border-purple/15 bg-white p-4 shadow-[0_10px_30px_rgba(60,40,80,0.08)] md:p-6">
       <div className="mb-4"><div className="mb-2 flex justify-between"><p className="section-label">Ask Susie Evaluation</p><p className="section-label">{step} of 5</p></div><div className="h-1.5 overflow-hidden rounded-full bg-stone/70"><div className="h-full bg-purple transition-all" style={{ width: `${step * 20}%` }} /></div></div>
       {step === 1 && <div><h2 className="font-serif text-2xl font-light leading-tight text-[#2c1f14] md:text-3xl">Which of these have you been feeling lately?</h2><p className="mb-3 mt-1 text-xs font-light text-muted">Select all that apply.</p><div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">{symptoms.map(([label, image]) => { const selected = fields.symptoms.includes(label); return <button key={label} type="button" onClick={() => toggle("symptoms", label)} className={`relative flex min-h-[68px] items-center gap-2 overflow-hidden rounded-[12px] border p-2 text-left md:block md:min-h-0 md:p-0 ${selected ? "border-2 border-purple bg-purple/5" : "border-purple/10 bg-stone/30"}`}><div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-[8px] md:h-auto md:w-full md:rounded-none md:aspect-[4/3]"><Image src={image} alt={label} fill className="object-cover object-top" /></div><p className="pr-4 text-[11px] font-medium leading-tight text-[#6A5A6D] md:p-2 md:text-sm">{label}</p>{selected && <span className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-purple text-xs text-white">✓</span>}</button>; })}</div></div>}

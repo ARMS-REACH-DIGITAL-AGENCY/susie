@@ -29,13 +29,16 @@ function TreatmentIcon({ type, compact = false }: { type: string; compact?: bool
 function TreatmentDetails({ treatment }: { treatment: (typeof treatments)[number] }) {
   return (
     <div className="flex h-full flex-col">
-      <div className="mb-4 flex items-start gap-3">
-        <TreatmentIcon type={treatment.icon} compact />
-        <div><p className="section-label mb-1">{treatment.tag}</p><h3 className="font-serif text-2xl font-light leading-tight text-[#2c1f14]">{treatment.title}</h3></div>
+      <div className="mb-2 flex items-start gap-3 md:mb-4">
+        <span className="hidden md:block"><TreatmentIcon type={treatment.icon} compact /></span>
+        <div className="min-w-0 flex-1">
+          <p className="section-label mb-0.5 md:mb-1">{treatment.tag}</p>
+          <h3 className="whitespace-nowrap font-serif text-[clamp(1.05rem,4.7vw,1.45rem)] font-light leading-tight tracking-[-0.02em] text-[#2c1f14] md:whitespace-normal md:text-2xl md:tracking-normal">{treatment.title}</h3>
+        </div>
       </div>
-      <p className="mb-4 font-sans text-sm font-light leading-relaxed text-muted">{treatment.description}</p>
-      <ul className="mb-5 space-y-1.5">{treatment.bullets.map((bullet) => <li key={bullet} className="flex items-start gap-2 font-sans text-xs font-light text-muted"><span className="text-purple">✦</span><span>{bullet}</span></li>)}</ul>
-      <Link href="/body-reset" className="btn-primary mt-auto w-full text-center" onClick={(event) => event.stopPropagation()}>See If This Is Right For You</Link>
+      <p className="mb-2.5 font-sans text-[13px] font-light leading-[1.45] text-muted md:mb-4 md:text-sm md:leading-relaxed">{treatment.description}</p>
+      <ul className="mb-3 space-y-1 md:mb-5 md:space-y-1.5">{treatment.bullets.map((bullet) => <li key={bullet} className="flex items-start gap-2 font-sans text-[11px] font-light leading-snug text-muted md:text-xs"><span className="text-purple">✦</span><span>{bullet}</span></li>)}</ul>
+      <Link href="/body-reset" className="btn-primary mt-auto w-full py-3 text-center md:py-4" onClick={(event) => event.stopPropagation()}>See If This Is Right For You</Link>
     </div>
   );
 }
@@ -54,7 +57,7 @@ export default function Services() {
           <div className="grid grid-cols-6 gap-1 rounded-t-[18px] border border-purple/10 bg-cream/95 p-2">
             {treatments.map((treatment, index) => <button key={treatment.title} type="button" onClick={() => setSelected(index)} className={`flex min-h-[82px] flex-col items-center justify-center rounded-[10px] border px-0.5 py-1.5 ${selected === index ? "border-purple bg-purple/10" : "border-stone/80 bg-white/75"}`}><TreatmentIcon type={treatment.icon} compact /><span className="mt-1 text-[7px] font-medium uppercase text-purple">{treatment.tag}</span></button>)}
           </div>
-          <div className="rounded-b-[18px] border border-t-0 border-purple/15 bg-white p-4 shadow-[0_10px_28px_rgba(60,40,80,0.08)]"><TreatmentDetails treatment={treatments[selected]} /></div>
+          <div className="rounded-b-[18px] border border-t-0 border-purple/15 bg-white p-3 shadow-[0_10px_28px_rgba(60,40,80,0.08)]"><TreatmentDetails treatment={treatments[selected]} /></div>
         </div>
 
         <div className="hidden gap-5 md:grid md:grid-cols-2 xl:grid-cols-3">

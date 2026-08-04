@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import EvaluationPageController from "@/components/EvaluationPageController";
 import EvaluationTrustSections from "@/components/EvaluationTrustSections";
 
@@ -18,10 +19,9 @@ export default function BodyResetLayout({ children }: { children: React.ReactNod
     <>
       <Navbar />
       <EvaluationPageController />
-      <div className="body-reset-route">
-        {children}
-        <EvaluationTrustSections />
-      </div>
+      <div className="body-reset-route">{children}</div>
+      <EvaluationTrustSections />
+      <Footer />
     </>
   );
 }

@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 
 export default function EvaluationPageController() {
+  const [showReset, setShowReset] = useState(false);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("reset") === "1") {
@@ -15,6 +17,19 @@ export default function EvaluationPageController() {
       window.location.reload();
       return;
     }
+
+    const readState = () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as { status?: string } | null;
+        setShowReset(saved?.status === "results");
+      } catch {
+        setShowReset(false);
+      }
+    };
+
+    readState();
+    const observer = new MutationObserver(readState);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     const style = document.createElement("style");
     style.id = "body-reset-desktop-hero-fixes";
@@ -43,8 +58,26 @@ export default function EvaluationPageController() {
     `;
     document.head.appendChild(style);
 
-    return () => style.remove();
+    return () => {
+      observer.disconnect();
+      style.remove();
+    };
   }, []);
 
-  return null;
+  function resetEvaluation() {
+    localStorage.removeItem(STORAGE_KEY);
+    window.location.assign("/body-reset");
+  }
+
+  if (!showReset) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={resetEvaluation}
+      className="fixed bottom-24 right-4 z-[70] rounded-full border border-purple/20 bg-white px-4 py-2 font-sans text-xs font-semibold uppercase tracking-[0.08em] text-purple shadow-lg transition hover:bg-purple hover:text-white"
+    >
+      Start a New Evaluation
+    </button>
+  );
 }

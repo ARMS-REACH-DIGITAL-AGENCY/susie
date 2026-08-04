@@ -2,71 +2,45 @@ const heroTreatmentImage = "/images/susie-treatment-hero.png";
 
 export default function Hero() {
   return (
-    <section className="relative pt-8 sm:pt-10 md:pt-32 pb-8 md:pb-24 overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gold/8 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-cream via-stone/40 to-cream pb-8 pt-20 md:pb-16 md:pt-24">
+      <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-purple/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-gold/8 blur-3xl pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-6 md:gap-16 items-center">
-          <div className="order-1">
-            <p className="section-label mb-3 md:mb-4">Gilbert &amp; East Valley Arizona · Since 1995</p>
-            <h1 className="font-serif text-[39px] sm:text-5xl lg:text-6xl font-light leading-[1.02] text-[#2c1f14] mb-4 md:mb-5">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid items-center gap-6 md:grid-cols-2 md:gap-12">
+          <div className="text-center md:text-left">
+            <p className="section-label mb-3">Gilbert &amp; East Valley Arizona · Since 1995</p>
+            <h1 className="mb-4 font-serif text-[34px] font-light leading-[1.02] text-[#2c1f14] sm:text-5xl lg:text-6xl">
               Feel puffy, tired, foggy, inflamed, heavy, or stuck?
             </h1>
-            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-3 md:mb-4 max-w-lg">
-              You don&rsquo;t have to settle for feeling this way. Let&rsquo;s help your body feel like itself again.
-            </p>
-            <p className="font-sans font-light text-muted text-base md:text-lg leading-relaxed mb-4 md:mb-7 max-w-lg">
-              Susie Sculpts offers private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.
+            <p className="mx-auto mb-4 max-w-lg font-sans text-[15px] font-light leading-relaxed text-muted md:mx-0 md:text-lg">
+              You do not have to settle for feeling this way. Susie offers private body reset, lymphatic, PEMF, and sculpting support to help you feel more like yourself again.
             </p>
 
-            <div className="mb-4 flex items-center gap-4 md:hidden">
-              <div className="relative w-24 h-20 rounded-md overflow-hidden shadow-md shrink-0 bg-white/70">
-                <img
-                  src={heroTreatmentImage}
-                  alt="Susie providing a Susie Sculpts treatment"
-                  className="w-full h-full object-cover object-center"
-                />
+            <div className="mx-auto mb-4 flex max-w-md items-center gap-3 text-left md:hidden">
+              <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-md bg-white/70 shadow-md">
+                <img src={heroTreatmentImage} alt="Susie providing a treatment" className="h-full w-full object-cover object-center" />
               </div>
               <div>
-                <p className="font-sans font-medium text-sm text-[#2c1f14]">Private help from Susie</p>
-                <p className="font-sans font-light text-xs text-muted leading-relaxed">
-                  Body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.
-                </p>
+                <p className="font-sans text-sm font-medium text-[#2c1f14]">Private help from Susie</p>
+                <p className="font-sans text-xs font-light leading-snug text-muted">A personal, professional first step based on what your body needs.</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#meet-susie" className="btn-primary">
-                Meet Susie
-              </a>
-              <a href="#treatments" className="btn-secondary">
-                View Treatments
-              </a>
+            <div className="flex flex-row justify-center gap-3 md:justify-start">
+              <a href="#meet-susie" className="btn-primary flex-1 px-4 py-3 sm:flex-none">Meet Susie</a>
+              <a href="#treatments" className="btn-secondary flex-1 px-4 py-3 sm:flex-none">View Treatments</a>
             </div>
 
-            <div className="mt-5 md:mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <a
-                href="tel:+14804400909"
-                className="flex items-center gap-2 text-sm font-sans font-light text-muted hover:text-purple transition-colors"
-              >
-                <span className="text-purple">📞</span>
-                <span>(480) 440-0909</span>
-              </a>
-              <span className="hidden sm:inline text-stone">·</span>
-              <p className="text-xs text-muted/60 font-sans font-light tracking-wide">
-                Gilbert · Chandler · Queen Creek · Mesa
-              </p>
+            <div className="mt-4 flex flex-col items-center gap-1 md:items-start">
+              <a href="tel:+14804400909" className="text-sm font-sans font-light text-muted transition-colors hover:text-purple">(480) 440-0909</a>
+              <p className="text-xs font-sans font-light tracking-wide text-muted/60">Gilbert · Chandler · Queen Creek · Mesa</p>
             </div>
           </div>
 
-          <div className="order-2 hidden md:flex justify-center md:justify-end">
-            <div className="relative w-full max-w-md h-[500px] rounded-sm overflow-hidden shadow-2xl bg-white/70">
-              <img
-                src={heroTreatmentImage}
-                alt="Susie providing a Susie Sculpts treatment in her wellness studio"
-                className="w-full h-full object-cover object-center"
-              />
+          <div className="hidden justify-end md:flex">
+            <div className="relative h-[460px] w-full max-w-md overflow-hidden rounded-sm bg-white/70 shadow-2xl">
+              <img src={heroTreatmentImage} alt="Susie providing a treatment in her wellness studio" className="h-full w-full object-cover object-center" />
             </div>
           </div>
         </div>

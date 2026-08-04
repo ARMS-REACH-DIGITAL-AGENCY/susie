@@ -73,6 +73,12 @@ export default function EvaluationPageController() {
     const style = document.createElement("style");
     style.id = "body-reset-responsive-hero";
     style.textContent = `
+      @media (max-width: 1023px) {
+        .body-reset-route main > section:first-child > div > div > div {
+          padding-top: 7.5rem !important;
+        }
+      }
+
       @media (min-width: 1024px) and (orientation: landscape) {
         .body-reset-route main > section:first-child {
           padding-left: 1.5rem !important;

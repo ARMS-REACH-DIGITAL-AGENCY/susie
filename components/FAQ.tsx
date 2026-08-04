@@ -13,7 +13,7 @@ const faqs = [
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <section id="faq" className="scroll-mt-24 bg-white/50 py-12 md:py-16">
+    <section id="faq" className="scroll-mt-[72px] bg-white/50 py-10 md:scroll-mt-[88px] md:py-12">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="mb-7 text-center"><p className="section-label mb-2">Common Questions</p><h2 className="section-heading">Frequently Asked Questions</h2></div>
         <div className="space-y-2.5">

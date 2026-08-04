@@ -73,56 +73,33 @@ export default function EvaluationPageController() {
     const style = document.createElement("style");
     style.id = "body-reset-responsive-hero";
     style.textContent = `
-      @media (min-width: 768px) and (max-width: 899px) {
-        .body-reset-route main > section:first-child > div > div {
-          min-height: 760px !important;
-          height: auto !important;
-        }
-        .body-reset-route main > section:first-child > div > div > div {
-          min-height: 760px !important;
-          justify-content: center !important;
-          padding: 2.5rem 2rem !important;
-        }
-        .body-reset-route main > section:first-child h1 {
-          max-width: 680px !important;
-          font-size: clamp(3rem, 6vw, 4.25rem) !important;
-          line-height: 0.98 !important;
-        }
-        .body-reset-route main > section:first-child form {
-          width: 100% !important;
-          max-width: 560px !important;
-          margin-top: 1.5rem !important;
-        }
-      }
-
-      @media (min-width: 900px) {
+      @media (min-width: 1024px) and (orientation: landscape) {
         .body-reset-route main > section:first-child {
           padding-left: 1.5rem !important;
           padding-right: 1.5rem !important;
         }
         .body-reset-route main > section:first-child > div > div {
           min-height: 0 !important;
-          height: clamp(660px, calc(100vh - 80px), 820px) !important;
-          max-height: 820px !important;
+          height: clamp(620px, calc(100vh - 80px), 760px) !important;
+          max-height: 760px !important;
         }
         .body-reset-route main > section:first-child > div > div > div {
           display: grid !important;
-          grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr) !important;
+          grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr) !important;
           min-height: 100% !important;
           height: 100% !important;
           align-items: center !important;
-          justify-content: initial !important;
-          gap: clamp(2rem, 4vw, 4.5rem) !important;
-          padding: clamp(2rem, 4vw, 4rem) !important;
+          gap: clamp(2rem, 4vw, 4rem) !important;
+          padding: clamp(2rem, 3.5vw, 3.5rem) !important;
         }
         .body-reset-route main > section:first-child h1 {
-          max-width: 760px !important;
-          font-size: clamp(3.35rem, 5vw, 5.4rem) !important;
-          line-height: 0.94 !important;
+          max-width: 720px !important;
+          font-size: clamp(3.25rem, 4.7vw, 5.1rem) !important;
+          line-height: 0.95 !important;
         }
         .body-reset-route main > section:first-child form {
           width: 100% !important;
-          max-width: 480px !important;
+          max-width: 470px !important;
           margin-top: 0 !important;
           justify-self: end !important;
         }

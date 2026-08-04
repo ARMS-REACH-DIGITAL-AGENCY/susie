@@ -22,6 +22,7 @@ export default function Navbar() {
 
   const closeMenu = () => setMenuOpen(false);
   const meetSusieHref = isEvaluationPage ? "#meet-susie" : "/#meet-susie";
+  const reviewsHref = isEvaluationPage ? "#testimonials" : "/#testimonials";
   const faqHref = isEvaluationPage ? "#faq" : "/#faq";
 
   return (
@@ -41,44 +42,16 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2 lg:gap-5">
             <nav className="hidden lg:flex items-center gap-4 font-sans text-[10px] font-medium tracking-[0.13em] uppercase text-muted">
-              <a href={meetSusieHref} className="hover:text-purple transition-colors whitespace-nowrap">
-                Meet Susie
-              </a>
-              <a href="/#treatments" className="hover:text-purple transition-colors whitespace-nowrap">
-                Treatments
-              </a>
-              <a href="/#testimonials" className="hover:text-purple transition-colors whitespace-nowrap">
-                Reviews
-              </a>
-              <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">
-                FAQ
-              </a>
-              <a
-                href={consultationBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-purple transition-colors whitespace-nowrap"
-              >
-                Book Your Free Professional Consult
-              </a>
-              <Link
-                href="/body-reset"
-                className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap"
-              >
-                See What Susie Says
-              </Link>
+              <a href={meetSusieHref} className="hover:text-purple transition-colors whitespace-nowrap">Meet Susie</a>
+              <a href="/#treatments" className="hover:text-purple transition-colors whitespace-nowrap">Treatments</a>
+              <a href={reviewsHref} className="hover:text-purple transition-colors whitespace-nowrap">Reviews</a>
+              <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">FAQ</a>
+              <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" className="hover:text-purple transition-colors whitespace-nowrap">Book Your Free Professional Consult</a>
+              <Link href="/body-reset" className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap">See What Susie Says</Link>
             </nav>
 
-            <button
-              type="button"
-              onClick={() => setMenuOpen(true)}
-              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple/20 bg-white/80 text-purple shadow-sm"
-              aria-label="Open navigation menu"
-              aria-expanded={menuOpen}
-            >
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
+            <button type="button" onClick={() => setMenuOpen(true)} className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple/20 bg-white/80 text-purple shadow-sm" aria-label="Open navigation menu" aria-expanded={menuOpen}>
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
             </button>
           </div>
         </div>
@@ -86,69 +59,26 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="fixed inset-0 z-[70] lg:hidden">
-          <button
-            type="button"
-            className="absolute inset-0 bg-[#2c1f14]/35 backdrop-blur-[2px]"
-            onClick={closeMenu}
-            aria-label="Close navigation menu"
-          />
+          <button type="button" className="absolute inset-0 bg-[#2c1f14]/35 backdrop-blur-[2px]" onClick={closeMenu} aria-label="Close navigation menu" />
           <aside className="absolute right-0 top-0 h-full w-[84%] max-w-sm bg-cream shadow-2xl border-l border-purple/15 px-6 py-5 overflow-y-auto">
             <div className="flex items-center justify-between mb-8">
               <Image src="/images/logo.png" alt="Susie Sculpts" width={155} height={38} className="h-9 w-auto" />
-              <button
-                type="button"
-                onClick={closeMenu}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple/20 bg-white/80 text-purple"
-                aria-label="Close navigation menu"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
+              <button type="button" onClick={closeMenu} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple/20 bg-white/80 text-purple" aria-label="Close navigation menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
               </button>
             </div>
 
             <nav className="flex flex-col font-sans text-sm font-medium tracking-[0.14em] uppercase text-[#2c1f14]">
-              <Link href="/" onClick={closeMenu} className="border-b border-stone py-4">
-                Home
-              </Link>
-              <a href={meetSusieHref} onClick={closeMenu} className="border-b border-stone py-4">
-                Meet Susie
-              </a>
-              <a href="/#treatments" onClick={closeMenu} className="border-b border-stone py-4">
-                Treatments
-              </a>
-              <a href="/#testimonials" onClick={closeMenu} className="border-b border-stone py-4">
-                Reviews
-              </a>
-              <a href={faqHref} onClick={closeMenu} className="border-b border-stone py-4">
-                FAQ
-              </a>
+              <Link href="/" onClick={closeMenu} className="border-b border-stone py-4">Home</Link>
+              <a href={meetSusieHref} onClick={closeMenu} className="border-b border-stone py-4">Meet Susie</a>
+              <a href="/#treatments" onClick={closeMenu} className="border-b border-stone py-4">Treatments</a>
+              <a href={reviewsHref} onClick={closeMenu} className="border-b border-stone py-4">Reviews</a>
+              <a href={faqHref} onClick={closeMenu} className="border-b border-stone py-4">FAQ</a>
             </nav>
 
-            <Link
-              href="/body-reset"
-              onClick={closeMenu}
-              className="mt-7 flex items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]"
-            >
-              See What Susie Says
-            </Link>
-
-            <a
-              href="tel:+14804400909"
-              onClick={closeMenu}
-              className="mt-3 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple"
-            >
-              Call or Text Susie
-            </a>
-            <a
-              href={consultationBookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={closeMenu}
-              className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 text-center font-sans text-xs font-medium tracking-[0.12em] uppercase text-white"
-            >
-              Book Your Free Professional Consult
-            </a>
+            <Link href="/body-reset" onClick={closeMenu} className="mt-7 flex items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]">See What Susie Says</Link>
+            <a href="tel:+14804400909" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple">Call or Text Susie</a>
+            <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 text-center font-sans text-xs font-medium tracking-[0.12em] uppercase text-white">Book Your Free Professional Consult</a>
           </aside>
         </div>
       )}

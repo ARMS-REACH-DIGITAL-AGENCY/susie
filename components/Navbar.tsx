@@ -21,7 +21,8 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
-  const anchorPrefix = isEvaluationPage ? "/" : "";
+  const meetSusieHref = isEvaluationPage ? "#meet-susie" : "/#meet-susie";
+  const faqHref = isEvaluationPage ? "#faq" : "/#faq";
 
   return (
     <>
@@ -40,16 +41,16 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2 lg:gap-5">
             <nav className="hidden lg:flex items-center gap-4 font-sans text-[10px] font-medium tracking-[0.13em] uppercase text-muted">
-              <a href={`${anchorPrefix}#meet-susie`} className="hover:text-purple transition-colors whitespace-nowrap">
+              <a href={meetSusieHref} className="hover:text-purple transition-colors whitespace-nowrap">
                 Meet Susie
               </a>
-              <a href={`${anchorPrefix}#treatments`} className="hover:text-purple transition-colors whitespace-nowrap">
+              <a href="/#treatments" className="hover:text-purple transition-colors whitespace-nowrap">
                 Treatments
               </a>
-              <a href={`${anchorPrefix}#testimonials`} className="hover:text-purple transition-colors whitespace-nowrap">
+              <a href="/#testimonials" className="hover:text-purple transition-colors whitespace-nowrap">
                 Reviews
               </a>
-              <a href={`${anchorPrefix}#faq`} className="hover:text-purple transition-colors whitespace-nowrap">
+              <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">
                 FAQ
               </a>
               <a
@@ -110,7 +111,7 @@ export default function Navbar() {
               <Link href="/" onClick={closeMenu} className="border-b border-stone py-4">
                 Home
               </Link>
-              <a href="/#meet-susie" onClick={closeMenu} className="border-b border-stone py-4">
+              <a href={meetSusieHref} onClick={closeMenu} className="border-b border-stone py-4">
                 Meet Susie
               </a>
               <a href="/#treatments" onClick={closeMenu} className="border-b border-stone py-4">
@@ -119,7 +120,7 @@ export default function Navbar() {
               <a href="/#testimonials" onClick={closeMenu} className="border-b border-stone py-4">
                 Reviews
               </a>
-              <a href="/#faq" onClick={closeMenu} className="border-b border-stone py-4">
+              <a href={faqHref} onClick={closeMenu} className="border-b border-stone py-4">
                 FAQ
               </a>
             </nav>

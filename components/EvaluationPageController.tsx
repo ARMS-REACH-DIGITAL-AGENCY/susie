@@ -18,17 +18,36 @@ export default function EvaluationPageController() {
       return;
     }
 
-    const readState = () => {
+    const syncPageEnhancements = () => {
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as { status?: string } | null;
         setShowReset(saved?.status === "results");
       } catch {
         setShowReset(false);
       }
+
+      const allElements = Array.from(document.querySelectorAll<HTMLElement>("p, div, a"));
+      const seriesLabel = allElements.find((element) => element.textContent?.trim().toUpperCase() === "6-TREATMENT SERIES");
+      if (seriesLabel) seriesLabel.textContent = "COMPLETE EXPERIENCE";
+
+      const durationLine = allElements.find((element) => element.textContent?.toUpperCase().includes("PER NULL-MINUTE TREATMENT"));
+      if (durationLine) durationLine.textContent = "SIX TREATMENTS SCHEDULED OVER APPROXIMATELY ONE WEEK";
+
+      const ultimateButton = Array.from(document.querySelectorAll<HTMLAnchorElement>("a")).find((element) =>
+        element.textContent?.toUpperCase().includes("I WANT THE ULTIMATE"),
+      );
+
+      if (ultimateButton && !document.getElementById("ultimate-scheduling-note")) {
+        const note = document.createElement("div");
+        note.id = "ultimate-scheduling-note";
+        note.className = "mb-3 mt-3 rounded-sm bg-stone/70 px-3 py-3 text-left font-sans text-[11px] font-light leading-relaxed text-muted";
+        note.innerHTML = '<strong class="font-medium text-[#2c1f14]">Scheduling note:</strong> This package is not intended to be completed in one day. Susie generally recommends two treatments per day, every other day—such as Monday, Wednesday, and Friday—over approximately one week.';
+        ultimateButton.parentElement?.insertBefore(note, ultimateButton);
+      }
     };
 
-    readState();
-    const observer = new MutationObserver(readState);
+    syncPageEnhancements();
+    const observer = new MutationObserver(syncPageEnhancements);
     observer.observe(document.body, { childList: true, subtree: true });
 
     const style = document.createElement("style");

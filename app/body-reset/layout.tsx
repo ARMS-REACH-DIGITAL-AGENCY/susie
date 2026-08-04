@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import EvaluationPageController from "@/components/EvaluationPageController";
+import EvaluationTrustSections from "@/components/EvaluationTrustSections";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -15,7 +17,11 @@ export default function BodyResetLayout({ children }: { children: React.ReactNod
   return (
     <>
       <Navbar />
-      <div className="body-reset-route">{children}</div>
+      <EvaluationPageController />
+      <div className="body-reset-route">
+        {children}
+        <EvaluationTrustSections />
+      </div>
     </>
   );
 }

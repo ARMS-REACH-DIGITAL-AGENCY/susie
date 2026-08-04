@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import ReturningVisitorResults from "@/components/ReturningVisitorResults";
-import BodyResetCheckout from "@/components/BodyResetCheckout";
 
 export const metadata: Metadata = {
   robots: {
@@ -11,13 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function BodyResetLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Navbar />
-      <div className="body-reset-route">{children}</div>
-      <style>{`.body-reset-route > header:first-child { display: none !important; }`}</style>
-      <ReturningVisitorResults />
-      <BodyResetCheckout />
-    </>
-  );
+  return <div className="body-reset-route">{children}</div>;
 }

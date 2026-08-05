@@ -8,6 +8,8 @@ export default function Hero() {
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="md:hidden">
+          <p className="section-label mb-3 text-left">Serving the East Valley Since 1995</p>
+
           <h1 className="mb-4 text-left font-serif text-[40px] font-light leading-[0.95] text-[#2c1f14] sm:text-5xl">
             Feel puffy, tired, foggy, inflamed, heavy, or stuck?
           </h1>
@@ -48,7 +50,7 @@ export default function Hero() {
 
         <div className="hidden items-center gap-12 md:grid md:grid-cols-2">
           <div className="text-left">
-            <p className="section-label mb-3">Gilbert &amp; East Valley Arizona · Since 1995</p>
+            <p className="section-label mb-3">Serving the East Valley Since 1995</p>
             <h1 className="mb-4 font-serif text-5xl font-light leading-[1.02] text-[#2c1f14] lg:text-6xl">
               Feel puffy, tired, foggy, inflamed, heavy, or stuck?
             </h1>

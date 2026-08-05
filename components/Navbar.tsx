@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 const consultationBookingUrl =
   "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
+const desktopEvaluationActionClass =
+  "rounded-sm bg-purple px-3 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.13em] text-white transition-colors hover:bg-purple-dark whitespace-nowrap";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -91,12 +93,12 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={startNewEvaluation}
-                  className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap"
+                  className={desktopEvaluationActionClass}
                 >
                   Start a New Evaluation
                 </button>
               ) : (
-                <Link href="/body-reset" className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap">
+                <Link href="/body-reset" className={desktopEvaluationActionClass}>
                   See What Susie Says
                 </Link>
               )}

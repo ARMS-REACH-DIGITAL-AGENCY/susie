@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 const consultationBookingUrl =
   "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 
@@ -12,6 +13,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const isEvaluationPage = pathname === "/body-reset";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isResultsPage, setIsResultsPage] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -20,10 +22,52 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!isEvaluationPage) {
+      setIsResultsPage(false);
+      return;
+    }
+
+    const syncResultsState = () => {
+      const resultsActive = document.body.classList.contains("evaluation-results-active");
+      setIsResultsPage(resultsActive);
+
+      const floatingReset = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).find(
+        (button) => button.textContent?.trim().toLowerCase() === "start a new evaluation",
+      );
+      if (floatingReset) floatingReset.style.display = "none";
+    };
+
+    syncResultsState();
+    const observer = new MutationObserver(syncResultsState);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"], childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, [isEvaluationPage]);
+
   const closeMenu = () => setMenuOpen(false);
   const meetSusieHref = isEvaluationPage ? "#meet-susie" : "/#meet-susie";
   const reviewsHref = isEvaluationPage ? "#testimonials" : "/#testimonials";
   const faqHref = isEvaluationPage ? "#faq" : "/#faq";
+
+  const startNewEvaluation = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    setMenuOpen(false);
+    window.location.assign("/body-reset?reset=1");
+  };
+
+  const evaluationAction = isResultsPage ? (
+    <button
+      type="button"
+      onClick={startNewEvaluation}
+      className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap"
+    >
+      Start a New Evaluation
+    </button>
+  ) : (
+    <Link href="/body-reset" className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap">
+      See What Susie Says
+    </Link>
+  );
 
   return (
     <>
@@ -47,7 +91,7 @@ export default function Navbar() {
               <a href={reviewsHref} className="hover:text-purple transition-colors whitespace-nowrap">Reviews</a>
               <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">FAQ</a>
               <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" className="hover:text-purple transition-colors whitespace-nowrap">Book Your Free Professional Consult</a>
-              <Link href="/body-reset" className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap">See What Susie Says</Link>
+              {evaluationAction}
             </nav>
 
             <button type="button" onClick={() => setMenuOpen(true)} className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple/20 bg-white/80 text-purple shadow-sm" aria-label="Open navigation menu" aria-expanded={menuOpen}>
@@ -76,7 +120,11 @@ export default function Navbar() {
               <a href={faqHref} onClick={closeMenu} className="border-b border-stone py-4">FAQ</a>
             </nav>
 
-            <Link href="/body-reset" onClick={closeMenu} className="mt-7 flex items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]">See What Susie Says</Link>
+            {isResultsPage ? (
+              <button type="button" onClick={startNewEvaluation} className="mt-7 flex w-full items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]">Start a New Evaluation</button>
+            ) : (
+              <Link href="/body-reset" onClick={closeMenu} className="mt-7 flex items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]">See What Susie Says</Link>
+            )}
             <a href="tel:+14804400909" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple">Call or Text Susie</a>
             <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 text-center font-sans text-xs font-medium tracking-[0.12em] uppercase text-white">Book Your Free Professional Consult</a>
           </aside>

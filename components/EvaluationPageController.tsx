@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 
+type EvaluationState = {
+  leadCaptured?: boolean;
+  step?: number;
+  status?: "quiz" | "results";
+};
+
 export default function EvaluationPageController() {
   const [showReset, setShowReset] = useState(false);
 
@@ -19,28 +25,28 @@ export default function EvaluationPageController() {
       return;
     }
 
-    const readSavedStatus = () => {
+    const readEvaluationState = (): EvaluationState | null => {
       try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as { status?: string } | null;
-        setShowReset(saved?.status === "results");
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as EvaluationState | null;
       } catch {
         localStorage.removeItem(STORAGE_KEY);
-        setShowReset(false);
+        return null;
       }
     };
 
     let landingWasActive = false;
 
     const syncEvaluationStageClasses = () => {
-      const landingFormButton = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).find((button) =>
-        button.textContent?.toLowerCase().includes("receive my free evaluation"),
-      );
-      const landingIsActive = Boolean(landingFormButton);
-      const pageText = document.body.textContent ?? "";
-      const quizIsActive = !landingIsActive && /ASK SUSIE EVALUATION/i.test(pageText) && /\d\s+OF\s+5/i.test(pageText);
+      const saved = readEvaluationState();
+      const resultsIsActive = saved?.status === "results";
+      const quizIsActive = saved?.status === "quiz";
+      const landingIsActive = !resultsIsActive && !quizIsActive;
+
+      setShowReset(resultsIsActive);
 
       document.body.classList.toggle("evaluation-landing-active", landingIsActive);
       document.body.classList.toggle("evaluation-quiz-active", quizIsActive);
+      document.body.classList.toggle("evaluation-results-active", resultsIsActive);
 
       if (landingWasActive && quizIsActive) {
         window.requestAnimationFrame(() => {
@@ -53,46 +59,12 @@ export default function EvaluationPageController() {
       landingWasActive = landingIsActive;
     };
 
-    const applyResultEnhancements = () => {
-      const allElements = Array.from(document.querySelectorAll<HTMLElement>("p, div, a"));
-
-      const seriesLabel = allElements.find(
-        (element) => element.textContent?.trim().toUpperCase() === "6-TREATMENT SERIES",
-      );
-      if (seriesLabel) seriesLabel.textContent = "COMPLETE EXPERIENCE";
-
-      const durationLine = allElements.find((element) =>
-        element.textContent?.toUpperCase().includes("PER NULL-MINUTE TREATMENT"),
-      );
-      if (durationLine) durationLine.textContent = "SIX TREATMENTS SCHEDULED OVER APPROXIMATELY ONE WEEK";
-
-      const ultimateButton = Array.from(document.querySelectorAll<HTMLAnchorElement>("a")).find((element) =>
-        element.textContent?.toUpperCase().includes("I WANT THE ULTIMATE"),
-      );
-
-      if (ultimateButton && !document.getElementById("ultimate-scheduling-note")) {
-        const note = document.createElement("div");
-        note.id = "ultimate-scheduling-note";
-        note.className =
-          "mb-3 mt-3 rounded-sm bg-stone/70 px-3 py-3 text-left font-sans text-[11px] font-light leading-relaxed text-muted";
-        note.innerHTML =
-          '<strong class="font-medium text-[#2c1f14]">Scheduling note:</strong> This package is not intended to be completed in one day. Susie generally recommends two treatments per day, every other day—such as Monday, Wednesday, and Friday—over approximately one week.';
-        ultimateButton.parentElement?.insertBefore(note, ultimateButton);
-      }
-    };
-
-    readSavedStatus();
     syncEvaluationStageClasses();
-    applyResultEnhancements();
 
     let mutationTimer: number | undefined;
     const observer = new MutationObserver(() => {
       window.clearTimeout(mutationTimer);
-      mutationTimer = window.setTimeout(() => {
-        readSavedStatus();
-        syncEvaluationStageClasses();
-        applyResultEnhancements();
-      }, 50);
+      mutationTimer = window.setTimeout(syncEvaluationStageClasses, 50);
     });
     observer.observe(document.body, { childList: true, subtree: true });
 
@@ -206,6 +178,7 @@ export default function EvaluationPageController() {
       window.clearTimeout(mutationTimer);
       document.body.classList.remove("evaluation-landing-active");
       document.body.classList.remove("evaluation-quiz-active");
+      document.body.classList.remove("evaluation-results-active");
       style.remove();
     };
   }, []);

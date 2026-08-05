@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 
@@ -11,8 +11,6 @@ type EvaluationState = {
 };
 
 export default function EvaluationPageController() {
-  const [showReset, setShowReset] = useState(false);
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
@@ -41,8 +39,6 @@ export default function EvaluationPageController() {
       const resultsIsActive = saved?.status === "results";
       const quizIsActive = saved?.leadCaptured === true && saved?.status === "quiz";
       const landingIsActive = !resultsIsActive && !quizIsActive;
-
-      setShowReset(resultsIsActive);
 
       document.body.classList.toggle("evaluation-landing-active", landingIsActive);
       document.body.classList.toggle("evaluation-quiz-active", quizIsActive);
@@ -191,20 +187,5 @@ export default function EvaluationPageController() {
     };
   }, []);
 
-  function resetEvaluation() {
-    localStorage.removeItem(STORAGE_KEY);
-    window.location.assign("/body-reset");
-  }
-
-  if (!showReset) return null;
-
-  return (
-    <button
-      type="button"
-      onClick={resetEvaluation}
-      className="fixed bottom-24 right-4 z-[70] rounded-full border border-purple/20 bg-white px-4 py-2 font-sans text-xs font-semibold uppercase tracking-[0.08em] text-purple shadow-lg transition hover:bg-purple hover:text-white"
-    >
-      Start a New Evaluation
-    </button>
-  );
+  return null;
 }

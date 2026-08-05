@@ -29,19 +29,29 @@ export default function Navbar() {
     }
 
     const syncResultsState = () => {
-      const resultsActive = document.body.classList.contains("evaluation-results-active");
-      setIsResultsPage(resultsActive);
+      let savedResults = false;
 
-      const floatingReset = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).find(
-        (button) => button.textContent?.trim().toLowerCase() === "start a new evaluation",
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as { status?: string } | null;
+        savedResults = saved?.status === "results";
+      } catch {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+
+      setIsResultsPage(
+        savedResults || document.body.classList.contains("evaluation-results-active"),
       );
-      if (floatingReset) floatingReset.style.display = "none";
     };
 
     syncResultsState();
     const observer = new MutationObserver(syncResultsState);
-    observer.observe(document.body, { attributes: true, attributeFilter: ["class"], childList: true, subtree: true });
-    return () => observer.disconnect();
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    window.addEventListener("pageshow", syncResultsState);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("pageshow", syncResultsState);
+    };
   }, [isEvaluationPage]);
 
   const closeMenu = () => setMenuOpen(false);
@@ -54,20 +64,6 @@ export default function Navbar() {
     setMenuOpen(false);
     window.location.assign("/body-reset?reset=1");
   };
-
-  const evaluationAction = isResultsPage ? (
-    <button
-      type="button"
-      onClick={startNewEvaluation}
-      className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap"
-    >
-      Start a New Evaluation
-    </button>
-  ) : (
-    <Link href="/body-reset" className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap">
-      See What Susie Says
-    </Link>
-  );
 
   return (
     <>
@@ -91,7 +87,19 @@ export default function Navbar() {
               <a href={reviewsHref} className="hover:text-purple transition-colors whitespace-nowrap">Reviews</a>
               <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">FAQ</a>
               <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" className="hover:text-purple transition-colors whitespace-nowrap">Book Your Free Professional Consult</a>
-              {evaluationAction}
+              {isResultsPage ? (
+                <button
+                  type="button"
+                  onClick={startNewEvaluation}
+                  className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap"
+                >
+                  Start a New Evaluation
+                </button>
+              ) : (
+                <Link href="/body-reset" className="rounded-sm bg-purple px-3 py-2.5 text-white hover:bg-purple-dark transition-colors whitespace-nowrap">
+                  See What Susie Says
+                </Link>
+              )}
             </nav>
 
             <button type="button" onClick={() => setMenuOpen(true)} className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-purple/20 bg-white/80 text-purple shadow-sm" aria-label="Open navigation menu" aria-expanded={menuOpen}>

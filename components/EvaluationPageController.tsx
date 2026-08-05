@@ -39,7 +39,7 @@ export default function EvaluationPageController() {
     const syncEvaluationStageClasses = () => {
       const saved = readEvaluationState();
       const resultsIsActive = saved?.status === "results";
-      const quizIsActive = saved?.status === "quiz";
+      const quizIsActive = saved?.leadCaptured === true && saved?.status === "quiz";
       const landingIsActive = !resultsIsActive && !quizIsActive;
 
       setShowReset(resultsIsActive);
@@ -71,13 +71,21 @@ export default function EvaluationPageController() {
     const style = document.createElement("style");
     style.id = "body-reset-responsive-hero";
     style.textContent = `
+      /* The route layout removes top padding for the landing hero. Restore
+         fixed-header clearance only for the quiz and results stages. */
+      .evaluation-quiz-active .body-reset-route > main,
+      .evaluation-results-active .body-reset-route > main {
+        padding-top: 5rem !important;
+      }
+
+      @media (min-width: 768px) {
+        .evaluation-quiz-active .body-reset-route > main,
+        .evaluation-results-active .body-reset-route > main {
+          padding-top: 6rem !important;
+        }
+      }
+
       @media (max-width: 767px) {
-        .body-reset-route.evaluation-quiz-active main > section:first-child {
-          padding-top: 5rem !important;
-        }
-        .body-reset-route.evaluation-quiz-active main > section:first-child > div {
-          scroll-margin-top: 5rem !important;
-        }
         .body-reset-route.evaluation-landing-active main > section:first-child > div > div {
           min-height: calc(100svh - 4rem) !important;
         }

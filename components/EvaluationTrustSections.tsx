@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Problem from "@/components/Problem";
+import Services from "@/components/Services";
 import Trust from "@/components/Trust";
 import FAQ from "@/components/FAQ";
 
@@ -27,6 +28,7 @@ export default function EvaluationTrustSections() {
   return (
     <div className="bg-cream">
       <Problem />
+      <Services />
       <Trust />
       <FAQ />
     </div>

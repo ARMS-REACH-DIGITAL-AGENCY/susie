@@ -31,15 +31,18 @@ export default function EvaluationPageController() {
 
     let landingWasActive = false;
 
-    const syncLandingStageClass = () => {
+    const syncEvaluationStageClasses = () => {
       const landingFormButton = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).find((button) =>
         button.textContent?.toLowerCase().includes("receive my free evaluation"),
       );
       const landingIsActive = Boolean(landingFormButton);
+      const pageText = document.body.textContent ?? "";
+      const quizIsActive = !landingIsActive && /ASK SUSIE EVALUATION/i.test(pageText) && /\d\s+OF\s+5/i.test(pageText);
 
       document.body.classList.toggle("evaluation-landing-active", landingIsActive);
+      document.body.classList.toggle("evaluation-quiz-active", quizIsActive);
 
-      if (landingWasActive && !landingIsActive) {
+      if (landingWasActive && quizIsActive) {
         window.requestAnimationFrame(() => {
           window.requestAnimationFrame(() => {
             window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -79,7 +82,7 @@ export default function EvaluationPageController() {
     };
 
     readSavedStatus();
-    syncLandingStageClass();
+    syncEvaluationStageClasses();
     applyResultEnhancements();
 
     let mutationTimer: number | undefined;
@@ -87,7 +90,7 @@ export default function EvaluationPageController() {
       window.clearTimeout(mutationTimer);
       mutationTimer = window.setTimeout(() => {
         readSavedStatus();
-        syncLandingStageClass();
+        syncEvaluationStageClasses();
         applyResultEnhancements();
       }, 50);
     });
@@ -97,6 +100,12 @@ export default function EvaluationPageController() {
     style.id = "body-reset-responsive-hero";
     style.textContent = `
       @media (max-width: 767px) {
+        .body-reset-route.evaluation-quiz-active main > section:first-child {
+          padding-top: 5rem !important;
+        }
+        .body-reset-route.evaluation-quiz-active main > section:first-child > div {
+          scroll-margin-top: 5rem !important;
+        }
         .body-reset-route.evaluation-landing-active main > section:first-child > div > div {
           min-height: calc(100svh - 4rem) !important;
         }
@@ -196,6 +205,7 @@ export default function EvaluationPageController() {
       observer.disconnect();
       window.clearTimeout(mutationTimer);
       document.body.classList.remove("evaluation-landing-active");
+      document.body.classList.remove("evaluation-quiz-active");
       style.remove();
     };
   }, []);

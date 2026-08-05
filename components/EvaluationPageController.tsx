@@ -29,11 +29,25 @@ export default function EvaluationPageController() {
       }
     };
 
+    let landingWasActive = false;
+
     const syncLandingStageClass = () => {
       const landingFormButton = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).find((button) =>
         button.textContent?.toLowerCase().includes("receive my free evaluation"),
       );
-      document.body.classList.toggle("evaluation-landing-active", Boolean(landingFormButton));
+      const landingIsActive = Boolean(landingFormButton);
+
+      document.body.classList.toggle("evaluation-landing-active", landingIsActive);
+
+      if (landingWasActive && !landingIsActive) {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          });
+        });
+      }
+
+      landingWasActive = landingIsActive;
     };
 
     const applyResultEnhancements = () => {

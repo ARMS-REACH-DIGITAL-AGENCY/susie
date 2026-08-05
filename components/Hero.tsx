@@ -8,7 +8,7 @@ export default function Hero() {
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="md:hidden">
-          <p className="mb-3 whitespace-nowrap text-left font-sans text-[8.5px] font-medium uppercase tracking-[0.22em] text-gold sm:text-[10px] sm:tracking-[0.28em]">Start With What Your Body Needs</p>
+          <p className="mb-3 whitespace-nowrap text-left font-sans text-[clamp(9.5px,2.7vw,11px)] font-medium uppercase tracking-[0.16em] text-gold sm:tracking-[0.22em]">Start With What Your Body Needs</p>
 
           <h1 className="mb-4 text-left font-serif text-[40px] font-light leading-[0.95] text-[#2c1f14] sm:text-5xl">
             Feel puffy, tired, foggy, inflamed, heavy, or stuck?

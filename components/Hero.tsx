@@ -19,8 +19,8 @@ export default function Hero() {
             <p>Susie Sculpts offers private body reset, lymphatic, PEMF, and sculpting support for women in Gilbert and the East Valley.</p>
           </div>
 
-          <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] items-start gap-3">
-            <div className="overflow-hidden rounded-md border border-purple/10 bg-white/90 shadow-[0_8px_22px_rgba(60,40,80,0.10)]">
+          <div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] items-stretch gap-3">
+            <div className="flex h-full flex-col overflow-hidden rounded-md border border-purple/10 bg-white/90 shadow-[0_8px_22px_rgba(60,40,80,0.10)]">
               <div className="aspect-[1.02/1] w-full overflow-hidden bg-white/70">
                 <img
                   src={heroTreatmentImage}
@@ -28,21 +28,24 @@ export default function Hero() {
                   className="h-full w-full object-cover object-center"
                 />
               </div>
-              <div className="px-2.5 py-2 text-left">
+              <div className="flex flex-1 flex-col justify-center px-2.5 py-2 text-left">
                 <p className="whitespace-nowrap font-sans text-[12px] font-semibold leading-tight text-[#2c1f14]">Private help from Susie</p>
                 <p className="mt-0.5 font-sans text-[10px] font-light leading-snug text-muted">A personal, professional first step based on what your body needs.</p>
               </div>
             </div>
 
-            <div className="flex min-h-full flex-col gap-2.5 rounded-md border border-purple/10 bg-white/55 p-2 shadow-[0_8px_22px_rgba(60,40,80,0.08)]">
-              <a href="#meet-susie" className="flex min-h-[50px] items-center justify-center rounded-sm bg-gold px-3 py-3 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#a88449]">
+            <div className="grid h-full grid-rows-[1fr_1fr_1fr_auto] gap-2 rounded-md border border-purple/10 bg-white/55 p-2 shadow-[0_8px_22px_rgba(60,40,80,0.08)]">
+              <a href="#meet-susie" className="flex min-h-[44px] items-center justify-center rounded-sm bg-gold px-3 py-2.5 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#a88449]">
                 Meet Susie
               </a>
-              <a href="tel:+14804400909" className="flex min-h-[50px] items-center justify-center rounded-sm border border-purple/25 bg-white px-3 py-3 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.08em] text-purple transition-colors hover:bg-purple/5">
+              <a href="tel:+14804400909" className="flex min-h-[44px] items-center justify-center rounded-sm border border-purple/25 bg-white px-3 py-2.5 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.08em] text-purple transition-colors hover:bg-purple/5">
                 Call or Text Susie
               </a>
-              <a href="#treatments" className="flex min-h-[50px] items-center justify-center rounded-sm bg-purple px-3 py-3 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-purple-dark">
+              <a href="#treatments" className="flex min-h-[44px] items-center justify-center rounded-sm bg-purple px-3 py-2.5 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-purple-dark">
                 View Treatments
+              </a>
+              <a href="#testimonials" className="flex items-center justify-center py-1 text-center font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-purple underline-offset-4 hover:underline">
+                Read Reviews
               </a>
             </div>
           </div>

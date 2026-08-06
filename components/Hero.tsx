@@ -1,4 +1,5 @@
 const heroTreatmentImage = "/images/susie-treatment-hero.png";
+const consultationBookingUrl = "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 
 export default function Hero() {
   return (
@@ -38,11 +39,11 @@ export default function Hero() {
               <a href="#meet-susie" className="flex min-h-[44px] items-center justify-center rounded-sm bg-gold px-3 py-2.5 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#a88449]">
                 Meet Susie
               </a>
-              <a href="tel:+14804400909" className="flex min-h-[44px] items-center justify-center rounded-sm border border-purple/25 bg-white px-3 py-2.5 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.08em] text-purple transition-colors hover:bg-purple/5">
-                Call or Text Susie
-              </a>
-              <a href="#treatments" className="flex min-h-[44px] items-center justify-center rounded-sm bg-purple px-3 py-2.5 text-center font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-purple-dark">
+              <a href="#treatments" className="flex min-h-[44px] items-center justify-center rounded-sm border border-purple/25 bg-white px-3 py-2.5 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.08em] text-purple transition-colors hover:bg-purple/5">
                 View Treatments
+              </a>
+              <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-[44px] items-center justify-center rounded-sm bg-purple px-3 py-2.5 text-center font-sans text-[10px] font-semibold uppercase tracking-[0.07em] text-white transition-colors hover:bg-purple-dark">
+                Book a Consult
               </a>
               <a href="#testimonials" className="flex items-center justify-center py-1 text-center font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-purple underline-offset-4 hover:underline">
                 Read Reviews

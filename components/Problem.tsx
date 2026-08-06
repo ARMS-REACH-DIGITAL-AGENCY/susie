@@ -24,7 +24,7 @@ export default function Problem() {
   const move = (direction: number) => trackRef.current?.scrollBy({ left: direction * Math.min(trackRef.current.clientWidth * 0.82, 320), behavior: "smooth" });
 
   return (
-    <section id="testimonials" className="scroll-mt-[72px] bg-white/50 pb-8 pt-6 md:scroll-mt-[88px] md:pb-12 md:pt-8">
+    <section id="testimonials" className="scroll-mt-16 bg-white/50 pb-8 pt-6 md:scroll-mt-20 md:pb-12 md:pt-8">
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
         <p className="section-label mb-3">For the woman who feels lost in her own body</p>
         <h2 className="mb-3 font-serif text-[31px] font-light leading-[1.02] text-[#2c1f14] sm:text-4xl md:mb-4 md:text-5xl">Do you still recognize the woman in the mirror?</h2>

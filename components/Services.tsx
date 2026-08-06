@@ -49,7 +49,7 @@ export default function Services() {
   const toggleCard = (index: number) => setFlippedCards((current) => { const next = new Set(current); next.has(index) ? next.delete(index) : next.add(index); return next; });
 
   return (
-    <section className="bg-cream pb-10 pt-8 md:pb-12 md:pt-10">
+    <section className="bg-cream pb-9 pt-8 md:pb-12 md:pt-10">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div id="treatments" className="mb-5 scroll-mt-24 text-center md:mb-7"><p className="section-label mb-2">The Ultimate &quot;YOU&quot; Experience</p><h2 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-5xl">Explore Susie&apos;s Professional Treatments</h2></div>
 
@@ -72,7 +72,7 @@ export default function Services() {
           })}
         </div>
 
-        <p className="mx-auto mt-6 max-w-xl text-center text-xs font-light text-muted/60">Each treatment supports a different wellness goal and is not intended to diagnose, treat, cure, or prevent disease. Individual experiences vary.</p>
+        <p className="mx-auto mt-4 max-w-[355px] text-center text-[11px] font-light leading-[1.35] text-muted/65 md:mt-6 md:max-w-xl md:text-xs md:leading-relaxed">Each treatment supports a different wellness goal and is not intended to diagnose, treat, cure, or prevent disease. Individual experiences vary.</p>
       </div>
     </section>
   );

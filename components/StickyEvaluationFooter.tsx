@@ -57,40 +57,45 @@ export default function StickyEvaluationFooter() {
 
   if (!isHomepage && !resultsMode) return null;
 
+  const supportingLineClass =
+    "font-sans text-[11px] font-light leading-none tracking-[0.03em] text-white/90 sm:text-sm";
+
   return (
     <>
-      <div aria-hidden="true" className="h-[86px] sm:h-[92px]" />
-      <div className="fixed bottom-0 left-0 right-0 z-[65] border-t border-white/15 bg-purple-dark text-white shadow-[0_-8px_24px_rgba(74,53,112,0.28)]">
+      <div aria-hidden="true" className="h-[84px] sm:h-[90px]" />
+      <div className="fixed bottom-0 left-0 right-0 z-[65] overflow-hidden border-t border-white/20 bg-purple-dark text-white shadow-[0_-8px_24px_rgba(74,53,112,0.32)]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[url('/images/sticky-footer-butterflies.svg')] bg-cover bg-center opacity-90" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-purple-dark/45" />
         <Link
           href={resultsMode ? consultationUrl : "/body-reset"}
           target={resultsMode ? "_blank" : undefined}
           rel={resultsMode ? "noopener noreferrer" : undefined}
-          className="mx-auto flex min-h-[86px] max-w-6xl flex-col items-center justify-center px-4 py-2 text-center sm:min-h-[92px]"
+          className="relative z-10 mx-auto flex min-h-[84px] max-w-6xl flex-col items-center justify-center px-4 py-1.5 text-center sm:min-h-[90px]"
         >
           {resultsMode ? (
             <>
-              <span className="hidden font-sans text-sm font-light tracking-[0.03em] sm:block">
+              <span className={`${supportingLineClass} hidden sm:block`}>
                 Not ready to choose a treatment before meeting Susie?
               </span>
-              <span className="font-sans text-[11px] font-light tracking-[0.03em] sm:hidden">
+              <span className={`${supportingLineClass} sm:hidden`}>
                 Want to meet Susie first?
               </span>
-              <span className="mt-0.5 hidden font-sans text-2xl font-medium uppercase tracking-[0.06em] sm:block">
+              <span className="my-1 hidden font-sans text-2xl font-medium uppercase leading-none tracking-[0.06em] sm:block">
                 Schedule a Free 30-Minute Consultation
               </span>
-              <span className="mt-0.5 font-sans text-xl font-medium uppercase tracking-[0.08em] sm:hidden">
+              <span className="my-1 font-sans text-xl font-medium uppercase leading-none tracking-[0.08em] sm:hidden">
                 Book a Free Consultation
               </span>
             </>
           ) : (
             <>
-              <span className="font-sans text-[11px] font-light tracking-[0.03em] sm:text-sm">
+              <span className={supportingLineClass}>
                 Need Help Deciding Which Treatment Is Best For You?
               </span>
-              <span className="mt-0.5 font-sans text-xl font-medium uppercase tracking-[0.08em] sm:text-2xl">
+              <span className="my-1 font-sans text-xl font-medium uppercase leading-none tracking-[0.08em] drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] sm:text-2xl">
                 See What Susie Says...
               </span>
-              <span className="mt-0.5 font-sans text-[10px] font-light tracking-[0.04em] text-white/85 sm:text-xs">
+              <span className={supportingLineClass}>
                 Take Susie&apos;s quick five-question evaluation.
               </span>
             </>

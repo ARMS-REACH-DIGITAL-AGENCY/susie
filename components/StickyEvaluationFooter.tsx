@@ -55,19 +55,17 @@ export default function StickyEvaluationFooter() {
 
   const resultsMode = isEvaluationPage && evaluationComplete;
 
-  // Show this conversion footer only on the public homepage and completed results page.
-  // Keep the evaluation landing form and quiz clear while the visitor is answering questions.
   if (!isHomepage && !resultsMode) return null;
 
   return (
     <>
-      <div aria-hidden="true" className="h-[72px] sm:h-[78px]" />
+      <div aria-hidden="true" className="h-[86px] sm:h-[92px]" />
       <div className="fixed bottom-0 left-0 right-0 z-[65] border-t border-white/15 bg-purple-dark text-white shadow-[0_-8px_24px_rgba(74,53,112,0.28)]">
         <Link
           href={resultsMode ? consultationUrl : "/body-reset"}
           target={resultsMode ? "_blank" : undefined}
           rel={resultsMode ? "noopener noreferrer" : undefined}
-          className="mx-auto flex min-h-[72px] max-w-6xl flex-col items-center justify-center px-4 py-2 text-center sm:min-h-[78px]"
+          className="mx-auto flex min-h-[86px] max-w-6xl flex-col items-center justify-center px-4 py-2 text-center sm:min-h-[92px]"
         >
           {resultsMode ? (
             <>
@@ -91,6 +89,9 @@ export default function StickyEvaluationFooter() {
               </span>
               <span className="mt-0.5 font-sans text-xl font-medium uppercase tracking-[0.08em] sm:text-2xl">
                 See What Susie Says...
+              </span>
+              <span className="mt-0.5 font-sans text-[10px] font-light tracking-[0.04em] text-white/85 sm:text-xs">
+                Take Susie&apos;s quick five-question evaluation.
               </span>
             </>
           )}

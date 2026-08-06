@@ -13,11 +13,12 @@ const credentials = [
 
 export default function Trust() {
   return (
-    <section className="bg-cream pb-10 pt-6 md:pb-12 md:pt-8">
+    <section className="relative bg-cream pb-10 pt-6 md:pb-12 md:pt-8">
+      <span id="meet-susie" className="section-anchor absolute left-0 top-6 md:top-8" aria-hidden="true" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid items-start gap-7 md:grid-cols-[0.76fr_1.24fr] md:gap-12">
           <div className="md:order-1">
-            <div id="meet-susie" className="section-anchor mb-4 md:hidden">
+            <div className="mb-4 md:hidden">
               <p className="section-label mb-2">Helping Women Since 1995</p>
               <h2 className="font-serif text-[32px] font-light leading-[1.03] text-[#2c1f14]">You don&apos;t need another promise. You need a plan that fits your body.</h2>
             </div>
@@ -35,7 +36,7 @@ export default function Trust() {
           </div>
 
           <div className="md:order-2">
-            <div id="meet-susie-desktop" className="section-anchor hidden md:block"><p className="section-label mb-3">Helping Women Since 1995</p><h2 className="mb-5 font-serif text-5xl font-light leading-[1.05] text-[#2c1f14]">You don&apos;t need another promise. You need a plan that fits your body.</h2></div>
+            <div className="hidden md:block"><p className="section-label mb-3">Helping Women Since 1995</p><h2 className="mb-5 font-serif text-5xl font-light leading-[1.05] text-[#2c1f14]">You don&apos;t need another promise. You need a plan that fits your body.</h2></div>
 
             <div className="space-y-4 text-base font-light leading-relaxed text-muted md:text-[17px]">
               <p>Have you ever looked in the mirror and thought, “I know I don&apos;t feel like myself—but I have no idea where to start?” You are not alone. Most women come to me after trying things that sounded good, cost money, and still left them guessing.</p>

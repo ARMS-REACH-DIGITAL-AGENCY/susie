@@ -29,6 +29,9 @@ body {
   .section-heading {
     @apply font-serif text-3xl md:text-4xl lg:text-5xl font-light leading-tight text-[#2c1f14];
   }
+  .section-anchor {
+    scroll-margin-top: 72px;
+  }
   .card {
     @apply bg-white/70 backdrop-blur-sm border border-stone rounded-sm p-6 md:p-8;
   }
@@ -37,6 +40,12 @@ body {
   }
   .select-field {
     @apply w-full bg-stone/60 border border-[#d4c4b0] rounded-sm px-4 py-3 font-sans text-sm font-light text-[#2c1f14] focus:outline-none focus:border-purple focus:ring-2 focus:ring-purple/10 transition-all duration-200 appearance-none cursor-pointer;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-anchor {
+    scroll-margin-top: 96px;
   }
 }
 

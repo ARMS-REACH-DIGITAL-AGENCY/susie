@@ -24,10 +24,12 @@ export default function Problem() {
   const move = (direction: number) => trackRef.current?.scrollBy({ left: direction * Math.min(trackRef.current.clientWidth * 0.82, 320), behavior: "smooth" });
 
   return (
-    <section id="testimonials" className="scroll-mt-16 bg-white/50 pb-8 pt-6 md:scroll-mt-20 md:pb-12 md:pt-8">
+    <section className="bg-white/50 pb-8 pt-6 md:pb-12 md:pt-8">
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
-        <p className="section-label mb-3">For the woman who feels lost in her own body</p>
-        <h2 className="mb-3 font-serif text-[31px] font-light leading-[1.02] text-[#2c1f14] sm:text-4xl md:mb-4 md:text-5xl">Do you still recognize the woman in the mirror?</h2>
+        <div id="testimonials" className="section-anchor">
+          <p className="section-label mb-3">For the woman who feels lost in her own body</p>
+          <h2 className="mb-3 font-serif text-[31px] font-light leading-[1.02] text-[#2c1f14] sm:text-4xl md:mb-4 md:text-5xl">Do you still recognize the woman in the mirror?</h2>
+        </div>
 
         <div className="relative -mx-4 mb-2 md:mx-0 md:mb-4">
           <button type="button" onClick={() => move(-1)} aria-label="Previous symptoms or review" className="absolute left-1 top-[40%] z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-2xl text-purple shadow-md md:left-2">‹</button>

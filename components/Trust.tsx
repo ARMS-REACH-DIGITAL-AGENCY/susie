@@ -38,23 +38,19 @@ export default function Trust() {
             <div className="hidden md:block"><p className="section-label mb-3">Helping Women Since 1995</p><h2 className="mb-5 font-serif text-5xl font-light leading-[1.05] text-[#2c1f14]">You don&apos;t need another promise. You need a plan that fits your body.</h2></div>
 
             <div className="space-y-4 text-base font-light leading-relaxed text-muted md:text-[17px]">
-              <div className="border-l-2 border-purple bg-purple/5 px-5 py-4">
-                <p className="font-serif text-2xl font-light leading-snug text-[#2c1f14] md:text-3xl">“My goal is to help you feel stronger, healthier, more confident, and more like yourself again.”</p>
-              </div>
+              <p>Have you ever looked in the mirror and thought, “I know I don&apos;t feel like myself—but I have no idea where to start?” You are not alone. Most women come to me after trying things that sounded good, cost money, and still left them guessing.</p>
 
-              <p>Susie Sculpts combines non-invasive body contouring, lymphatic wellness, muscle strengthening, pelvic floor support, and PEMF technology with a personalized, whole-body approach.</p>
+              <p>The problem is not that you failed. Your body is not one-size-fits-all. Instead of asking, “Which treatment should I buy?” I believe the better question is, “What does my body need first?”</p>
 
-              <div className="border-l-2 border-gold bg-white/60 px-5 py-4">
-                <p className="font-serif text-2xl font-light leading-snug text-[#2c1f14] md:text-3xl">“I believe the best results come from listening—not selling.”</p>
-              </div>
-
-              <p>Every recommendation begins with what matters most to you because every body is different.</p>
+              <p>After more than 30 years in health and wellness and thousands of client sessions, I have learned that the best results begin with listening. I look at what you are feeling, what you have tried, and what you want to change—then help identify the most logical place to begin.</p>
 
               <div className="border-l-2 border-purple bg-purple/5 px-5 py-4">
-                <p className="font-serif text-2xl font-light leading-snug text-[#2c1f14] md:text-3xl">“Together, we’ll talk about what has changed, answer your questions, and create a plan that makes sense for your body, comfort level, and goals.”</p>
+                <p className="font-serif text-2xl font-light leading-snug text-[#2c1f14] md:text-3xl">“My goal is to help you feel stronger, healthier, more confident, and more like yourself again. My loyal clients tell me THAT is priceless!”</p>
               </div>
 
-              <p className="font-medium text-[#2c1f14]">Let’s start with a conversation and discover what your body needs.</p>
+              <p>Susie Sculpts combines non-invasive body contouring, lymphatic wellness, muscle strengthening, pelvic-floor support, and PEMF technology with a personal, holistic approach. We begin with your desired result—not a machine or a sales pitch.</p>
+
+              <p className="font-medium text-[#2c1f14]">The easiest first step is simply a conversation. No pressure. Ever.</p>
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">

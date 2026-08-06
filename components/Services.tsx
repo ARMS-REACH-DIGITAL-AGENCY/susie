@@ -51,7 +51,7 @@ export default function Services() {
   return (
     <section className="bg-cream pb-9 pt-8 md:pb-12 md:pt-10">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div id="treatments" className="mb-5 scroll-mt-24 text-center md:mb-7"><p className="section-label mb-2">The Ultimate &quot;YOU&quot; Experience</p><h2 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-5xl">Explore Susie&apos;s Professional Treatments</h2></div>
+        <div id="treatments" className="mb-5 scroll-mt-16 text-center md:mb-7 md:scroll-mt-20"><p className="section-label mb-2">The Ultimate &quot;YOU&quot; Experience</p><h2 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-5xl">Explore Susie&apos;s Professional Treatments</h2></div>
 
         <div className="relative md:hidden">
           <div className="grid grid-cols-6 gap-1 rounded-t-[18px] border border-purple/10 bg-cream/95 p-2">

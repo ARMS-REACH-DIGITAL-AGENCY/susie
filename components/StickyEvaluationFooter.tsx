@@ -4,39 +4,60 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 const consultationUrl =
   "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 
 export default function StickyEvaluationFooter() {
   const pathname = usePathname();
+  const isHomepage = pathname === "/";
   const isEvaluationPage = pathname === "/body-reset";
   const [evaluationComplete, setEvaluationComplete] = useState(false);
 
   useEffect(() => {
     const syncState = () => {
-      setEvaluationComplete(document.body.dataset.evaluationComplete === "true");
+      let savedResults = false;
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as { status?: string } | null;
+        savedResults = saved?.status === "results";
+      } catch {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+
+      setEvaluationComplete(
+        savedResults ||
+          document.body.dataset.evaluationComplete === "true" ||
+          document.body.classList.contains("evaluation-results-active"),
+      );
     };
 
     syncState();
     window.addEventListener("evaluation-complete", syncState);
+    window.addEventListener("pageshow", syncState);
+    window.addEventListener("popstate", syncState);
 
     const observer = new MutationObserver(syncState);
     observer.observe(document.body, {
       attributes: true,
-      attributeFilter: ["data-evaluation-complete"],
+      attributeFilter: ["class", "data-evaluation-complete"],
+      childList: true,
+      subtree: true,
     });
 
     return () => {
       window.removeEventListener("evaluation-complete", syncState);
+      window.removeEventListener("pageshow", syncState);
+      window.removeEventListener("popstate", syncState);
       observer.disconnect();
     };
-  }, []);
-
-  // Once someone enters the evaluation, the original CTA has already done its job.
-  // Keep the screen clear until results are available.
-  if (isEvaluationPage && !evaluationComplete) return null;
+  }, [pathname]);
 
   const resultsMode = isEvaluationPage && evaluationComplete;
+
+  // Show this conversion footer only on the public homepage and completed results page.
+  // Keep the evaluation landing form and quiz clear while the visitor is answering questions.
+  if (!isHomepage && !resultsMode) return null;
 
   return (
     <>
@@ -51,7 +72,7 @@ export default function StickyEvaluationFooter() {
           {resultsMode ? (
             <>
               <span className="hidden font-sans text-sm font-light tracking-[0.03em] sm:block">
-                Not ready to commit before meeting Susie?
+                Not ready to choose a treatment before meeting Susie?
               </span>
               <span className="font-sans text-[11px] font-light tracking-[0.03em] sm:hidden">
                 Want to meet Susie first?

@@ -67,10 +67,7 @@ export default function Hero() {
               <a href="#treatments" className="btn-secondary px-4 py-3">View Treatments</a>
             </div>
 
-            <div className="mt-4 flex flex-col items-start gap-1">
-              <a href="tel:+14804400909" className="font-sans text-sm font-light text-muted transition-colors hover:text-purple">(480) 440-0909</a>
-              <p className="font-sans text-xs font-light tracking-wide text-muted/60">Gilbert · Chandler · Queen Creek · Mesa</p>
-            </div>
+            <p className="mt-4 font-sans text-xs font-light tracking-wide text-muted/60">Gilbert · Chandler · Queen Creek · Mesa</p>
           </div>
 
           <div className="flex justify-end">

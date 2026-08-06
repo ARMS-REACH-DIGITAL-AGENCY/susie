@@ -9,8 +9,8 @@ type Slide =
 
 const slides: Slide[] = [
   { kind: "symptom", label: "Don’t feel like yourself", microcopy: "“I don’t recognize the woman in the mirror.” Susie is here to help you rediscover that woman.", image: "/images/symptom-yourself.png" },
-  { kind: "symptom", label: "Puffy or bloated", microcopy: "“My rings are tight. My clothes don’t fit the same. I just feel puffy.” Let’s support healthy lymphatic flow so you can feel lighter again.", image: "/images/symptom-puffy.png" },
   { kind: "review", quote: "I am so grateful to Susie and her expertise on Synergie. I lost 26 pounds and went down 2 sizes.", author: "Leslie Y." },
+  { kind: "symptom", label: "Puffy or bloated", microcopy: "“My rings are tight. My clothes don’t fit the same. I just feel puffy.” Let’s support healthy lymphatic flow so you can feel lighter again.", image: "/images/symptom-puffy.png" },
   { kind: "symptom", label: "Inflamed or achy", microcopy: "“Everything aches. I wake up stiff. My body hurts for no reason.” Let’s help support recovery naturally.", image: "/images/symptom-achy.png" },
   { kind: "symptom", label: "Heavy or sluggish", microcopy: "“I feel like I’m dragging all day. Even simple things feel harder.” Your body deserves better support.", image: "/images/symptom-heavy.png" },
   { kind: "symptom", label: "Always exhausted?", microcopy: "“I slept, but I still feel exhausted. Coffee isn’t helping anymore.” Let’s help your body recover and recharge.", image: "/images/symptom-tired.png" },
@@ -24,12 +24,12 @@ export default function Problem() {
   const move = (direction: number) => trackRef.current?.scrollBy({ left: direction * Math.min(trackRef.current.clientWidth * 0.82, 320), behavior: "smooth" });
 
   return (
-    <section id="testimonials" className="scroll-mt-[72px] bg-white/50 pb-10 pt-6 md:scroll-mt-[88px] md:pb-12 md:pt-8">
+    <section id="testimonials" className="scroll-mt-[72px] bg-white/50 pb-8 pt-6 md:scroll-mt-[88px] md:pb-12 md:pt-8">
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
         <p className="section-label mb-3">For the woman who feels lost in her own body</p>
-        <h2 className="mb-4 font-serif text-[31px] font-light leading-[1.02] text-[#2c1f14] sm:text-4xl md:text-5xl">Do you still recognize the woman in the mirror?</h2>
+        <h2 className="mb-3 font-serif text-[31px] font-light leading-[1.02] text-[#2c1f14] sm:text-4xl md:mb-4 md:text-5xl">Do you still recognize the woman in the mirror?</h2>
 
-        <div className="relative -mx-4 mb-4 md:mx-0">
+        <div className="relative -mx-4 mb-2 md:mx-0 md:mb-4">
           <button type="button" onClick={() => move(-1)} aria-label="Previous symptoms or review" className="absolute left-1 top-[40%] z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-2xl text-purple shadow-md md:left-2">‹</button>
           <button type="button" onClick={() => move(1)} aria-label="Next symptoms or review" className="absolute right-1 top-[40%] z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-2xl text-purple shadow-md md:right-2">›</button>
           <div ref={trackRef} className="overflow-x-auto scroll-smooth snap-x snap-mandatory scroll-px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -53,7 +53,7 @@ export default function Problem() {
           </div>
         </div>
 
-        <p className="mx-auto max-w-3xl font-sans text-[15px] font-light leading-relaxed text-muted md:text-lg">If your body no longer feels like your own, you are not alone. Naming what changed is the first step toward finding your way back.</p>
+        <p className="mx-auto max-w-[355px] font-sans text-[15px] font-semibold leading-[1.35] text-[#2c1f14] md:max-w-3xl md:text-lg md:font-medium md:leading-relaxed">If your body no longer feels like your own, you are not alone. Naming what changed is the first step toward finding your way back.</p>
       </div>
     </section>
   );

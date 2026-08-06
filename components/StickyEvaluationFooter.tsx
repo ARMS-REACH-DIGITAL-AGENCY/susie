@@ -58,22 +58,22 @@ export default function StickyEvaluationFooter() {
   if (!isHomepage && !resultsMode) return null;
 
   const supportingLineClass =
-    "font-sans text-[11px] font-light leading-none tracking-[0.03em] text-white/90 sm:text-sm";
+    "font-sans text-[11px] font-light leading-none tracking-[0.03em] text-white/95 drop-shadow-[0_1px_1px_rgba(0,0,0,0.7)] sm:text-[13px]";
 
   return (
     <>
-      <div aria-hidden="true" className="h-[84px] sm:h-[90px]" />
-      <div className="fixed bottom-0 left-0 right-0 z-[65] overflow-hidden border-t border-white/20 bg-purple-dark text-white shadow-[0_-8px_24px_rgba(74,53,112,0.32)]">
+      <div aria-hidden="true" className="h-[70px] sm:h-[76px]" />
+      <div className="fixed bottom-0 left-0 right-0 z-[65] overflow-hidden border-t border-white/20 bg-purple-dark text-white shadow-[0_-7px_20px_rgba(74,53,112,0.3)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[url('/images/Susie_favicon.png')] bg-cover bg-center opacity-55"
+          className="pointer-events-none absolute inset-0 bg-[url('/images/Susie_favicon.png')] bg-[length:480px_auto] bg-repeat-x bg-top opacity-85 sm:bg-[length:620px_auto]"
         />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-purple-dark/60" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-purple-dark/38" />
         <Link
           href={resultsMode ? consultationUrl : "/body-reset"}
           target={resultsMode ? "_blank" : undefined}
           rel={resultsMode ? "noopener noreferrer" : undefined}
-          className="relative z-10 mx-auto flex min-h-[84px] max-w-6xl flex-col items-center justify-center px-4 py-1.5 text-center sm:min-h-[90px]"
+          className="relative z-10 mx-auto flex min-h-[70px] max-w-6xl flex-col items-center justify-center px-4 py-1 text-center sm:min-h-[76px]"
         >
           {resultsMode ? (
             <>
@@ -83,10 +83,10 @@ export default function StickyEvaluationFooter() {
               <span className={`${supportingLineClass} sm:hidden`}>
                 Want to meet Susie first?
               </span>
-              <span className="my-1 hidden font-sans text-2xl font-medium uppercase leading-none tracking-[0.06em] sm:block">
+              <span className="my-0.5 hidden font-sans text-2xl font-medium uppercase leading-none tracking-[0.06em] drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] sm:block">
                 Schedule a Free 30-Minute Consultation
               </span>
-              <span className="my-1 font-sans text-xl font-medium uppercase leading-none tracking-[0.08em] sm:hidden">
+              <span className="my-0.5 font-sans text-xl font-medium uppercase leading-none tracking-[0.08em] drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] sm:hidden">
                 Book a Free Consultation
               </span>
             </>
@@ -95,7 +95,7 @@ export default function StickyEvaluationFooter() {
               <span className={supportingLineClass}>
                 Need Help Deciding Which Treatment Is Best For You?
               </span>
-              <span className="my-1 font-sans text-xl font-medium uppercase leading-none tracking-[0.08em] drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] sm:text-2xl">
+              <span className="my-0.5 font-sans text-xl font-medium uppercase leading-none tracking-[0.08em] drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)] sm:text-2xl">
                 See What Susie Says...
               </span>
               <span className={supportingLineClass}>

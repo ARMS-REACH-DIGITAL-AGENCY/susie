@@ -13,7 +13,7 @@ const credentials = [
 
 export default function Trust() {
   return (
-    <section id="meet-susie" className="scroll-mt-[72px] bg-cream pb-10 pt-6 md:scroll-mt-[88px] md:pb-12 md:pt-8">
+    <section id="meet-susie" className="scroll-mt-16 bg-cream pb-10 pt-6 md:scroll-mt-20 md:pb-12 md:pt-8">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid items-start gap-7 md:grid-cols-[0.76fr_1.24fr] md:gap-12">
           <div className="md:order-1">
@@ -30,7 +30,7 @@ export default function Trust() {
               <p className="mb-3 border-b border-purple/10 pb-3 text-sm font-semibold text-purple">Susie Bute <span className="font-light text-muted">| Body Sculpting and PEMF Specialist</span></p>
               <p className="section-label mb-3">Experience &amp; Credentials</p>
               <ul className="space-y-2">{credentials.map((credential) => <li key={credential} className="flex items-start gap-2.5 text-sm font-light leading-snug text-muted"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-purple" /><span>{credential}</span></li>)}</ul>
-              <p className="mt-4 whitespace-nowrap border-t border-purple/10 pt-3 text-center text-[9px] font-medium uppercase tracking-[0.025em] text-purple sm:text-[10px] sm:tracking-[0.05em] md:text-xs md:tracking-[0.08em]">Ethical • Experienced • Empathetic • Effective</p>
+              <p className="mt-4 whitespace-nowrap border-t border-purple/10 pt-3 text-center text-[10px] font-medium uppercase tracking-[0.035em] text-purple sm:text-[11px] sm:tracking-[0.05em] md:text-xs md:tracking-[0.08em]">Ethical • Experienced • Empathetic • Effective</p>
             </div>
           </div>
 

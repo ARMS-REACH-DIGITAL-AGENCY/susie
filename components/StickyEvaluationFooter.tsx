@@ -64,8 +64,11 @@ export default function StickyEvaluationFooter() {
     <>
       <div aria-hidden="true" className="h-[84px] sm:h-[90px]" />
       <div className="fixed bottom-0 left-0 right-0 z-[65] overflow-hidden border-t border-white/20 bg-purple-dark text-white shadow-[0_-8px_24px_rgba(74,53,112,0.32)]">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[url('/images/sticky-footer-butterflies.svg')] bg-cover bg-center opacity-90" />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-purple-dark/45" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[url('/images/Susie_favicon.png')] bg-cover bg-center opacity-55"
+        />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-purple-dark/60" />
         <Link
           href={resultsMode ? consultationUrl : "/body-reset"}
           target={resultsMode ? "_blank" : undefined}

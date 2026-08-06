@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 320" role="img" aria-label="Decorative butterfly background">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#33205f"/>
+      <stop offset="0.5" stop-color="#4b2f7c"/>
+      <stop offset="1" stop-color="#382368"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="65%">
+      <stop offset="0" stop-color="#7e5ac2" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#7e5ac2" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="1.5"/></filter>
+  </defs>
+  <rect width="1600" height="320" fill="url(#bg)"/>
+  <rect width="1600" height="320" fill="url(#glow)"/>
+
+  <g opacity=".18" fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round">
+    <path d="M38 32c76-10 148 48 153 121 5 69-52 126-121 132-59 5-110-30-131-76"/>
+    <path d="M286 32c-76-10-148 48-153 121-5 69 52 126 121 132 59 5 110-30 131-76"/>
+    <path d="M1215 32c76-10 148 48 153 121 5 69-52 126-121 132-59 5-110-30-131-76"/>
+    <path d="M1463 32c-76-10-148 48-153 121-5 69 52 126 121 132 59 5 110-30 131-76"/>
+  </g>
+
+  <g opacity=".22" fill="#a98adc" stroke="#d8c5ff" stroke-width="3">
+    <g transform="translate(100 32) rotate(-10 130 125)">
+      <path d="M130 132C65 72 8 58 4 100c-4 48 54 92 117 74z"/>
+      <path d="M130 132c65-60 122-74 126-32 4 48-54 92-117 74z"/>
+      <path d="M126 138c-48 42-82 85-52 106 30 21 70-22 64-89z"/>
+      <path d="M134 138c48 42 82 85 52 106-30 21-70-22-64-89z"/>
+      <ellipse cx="130" cy="136" rx="10" ry="35" fill="#d8c5ff"/>
+    </g>
+    <g transform="translate(1260 16) rotate(9 130 125)">
+      <path d="M130 132C65 72 8 58 4 100c-4 48 54 92 117 74z"/>
+      <path d="M130 132c65-60 122-74 126-32 4 48-54 92-117 74z"/>
+      <path d="M126 138c-48 42-82 85-52 106 30 21 70-22 64-89z"/>
+      <path d="M134 138c48 42 82 85 52 106-30 21-70-22-64-89z"/>
+      <ellipse cx="130" cy="136" rx="10" ry="35" fill="#d8c5ff"/>
+    </g>
+  </g>
+
+  <g opacity=".12" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" transform="translate(645 35)">
+    <path d="M155 93c-44-73-143-51-145 23-2 62 69 104 145 169"/>
+    <path d="M155 93c44-73 143-51 145 23 2 62-69 104-145 169"/>
+    <path d="M155 96c-35 63-67 105-118 145"/>
+    <path d="M155 96c35 63 67 105 118 145"/>
+  </g>
+
+  <g fill="#c7a55a" opacity=".32" filter="url(#soft)">
+    <circle cx="360" cy="55" r="4"/><circle cx="405" cy="250" r="3"/><circle cx="1180" cy="72" r="4"/><circle cx="1135" cy="255" r="3"/>
+    <circle cx="520" cy="95" r="2.5"/><circle cx="1080" cy="215" r="2.5"/>
+  </g>
+</svg>

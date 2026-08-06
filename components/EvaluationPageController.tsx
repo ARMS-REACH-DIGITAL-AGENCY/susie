@@ -67,8 +67,7 @@ export default function EvaluationPageController() {
     const style = document.createElement("style");
     style.id = "body-reset-responsive-hero";
     style.textContent = `
-      /* The route layout removes top padding for the landing hero. Restore
-         fixed-header clearance only for the quiz and results stages. */
+      /* Keep quiz and results content below the fixed navigation. */
       .evaluation-quiz-active .body-reset-route > main,
       .evaluation-results-active .body-reset-route > main {
         padding-top: 5rem !important;
@@ -81,98 +80,21 @@ export default function EvaluationPageController() {
         }
       }
 
-      @media (max-width: 767px) {
-        .body-reset-route.evaluation-landing-active main > section:first-child > div > div {
-          min-height: calc(100svh - 4rem) !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child > div > div > div.absolute.inset-0 {
-          background: linear-gradient(180deg, rgba(30,20,16,.12) 0%, rgba(30,20,16,.28) 30%, rgba(30,20,16,.72) 58%, rgba(20,12,10,.96) 100%) !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child > div > div > div.relative.z-10 {
-          min-height: calc(100svh - 4rem) !important;
-          padding: 4.5rem 1.25rem 1rem !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child h1 {
-          font-size: clamp(2.05rem, 9.2vw, 2.45rem) !important;
-          line-height: .94 !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child h1 + p {
-          margin-top: .65rem !important;
-          font-size: .82rem !important;
-          line-height: 1.45 !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child h1 + p + p {
-          margin-top: .4rem !important;
-          font-size: .86rem !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form {
-          margin-top: .8rem !important;
-          padding: .75rem !important;
-          border-radius: 1rem !important;
-          background: rgba(25,16,14,.42) !important;
-          backdrop-filter: blur(5px) !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form .space-y-2\\.5 > :not([hidden]) ~ :not([hidden]) {
-          margin-top: .45rem !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form .input-field {
-          min-height: 3rem !important;
-          padding: .7rem .9rem !important;
-          font-size: .95rem !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form label {
-          color: rgba(255,255,255,.92) !important;
-          font-size: .66rem !important;
-          line-height: 1.35 !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form label input {
-          flex: 0 0 auto !important;
-          width: 1.1rem !important;
-          height: 1.1rem !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form button[type="submit"] {
-          min-height: 3rem !important;
-          padding-top: .65rem !important;
-          padding-bottom: .65rem !important;
-        }
+      /* Keep the woman's head visible when the hero image is cropped. */
+      .evaluation-landing-active .body-reset-route img[alt="Woman looking thoughtfully in the mirror"] {
+        object-position: center top !important;
       }
 
-      @media (min-width: 768px) and (max-width: 1023px) {
-        .body-reset-route.evaluation-landing-active main > section:first-child > div > div > div {
-          padding-top: 7.5rem !important;
-        }
+      /* Add contrast behind the approved white hero copy. */
+      .evaluation-landing-active .body-reset-route main > section:first-child .text-white h1,
+      .evaluation-landing-active .body-reset-route main > section:first-child .text-white > p {
+        text-shadow: 0 2px 8px rgba(0,0,0,.72), 0 1px 2px rgba(0,0,0,.9) !important;
       }
 
-      @media (min-width: 1024px) and (orientation: landscape) {
-        .body-reset-route.evaluation-landing-active main > section:first-child {
-          padding-left: 1.5rem !important;
-          padding-right: 1.5rem !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child > div > div {
-          min-height: 0 !important;
-          height: clamp(620px, calc(100vh - 80px), 760px) !important;
-          max-height: 760px !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child > div > div > div {
-          display: grid !important;
-          grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr) !important;
-          min-height: 100% !important;
-          height: 100% !important;
-          align-items: center !important;
-          gap: clamp(2rem, 4vw, 4rem) !important;
-          padding: clamp(2rem, 3.5vw, 3.5rem) !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child h1 {
-          max-width: 720px !important;
-          font-size: clamp(3.25rem, 4.7vw, 5.1rem) !important;
-          line-height: 0.95 !important;
-        }
-        .body-reset-route.evaluation-landing-active main > section:first-child form {
-          width: 100% !important;
-          max-width: 470px !important;
-          margin-top: 0 !important;
-          justify-self: end !important;
-        }
+      /* The consent copy sits over a dark translucent panel. */
+      .evaluation-landing-active .body-reset-route main > section:first-child form label {
+        color: rgba(255,255,255,.98) !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,.9) !important;
       }
     `;
     document.head.appendChild(style);

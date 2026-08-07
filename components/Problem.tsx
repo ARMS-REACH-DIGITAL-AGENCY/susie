@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 type Slide =
   | { kind: "symptom"; label: string; microcopy: string; image: string }
-  | { kind: "review"; quote: string; author: string };
+  | { kind: "review"; quote: string; author: string; source?: string };
 
 const slides: Slide[] = [
   { kind: "symptom", label: "Don’t feel like yourself", microcopy: "“I don’t recognize the woman in the mirror.” Susie is here to help you rediscover that woman.", image: "/images/symptom-yourself.png" },
@@ -17,6 +17,7 @@ const slides: Slide[] = [
   { kind: "symptom", label: "Brain fog", microcopy: "“I walk into a room and forget why. I can’t focus like I used to.” Let’s help you feel clear and focused again.", image: "/images/symptom-foggy.png" },
   { kind: "symptom", label: "Stuck — nothing works", microcopy: "“I’ve tried things before, but nothing seems to last.” Stop guessing and find the right first step.", image: "/images/symptom-stuck.png" },
   { kind: "symptom", label: "Uncomfortable in your body", microcopy: "“My body doesn’t feel like mine anymore.” Let’s help you feel more comfortable and at home again.", image: "/images/symptom-uncomfortable.png" },
+  { kind: "review", quote: "I was extremely happy with the results that I got and lost a couple inches. Susie is very professional and very easy to talk to.", author: "Mary H.", source: "Google Review" },
 ];
 
 export default function Problem() {
@@ -47,7 +48,11 @@ export default function Problem() {
                     <div className="mb-3 text-lg text-gold">★★★★★</div>
                     <p className="font-serif text-xl font-light italic leading-relaxed text-[#2c1f14]">“{slide.quote}”</p>
                     <p className="mt-4 text-xs font-sans font-medium uppercase tracking-widest text-purple/60">— {slide.author}</p>
-                    <p className="mt-3 text-[10px] font-sans font-light leading-relaxed text-muted/70">Individual results vary. Testimonial shared from a Susie Sculpts client.</p>
+                    {slide.source ? (
+                      <p className="mt-2 text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-purple/45">{slide.source}</p>
+                    ) : (
+                      <p className="mt-3 text-[10px] font-sans font-light leading-relaxed text-muted/70">Individual results vary. Testimonial shared from a Susie Sculpts client.</p>
+                    )}
                   </article>
                 ),
               )}

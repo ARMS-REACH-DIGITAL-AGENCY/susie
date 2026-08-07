@@ -1,0 +1,24 @@
+.body-reset-route div[role="button"][aria-label^="Flip "] {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  padding: 0.25rem !important;
+}
+
+.body-reset-route div[role="button"][aria-label^="Flip "] > section {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.body-reset-route div[role="button"][aria-label^="Flip "] > p:last-child {
+  display: none !important;
+}
+
+.body-reset-route div[role="button"][aria-label^="Flip "] > section > div:last-child {
+  padding-bottom: 1rem;
+}
+
+.body-reset-route div[role="button"][aria-label^="Flip "] a {
+  scroll-margin-bottom: 1rem;
+}

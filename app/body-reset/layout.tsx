@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EvaluationPageController from "@/components/EvaluationPageController";
 import EvaluationTrustSections from "@/components/EvaluationTrustSections";
+import "./results-flip-card.css";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;

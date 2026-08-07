@@ -4,22 +4,20 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 const socials = [
-  ["Instagram", "https://www.instagram.com/susiesculpts"],
-  ["Facebook", "#"],
-  ["Google", "https://g.page/susiesculpts"],
-  ["X", "#"],
-  ["YouTube", "#"],
-  ["TikTok", "#"],
+  ["LinkedIn", "https://www.linkedin.com/in/susie-bute-7784a835?utm_source=share_via&utm_content=profile&utm_medium=member_android"],
+  ["Instagram", "https://www.instagram.com/susiesculpts?igsh=bDZkd3lnd3J4OTlw"],
+  ["Google", "https://share.google/FV3eZee8jMbh0zwYd"],
+  ["Facebook", "https://www.facebook.com/share/1HDw3mB8Ew/"],
+  ["TikTok", "https://www.tiktok.com/@susie.bute?_r=1&_t=ZT-98gx5ML4Rxd"],
 ] as const;
 
 function SocialIcon({ label }: { label: string }) {
   const shared = { width: 17, height: 17, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
   const icons: Record<string, ReactNode> = {
+    LinkedIn: <svg {...shared}><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7.5 10v7" /><path d="M7.5 7.5v.01" /><path d="M11.5 17v-4a3 3 0 0 1 6 0v4" /><path d="M11.5 10v7" /></svg>,
     Instagram: <svg {...shared}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none" /></svg>,
     Facebook: <svg {...shared}><path d="M14 8h3V4.5A16 16 0 0 0 14.4 4C11.8 4 10 5.6 10 8.5V11H7v4h3v6h4v-6h3l.6-4H14V8.8c0-.6.2-.8 0-.8Z" fill="currentColor" stroke="none" /></svg>,
     Google: <svg {...shared}><path d="M21 12.2c0-.7-.1-1.4-.2-2H12v3.7h5.1a4.4 4.4 0 0 1-1.9 2.9v2.4h3.1c1.8-1.7 2.7-4.1 2.7-7Z" /><path d="M12 21c2.5 0 4.6-.8 6.3-2.2l-3.1-2.4c-.9.6-2 .9-3.2.9-2.4 0-4.5-1.6-5.2-3.8H3.6V16A9.5 9.5 0 0 0 12 21Z" /><path d="M6.8 13.5a5.7 5.7 0 0 1 0-3V8H3.6a9.5 9.5 0 0 0 0 8l3.2-2.5Z" /><path d="M12 6.7c1.4 0 2.6.5 3.5 1.4l2.7-2.7A9 9 0 0 0 3.6 8l3.2 2.5c.7-2.2 2.8-3.8 5.2-3.8Z" /></svg>,
-    X: <svg {...shared}><path d="m5 4 14 16M19 4 5 20" /></svg>,
-    YouTube: <svg {...shared}><rect x="3" y="6" width="18" height="12" rx="4" /><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none" /></svg>,
     TikTok: <svg {...shared}><path d="M15 4v10.2a4.2 4.2 0 1 1-3.2-4.1" /><path d="M15 4c.8 2.2 2.4 3.5 5 3.7" /></svg>,
   };
   return icons[label] ?? null;
@@ -45,10 +43,8 @@ export default function Footer() {
             <div className="flex flex-wrap gap-2">
               {socials.map(([label, href]) => {
                 const classes = "flex h-9 w-9 items-center justify-center rounded-full border border-cream/25 text-cream transition hover:border-cream/70 hover:bg-cream/10";
-                return href === "#" ? (
-                  <span key={label} aria-label={`${label} link coming soon`} title={`${label} link coming soon`} className={`${classes} opacity-55`}><SocialIcon label={label} /></span>
-                ) : (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={classes}><SocialIcon label={label} /></a>
+                return (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label === "Google" ? "Google Business Profile" : label} title={label === "Google" ? "Google Business Profile" : label} className={classes}><SocialIcon label={label} /></a>
                 );
               })}
             </div>

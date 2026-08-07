@@ -10,14 +10,14 @@ type Slide =
 const slides: Slide[] = [
   { kind: "symptom", label: "Don’t feel like yourself", microcopy: "“I don’t recognize the woman in the mirror.” Susie is here to help you rediscover that woman.", image: "/images/symptom-yourself.png" },
   { kind: "review", quote: "I am so grateful to Susie and her expertise on Synergie. I lost 26 pounds and went down 2 sizes.", author: "Leslie Y." },
+  { kind: "symptom", label: "Uncomfortable in your body", microcopy: "“My body doesn’t feel like mine anymore.” Let’s help you feel more comfortable and at home again.", image: "/images/symptom-uncomfortable.png" },
+  { kind: "review", quote: "I was extremely happy with the results that I got and lost a couple inches. Susie is very professional and very easy to talk to.", author: "Mary H.", source: "Google Review" },
   { kind: "symptom", label: "Puffy or bloated", microcopy: "“My rings are tight. My clothes don’t fit the same. I just feel puffy.” Let’s support healthy lymphatic flow so you can feel lighter again.", image: "/images/symptom-puffy.png" },
   { kind: "symptom", label: "Inflamed or achy", microcopy: "“Everything aches. I wake up stiff. My body hurts for no reason.” Let’s help support recovery naturally.", image: "/images/symptom-achy.png" },
   { kind: "symptom", label: "Heavy or sluggish", microcopy: "“I feel like I’m dragging all day. Even simple things feel harder.” Your body deserves better support.", image: "/images/symptom-heavy.png" },
   { kind: "symptom", label: "Always exhausted?", microcopy: "“I slept, but I still feel exhausted. Coffee isn’t helping anymore.” Let’s help your body recover and recharge.", image: "/images/symptom-tired.png" },
   { kind: "symptom", label: "Brain fog", microcopy: "“I walk into a room and forget why. I can’t focus like I used to.” Let’s help you feel clear and focused again.", image: "/images/symptom-foggy.png" },
   { kind: "symptom", label: "Stuck — nothing works", microcopy: "“I’ve tried things before, but nothing seems to last.” Stop guessing and find the right first step.", image: "/images/symptom-stuck.png" },
-  { kind: "symptom", label: "Uncomfortable in your body", microcopy: "“My body doesn’t feel like mine anymore.” Let’s help you feel more comfortable and at home again.", image: "/images/symptom-uncomfortable.png" },
-  { kind: "review", quote: "I was extremely happy with the results that I got and lost a couple inches. Susie is very professional and very easy to talk to.", author: "Mary H.", source: "Google Review" },
 ];
 
 export default function Problem() {

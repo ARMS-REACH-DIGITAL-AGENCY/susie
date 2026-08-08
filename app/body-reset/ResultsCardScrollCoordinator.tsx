@@ -32,7 +32,24 @@ function prepareCard(back: HTMLElement) {
   if (!front) return;
 
   front.dataset.resultsCardFront = "true";
-  card.dataset.cardTitle = front.querySelector("h3")?.textContent?.trim() || "";
+
+  let header = card.querySelector<HTMLElement>(":scope > .results-card-shared-header");
+  if (!header) {
+    header = document.createElement("div");
+    header.className = "results-card-shared-header";
+    header.setAttribute("aria-hidden", "true");
+
+    const eyebrow = document.createElement("p");
+    eyebrow.className = "results-card-shared-eyebrow";
+    eyebrow.textContent = front.querySelector("p")?.textContent?.trim() || "Treatment Series";
+
+    const title = document.createElement("p");
+    title.className = "results-card-shared-title";
+    title.textContent = front.querySelector("h3")?.textContent?.trim() || "";
+
+    header.append(eyebrow, title);
+    card.insertBefore(header, inner);
+  }
 }
 
 export default function ResultsCardScrollCoordinator() {
@@ -51,8 +68,8 @@ export default function ResultsCardScrollCoordinator() {
           if (!card) return;
 
           const rect = card.getBoundingClientRect();
-          const active = Math.abs(rect.top - top) <= 12;
-          back.dataset.scrollActive = active ? "true" : "false";
+          const aligned = Math.abs(rect.top - top) <= 10;
+          back.dataset.scrollActive = aligned ? "true" : "false";
         });
       });
     };
@@ -74,6 +91,8 @@ export default function ResultsCardScrollCoordinator() {
             const distance = rect.top - stickyTop();
             if (Math.abs(distance) > 2) {
               window.scrollTo({ top: window.scrollY + distance, behavior: "smooth" });
+            } else if (back) {
+              back.dataset.scrollActive = "true";
             }
           });
         }

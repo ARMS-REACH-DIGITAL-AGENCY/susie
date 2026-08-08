@@ -5,56 +5,34 @@
 
 .body-reset-route #full-treatment-list > div:last-child > div {
   position: relative;
-  display: flex;
   height: calc(100dvh - var(--results-card-top) - var(--results-card-bottom));
   min-height: 0 !important;
-  flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(90, 43, 170, 0.15);
   border-radius: 24px;
-  background: #fff;
   scroll-margin-top: var(--results-card-top);
+  --results-card-header-height: 116px;
 }
 
-.body-reset-route .results-card-shared-header {
-  flex: 0 0 auto;
-  width: 100%;
+.body-reset-route #full-treatment-list > div:last-child > div > div:not(.results-card-persistent-header) {
+  height: 100%;
+  min-height: 0 !important;
+}
+
+.body-reset-route .results-card-persistent-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 30;
+  min-height: var(--results-card-header-height);
+  border-radius: 24px 24px 0 0;
   border-bottom: 1px solid rgba(90, 43, 170, 0.12);
   background: #fff;
-  padding: 1.3rem 1.25rem 1rem;
+  padding: 1.35rem 1.25rem 1rem;
   text-align: center;
-}
-
-.body-reset-route .results-card-shared-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #b79a5f;
-}
-
-.body-reset-route .results-card-shared-title {
-  margin-top: 0.65rem;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.875rem;
-  font-weight: 300;
-  line-height: 1.12;
-  color: #2c1f14;
-}
-
-.body-reset-route #full-treatment-list > div:last-child > div > div:not(.results-card-shared-header) {
-  position: relative;
-  flex: 1 1 auto;
-  height: auto !important;
-  min-height: 0 !important;
-  overflow: hidden;
+  pointer-events: none;
 }
 
 .body-reset-route [data-results-card-front="true"] {
-  border: 0 !important;
-  border-radius: 0 !important;
-  padding-top: 1rem !important;
+  padding-top: calc(var(--results-card-header-height) + 0.75rem) !important;
   pointer-events: auto !important;
 }
 
@@ -67,8 +45,7 @@
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
-  border-radius: 0 !important;
-  padding: 0.25rem !important;
+  padding: var(--results-card-header-height) 0.25rem 0.25rem !important;
 }
 
 .body-reset-route [data-results-card-back="true"] > section {
@@ -118,7 +95,11 @@
     --results-card-bottom: 82px;
   }
 
-  .body-reset-route .results-card-shared-header {
+  .body-reset-route #full-treatment-list > div:last-child > div {
+    --results-card-header-height: 124px;
+  }
+
+  .body-reset-route .results-card-persistent-header {
     padding: 1.5rem 1.5rem 1.1rem;
   }
 }

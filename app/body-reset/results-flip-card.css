@@ -20,16 +20,19 @@
   overflow: visible;
   border-bottom: 1px solid rgba(90, 43, 170, 0.1);
   background: #fff;
+  padding: 12px 22px !important;
 }
 
-/* Pricing-side header: use the full treatment artwork, not an icon inside a white badge. */
+/* Pricing-side header should read as one compact unit: icon + eyebrow + title. */
 .body-reset-route .results-back-heading > div {
-  gap: 14px !important;
+  align-items: center !important;
+  gap: 10px !important;
 }
 
 .body-reset-route .results-back-heading > div > div:first-child {
-  width: 66px !important;
-  height: 66px !important;
+  width: 58px !important;
+  height: 58px !important;
+  flex: 0 0 58px !important;
   overflow: visible !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -41,9 +44,15 @@
   object-fit: contain !important;
 }
 
+.body-reset-route .results-back-heading .section-label {
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
 .body-reset-route .results-back-heading h3 {
-  font-size: 1.2rem !important;
-  line-height: 1.05 !important;
+  margin-top: 4px !important;
+  font-size: 1.35rem !important;
+  line-height: 1.02 !important;
   white-space: nowrap !important;
 }
 
@@ -116,9 +125,14 @@
     --results-card-bottom: 82px;
   }
 
+  .body-reset-route .results-back-heading {
+    padding: 14px 24px !important;
+  }
+
   .body-reset-route .results-back-heading > div > div:first-child {
-    width: 76px !important;
-    height: 76px !important;
+    width: 66px !important;
+    height: 66px !important;
+    flex-basis: 66px !important;
   }
 
   .body-reset-route .results-back-heading h3,

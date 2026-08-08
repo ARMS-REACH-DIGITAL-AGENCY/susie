@@ -30,25 +30,29 @@ function prepareCard(back: HTMLElement) {
 
   const front = Array.from(inner.children).find((child) => child.tagName === "BUTTON") as HTMLButtonElement | undefined;
   if (!front) return;
-
   front.dataset.resultsCardFront = "true";
 
-  let header = card.querySelector<HTMLElement>(":scope > .results-card-shared-header");
+  let header = card.querySelector<HTMLElement>(":scope > .results-card-persistent-header");
   if (!header) {
     header = document.createElement("div");
-    header.className = "results-card-shared-header";
+    header.className = "results-card-persistent-header";
     header.setAttribute("aria-hidden", "true");
 
     const eyebrow = document.createElement("p");
-    eyebrow.className = "results-card-shared-eyebrow";
+    eyebrow.className = "section-label";
     eyebrow.textContent = front.querySelector("p")?.textContent?.trim() || "Treatment Series";
 
     const title = document.createElement("p");
-    title.className = "results-card-shared-title";
+    title.className = "mt-3 font-serif text-3xl font-light leading-tight text-[#2c1f14]";
     title.textContent = front.querySelector("h3")?.textContent?.trim() || "";
 
     header.append(eyebrow, title);
-    card.insertBefore(header, inner);
+    card.appendChild(header);
+  }
+
+  const headerHeight = Math.ceil(header.getBoundingClientRect().height);
+  if (headerHeight > 0) {
+    card.style.setProperty("--results-card-header-height", `${headerHeight}px`);
   }
 }
 

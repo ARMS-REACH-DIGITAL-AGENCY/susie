@@ -1,16 +1,12 @@
 .body-reset-route #full-treatment-list {
-  --results-sticky-top: 72px;
-  --results-sticky-bottom: 76px;
+  --results-card-top: 72px;
+  --results-card-bottom: 76px;
 }
 
 .body-reset-route #full-treatment-list > div:last-child > div {
-  position: sticky;
-  top: var(--results-sticky-top);
-  z-index: 1;
-  align-self: start;
-  height: calc(100dvh - var(--results-sticky-top) - var(--results-sticky-bottom));
+  height: calc(100dvh - var(--results-card-top) - var(--results-card-bottom));
   min-height: 0 !important;
-  scroll-margin-top: var(--results-sticky-top);
+  scroll-margin-top: var(--results-card-top);
 }
 
 .body-reset-route #full-treatment-list > div:last-child > div > div {
@@ -40,10 +36,14 @@
 .body-reset-route div[role="button"][aria-label^="Flip "] > section {
   flex: 1 1 auto;
   min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior-y: auto;
+  overflow-y: hidden;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+}
+
+.body-reset-route div[role="button"][aria-label^="Flip "][data-scroll-active="true"] > section {
+  overflow-y: auto;
+  overscroll-behavior-y: auto;
 }
 
 .body-reset-route div[role="button"][aria-label^="Flip "] > p:last-child {
@@ -60,7 +60,7 @@
 
 @media (min-width: 768px) {
   .body-reset-route #full-treatment-list {
-    --results-sticky-top: 88px;
-    --results-sticky-bottom: 82px;
+    --results-card-top: 88px;
+    --results-card-bottom: 82px;
   }
 }

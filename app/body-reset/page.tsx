@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Footer from "@/components/Footer";
 
 type Key = "ultimate" | "pemf" | "lymphatic" | "fascia" | "pelvic" | "contour" | "muscle";
 type Product = { count: number; price: number; duration: number | null; href: string };
-type Offer = { key: Key; name: string; short: string; icon: string; description: string; included: string[]; products: Product[] };
+type Offer = { key: Key; name: string; short: string; icon: string; description: string; included: string[]; benefits: string[]; products: Product[] };
 type Fields = { firstName: string; email: string; phone: string; consent: boolean; symptoms: string[]; tried: string[]; goals: string[]; priority: string; urgency: string };
 type SavedState = { version: 2; leadCaptured: boolean; step: number; status: "quiz" | "results"; fields: Fields };
 
@@ -14,13 +14,13 @@ const STORAGE_KEY = "susie-sculpts-evaluation-v2";
 const consultationUrl = "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 
 const offers: Offer[] = [
-  { key: "ultimate", name: 'The Ultimate "YOU" Experience', short: "Ultimate YOU", icon: "/images/susie.jpg", description: "Susie’s complete six-treatment experience when several goals matter or you want help identifying the best focused path.", included: ["One Body Contouring treatment", "One Fascia and Skin Revival treatment", "One Lymphatic Wellness treatment", "One Muscle + Strength + Tone treatment", "One Pelvic Floor Strengthening treatment", "One PEMF Recovery and Wellness treatment"], products: [{ count: 6, price: 1297, duration: null, href: "https://api.armsreachdigital.com/payment-link/6a6da6b87b99151a54041af5" }] },
-  { key: "muscle", name: "Muscle + Strength + Tone Series", short: "Muscle + Strength + Tone", icon: "/images/treatment-muscle.png", description: "Muscle activation, strengthening, toning, and body-sculpting support.", included: ["EMShape muscle activation", "Strengthening and toning support", "50-minute appointments"], products: [{ count: 20, price: 5997, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da301a655fa0b802a7622" }, { count: 10, price: 3997, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da29c7b99151a54041ae9" }, { count: 5, price: 2497, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da211a655fa0b802a7620" }, { count: 1, price: 597, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da028a655fa0b802a761d" }] },
-  { key: "contour", name: "Body Contouring Series", short: "Body Contouring", icon: "/images/treatment-contour.png", description: "Targeted support for inches, stubborn areas, skin tightening, and contouring goals.", included: ["Ultrasonic cavitation", "RF skin-tightening support", "55-minute appointments"], products: [{ count: 20, price: 3197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da44fa655fa0b802a7625" }, { count: 10, price: 1697, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da41ea655fa0b802a7624" }, { count: 5, price: 897, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da3e57b99151a54041aee" }, { count: 1, price: 197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da32fa655fa0b802a7623" }] },
-  { key: "fascia", name: "Fascia and Skin Revival Series", short: "Fascia + Skin Revival", icon: "/images/treatment-fascia.png", description: "Fascia, circulation, skin-texture, and smoothing support.", included: ["Rollerwave fascia treatment", "Circulation and skin-texture support", "55-minute appointments"], products: [{ count: 20, price: 3197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da7f07b99151a54041af8" }, { count: 10, price: 1697, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da84e7b99151a54041af9" }, { count: 5, price: 897, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da727a655fa0b802a7629" }, { count: 1, price: 197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da6ec7b99151a54041af6" }] },
-  { key: "pelvic", name: "Pelvic Floor Strengthening Series", short: "Pelvic Floor Strengthening", icon: "/images/treatment-pelvic.png", description: "Pelvic-floor and deep-core strengthening support in a private, fully clothed session.", included: ["Pelvic-floor muscle activation", "Private, fully clothed treatment", "45-minute appointments"], products: [{ count: 20, price: 3197, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e2f6da655fa0b802a76b8" }, { count: 10, price: 1697, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6da5d87b99151a54041af4" }, { count: 5, price: 897, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6da591a655fa0b802a7627" }, { count: 1, price: 197, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6da4797b99151a54041af1" }] },
-  { key: "lymphatic", name: "Lymphatic Wellness Series", short: "Lymphatic Wellness", icon: "/images/treatment-lymphatic.png", description: "Lymphatic and circulation support for puffiness, bloating, heaviness, and sluggishness.", included: ["Synergie vacuum massage", "Lymphatic-flow and circulation support", "45-minute appointments", "$50 spandex bodysuit included"], products: [{ count: 20, price: 1597, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e1fc77b99151a54041b85" }, { count: 10, price: 897, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e20567b99151a54041b87" }, { count: 5, price: 497, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e221ea655fa0b802a76a6" }, { count: 1, price: 147, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e2307a655fa0b802a76a7" }] },
-  { key: "pemf", name: "PEMF Recovery and Wellness Series", short: "PEMF Recovery + Wellness", icon: "/images/treatment-pemf.png", description: "Recovery and wellness support for aches, fatigue, stress, fogginess, and low energy.", included: ["PEMF recovery and wellness treatment", "Relaxation, circulation, and energy support", "30-minute appointments"], products: [{ count: 20, price: 797, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e20ba7b99151a54041b89" }, { count: 10, price: 497, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e22c57b99151a54041b8c" }, { count: 5, price: 297, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e2370a655fa0b802a76ab" }, { count: 1, price: 67, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e23957b99151a54041b8f" }] },
+  { key: "ultimate", name: 'The Ultimate "YOU" Experience', short: "Ultimate YOU", icon: "/images/susie.jpg", description: "Susie’s complete six-treatment experience when several goals matter or you want help identifying the best focused path.", included: ["One Body Contouring treatment", "One Fascia and Skin Revival treatment", "One Lymphatic Wellness treatment", "One Muscle + Strength + Tone treatment", "One Pelvic Floor Strengthening treatment", "One PEMF Recovery and Wellness treatment"], benefits: [], products: [{ count: 6, price: 1297, duration: null, href: "https://api.armsreachdigital.com/payment-link/6a6da6b87b99151a54041af5" }] },
+  { key: "muscle", name: "Muscle + Strength + Tone Series", short: "Muscle + Strength + Tone", icon: "/images/treatment-muscle.png", description: "Muscle activation, strengthening, toning, and body-sculpting support.", included: ["EMShape muscle activation", "Strengthening and toning support", "50-minute appointments"], benefits: ["Supports muscle activation and strengthening", "Supports toning and body-sculpting goals", "Helps target areas that can be difficult to tone with exercise alone"], products: [{ count: 20, price: 5997, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da301a655fa0b802a7622" }, { count: 10, price: 3997, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da29c7b99151a54041ae9" }, { count: 5, price: 2497, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da211a655fa0b802a7620" }, { count: 1, price: 597, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da028a655fa0b802a761d" }] },
+  { key: "contour", name: "Body Contouring Series", short: "Body Contouring", icon: "/images/treatment-contour.png", description: "Targeted support for inches, stubborn areas, skin tightening, and contouring goals.", included: ["Ultrasonic cavitation", "RF skin-tightening support", "55-minute appointments"], benefits: ["Targets stubborn areas and inch-loss goals", "Supports smoother, firmer-looking skin", "Helps refine body contours"], products: [{ count: 20, price: 3197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da44fa655fa0b802a7625" }, { count: 10, price: 1697, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da41ea655fa0b802a7624" }, { count: 5, price: 897, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da3e57b99151a54041aee" }, { count: 1, price: 197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da32fa655fa0b802a7623" }] },
+  { key: "fascia", name: "Fascia and Skin Revival Series", short: "Fascia + Skin Revival", icon: "/images/treatment-fascia.png", description: "Fascia, circulation, skin-texture, and smoothing support.", included: ["Rollerwave fascia treatment", "Circulation and skin-texture support", "55-minute appointments"], benefits: ["Supports fascia mobility and circulation", "Supports smoother-looking skin texture", "Helps address the appearance of cellulite"], products: [{ count: 20, price: 3197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da7f07b99151a54041af8" }, { count: 10, price: 1697, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da84e7b99151a54041af9" }, { count: 5, price: 897, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da727a655fa0b802a7629" }, { count: 1, price: 197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da6ec7b99151a54041af6" }] },
+  { key: "pelvic", name: "Pelvic Floor Strengthening Series", short: "Pelvic Floor Strengthening", icon: "/images/treatment-pelvic.png", description: "Pelvic-floor and deep-core strengthening support in a private, fully clothed session.", included: ["Pelvic-floor muscle activation", "Private, fully clothed treatment", "45-minute appointments"], benefits: ["Supports pelvic-floor strength", "Supports deep-core activation", "Private, fully clothed sessions"], products: [{ count: 20, price: 3197, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e2f6da655fa0b802a76b8" }, { count: 10, price: 1697, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6da5d87b99151a54041af4" }, { count: 5, price: 897, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6da591a655fa0b802a7627" }, { count: 1, price: 197, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6da4797b99151a54041af1" }] },
+  { key: "lymphatic", name: "Lymphatic Wellness Series", short: "Lymphatic Wellness", icon: "/images/treatment-lymphatic.png", description: "Lymphatic and circulation support for puffiness, bloating, heaviness, and sluggishness.", included: ["Synergie vacuum massage", "Lymphatic-flow and circulation support", "45-minute appointments", "$50 spandex bodysuit included"], benefits: ["Supports healthy lymphatic flow", "Supports circulation and wellness", "Helps you feel lighter and less puffy"], products: [{ count: 20, price: 1597, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e1fc77b99151a54041b85" }, { count: 10, price: 897, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e20567b99151a54041b87" }, { count: 5, price: 497, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e221ea655fa0b802a76a6" }, { count: 1, price: 147, duration: 45, href: "https://api.armsreachdigital.com/payment-link/6a6e2307a655fa0b802a76a7" }] },
+  { key: "pemf", name: "PEMF Recovery and Wellness Series", short: "PEMF Recovery + Wellness", icon: "/images/treatment-pemf.png", description: "Recovery and wellness support for aches, fatigue, stress, fogginess, and low energy.", included: ["PEMF recovery and wellness treatment", "Relaxation, circulation, and energy support", "30-minute appointments"], benefits: ["Supports recovery and relaxation", "Supports circulation and energy", "Designed for aches, fatigue, stress, and fogginess"], products: [{ count: 20, price: 797, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e20ba7b99151a54041b89" }, { count: 10, price: 497, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e22c57b99151a54041b8c" }, { count: 5, price: 297, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e2370a655fa0b802a76ab" }, { count: 1, price: 67, duration: 30, href: "https://api.armsreachdigital.com/payment-link/6a6e23957b99151a54041b8f" }] },
 ];
 
 const symptoms = [["Puffy/bloated", "/images/symptom-puffy.png"], ["Inflamed/achy", "/images/symptom-achy.png"], ["Heavy/sluggish", "/images/symptom-heavy.png"], ["Tired all the time", "/images/symptom-tired.png"], ["Foggy/unfocused", "/images/symptom-foggy.png"], ["Stuck—nothing works", "/images/symptom-stuck.png"], ["Uncomfortable in my body", "/images/symptom-uncomfortable.png"], ["Don’t feel like myself", "/images/symptom-yourself.png"]] as const;
@@ -52,56 +52,61 @@ function ChoiceButton({ label, selected, onClick }: { label: string; selected: b
   return <button type="button" onClick={onClick} className={`relative min-h-[42px] rounded-sm border px-3 py-2 text-left text-[13px] font-light leading-tight transition md:min-h-[46px] md:px-4 md:text-sm ${selected ? "border-purple bg-purple text-white" : "border-stone bg-stone/40 text-muted hover:border-purple/40"}`}>{label}{selected && <span className="absolute right-2 top-1/2 -translate-y-1/2">✓</span>}</button>;
 }
 
-function ProductCard({ offer, product, featured = false }: { offer: Offer; product: Product; featured?: boolean }) {
+function ProductCard({ offer, product }: { offer: Offer; product: Product }) {
   const isUltimate = offer.key === "ultimate";
   const isLymphatic = offer.key === "lymphatic";
   const isSingle = product.count === 1;
   const treatmentValue = isLymphatic ? (product.price - 50) / product.count : product.price / product.count;
   const detail = isUltimate
-    ? "Designed to be completed over approximately one week: two treatments per day, every other day, such as Monday, Wednesday, and Friday."
+    ? "Six treatments across Susie’s signature modalities"
     : isSingle
       ? `${product.duration}-minute treatment${isLymphatic ? " · $50 spandex bodysuit included" : ""}`
       : `${money(treatmentValue)} per ${product.duration}-minute treatment${isLymphatic ? " · $50 spandex bodysuit included" : ""}`;
   const label = isUltimate ? "The Complete Experience" : isSingle ? "Single Treatment" : `${product.count}-Treatment Series`;
-  const cta = isUltimate ? 'Choose the Ultimate "YOU" Experience' : `Choose ${product.count} ${product.count === 1 ? "Session" : "Sessions"}`;
+  const cta = isUltimate ? 'Purchase the Ultimate "YOU" Experience' : `Purchase ${product.count} ${product.count === 1 ? "Session" : "Sessions"}`;
 
-  return <div className={`rounded-[18px] border p-4 md:p-5 ${featured ? "border-purple/35 bg-purple/5 shadow-sm" : "border-stone bg-white"}`}>
-    <p className="section-label mb-3">{label}</p>
-    <div className="rounded-[14px] border border-purple/10 bg-white/85 p-4 text-center">
-      <p className="font-serif text-4xl font-light text-purple">{money(product.price)}</p>
-      <p className="mx-auto mt-2 max-w-2xl font-sans text-xs font-medium leading-relaxed text-muted">{detail}</p>
+  return <div className="rounded-[16px] border border-stone bg-white p-3.5 md:p-4">
+    <div className="flex items-start justify-between gap-3">
+      <div><p className="section-label mb-1.5">{label}</p><p className="text-xs font-medium leading-relaxed text-muted">{detail}</p></div>
+      <p className="shrink-0 font-serif text-3xl font-light text-purple">{money(product.price)}</p>
     </div>
-    <a href={product.href} onClick={(event) => event.stopPropagation()} className={`${featured ? "btn-primary" : "btn-secondary"} mt-4 flex min-h-12 w-full items-center justify-center px-5 py-3 text-center leading-snug`}>{cta}</a>
+    <a href={product.href} onClick={(event) => event.stopPropagation()} className="btn-secondary mt-3 flex min-h-11 w-full items-center justify-center px-4 py-2.5 text-center text-sm leading-snug">{cta}</a>
   </div>;
 }
 
-function FamilySection({ offer, recommended = false }: { offer: Offer; recommended?: boolean }) {
-  return <section className={`rounded-[22px] border p-5 md:p-6 ${recommended ? "border-purple/25 bg-white" : "border-stone bg-stone/25"}`}>
-    <div className="treatment-family-sticky-header">
-      <div className="flex items-start gap-3">
-        <div className="relative mt-1 h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white"><Image src={offer.icon} alt="" fill className="object-contain" /></div>
-        <div><p className="section-label mb-1">{recommended ? "Susie’s Recommended Series" : "Treatment Series"}</p><h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3></div>
-      </div>
-      <p className="mt-3 text-sm font-light leading-relaxed text-muted">{offer.description}</p>
-    </div>
-    <div className="mb-4 rounded-[16px] border border-purple/10 bg-white/80 p-4"><p className="section-label mb-2">What’s Included</p><ul className="grid gap-2 text-sm font-light text-muted sm:grid-cols-2">{offer.included.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">✦</span><span>{item}</span></li>)}</ul></div>
-    <div className="space-y-4">{offer.products.map((product, index) => <ProductCard key={`${offer.key}-${product.count}`} offer={offer} product={product} featured={recommended && index === 0} />)}</div>
-  </section>;
-}
+function FlipCard({ offer, initiallyFlipped = false }: { offer: Offer; initiallyFlipped?: boolean }) {
+  const [flipped, setFlipped] = useState(initiallyFlipped);
+  const pricingRef = useRef<HTMLDivElement>(null);
+  const highlights = offer.key === "ultimate" ? offer.included : offer.benefits;
 
-function FlipCard({ offer }: { offer: Offer }) {
-  const [flipped, setFlipped] = useState(false);
-  return <div className="min-h-[720px] [perspective:1400px]">
-    <div className={`relative min-h-[720px] transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
-      <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden]">
+  function showFront() {
+    if (pricingRef.current) pricingRef.current.scrollTop = 0;
+    setFlipped(false);
+  }
+
+  return <div className="results-treatment-card [perspective:1400px]">
+    <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
+      <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden] md:p-6">
         <p className="section-label">Treatment Series</p>
-        <h3 className="mt-3 font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3>
-        <div className="relative mx-auto my-8 min-h-0 w-full flex-1"><Image src={offer.icon} alt={offer.name} fill className="object-contain p-4" sizes="(max-width: 768px) 80vw, 420px" /></div>
+        <h3 className="mt-2.5 font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3>
+        <div className="relative mx-auto my-5 min-h-0 w-full flex-1"><Image src={offer.icon} alt={offer.name} fill className="object-contain p-4" sizes="(max-width: 768px) 80vw, 420px" /></div>
         <p className="mt-auto font-sans text-xs font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Price Options</p>
       </button>
-      <div role="button" tabIndex={0} aria-label={`Flip ${offer.name} card to the front`} onClick={() => setFlipped(false)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") setFlipped(false); }} className="absolute inset-0 cursor-pointer overflow-y-auto rounded-[24px] bg-cream p-1 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-        <FamilySection offer={offer} />
-        <p className="px-4 pb-5 pt-3 text-center font-sans text-xs font-semibold uppercase tracking-[0.14em] text-purple">Tap Anywhere Outside a Purchase Button to Flip Back</p>
+
+      <div role="button" tabIndex={0} aria-label={`Flip ${offer.name} card to the front`} onClick={showFront} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") showFront(); }} className="absolute inset-0 flex cursor-pointer flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div className="results-back-heading shrink-0 bg-white px-5 pb-4 pt-5 text-center md:px-6 md:pt-6">
+          <p className="section-label">Treatment Series</p>
+          <h3 className="mt-2.5 font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3>
+        </div>
+        <div ref={pricingRef} className="results-pricing-scroll min-h-0 flex-1 border-t border-purple/10 bg-cream/60 px-3.5 py-4 md:px-4">
+          <p className="mb-3 text-sm font-light leading-relaxed text-muted">{offer.description}</p>
+          <div className="mb-3 rounded-[14px] border border-purple/10 bg-white/85 p-3.5">
+            <p className="section-label mb-2">{offer.key === "ultimate" ? "What’s Included" : "Benefits"}</p>
+            <ul className="space-y-1.5 text-sm font-light text-muted">{highlights.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">✦</span><span>{item}</span></li>)}</ul>
+          </div>
+          <div className="space-y-3">{offer.products.map((product) => <ProductCard key={`${offer.key}-${product.count}`} offer={offer} product={product} />)}</div>
+          <p className="pb-2 pt-3 text-center text-[10px] font-medium uppercase tracking-[0.12em] text-purple/75">Tap outside a purchase button to return</p>
+        </div>
       </div>
     </div>
   </div>;
@@ -137,9 +142,24 @@ export default function BodyResetPage() {
     const firstName = fields.firstName.trim().split(/\s+/)[0];
     const others = offers.filter((offer) => offer.key !== result.key);
     return <><main className="bg-cream pb-14 pt-20 md:pt-24"><div className="mx-auto max-w-5xl space-y-6 px-4 sm:px-6">
-      <section className="grid gap-5 rounded-[22px] border border-purple/15 bg-white p-5 shadow-sm md:grid-cols-[1fr_180px] md:p-7"><div><p className="section-label mb-2">Your Personalized Recommendation</p><h1 className="font-serif text-4xl font-light leading-tight text-[#2c1f14] md:text-5xl">{firstName}, I recommend the <span className="text-purple">{result.offer.name}</span>.</h1><p className="mt-4 text-sm font-light text-muted">Based on what you shared:</p><ul className="mt-3 space-y-2">{result.reasons.map((reason) => <li key={reason} className="flex gap-2 text-sm font-light leading-relaxed text-muted"><span className="text-purple">•</span><span>{reason}</span></li>)}</ul><p className="mt-4 border-t border-purple/15 pt-3 text-xs font-light leading-relaxed text-muted/80"><strong className="text-[#2c1f14]">Important:</strong> This is not a diagnosis. It is my starting-point recommendation. We will confirm the right series and number of sessions after I understand your comfort level, goals, and budget.</p></div><div className="relative hidden overflow-hidden rounded-[18px] md:block"><Image src="/images/susie.jpg" alt="Susie" fill className="object-cover object-top" /></div></section>
-      <FamilySection offer={result.offer} recommended />
-      <section id="full-treatment-list" className="scroll-mt-24"><div className="mb-5 text-center"><p className="section-label mb-2">Explore Every Option</p><h2 className="font-serif text-4xl font-light text-[#2c1f14]">All Susie Sculpts Treatment Series</h2><p className="mx-auto mt-2 max-w-2xl text-sm font-light text-muted">Tap a card to view every package, treatment value, and secure checkout link.</p></div><div className="grid gap-5 lg:grid-cols-2">{others.map((offer) => <FlipCard key={offer.key} offer={offer} />)}</div></section>
+      <section className="rounded-[20px] border border-purple/15 bg-white p-5 shadow-sm md:p-6">
+        <p className="section-label mb-2">Your Personalized Recommendation</p>
+        <h1 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-4xl">Susie recommends the <span className="text-purple">{result.offer.name}</span>.</h1>
+        <p className="mt-2 text-sm font-light text-muted">{firstName ? `${firstName}, based on what you shared:` : "Based on what you shared:"}</p>
+        <ul className="mt-2 space-y-1.5">{result.reasons.map((reason) => <li key={reason} className="flex gap-2 text-xs font-light leading-relaxed text-muted"><span className="text-purple">•</span><span>{reason}</span></li>)}</ul>
+        <p className="mt-3 border-t border-purple/10 pt-3 text-[11px] font-light leading-relaxed text-muted/75"><strong className="text-[#2c1f14]">Important:</strong> This is a starting-point recommendation, not a diagnosis. Susie will confirm the right series and number of sessions with you.</p>
+      </section>
+
+      <section>
+        <p className="section-label mb-3 text-center">Recommended For You</p>
+        <div className="mx-auto max-w-xl"><FlipCard offer={result.offer} initiallyFlipped /></div>
+      </section>
+
+      <section id="full-treatment-list" className="scroll-mt-24">
+        <div className="mb-5 text-center"><p className="section-label mb-2">Explore Other Treatments</p><h2 className="font-serif text-3xl font-light text-[#2c1f14] md:text-4xl">All Susie Sculpts Treatment Series</h2><p className="mx-auto mt-2 max-w-2xl text-sm font-light text-muted">Tap any card to see benefits, pricing options, and secure purchase links.</p></div>
+        <div className="grid gap-5 lg:grid-cols-2">{others.map((offer) => <FlipCard key={offer.key} offer={offer} />)}</div>
+      </section>
+
       <section className="rounded-[22px] border border-purple/15 bg-white p-5 text-center md:p-7"><h2 className="font-serif text-3xl font-light text-[#2c1f14]">Talk with Susie before choosing</h2><p className="mx-auto mt-2 max-w-xl text-sm font-light text-muted">Review the recommendation together and confirm the right next step.</p><a href={consultationUrl} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 inline-block">Book Your FREE Professional Consult</a><button type="button" onClick={restart} className="mt-4 block w-full text-xs text-muted underline">Retake the evaluation</button></section>
     </div></main><Footer /></>;
   }

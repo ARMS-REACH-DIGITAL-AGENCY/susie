@@ -87,7 +87,7 @@ function calculate(fields: Fields) {
   const ranked = (Object.keys(score) as Key[]).sort((a, b) => score[b] - score[a]);
   const key = ranked[0] || "ultimate";
 
-  let finalReasons = reasons[key].slice(0, 3);
+  let finalReasons = reasons[key].slice(0, 2);
   if (key === "ultimate") {
     const ultimateReasons: string[] = [];
     if (fields.symptoms.length >= 4 || fields.goals.length >= 3) ultimateReasons.push("You mentioned several different concerns or goals, so a broader starting experience may fit better than focusing on only one area.");
@@ -95,7 +95,19 @@ function calculate(fields: Fields) {
     if (fields.goals.includes("Let Susie build the plan")) ultimateReasons.push("You’re open to letting Susie see how your body responds across several modalities before narrowing the plan.");
     if (fields.symptoms.some((v) => v.includes("Stuck") || v.includes("myself"))) ultimateReasons.push("You described feeling stuck or unlike yourself, which suggests it may be useful to look at the bigger picture first.");
     if (ultimateReasons.length === 0) ultimateReasons.push("Your answers didn’t point strongly to only one focused treatment, so a broader starting experience gives Susie more information to work with.");
-    finalReasons = ultimateReasons.slice(0, 3);
+    if (ultimateReasons.length < 2) ultimateReasons.push("Taken together, your answers are better served by looking at several treatment approaches before narrowing too quickly to just one.");
+    finalReasons = ultimateReasons.slice(0, 2);
+  } else if (finalReasons.length < 2) {
+    const overallReason: Record<Exclude<Key, "ultimate">, string> = {
+      muscle: "Taken together, your answers lean more toward a focused strengthening-and-toning series than the other individual treatment paths.",
+      contour: "Taken together, your answers lean more toward a focused body-contouring path than the other individual treatment options.",
+      fascia: "Taken together, your answers lean more toward fascia and skin-texture support than the other individual treatment options.",
+      pelvic: "Taken together, your answers lean more toward focused pelvic-floor and deep-core support than the other individual treatment options.",
+      lymphatic: "Taken together, your answers lean more toward lymphatic and circulation support than the other individual treatment options.",
+      pemf: "Taken together, your answers lean more toward recovery, energy, and wellness support than the other individual treatment options.",
+    };
+    finalReasons.push(overallReason[key]);
+    if (finalReasons.length < 2) finalReasons.push("Across the five questions, this series received the strongest overall match from your answers.");
   }
 
   return { key, offer: getOffer(key), reasons: finalReasons, summary: ranked.map((k) => `${k}:${score[k]}`).join("|") };
@@ -171,7 +183,7 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
     <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
       <button type="button" onClick={() => beginFlip(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-xl [backface-visibility:hidden] md:p-6">
         {recommendation ? <>
-          <p className="section-label">Recommended Treatment Series</p>
+          <p className="section-label recommended-series-eyebrow"><span className="block">Recommended</span><span className="mt-1 block whitespace-nowrap">Treatment Series</span></p>
           <div className="mt-3 border-t border-purple/10 pt-3 text-left">
             <div className="space-y-2.5 text-sm font-light leading-[1.45] text-muted">
               <p>Hi {recommendation.firstName},</p>
@@ -179,12 +191,12 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
               {recommendation.reasons.length > 0 && <><p>Here’s why:</p><ul className="space-y-1.5">{recommendation.reasons.map((reason) => <li key={reason} className="flex gap-2"><span className="text-purple">•</span><span>{reason}</span></li>)}</ul></>}
               <p>Just so you know, this is a starting-point recommendation, not a diagnosis. We’ll confirm the right series and number of sessions together based on your goals, comfort level, and budget.</p>
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3">
-              <div className="text-left"><p className="text-sm font-light leading-[1.4] text-muted">Hope to see you soon,</p><p className="mt-0.5 font-serif text-2xl font-light text-purple">Susie</p></div>
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-purple/15 bg-stone"><Image src="/images/susie.jpg" alt="Susie" fill className="object-cover object-top" sizes="64px" /></div>
+            <div className="recommendation-signoff mt-3 flex items-center gap-3">
+              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-purple/15 bg-stone"><Image src="/images/susie.jpg" alt="Susie" fill className="object-cover object-top" sizes="48px" /></div>
+              <div className="text-left"><p className="text-sm font-light leading-[1.3] text-muted">Hope to see you soon,</p><p className="font-serif text-2xl font-light leading-none text-purple">Susie</p></div>
             </div>
           </div>
-          <div className="mt-auto pt-3 text-center">
+          <div className="recommendation-pricing-prompt mt-auto pt-3 text-left">
             <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Pricing Options For</p>
             <p className="mt-1 whitespace-nowrap font-serif text-[clamp(1.25rem,5.7vw,2rem)] font-light leading-tight text-[#2c1f14]">{letterTitle}</p>
           </div>
@@ -203,7 +215,7 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
               <Image src={offer.icon} alt="" fill className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain p-1"} sizes="40px" />
             </div>
             <div className="min-w-0 flex-1 text-left">
-              <p className={eyebrowClass}>{eyebrow}</p>
+              {recommended ? <p className="section-label recommended-series-eyebrow"><span className="block">Recommended</span><span className="mt-1 block whitespace-nowrap">Treatment Series</span></p> : <p className={eyebrowClass}>{eyebrow}</p>}
               <h3 className={`mt-1 whitespace-nowrap font-serif font-light leading-tight tracking-[-0.01em] text-[#2c1f14] ${backTitleClass}`}>{title}</h3>
             </div>
           </div>

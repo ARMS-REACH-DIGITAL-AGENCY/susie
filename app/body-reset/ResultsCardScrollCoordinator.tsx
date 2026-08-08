@@ -29,31 +29,7 @@ function prepareCard(back: HTMLElement) {
   back.dataset.resultsCardBack = "true";
 
   const front = Array.from(inner.children).find((child) => child.tagName === "BUTTON") as HTMLButtonElement | undefined;
-  if (!front) return;
-  front.dataset.resultsCardFront = "true";
-
-  let header = card.querySelector<HTMLElement>(":scope > .results-card-persistent-header");
-  if (!header) {
-    header = document.createElement("div");
-    header.className = "results-card-persistent-header";
-    header.setAttribute("aria-hidden", "true");
-
-    const eyebrow = document.createElement("p");
-    eyebrow.className = "section-label";
-    eyebrow.textContent = front.querySelector("p")?.textContent?.trim() || "Treatment Series";
-
-    const title = document.createElement("p");
-    title.className = "mt-3 font-serif text-3xl font-light leading-tight text-[#2c1f14]";
-    title.textContent = front.querySelector("h3")?.textContent?.trim() || "";
-
-    header.append(eyebrow, title);
-    card.appendChild(header);
-  }
-
-  const headerHeight = Math.ceil(header.getBoundingClientRect().height);
-  if (headerHeight > 0) {
-    card.style.setProperty("--results-card-header-height", `${headerHeight}px`);
-  }
+  if (front) front.dataset.resultsCardFront = "true";
 }
 
 export default function ResultsCardScrollCoordinator() {
@@ -72,8 +48,7 @@ export default function ResultsCardScrollCoordinator() {
           if (!card) return;
 
           const rect = card.getBoundingClientRect();
-          const aligned = Math.abs(rect.top - top) <= 10;
-          back.dataset.scrollActive = aligned ? "true" : "false";
+          back.dataset.scrollActive = Math.abs(rect.top - top) <= 10 ? "true" : "false";
         });
       });
     };
@@ -88,6 +63,7 @@ export default function ResultsCardScrollCoordinator() {
         const back = card?.querySelector<HTMLElement>("[data-results-card-back='true']");
         const scroller = back?.querySelector<HTMLElement>(":scope > section");
         if (scroller) scroller.scrollTop = 0;
+        if (back) back.dataset.scrollActive = "false";
 
         if (card) {
           requestAnimationFrame(() => {
@@ -107,9 +83,8 @@ export default function ResultsCardScrollCoordinator() {
       if (!back || target.closest("a")) return;
 
       const scroller = back.querySelector<HTMLElement>(":scope > section");
-      requestAnimationFrame(() => {
-        if (scroller) scroller.scrollTop = 0;
-      });
+      if (scroller) scroller.scrollTop = 0;
+      back.dataset.scrollActive = "false";
     };
 
     const observer = new MutationObserver(sync);

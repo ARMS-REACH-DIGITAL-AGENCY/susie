@@ -63,7 +63,7 @@ function ProductCard({ offer, product, featured = false }: { offer: Offer; produ
       ? `${product.duration}-minute treatment${isLymphatic ? " · $50 spandex bodysuit included" : ""}`
       : `${money(treatmentValue)} per ${product.duration}-minute treatment${isLymphatic ? " · $50 spandex bodysuit included" : ""}`;
   const label = isUltimate ? "The Complete Experience" : isSingle ? "Single Treatment" : `${product.count}-Treatment Series`;
-  const cta = isUltimate ? 'Choose the Ultimate "YOU" Experience' : isSingle ? `Choose 1 ${offer.short} Treatment` : `Choose the ${product.count}-Treatment ${offer.short} Series`;
+  const cta = isUltimate ? 'Choose the Ultimate "YOU" Experience' : `Choose ${product.count} ${product.count === 1 ? "Session" : "Sessions"}`;
 
   return <div className={`rounded-[18px] border p-4 md:p-5 ${featured ? "border-purple/35 bg-purple/5 shadow-sm" : "border-stone bg-white"}`}>
     <p className="section-label mb-3">{label}</p>
@@ -77,11 +77,13 @@ function ProductCard({ offer, product, featured = false }: { offer: Offer; produ
 
 function FamilySection({ offer, recommended = false }: { offer: Offer; recommended?: boolean }) {
   return <section className={`rounded-[22px] border p-5 md:p-6 ${recommended ? "border-purple/25 bg-white" : "border-stone bg-stone/25"}`}>
-    <div className="mb-4 flex items-start gap-3">
-      <div className="relative mt-1 h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white"><Image src={offer.icon} alt="" fill className="object-contain" /></div>
-      <div><p className="section-label mb-1">{recommended ? "Susie’s Recommended Series" : "Treatment Series"}</p><h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3></div>
+    <div className="treatment-family-sticky-header">
+      <div className="flex items-start gap-3">
+        <div className="relative mt-1 h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white"><Image src={offer.icon} alt="" fill className="object-contain" /></div>
+        <div><p className="section-label mb-1">{recommended ? "Susie’s Recommended Series" : "Treatment Series"}</p><h3 className="font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3></div>
+      </div>
+      <p className="mt-3 text-sm font-light leading-relaxed text-muted">{offer.description}</p>
     </div>
-    <p className="mb-4 text-sm font-light leading-relaxed text-muted">{offer.description}</p>
     <div className="mb-4 rounded-[16px] border border-purple/10 bg-white/80 p-4"><p className="section-label mb-2">What’s Included</p><ul className="grid gap-2 text-sm font-light text-muted sm:grid-cols-2">{offer.included.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">✦</span><span>{item}</span></li>)}</ul></div>
     <div className="space-y-4">{offer.products.map((product, index) => <ProductCard key={`${offer.key}-${product.count}`} offer={offer} product={product} featured={recommended && index === 0} />)}</div>
   </section>;
@@ -95,7 +97,7 @@ function FlipCard({ offer }: { offer: Offer }) {
         <p className="section-label">Treatment Series</p>
         <h3 className="mt-3 font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3>
         <div className="relative mx-auto my-8 min-h-0 w-full flex-1"><Image src={offer.icon} alt={offer.name} fill className="object-contain p-4" sizes="(max-width: 768px) 80vw, 420px" /></div>
-        <p className="mt-auto font-sans text-xs font-semibold uppercase tracking-[0.14em] text-purple">Tap to Flip</p>
+        <p className="mt-auto font-sans text-xs font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Price Options</p>
       </button>
       <div role="button" tabIndex={0} aria-label={`Flip ${offer.name} card to the front`} onClick={() => setFlipped(false)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") setFlipped(false); }} className="absolute inset-0 cursor-pointer overflow-y-auto rounded-[24px] bg-cream p-1 [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <FamilySection offer={offer} />

@@ -8,7 +8,6 @@
   height: calc(100dvh - var(--results-card-top) - var(--results-card-bottom));
   min-height: 0 !important;
   scroll-margin-top: var(--results-card-top);
-  --results-card-header-height: 108px;
 }
 
 .body-reset-route #full-treatment-list > div:last-child > div > div {
@@ -17,48 +16,19 @@
 }
 
 .body-reset-route [data-results-card-front="true"] {
-  padding-top: calc(var(--results-card-header-height) + 0.5rem) !important;
+  pointer-events: auto !important;
 }
 
 .body-reset-route [data-results-card-front="true"] > p:first-child,
 .body-reset-route [data-results-card-front="true"] > h3 {
-  visibility: hidden;
-}
-
-.body-reset-route .results-card-persistent-header {
-  position: absolute;
-  inset: 0 0 auto 0;
-  z-index: 20;
-  border-radius: 24px 24px 0 0;
-  background: white;
-  padding: 1.35rem 1.25rem 1rem;
-  text-align: center;
-  pointer-events: none;
-}
-
-.body-reset-route .results-card-persistent-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #b79a5f;
-}
-
-.body-reset-route .results-card-persistent-title {
-  margin-top: 0.75rem;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 1.875rem;
-  font-weight: 300;
-  line-height: 1.15;
-  color: #2c1f14;
+  visibility: visible;
 }
 
 .body-reset-route div[role="button"][aria-label^="Flip "] {
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
-  padding: var(--results-card-header-height) 0.25rem 0.25rem !important;
+  padding: 0.25rem !important;
 }
 
 .body-reset-route div[role="button"][aria-label^="Flip "] > section {
@@ -75,7 +45,13 @@
 }
 
 .body-reset-route div[role="button"][aria-label^="Flip "] .treatment-family-sticky-header {
-  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: -1.25rem -1.25rem 1rem;
+  padding: 1.1rem 1.25rem 1rem;
+  border-bottom: 1px solid rgba(90, 43, 170, 0.14);
+  background: rgba(250, 248, 245, 0.98);
 }
 
 .body-reset-route div[role="button"][aria-label^="Flip "] > p:last-child {
@@ -96,11 +72,8 @@
     --results-card-bottom: 82px;
   }
 
-  .body-reset-route #full-treatment-list > div:last-child > div {
-    --results-card-header-height: 116px;
-  }
-
-  .body-reset-route .results-card-persistent-header {
-    padding: 1.5rem 1.5rem 1.1rem;
+  .body-reset-route div[role="button"][aria-label^="Flip "] .treatment-family-sticky-header {
+    margin: -1.5rem -1.5rem 1rem;
+    padding: 1.25rem 1.5rem 1rem;
   }
 }

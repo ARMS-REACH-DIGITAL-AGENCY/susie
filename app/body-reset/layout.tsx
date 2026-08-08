@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EvaluationPageController from "@/components/EvaluationPageController";
 import EvaluationTrustSections from "@/components/EvaluationTrustSections";
+import ResultsCardScrollCoordinator from "./ResultsCardScrollCoordinator";
 import "./results-flip-card.css";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,7 @@ export default function BodyResetLayout({ children }: { children: React.ReactNod
     <>
       <Navbar />
       <EvaluationPageController />
+      <ResultsCardScrollCoordinator />
       <div className="body-reset-route [&>main]:!pt-0 [&>footer]:hidden">{children}</div>
       <EvaluationTrustSections />
       <Footer />

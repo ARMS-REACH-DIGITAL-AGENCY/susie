@@ -17,8 +17,86 @@
 .body-reset-route .results-back-heading {
   position: relative;
   z-index: 5;
+  overflow: visible;
   border-bottom: 1px solid rgba(90, 43, 170, 0.1);
   background: #fff;
+}
+
+/* Pricing-side header: use the full treatment artwork, not an icon inside a white badge. */
+.body-reset-route .results-back-heading > div {
+  gap: 14px !important;
+}
+
+.body-reset-route .results-back-heading > div > div:first-child {
+  width: 66px !important;
+  height: 66px !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.body-reset-route .results-back-heading > div > div:first-child img {
+  padding: 0 !important;
+  object-fit: contain !important;
+}
+
+.body-reset-route .results-back-heading h3 {
+  font-size: 1.2rem !important;
+  line-height: 1.05 !important;
+  white-space: nowrap !important;
+}
+
+/* Front-side treatment names stay prominent and on one line. */
+.body-reset-route .results-treatment-card > div > button > h3 {
+  font-size: 1.5rem !important;
+  line-height: 1.05 !important;
+  white-space: nowrap !important;
+}
+
+/* Recommended card: force a clean two-line eyebrow when all three words do not fit. */
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > p:first-child {
+  max-width: 160px;
+  margin-inline: auto;
+  white-space: normal !important;
+  line-height: 1.35 !important;
+  text-align: center;
+}
+
+/* Tighten the sign-off: photo left, copy immediately beside it. */
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child {
+  flex-direction: row-reverse !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 8px !important;
+}
+
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child > div:last-child {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child > div:first-child p:first-child {
+  line-height: 1.2 !important;
+}
+
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child > div:first-child p:last-child {
+  margin-top: 0 !important;
+  line-height: 1.05 !important;
+}
+
+/* Treat the pricing prompt like a compact P.S. directly beneath the sign-off. */
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:last-of-type {
+  margin-top: 8px !important;
+  padding-top: 0 !important;
+  text-align: left !important;
+}
+
+.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:last-of-type p:last-child {
+  margin-top: 2px !important;
+  font-size: 1.25rem !important;
+  line-height: 1.05 !important;
 }
 
 .body-reset-route .results-pricing-scroll {
@@ -36,5 +114,20 @@
   .body-reset-route {
     --results-card-top: 88px;
     --results-card-bottom: 82px;
+  }
+
+  .body-reset-route .results-back-heading > div > div:first-child {
+    width: 76px !important;
+    height: 76px !important;
+  }
+
+  .body-reset-route .results-back-heading h3,
+  .body-reset-route .results-treatment-card > div > button > h3 {
+    font-size: 1.75rem !important;
+  }
+
+  .body-reset-route main > div > section:first-child .results-treatment-card > div > button > p:first-child {
+    max-width: none;
+    white-space: nowrap !important;
   }
 }

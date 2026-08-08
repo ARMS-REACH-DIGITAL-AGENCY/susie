@@ -20,7 +20,7 @@ function normalizePurchaseLabels() {
   });
 }
 
-function ensurePersistentHeader(back: HTMLElement) {
+function prepareCard(back: HTMLElement) {
   const inner = back.parentElement;
   const card = cardFor(back);
   if (!inner || !card) return;
@@ -30,31 +30,9 @@ function ensurePersistentHeader(back: HTMLElement) {
 
   const front = Array.from(inner.children).find((child) => child.tagName === "BUTTON") as HTMLButtonElement | undefined;
   if (!front) return;
+
   front.dataset.resultsCardFront = "true";
-
-  let header = card.querySelector<HTMLElement>(":scope > .results-card-persistent-header");
-  if (!header) {
-    const eyebrow = front.querySelector("p")?.textContent?.trim() || "Treatment Series";
-    const title = front.querySelector("h3")?.textContent?.trim() || "";
-
-    header = document.createElement("div");
-    header.className = "results-card-persistent-header";
-    header.setAttribute("aria-hidden", "true");
-
-    const eyebrowNode = document.createElement("p");
-    eyebrowNode.className = "results-card-persistent-eyebrow";
-    eyebrowNode.textContent = eyebrow;
-
-    const titleNode = document.createElement("p");
-    titleNode.className = "results-card-persistent-title";
-    titleNode.textContent = title;
-
-    header.append(eyebrowNode, titleNode);
-    card.appendChild(header);
-  }
-
-  const height = Math.ceil(header.getBoundingClientRect().height);
-  if (height > 0) card.style.setProperty("--results-card-header-height", `${height}px`);
+  card.dataset.cardTitle = front.querySelector("h3")?.textContent?.trim() || "";
 }
 
 export default function ResultsCardScrollCoordinator() {
@@ -68,7 +46,7 @@ export default function ResultsCardScrollCoordinator() {
         const top = stickyTop();
 
         document.querySelectorAll<HTMLElement>(BACK_SELECTOR).forEach((back) => {
-          ensurePersistentHeader(back);
+          prepareCard(back);
           const card = cardFor(back);
           if (!card) return;
 

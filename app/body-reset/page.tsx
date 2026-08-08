@@ -129,28 +129,49 @@ function ProductCard({ offer, product }: { offer: Offer; product: Product }) {
 
 function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer; recommended?: boolean; recommendation?: RecommendationNote }) {
   const [flipped, setFlipped] = useState(false);
+  const [lifting, setLifting] = useState(false);
   const pricingRef = useRef<HTMLDivElement>(null);
+  const flipTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const highlights = offer.key === "ultimate" ? offer.included : offer.benefits;
-  const eyebrow = recommended ? "Recommended Series" : "Treatment Series";
+  const eyebrow = recommended ? "Recommended Treatment Series" : "Treatment Series";
   const title = displayOfferTitle(offer);
   const letterTitle = offer.key === "ultimate" ? title : offer.name;
   const titleClass = recommended
     ? "text-[clamp(1.45rem,6.5vw,2.25rem)]"
     : "text-[1.35rem] sm:text-2xl md:text-3xl";
+  const backTitleClass = offer.key === "ultimate"
+    ? "text-[clamp(0.95rem,4.1vw,1.3rem)]"
+    : "text-[clamp(1.05rem,4.5vw,1.45rem)]";
   const eyebrowClass = recommended
     ? "section-label whitespace-nowrap text-[10px] tracking-[0.14em] sm:text-xs"
     : "section-label";
 
-  function showFront() {
-    if (pricingRef.current) pricingRef.current.scrollTop = 0;
-    setFlipped(false);
+  useEffect(() => () => {
+    if (flipTimerRef.current) clearTimeout(flipTimerRef.current);
+  }, []);
+
+  function beginFlip(nextFlipped: boolean) {
+    if (flipTimerRef.current) return;
+    setLifting(true);
+    flipTimerRef.current = setTimeout(() => {
+      setFlipped(nextFlipped);
+      flipTimerRef.current = setTimeout(() => {
+        setLifting(false);
+        flipTimerRef.current = null;
+      }, 220);
+    }, 110);
   }
 
-  return <div className="results-treatment-card [perspective:1400px]">
+  function showFront() {
+    if (pricingRef.current) pricingRef.current.scrollTop = 0;
+    beginFlip(false);
+  }
+
+  return <div className={`results-treatment-card [perspective:1400px] transition-transform duration-150 ease-out ${lifting ? "-translate-y-1 scale-[1.01]" : ""}`}>
     <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
-      <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden] md:p-6">
+      <button type="button" onClick={() => beginFlip(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-xl [backface-visibility:hidden] md:p-6">
         {recommendation ? <>
-          <p className="section-label">Your Recommended Series</p>
+          <p className="section-label">Recommended Treatment Series</p>
           <div className="mt-3 border-t border-purple/10 pt-3 text-left">
             <div className="space-y-2.5 text-sm font-light leading-[1.45] text-muted">
               <p>Hi {recommendation.firstName},</p>
@@ -176,9 +197,16 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
       </button>
 
       <div role="button" tabIndex={0} aria-label={`Flip ${offer.name} card to the front`} onClick={showFront} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") showFront(); }} className="absolute inset-0 flex cursor-pointer flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
-        <div className="results-back-heading shrink-0 bg-white px-5 pb-4 pt-5 text-center md:px-6 md:pt-6">
-          <p className={eyebrowClass}>{eyebrow}</p>
-          <h3 className={`mt-2.5 whitespace-nowrap font-serif font-light leading-tight tracking-[-0.01em] text-[#2c1f14] ${titleClass}`}>{title}</h3>
+        <div className="results-back-heading shrink-0 bg-white px-5 pb-4 pt-5 md:px-6 md:pt-6">
+          <div className="flex items-center gap-3">
+            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-purple/10 bg-white">
+              <Image src={offer.icon} alt="" fill className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain p-1"} sizes="40px" />
+            </div>
+            <div className="min-w-0 flex-1 text-left">
+              <p className={eyebrowClass}>{eyebrow}</p>
+              <h3 className={`mt-1 whitespace-nowrap font-serif font-light leading-tight tracking-[-0.01em] text-[#2c1f14] ${backTitleClass}`}>{title}</h3>
+            </div>
+          </div>
         </div>
         <div ref={pricingRef} className="results-pricing-scroll min-h-0 flex-1 border-t border-purple/10 bg-cream/60 px-3.5 py-4 md:px-4">
           <p className="mb-3 text-sm font-light leading-relaxed text-muted">{offer.description}</p>

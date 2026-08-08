@@ -16,7 +16,7 @@ const BODY_RESET_SHARE_URL = "https://susiesculpts.com/body-reset";
 const REMOVED_PRIORITY = "Let Susie choose the safest first step";
 
 const offers: Offer[] = [
-  { key: "ultimate", name: 'The Ultimate "YOU" Experience', short: "Ultimate YOU", icon: "/images/susie.jpg", description: "Susie’s complete six-treatment experience when several goals matter or you want help identifying the best focused path.", included: ["One Body Contouring treatment", "One Fascia and Skin Revival treatment", "One Lymphatic Wellness treatment", "One Muscle + Strength + Tone treatment", "One Pelvic Floor Strengthening treatment", "One PEMF Recovery and Wellness treatment"], benefits: [], products: [{ count: 6, price: 1297, duration: null, href: "https://api.armsreachdigital.com/payment-link/6a6da6b87b99151a54041af5" }] },
+  { key: "ultimate", name: 'Ultimate "YOU" Experience', short: "Ultimate YOU", icon: "/images/susie.jpg", description: "Susie’s complete six-treatment experience when several goals matter or you want help identifying the best focused path.", included: ["One Body Contouring treatment", "One Fascia and Skin Revival treatment", "One Lymphatic Wellness treatment", "One Muscle + Strength + Tone treatment", "One Pelvic Floor Strengthening treatment", "One PEMF Recovery and Wellness treatment"], benefits: [], products: [{ count: 6, price: 1297, duration: null, href: "https://api.armsreachdigital.com/payment-link/6a6da6b87b99151a54041af5" }] },
   { key: "muscle", name: "Muscle + Strength + Tone Series", short: "Muscle + Strength + Tone", icon: "/images/treatment-muscle.png", description: "Muscle activation, strengthening, toning, and body-sculpting support.", included: ["EMShape muscle activation", "Strengthening and toning support", "50-minute appointments"], benefits: ["Supports muscle activation and strengthening", "Supports toning and body-sculpting goals", "Helps target areas that can be difficult to tone with exercise alone"], products: [{ count: 20, price: 5997, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da301a655fa0b802a7622" }, { count: 10, price: 3997, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da29c7b99151a54041ae9" }, { count: 5, price: 2497, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da211a655fa0b802a7620" }, { count: 1, price: 597, duration: 50, href: "https://api.armsreachdigital.com/payment-link/6a6da028a655fa0b802a761d" }] },
   { key: "contour", name: "Body Contouring Series", short: "Body Contouring", icon: "/images/treatment-contour.png", description: "Targeted support for inches, stubborn areas, skin tightening, and contouring goals.", included: ["Ultrasonic cavitation", "RF skin-tightening support", "55-minute appointments"], benefits: ["Targets stubborn areas and inch-loss goals", "Supports smoother, firmer-looking skin", "Helps refine body contours"], products: [{ count: 20, price: 3197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da44fa655fa0b802a7625" }, { count: 10, price: 1697, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da41ea655fa0b802a7624" }, { count: 5, price: 897, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da3e57b99151a54041aee" }, { count: 1, price: 197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da32fa655fa0b802a7623" }] },
   { key: "fascia", name: "Fascia and Skin Revival Series", short: "Fascia + Skin Revival", icon: "/images/treatment-fascia.png", description: "Fascia, circulation, skin-texture, and smoothing support.", included: ["Rollerwave fascia treatment", "Circulation and skin-texture support", "55-minute appointments"], benefits: ["Supports fascia mobility and circulation", "Supports smoother-looking skin texture", "Helps address the appearance of cellulite"], products: [{ count: 20, price: 3197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da7f07b99151a54041af8" }, { count: 10, price: 1697, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da84e7b99151a54041af9" }, { count: 5, price: 897, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da727a655fa0b802a7629" }, { count: 1, price: 197, duration: 55, href: "https://api.armsreachdigital.com/payment-link/6a6da6ec7b99151a54041af6" }] },
@@ -34,7 +34,7 @@ const emptyFields: Fields = { firstName: "", email: "", phone: "", consent: fals
 
 function getOffer(key: Key) { return offers.find((offer) => offer.key === key) ?? offers[0]; }
 function money(value: number) { return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value); }
-function displayOfferTitle(offer: Offer) { return offer.key === "ultimate" ? 'The Ultimate "YOU" Experience' : offer.short; }
+function displayOfferTitle(offer: Offer) { return offer.key === "ultimate" ? 'Ultimate "YOU" Experience' : offer.short; }
 function SymptomLabel({ label }: { label: string }) {
   const pieces = label.split(/([/—])/);
   return <>{pieces.map((piece, index) => piece === "/" || piece === "—" ? <span key={`${piece}-${index}`}>{piece}<wbr /></span> : <span key={`${piece}-${index}`}>{piece}</span>)}</>;
@@ -122,17 +122,14 @@ function ProductCard({ offer, product }: { offer: Offer; product: Product }) {
   const isLymphatic = offer.key === "lymphatic";
   const isSingle = product.count === 1;
   const treatmentValue = isLymphatic ? (product.price - 50) / product.count : product.price / product.count;
-  const detail = isUltimate
-    ? "Six treatments across Susie’s signature modalities"
-    : isSingle
-      ? `${product.duration}-minute treatment${isLymphatic ? " · $50 spandex bodysuit included" : ""}`
-      : `${money(treatmentValue)} per ${product.duration}-minute treatment${isLymphatic ? " · $50 spandex bodysuit included" : ""}`;
+  const primaryDetail = isSingle ? `${product.duration}-minute treatment` : `${money(treatmentValue)} per ${product.duration}-minute treatment`;
+  const secondaryDetail = isLymphatic ? "$50 spandex bodysuit included" : "";
   const label = isUltimate ? "The Complete Experience" : isSingle ? "Single Treatment" : `${product.count}-Treatment Series`;
-  const cta = isUltimate ? 'Purchase the Ultimate "YOU" Experience' : `Purchase ${product.count} ${product.count === 1 ? "Session" : "Sessions"}`;
+  const cta = isUltimate ? 'Purchase Ultimate "YOU" Experience' : `Purchase ${product.count} ${product.count === 1 ? "Session" : "Sessions"}`;
 
   return <div className="rounded-[16px] border border-stone bg-white p-3.5 md:p-4">
-    <div className="flex items-start justify-between gap-3">
-      <div><p className="section-label mb-1.5">{label}</p><p className="text-xs font-medium leading-relaxed text-muted">{detail}</p></div>
+    <div className="flex items-start justify-between gap-2.5">
+      <div className="min-w-0"><p className="section-label mb-1.5">{label}</p>{!isUltimate && <div className="text-xs font-medium leading-relaxed text-muted"><p className={isLymphatic ? "whitespace-nowrap text-[11px] sm:text-xs" : ""}>{primaryDetail}</p>{secondaryDetail && <p className="mt-0.5 whitespace-nowrap text-[11px] sm:text-xs">{secondaryDetail}</p>}</div>}</div>
       <p className="shrink-0 font-serif text-3xl font-light text-purple">{money(product.price)}</p>
     </div>
     <a href={product.href} onClick={(event) => event.stopPropagation()} className="btn-secondary mt-3 flex min-h-11 w-full items-center justify-center px-4 py-2.5 text-center text-sm leading-snug">{cta}</a>
@@ -211,8 +208,8 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
       <div role="button" tabIndex={0} aria-label={`Flip ${offer.name} card to the front`} onClick={showFront} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") showFront(); }} className="absolute inset-0 flex cursor-pointer flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <div className="results-back-heading shrink-0 bg-white px-5 pb-4 pt-5 md:px-6 md:pt-6">
           <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-purple/10 bg-white">
-              <Image src={offer.icon} alt="" fill className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain p-1"} sizes="40px" />
+            <div className={`results-back-icon relative h-10 w-10 shrink-0 ${offer.key === "ultimate" ? "results-back-icon-photo overflow-hidden rounded-full border border-purple/15 bg-white" : "overflow-visible"}`}>
+              <Image src={offer.icon} alt="" fill className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain"} sizes="40px" />
             </div>
             <div className="min-w-0 flex-1 text-left">
               {recommended ? <p className="section-label recommended-series-eyebrow"><span className="block">Recommended</span><span className="mt-1 block whitespace-nowrap">Treatment Series</span></p> : <p className={eyebrowClass}>{eyebrow}</p>}

@@ -131,8 +131,9 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
   const [flipped, setFlipped] = useState(false);
   const pricingRef = useRef<HTMLDivElement>(null);
   const highlights = offer.key === "ultimate" ? offer.included : offer.benefits;
-  const eyebrow = recommended ? "Recommended Treatment Package" : "Treatment Series";
+  const eyebrow = recommended ? "Recommended Series" : "Treatment Series";
   const title = displayOfferTitle(offer);
+  const letterTitle = offer.key === "ultimate" ? title : offer.name;
   const titleClass = recommended
     ? "text-[clamp(1.45rem,6.5vw,2.25rem)]"
     : "text-[1.35rem] sm:text-2xl md:text-3xl";
@@ -149,11 +150,11 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
     <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
       <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden] md:p-6">
         {recommendation ? <>
-          <p className="section-label">Your Recommended Package</p>
+          <p className="section-label">Your Recommended Series</p>
           <div className="mt-3 border-t border-purple/10 pt-3 text-left">
             <div className="space-y-2.5 text-sm font-light leading-[1.45] text-muted">
               <p>Hi {recommendation.firstName},</p>
-              <p>Thanks for telling me what you’ve been feeling. Based on your answers, I think the <strong className="font-medium text-[#2c1f14]">{title}</strong> is the best place to start.</p>
+              <p>Thanks for telling me what you’ve been feeling. Based on your answers, I think the <strong className="font-medium text-[#2c1f14]">{letterTitle}</strong> is the best place to start.</p>
               {recommendation.reasons.length > 0 && <><p>Here’s why:</p><ul className="space-y-1.5">{recommendation.reasons.map((reason) => <li key={reason} className="flex gap-2"><span className="text-purple">•</span><span>{reason}</span></li>)}</ul></>}
               <p>Just so you know, this is a starting-point recommendation, not a diagnosis. We’ll confirm the right series and number of sessions together based on your goals, comfort level, and budget.</p>
             </div>
@@ -164,7 +165,7 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
           </div>
           <div className="mt-auto pt-3 text-center">
             <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Pricing Options For</p>
-            <p className="mt-1 whitespace-nowrap font-serif text-[clamp(1.25rem,5.7vw,2rem)] font-light leading-tight text-[#2c1f14]">{title}</p>
+            <p className="mt-1 whitespace-nowrap font-serif text-[clamp(1.25rem,5.7vw,2rem)] font-light leading-tight text-[#2c1f14]">{letterTitle}</p>
           </div>
         </> : <>
           <p className={eyebrowClass}>{eyebrow}</p>

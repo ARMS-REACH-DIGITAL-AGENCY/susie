@@ -1,3 +1,35 @@
+.body-reset-route #full-treatment-list {
+  --results-sticky-top: 72px;
+  --results-sticky-bottom: 76px;
+}
+
+.body-reset-route #full-treatment-list > div:last-child > div {
+  position: sticky;
+  top: var(--results-sticky-top);
+  z-index: 1;
+  align-self: start;
+  height: calc(100dvh - var(--results-sticky-top) - var(--results-sticky-bottom));
+  min-height: 0 !important;
+  scroll-margin-top: var(--results-sticky-top);
+}
+
+.body-reset-route #full-treatment-list > div:last-child > div > div {
+  height: 100%;
+  min-height: 0 !important;
+}
+
+.body-reset-route #full-treatment-list > div:last-child > div > div > button > p:last-child {
+  font-size: 0;
+  line-height: 1rem;
+}
+
+.body-reset-route #full-treatment-list > div:last-child > div > div > button > p:last-child::after {
+  content: "Tap to See Price Options";
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.14em;
+}
+
 .body-reset-route div[role="button"][aria-label^="Flip "] {
   display: flex !important;
   flex-direction: column !important;
@@ -9,6 +41,9 @@
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 .body-reset-route div[role="button"][aria-label^="Flip "] > p:last-child {
@@ -21,4 +56,11 @@
 
 .body-reset-route div[role="button"][aria-label^="Flip "] a {
   scroll-margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .body-reset-route #full-treatment-list {
+    --results-sticky-top: 88px;
+    --results-sticky-bottom: 82px;
+  }
 }

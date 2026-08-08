@@ -63,46 +63,51 @@
   white-space: nowrap !important;
 }
 
-/* Recommended card: force a clean two-line eyebrow when all three words do not fit. */
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > p:first-child {
-  max-width: 160px;
-  margin-inline: auto;
+/* Recommended card eyebrow is exactly two lines: RECOMMENDED / TREATMENT SERIES. */
+.body-reset-route .recommended-series-eyebrow {
+  width: max-content;
+  max-width: none !important;
+  margin-inline: auto !important;
   white-space: normal !important;
-  line-height: 1.35 !important;
+  line-height: 1.05 !important;
   text-align: center;
 }
 
+.body-reset-route .recommended-series-eyebrow > span:last-child {
+  white-space: nowrap !important;
+}
+
 /* Tighten the sign-off: photo left, copy immediately beside it. */
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child {
-  flex-direction: row-reverse !important;
-  justify-content: flex-end !important;
+.body-reset-route .recommendation-signoff {
+  justify-content: flex-start !important;
   align-items: center !important;
   gap: 10px !important;
   margin-top: 8px !important;
 }
 
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child > div:last-child {
+.body-reset-route .recommendation-signoff > div:first-child {
   width: 48px !important;
   height: 48px !important;
 }
 
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child > div:first-child p:first-child {
+.body-reset-route .recommendation-signoff p:first-child {
   line-height: 1.2 !important;
 }
 
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:first-of-type > div:last-child > div:first-child p:last-child {
+.body-reset-route .recommendation-signoff p:last-child {
   margin-top: 0 !important;
   line-height: 1.05 !important;
 }
 
-/* Treat the pricing prompt like a compact P.S. directly beneath the sign-off. */
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:last-of-type {
-  margin-top: 8px !important;
-  padding-top: 0 !important;
+/* Keep the two-line pricing prompt anchored near the bottom with card-like inset spacing. */
+.body-reset-route .recommendation-pricing-prompt {
+  margin-top: auto !important;
+  padding-top: 10px !important;
+  padding-bottom: 2px !important;
   text-align: left !important;
 }
 
-.body-reset-route main > div > section:first-child .results-treatment-card > div > button > div:last-of-type p:last-child {
+.body-reset-route .recommendation-pricing-prompt p:last-child {
   margin-top: 2px !important;
   font-size: 1.25rem !important;
   line-height: 1.05 !important;
@@ -138,10 +143,5 @@
   .body-reset-route .results-back-heading h3,
   .body-reset-route .results-treatment-card > div > button > h3 {
     font-size: 1.75rem !important;
-  }
-
-  .body-reset-route main > div > section:first-child .results-treatment-card > div > button > p:first-child {
-    max-width: none;
-    white-space: nowrap !important;
   }
 }

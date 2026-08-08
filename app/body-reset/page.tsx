@@ -149,8 +149,7 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
     <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
       <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden] md:p-6">
         {recommendation ? <>
-          <p className="section-label">Your Personalized Recommendation</p>
-          <h2 className={`mt-2.5 whitespace-nowrap font-serif font-light leading-tight text-purple ${titleClass}`}>{title}</h2>
+          <p className="section-label">Your Recommended Package</p>
           <div className="mt-3 border-t border-purple/10 pt-3 text-left">
             <div className="space-y-2.5 text-sm font-light leading-[1.45] text-muted">
               <p>Hi {recommendation.firstName},</p>
@@ -163,7 +162,10 @@ function FlipCard({ offer, recommended = false, recommendation }: { offer: Offer
               <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-purple/15 bg-stone"><Image src="/images/susie.jpg" alt="Susie" fill className="object-cover object-top" sizes="64px" /></div>
             </div>
           </div>
-          <p className="mt-auto pt-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Price Options</p>
+          <div className="mt-auto pt-3 text-center">
+            <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Pricing Options For</p>
+            <p className="mt-1 whitespace-nowrap font-serif text-[clamp(1.25rem,5.7vw,2rem)] font-light leading-tight text-[#2c1f14]">{title}</p>
+          </div>
         </> : <>
           <p className={eyebrowClass}>{eyebrow}</p>
           <h3 className={`mt-2.5 whitespace-nowrap font-serif font-light leading-tight tracking-[-0.01em] text-[#2c1f14] ${titleClass}`}>{title}</h3>
@@ -280,7 +282,9 @@ export default function BodyResetPage() {
 
   if (status === "results") {
     const firstName = fields.firstName.trim().split(/\s+/)[0] || "there";
-    const others = offers.filter((offer) => offer.key !== result.key);
+    const others = offers
+      .filter((offer) => offer.key !== result.key)
+      .sort((a, b) => Number(a.key === "ultimate") - Number(b.key === "ultimate"));
     return <><main className="bg-cream pb-14 pt-20 md:pt-24"><div className="mx-auto max-w-5xl space-y-6 px-4 sm:px-6">
       <section><div className="mx-auto max-w-xl"><FlipCard offer={result.offer} recommended recommendation={{ firstName, reasons: result.reasons }} /></div></section>
 

@@ -12,6 +12,14 @@ function cardFor(back: HTMLElement) {
   return back.parentElement?.parentElement as HTMLElement | null;
 }
 
+function normalizePurchaseLabels() {
+  document.querySelectorAll<HTMLAnchorElement>(".body-reset-route a").forEach((link) => {
+    const label = link.textContent?.trim();
+    if (!label?.startsWith("Choose ")) return;
+    link.textContent = label.replace(/^Choose\s+/, "Purchase ");
+  });
+}
+
 function ensurePersistentHeader(back: HTMLElement) {
   const inner = back.parentElement;
   const card = cardFor(back);
@@ -56,6 +64,7 @@ export default function ResultsCardScrollCoordinator() {
     const sync = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
+        normalizePurchaseLabels();
         const top = stickyTop();
 
         document.querySelectorAll<HTMLElement>(BACK_SELECTOR).forEach((back) => {

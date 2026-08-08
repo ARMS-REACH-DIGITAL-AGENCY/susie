@@ -11,7 +11,7 @@ type Fields = { firstName: string; email: string; phone: string; consent: boolea
 type SavedState = { version: 2; leadCaptured: boolean; step: number; status: "quiz" | "results"; fields: Fields };
 
 const STORAGE_KEY = "susie-sculpts-evaluation-v2";
-const consultationUrl = "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
+const BODY_RESET_SHARE_URL = "https://susiesculpts.com/body-reset";
 
 const offers: Offer[] = [
   { key: "ultimate", name: 'The Ultimate "YOU" Experience', short: "Ultimate YOU", icon: "/images/susie.jpg", description: "Susie’s complete six-treatment experience when several goals matter or you want help identifying the best focused path.", included: ["One Body Contouring treatment", "One Fascia and Skin Revival treatment", "One Lymphatic Wellness treatment", "One Muscle + Strength + Tone treatment", "One Pelvic Floor Strengthening treatment", "One PEMF Recovery and Wellness treatment"], benefits: [], products: [{ count: 6, price: 1297, duration: null, href: "https://api.armsreachdigital.com/payment-link/6a6da6b87b99151a54041af5" }] },
@@ -74,10 +74,11 @@ function ProductCard({ offer, product }: { offer: Offer; product: Product }) {
   </div>;
 }
 
-function FlipCard({ offer, initiallyFlipped = false }: { offer: Offer; initiallyFlipped?: boolean }) {
+function FlipCard({ offer, initiallyFlipped = false, recommended = false }: { offer: Offer; initiallyFlipped?: boolean; recommended?: boolean }) {
   const [flipped, setFlipped] = useState(initiallyFlipped);
   const pricingRef = useRef<HTMLDivElement>(null);
   const highlights = offer.key === "ultimate" ? offer.included : offer.benefits;
+  const eyebrow = recommended ? "Recommended Treatment Package" : "Treatment Series";
 
   function showFront() {
     if (pricingRef.current) pricingRef.current.scrollTop = 0;
@@ -87,7 +88,7 @@ function FlipCard({ offer, initiallyFlipped = false }: { offer: Offer; initially
   return <div className="results-treatment-card [perspective:1400px]">
     <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
       <button type="button" onClick={() => setFlipped(true)} className="absolute inset-0 flex flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white p-5 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-xl [backface-visibility:hidden] md:p-6">
-        <p className="section-label">Treatment Series</p>
+        <p className="section-label">{eyebrow}</p>
         <h3 className="mt-2.5 font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3>
         <div className="relative mx-auto my-5 min-h-0 w-full flex-1"><Image src={offer.icon} alt={offer.name} fill className="object-contain p-4" sizes="(max-width: 768px) 80vw, 420px" /></div>
         <p className="mt-auto font-sans text-xs font-semibold uppercase tracking-[0.14em] text-purple">Tap to See Price Options</p>
@@ -95,7 +96,7 @@ function FlipCard({ offer, initiallyFlipped = false }: { offer: Offer; initially
 
       <div role="button" tabIndex={0} aria-label={`Flip ${offer.name} card to the front`} onClick={showFront} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") showFront(); }} className="absolute inset-0 flex cursor-pointer flex-col overflow-hidden rounded-[24px] border border-purple/15 bg-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
         <div className="results-back-heading shrink-0 bg-white px-5 pb-4 pt-5 text-center md:px-6 md:pt-6">
-          <p className="section-label">Treatment Series</p>
+          <p className="section-label">{eyebrow}</p>
           <h3 className="mt-2.5 font-serif text-3xl font-light leading-tight text-[#2c1f14]">{offer.name}</h3>
         </div>
         <div ref={pricingRef} className="results-pricing-scroll min-h-0 flex-1 border-t border-purple/10 bg-cream/60 px-3.5 py-4 md:px-4">
@@ -105,11 +106,55 @@ function FlipCard({ offer, initiallyFlipped = false }: { offer: Offer; initially
             <ul className="space-y-1.5 text-sm font-light text-muted">{highlights.map((item) => <li key={item} className="flex gap-2"><span className="text-purple">✦</span><span>{item}</span></li>)}</ul>
           </div>
           <div className="space-y-3">{offer.products.map((product) => <ProductCard key={`${offer.key}-${product.count}`} offer={offer} product={product} />)}</div>
-          <p className="pb-2 pt-3 text-center text-[10px] font-medium uppercase tracking-[0.12em] text-purple/75">Tap outside a purchase button to return</p>
         </div>
       </div>
     </div>
   </div>;
+}
+
+function ShareBodyReset() {
+  const [shareNote, setShareNote] = useState("");
+  const title = "See What Susie Says";
+  const text = "Take Susie Sculpts’ free Body Reset evaluation and get a personalized starting-point recommendation.";
+  const encodedUrl = encodeURIComponent(BODY_RESET_SHARE_URL);
+  const emailHref = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${text}\n\n${BODY_RESET_SHARE_URL}`)}`;
+  const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+  async function shareToApps() {
+    setShareNote("");
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text, url: BODY_RESET_SHARE_URL });
+        return;
+      }
+      await navigator.clipboard.writeText(BODY_RESET_SHARE_URL);
+      setShareNote("Link copied — paste it into Instagram or any message.");
+    } catch (error) {
+      if ((error as Error)?.name !== "AbortError") setShareNote("Use Copy Link, then paste it into Instagram or any message.");
+    }
+  }
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(BODY_RESET_SHARE_URL);
+      setShareNote("Body Reset link copied.");
+    } catch {
+      setShareNote(BODY_RESET_SHARE_URL);
+    }
+  }
+
+  return <section className="rounded-[22px] border border-purple/15 bg-white p-5 text-center md:p-6">
+    <p className="section-label mb-2">Know Someone Who Might Need This?</p>
+    <h2 className="font-serif text-3xl font-light text-[#2c1f14]">Share the Body Reset Evaluation</h2>
+    <p className="mx-auto mt-2 max-w-xl text-sm font-light leading-relaxed text-muted">Share the evaluation itself — not your personal results — so a friend can see what Susie recommends for them.</p>
+    <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <a href={emailHref} className="btn-secondary flex min-h-11 items-center justify-center px-3 py-2 text-sm">Email</a>
+      <a href={facebookHref} target="_blank" rel="noopener noreferrer" className="btn-secondary flex min-h-11 items-center justify-center px-3 py-2 text-sm">Facebook</a>
+      <button type="button" onClick={shareToApps} className="btn-secondary min-h-11 px-3 py-2 text-sm">Instagram / Share</button>
+      <button type="button" onClick={copyLink} className="btn-secondary min-h-11 px-3 py-2 text-sm">Copy Link</button>
+    </div>
+    {shareNote && <p className="mt-3 text-xs font-light text-muted">{shareNote}</p>}
+  </section>;
 }
 
 export default function BodyResetPage() {
@@ -139,20 +184,26 @@ export default function BodyResetPage() {
   if (!hydrated) return <main className="min-h-screen bg-cream pt-20" />;
 
   if (status === "results") {
-    const firstName = fields.firstName.trim().split(/\s+/)[0];
+    const firstName = fields.firstName.trim().split(/\s+/)[0] || "there";
     const others = offers.filter((offer) => offer.key !== result.key);
     return <><main className="bg-cream pb-14 pt-20 md:pt-24"><div className="mx-auto max-w-5xl space-y-6 px-4 sm:px-6">
       <section className="rounded-[20px] border border-purple/15 bg-white p-5 shadow-sm md:p-6">
         <p className="section-label mb-2">Your Personalized Recommendation</p>
-        <h1 className="font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-4xl">Susie recommends the <span className="text-purple">{result.offer.name}</span>.</h1>
-        <p className="mt-2 text-sm font-light text-muted">{firstName ? `${firstName}, based on what you shared:` : "Based on what you shared:"}</p>
-        <ul className="mt-2 space-y-1.5">{result.reasons.map((reason) => <li key={reason} className="flex gap-2 text-xs font-light leading-relaxed text-muted"><span className="text-purple">•</span><span>{reason}</span></li>)}</ul>
-        <p className="mt-3 border-t border-purple/10 pt-3 text-[11px] font-light leading-relaxed text-muted/75"><strong className="text-[#2c1f14]">Important:</strong> This is a starting-point recommendation, not a diagnosis. Susie will confirm the right series and number of sessions with you.</p>
+        <h1 className="font-serif text-3xl font-light leading-tight text-purple md:text-4xl">{result.offer.name}</h1>
+        <div className="mt-4 border-t border-purple/10 pt-4">
+          <p className="text-sm font-light leading-relaxed text-muted">Hi {firstName},</p>
+          <p className="mt-3 text-sm font-light leading-relaxed text-muted">Thanks for taking a few minutes to tell me what you’ve been feeling. Based on your answers, I recommend starting with the <strong className="font-medium text-[#2c1f14]">{result.offer.name}</strong>.</p>
+          {result.reasons.length > 0 && <><p className="mt-3 text-sm font-light leading-relaxed text-muted">Here’s why:</p><ul className="mt-2 space-y-1.5">{result.reasons.map((reason) => <li key={reason} className="flex gap-2 text-sm font-light leading-relaxed text-muted"><span className="text-purple">•</span><span>{reason}</span></li>)}</ul></>}
+          <p className="mt-3 text-xs font-light leading-relaxed text-muted/80">Just so you know, this is a starting-point recommendation, not a diagnosis. We’ll confirm the right series and number of sessions together based on your goals, comfort level, and budget.</p>
+          <div className="mt-4 flex items-end justify-between gap-4">
+            <div><p className="text-sm font-light text-muted">Hope to see you soon,</p><p className="mt-1 font-serif text-2xl font-light text-purple">Susie</p></div>
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-purple/15 bg-stone"><Image src="/images/susie.jpg" alt="Susie" fill className="object-cover object-top" sizes="80px" /></div>
+          </div>
+        </div>
       </section>
 
       <section>
-        <p className="section-label mb-3 text-center">Recommended For You</p>
-        <div className="mx-auto max-w-xl"><FlipCard offer={result.offer} initiallyFlipped /></div>
+        <div className="mx-auto max-w-xl"><FlipCard offer={result.offer} initiallyFlipped recommended /></div>
       </section>
 
       <section id="full-treatment-list" className="scroll-mt-24">
@@ -160,7 +211,8 @@ export default function BodyResetPage() {
         <div className="grid gap-5 lg:grid-cols-2">{others.map((offer) => <FlipCard key={offer.key} offer={offer} />)}</div>
       </section>
 
-      <section className="rounded-[22px] border border-purple/15 bg-white p-5 text-center md:p-7"><h2 className="font-serif text-3xl font-light text-[#2c1f14]">Talk with Susie before choosing</h2><p className="mx-auto mt-2 max-w-xl text-sm font-light text-muted">Review the recommendation together and confirm the right next step.</p><a href={consultationUrl} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 inline-block">Book Your FREE Professional Consult</a><button type="button" onClick={restart} className="mt-4 block w-full text-xs text-muted underline">Retake the evaluation</button></section>
+      <ShareBodyReset />
+      <button type="button" onClick={restart} className="block w-full pb-2 text-center text-xs text-muted underline">Retake the evaluation</button>
     </div></main><Footer /></>;
   }
 

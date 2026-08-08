@@ -16,28 +16,26 @@
   scroll-margin-top: var(--results-card-top);
 }
 
-.body-reset-route #full-treatment-list > div:last-child > div::before {
-  content: "TREATMENT SERIES";
-  display: block;
+.body-reset-route .results-card-shared-header {
   flex: 0 0 auto;
-  padding: 1.3rem 1.25rem 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(90, 43, 170, 0.12);
   background: #fff;
+  padding: 1.3rem 1.25rem 1rem;
   text-align: center;
+}
+
+.body-reset-route .results-card-shared-eyebrow {
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1rem;
   letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: #b79a5f;
 }
 
-.body-reset-route #full-treatment-list > div:last-child > div::after {
-  content: attr(data-card-title);
-  display: block;
-  flex: 0 0 auto;
-  padding: 0.65rem 1.25rem 1rem;
-  border-bottom: 1px solid rgba(90, 43, 170, 0.12);
-  background: #fff;
-  text-align: center;
+.body-reset-route .results-card-shared-title {
+  margin-top: 0.65rem;
   font-family: var(--font-serif), Georgia, serif;
   font-size: 1.875rem;
   font-weight: 300;
@@ -45,7 +43,7 @@
   color: #2c1f14;
 }
 
-.body-reset-route #full-treatment-list > div:last-child > div > div {
+.body-reset-route #full-treatment-list > div:last-child > div > div:not(.results-card-shared-header) {
   position: relative;
   flex: 1 1 auto;
   height: auto !important;
@@ -120,11 +118,7 @@
     --results-card-bottom: 82px;
   }
 
-  .body-reset-route #full-treatment-list > div:last-child > div::before {
-    padding: 1.5rem 1.5rem 0;
-  }
-
-  .body-reset-route #full-treatment-list > div:last-child > div::after {
-    padding: 0.7rem 1.5rem 1.1rem;
+  .body-reset-route .results-card-shared-header {
+    padding: 1.5rem 1.5rem 1.1rem;
   }
 }

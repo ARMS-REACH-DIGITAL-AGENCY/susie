@@ -5,33 +5,75 @@
 
 .body-reset-route #full-treatment-list > div:last-child > div {
   position: relative;
+  display: flex;
   height: calc(100dvh - var(--results-card-top) - var(--results-card-bottom));
   min-height: 0 !important;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(90, 43, 170, 0.15);
+  border-radius: 24px;
+  background: #fff;
   scroll-margin-top: var(--results-card-top);
 }
 
+.body-reset-route #full-treatment-list > div:last-child > div::before {
+  content: "TREATMENT SERIES";
+  display: block;
+  flex: 0 0 auto;
+  padding: 1.3rem 1.25rem 0;
+  background: #fff;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.18em;
+  color: #b79a5f;
+}
+
+.body-reset-route #full-treatment-list > div:last-child > div::after {
+  content: attr(data-card-title);
+  display: block;
+  flex: 0 0 auto;
+  padding: 0.65rem 1.25rem 1rem;
+  border-bottom: 1px solid rgba(90, 43, 170, 0.12);
+  background: #fff;
+  text-align: center;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.875rem;
+  font-weight: 300;
+  line-height: 1.12;
+  color: #2c1f14;
+}
+
 .body-reset-route #full-treatment-list > div:last-child > div > div {
-  height: 100%;
+  position: relative;
+  flex: 1 1 auto;
+  height: auto !important;
   min-height: 0 !important;
+  overflow: hidden;
 }
 
 .body-reset-route [data-results-card-front="true"] {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding-top: 1rem !important;
   pointer-events: auto !important;
 }
 
 .body-reset-route [data-results-card-front="true"] > p:first-child,
 .body-reset-route [data-results-card-front="true"] > h3 {
-  visibility: visible;
+  display: none !important;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "] {
+.body-reset-route [data-results-card-back="true"] {
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
+  border-radius: 0 !important;
   padding: 0.25rem !important;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "] > section {
+.body-reset-route [data-results-card-back="true"] > section {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: hidden;
@@ -39,30 +81,36 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "][data-scroll-active="true"] > section {
+.body-reset-route [data-results-card-back="true"][data-scroll-active="true"] > section {
   overflow-y: auto;
   overscroll-behavior-y: auto;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "] .treatment-family-sticky-header {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  margin: -1.25rem -1.25rem 1rem;
-  padding: 1.1rem 1.25rem 1rem;
-  border-bottom: 1px solid rgba(90, 43, 170, 0.14);
-  background: rgba(250, 248, 245, 0.98);
+.body-reset-route [data-results-card-back="true"] .treatment-family-sticky-header {
+  position: static;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "] > p:last-child {
+.body-reset-route [data-results-card-back="true"] .treatment-family-sticky-header > div {
+  display: none;
+}
+
+.body-reset-route [data-results-card-back="true"] .treatment-family-sticky-header > p {
+  margin-top: 0;
+}
+
+.body-reset-route [data-results-card-back="true"] > p:last-child {
   display: none !important;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "] > section > div:last-child {
+.body-reset-route [data-results-card-back="true"] > section > div:last-child {
   padding-bottom: 1rem;
 }
 
-.body-reset-route div[role="button"][aria-label^="Flip "] a {
+.body-reset-route [data-results-card-back="true"] a {
   scroll-margin-bottom: 1rem;
 }
 
@@ -72,8 +120,11 @@
     --results-card-bottom: 82px;
   }
 
-  .body-reset-route div[role="button"][aria-label^="Flip "] .treatment-family-sticky-header {
-    margin: -1.5rem -1.5rem 1rem;
-    padding: 1.25rem 1.5rem 1rem;
+  .body-reset-route #full-treatment-list > div:last-child > div::before {
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .body-reset-route #full-treatment-list > div:last-child > div::after {
+    padding: 0.7rem 1.5rem 1.1rem;
   }
 }

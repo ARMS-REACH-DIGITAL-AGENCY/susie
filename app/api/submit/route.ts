@@ -120,8 +120,23 @@ export async function POST(req: NextRequest) {
       page: normalizeString(body.page) || "Find My Best First Step",
     };
 
+    // Keep the canonical snake_case contract as the source of truth, but also
+    // emit the legacy camelCase aliases that older HighLevel workflow mappings
+    // may still reference. This lets the workflow be repaired without dropping
+    // contact names or evaluation fields during the transition.
     const payload = {
       ...canonicalPayload,
+      firstName: canonicalPayload.first_name,
+      lastName: canonicalPayload.last_name,
+      fullName: canonicalPayload.full_name,
+      previouslyTried: canonicalPayload.previously_tried,
+      preferredNextStep: canonicalPayload.preferred_next_step,
+      recommendedTreatment: canonicalPayload.recommended_treatment,
+      recommendationKey: canonicalPayload.recommendation_key,
+      recommendationReasons: canonicalPayload.recommendation_reasons,
+      scoreSummary: canonicalPayload.score_summary,
+      leadStage: canonicalPayload.lead_stage,
+      funnelPath: canonicalPayload.funnel_path,
       raw_payload: JSON.stringify(canonicalPayload),
     };
 
@@ -132,6 +147,8 @@ export async function POST(req: NextRequest) {
     console.info("[Susie Sculpts] Sending canonical ARMS intake submission", {
       submissionId: payload.submission_id,
       submittedAt: payload.submitted_at,
+      firstName: payload.first_name,
+      lastName: payload.last_name,
       email,
       source: payload.source,
       page: payload.page,

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
 import CopyUpdates from "@/components/CopyUpdates";
+import ConsultationLinkNormalizer from "@/components/ConsultationLinkNormalizer";
 import StickyEvaluationFooter from "@/components/StickyEvaluationFooter";
 import "./globals.css";
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-cream font-sans antialiased">
         <AnalyticsScripts />
         <CopyUpdates />
+        <ConsultationLinkNormalizer />
         {children}
         <StickyEvaluationFooter />
       </body>

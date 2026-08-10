@@ -37,4 +37,18 @@
     --results-card-top: 88px;
     --results-card-bottom: 82px;
   }
+
+  /* The personalized recommendation should read as the same landscape-style
+     card used by each treatment in the two-column results grid, rather than
+     as a narrow portrait card. Front and back share these dimensions. */
+  .body-reset-route main > div > section:first-child > div {
+    max-width: none !important;
+    width: 100%;
+  }
+
+  .body-reset-route main > div > section:first-child .results-treatment-card {
+    width: 100%;
+    height: 560px;
+    min-height: 560px;
+  }
 }

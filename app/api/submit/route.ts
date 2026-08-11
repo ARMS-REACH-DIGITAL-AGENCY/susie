@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
 
     const webhookUrl =
       process.env.HIGHLEVEL_WEBHOOK_URL ||
-      "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/14c03571-59aa-4b47-92f4-bf437144fb78";
+      "https://services.leadconnectorhq.com/hooks/QLS1wvtsvzL1YsLFxYcM/webhook-trigger/b5ab78ed-4b64-4c63-ae6e-90d591e468c0";
 
     console.info("[Susie Sculpts] Sending canonical ARMS intake submission", {
       submissionId: payload.submission_id,

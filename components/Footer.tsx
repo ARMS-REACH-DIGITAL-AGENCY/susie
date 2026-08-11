@@ -8,7 +8,7 @@ const socials = [
   ["Instagram", "https://www.instagram.com/susiesculpts?igsh=bDZkd3lnd3J4OTlw"],
   ["Google", "https://share.google/FV3eZee8jMbh0zwYd"],
   ["Facebook", "https://www.facebook.com/share/1HDw3mB8Ew/"],
-  ["TikTok", "https://www.tiktok.com/@susie.bute?_r=1&_t=ZT-98gx5ML4Rxd"],
+  ["TikTok", "https://www.tiktok.com/@susiesculpts?_r=1&_t=ZT-98gx5ML4Rxd"],
 ] as const;
 
 function SocialIcon({ label }: { label: string }) {

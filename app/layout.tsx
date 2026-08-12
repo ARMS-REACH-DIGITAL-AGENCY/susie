@@ -22,7 +22,6 @@ const jost = Jost({
 });
 
 const faviconPath = "/images/Susie_favicon.png?v=4";
-const socialImagePath = "/opengraph-image";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.susiesculpts.com"),
@@ -39,13 +38,13 @@ export const metadata: Metadata = {
     siteName: "Susie Sculpts",
     locale: "en_US",
     type: "website",
-    images: [{ url: socialImagePath, width: 1200, height: 630, alt: "Susie Sculpts — private body reset and wellness support in Gilbert, Arizona" }],
+    images: [{ url: faviconPath, alt: "Susie Sculpts" }],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Susie Sculpts | Body Reset, PEMF, Synergie & Sculpting in Gilbert AZ",
     description: "Private body reset, lymphatic, PEMF, and body sculpting support for women in Gilbert and the East Valley.",
-    images: [socialImagePath],
+    images: [faviconPath],
   },
 };
 

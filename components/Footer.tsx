@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 const socials = [
@@ -39,6 +40,7 @@ export default function Footer() {
               <li><a href="tel:+14805265656" className="transition-colors hover:text-cream">(480) 526-5656</a></li>
               <li><a href="mailto:susiesculpts@gmail.com" className="transition-colors hover:text-cream">susiesculpts@gmail.com</a></li>
             </ul>
+            <p className="mt-3 max-w-[220px] text-[11px] font-light leading-relaxed text-cream/45">Typical response time: within one business day.</p>
             <p className="mb-2 mt-5 text-xs font-medium uppercase tracking-widest text-gold">Social Media</p>
             <div className="flex flex-wrap gap-2">
               {socials.map(([label, href]) => {
@@ -63,6 +65,10 @@ export default function Footer() {
 
         <div className="mt-8 space-y-3 border-t border-cream/10 pt-6">
           <p className="max-w-3xl text-xs font-light leading-relaxed text-cream/40"><strong className="font-medium text-cream/50">Disclaimer:</strong> Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary. Results are not guaranteed.</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-light text-cream/40">
+            <Link href="/privacy" className="transition-colors hover:text-cream">Privacy Policy</Link>
+            <Link href="/terms" className="transition-colors hover:text-cream">Terms &amp; Messaging Terms</Link>
+          </div>
           <div className="flex flex-col gap-1 text-xs font-light text-cream/30 sm:flex-row sm:items-center sm:justify-between">
             <p>© 2026 Susie Sculpts · susiesculpts.com · Gilbert, AZ</p>
             <p>Powered by <a href="https://armsreachdigital.agency" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-cream">ARMS REACH Digital Agency</a></p>

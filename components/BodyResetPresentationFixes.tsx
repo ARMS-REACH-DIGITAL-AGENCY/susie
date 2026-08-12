@@ -62,9 +62,80 @@ function rewriteCheckoutButtons() {
   });
 }
 
+function polishLeadCaptureHero() {
+  const pageMain = document.querySelector<HTMLElement>(".body-reset-route main");
+  if (!pageMain) return;
+
+  const heroHeading = Array.from(pageMain.querySelectorAll<HTMLHeadingElement>("h1")).find((heading) =>
+    heading.textContent?.includes("Feel puffy, tired"),
+  );
+  if (!heroHeading) return;
+
+  const heroSection = heroHeading.closest("section");
+  if (!heroSection) return;
+  heroSection.dataset.aestheticHero = "true";
+
+  const intro = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>
+    paragraph.textContent?.includes("Enter your information"),
+  );
+  if (intro) {
+    intro.textContent = "Answer five quick questions and receive Susie’s professional starting-point recommendation.";
+    intro.classList.add("max-w-[34rem]");
+  }
+
+  const trustLine = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>
+    paragraph.textContent?.trim().toLowerCase().startsWith("free. private."),
+  );
+  if (trustLine) trustLine.textContent = "Free. Private. No Pressure.";
+
+  const consentLabel = Array.from(heroSection.querySelectorAll<HTMLLabelElement>("label")).find((label) =>
+    label.textContent?.includes("I agree to receive follow-up messages about my evaluation"),
+  );
+  if (consentLabel) {
+    const checkbox = consentLabel.querySelector<HTMLInputElement>('input[type="checkbox"]');
+    const textNode = Array.from(consentLabel.childNodes).find((node) => node.nodeType === Node.TEXT_NODE);
+    if (textNode) textNode.textContent = "I agree to receive follow-up messages about my evaluation.";
+    if (checkbox) checkbox.setAttribute("aria-label", "I agree to receive follow-up messages about my evaluation.");
+  }
+
+  const heroImage = heroSection.querySelector<HTMLImageElement>('img[alt="Woman looking thoughtfully in the mirror"]');
+  if (heroImage) heroImage.style.objectPosition = "center 22%";
+}
+
+function useStarBulletsEverywhere() {
+  Array.from(document.querySelectorAll<HTMLElement>(".body-reset-route ul li > span:first-child")).forEach((marker) => {
+    const text = marker.textContent?.trim();
+    if (text === "•" || text === "·" || text === "●") marker.textContent = "✦";
+  });
+}
+
+function injectAestheticStyles() {
+  if (document.getElementById("body-reset-aesthetic-polish")) return;
+  const style = document.createElement("style");
+  style.id = "body-reset-aesthetic-polish";
+  style.textContent = `
+    .body-reset-route [data-aesthetic-hero="true"] h1 {
+      font-size: 40px !important;
+      line-height: .98 !important;
+    }
+    .body-reset-route [data-aesthetic-hero="true"] img[alt="Woman looking thoughtfully in the mirror"] {
+      object-position: center 22% !important;
+    }
+    @media (min-width: 640px) {
+      .body-reset-route [data-aesthetic-hero="true"] h1 { font-size: 3rem !important; }
+    }
+    @media (min-width: 1024px) {
+      .body-reset-route [data-aesthetic-hero="true"] h1 { font-size: 3.75rem !important; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 function applyBodyResetPresentationFixes() {
   if (window.location.pathname !== "/body-reset") return;
-  compactRecommendationFootnote();
+  injectAestheticStyles();
+  polishLeadCaptureHero();
+  useStarBulletsEverywhere();
   replaceUltimateAverageCopy();
   rewriteCheckoutButtons();
 }

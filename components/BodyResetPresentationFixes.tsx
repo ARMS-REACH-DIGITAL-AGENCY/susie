@@ -17,22 +17,12 @@ function replaceUltimateAverageCopy() {
 
 function rewriteCheckoutButtons() {
   Array.from(document.querySelectorAll<HTMLAnchorElement>('a[href*="payment-link"]')).forEach((anchor) => {
-    const productCard = anchor.closest("div.flex.h-full.flex-col") as HTMLElement | null;
-    const familySection = anchor.closest("section") as HTMLElement | null;
-    if (!productCard || !familySection) return;
-
-    const label = productCard.querySelector("p.section-label")?.textContent?.trim() ?? "";
-    const familyName = familySection.querySelector("h3")?.textContent?.trim() ?? "Treatment";
-
-    if (familyName.toLowerCase().includes("ultimate")) {
-      anchor.textContent = "I WANT THE ULTIMATE YOU EXPERIENCE";
-      return;
+    const text = anchor.textContent?.trim() ?? "";
+    if (/ultimate\s+(?:["“”])?you(?:["“”])?\s+experience/i.test(text)) {
+      anchor.textContent = text
+        .replace(/ULTIMATE\s+(?:["“”])?YOU(?:["“”])?\s+EXPERIENCE/g, "ULTIMATE “YOU” EXPERIENCE")
+        .replace(/Ultimate\s+(?:["“”])?YOU(?:["“”])?\s+Experience/g, "Ultimate “YOU” Experience");
     }
-
-    const countMatch = label.match(/(\d+)-Treatment/i);
-    const count = countMatch?.[1] ?? (label.toLowerCase().includes("single") ? "1" : "20");
-    const treatmentName = familyName.replace(/\s+Series$/i, "").toUpperCase();
-    anchor.textContent = `I WANT ${count} ${treatmentName} ${count === "1" ? "TREATMENT" : "TREATMENTS"}`;
   });
 }
 
@@ -43,6 +33,11 @@ function polishLeadHero() {
   const heroImage = route.querySelector<HTMLImageElement>('img[alt="Woman looking thoughtfully in the mirror"]');
   const heroSection = heroImage?.closest("section");
   if (!heroImage || !heroSection) return;
+
+  const pill = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find(
+    (paragraph) => paragraph.textContent?.trim().toLowerCase() === "see what susie says",
+  );
+  pill?.remove();
 
   const main = heroSection.closest<HTMLElement>("main");
   const heroFrame = heroImage.parentElement as HTMLElement | null;
@@ -102,23 +97,73 @@ function useSmartPunctuation() {
   while (node) {
     const value = node.nodeValue ?? "";
     const polished = value
+      .replace(/ULTIMATE\s+(?:["“”])?U(?:["“”])?\s+EXPERIENCE/g, "ULTIMATE “YOU” EXPERIENCE")
+      .replace(/ULTIMATE\s+(?:["“”])?YOU(?:["“”])?\s+EXPERIENCE/g, "ULTIMATE “YOU” EXPERIENCE")
+      .replace(/Ultimate\s+(?:["“”])?U(?:["“”])?\s+Experience/g, "Ultimate “YOU” Experience")
+      .replace(/Ultimate\s+(?:["“”])?YOU(?:["“”])?\s+Experience/g, "Ultimate “YOU” Experience")
       .replace(/\"YOU\"/g, "“YOU”")
-      .replace(/Susie's/g, "Susie’s");
+      .replace(/Susie's/g, "Susie’s")
+      .replace(/(\$[\d,]+)\.00\b/g, "$1");
     if (polished !== value) node.nodeValue = polished;
     node = walker.nextNode();
   }
 }
 
-function useStarBullets() {
+function serifUltimateYou() {
+  const route = document.querySelector<HTMLElement>(".body-reset-route");
+  if (!route) return;
+
+  const textNodes: Text[] = [];
+  const walker = document.createTreeWalker(route, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+  while (node) {
+    if (
+      node instanceof Text &&
+      node.nodeValue?.includes("“YOU”") &&
+      !(node.parentElement?.closest('[data-ultimate-you-serif="true"]'))
+    ) {
+      textNodes.push(node);
+    }
+    node = walker.nextNode();
+  }
+
+  textNodes.forEach((textNode) => {
+    const value = textNode.nodeValue ?? "";
+    const pieces = value.split("“YOU”");
+    if (pieces.length < 2) return;
+
+    const fragment = document.createDocumentFragment();
+    pieces.forEach((piece, index) => {
+      if (piece) fragment.append(document.createTextNode(piece));
+      if (index < pieces.length - 1) {
+        const quotedYou = document.createElement("span");
+        quotedYou.textContent = "“YOU”";
+        quotedYou.className = "font-serif";
+        quotedYou.dataset.ultimateYouSerif = "true";
+        fragment.append(quotedYou);
+      }
+    });
+    textNode.replaceWith(fragment);
+  });
+}
+
+function normalizeStarBullets() {
   const route = document.querySelector<HTMLElement>(".body-reset-route");
   if (!route) return;
 
   Array.from(route.querySelectorAll<HTMLUListElement>("ul")).forEach((list) => {
     list.classList.add("list-none");
     Array.from(list.children).forEach((child) => {
-      if (!(child instanceof HTMLLIElement) || child.dataset.starBullet === "true") return;
+      if (!(child instanceof HTMLLIElement)) return;
 
-      child.classList.add("flex", "items-start", "gap-2");
+      const indicators = Array.from(child.children).filter((element) => {
+        const text = element.textContent?.trim();
+        return text === "✦" || text === "•";
+      });
+
+      if (indicators.length === 1 && indicators[0].textContent?.trim() === "✦" && child.dataset.starBullet === "true") return;
+
+      indicators.forEach((indicator) => indicator.remove());
       const star = document.createElement("span");
       star.textContent = "✦";
       star.setAttribute("aria-hidden", "true");
@@ -129,11 +174,42 @@ function useStarBullets() {
   });
 }
 
+function polishPricingCards() {
+  const route = document.querySelector<HTMLElement>(".body-reset-route");
+  if (!route) return;
+
+  Array.from(route.querySelectorAll<HTMLParagraphElement>("p")).forEach((paragraph) => {
+    const text = paragraph.textContent?.trim() ?? "";
+
+    if (/^\$[\d,]+$/.test(text)) {
+      paragraph.classList.add("text-right");
+      paragraph.style.textAlign = "right";
+
+      const row = paragraph.parentElement;
+      if (!row || row.dataset.priceLayoutPolished === "true") return;
+
+      const leftColumn = Array.from(row.children).find((child) => child !== paragraph && child instanceof HTMLElement) as HTMLElement | undefined;
+      const details = leftColumn?.querySelector<HTMLElement>("div.text-xs");
+      if (details) {
+        Array.from(details.querySelectorAll<HTMLParagraphElement>("p")).forEach((detailLine) => {
+          detailLine.style.whiteSpace = "nowrap";
+        });
+        details.classList.add("mt-1", "w-full");
+        row.insertAdjacentElement("afterend", details);
+      }
+
+      row.dataset.priceLayoutPolished = "true";
+    }
+  });
+}
+
 function applyBodyResetPresentationFixes() {
   if (window.location.pathname !== "/body-reset") return;
   polishLeadHero();
   useSmartPunctuation();
-  useStarBullets();
+  serifUltimateYou();
+  normalizeStarBullets();
+  polishPricingCards();
   replaceUltimateAverageCopy();
   rewriteCheckoutButtons();
 }

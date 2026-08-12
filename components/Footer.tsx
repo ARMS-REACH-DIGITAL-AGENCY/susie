@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 const socials = [
   ["LinkedIn", "https://www.linkedin.com/in/susie-bute-7784a835?utm_source=share_via&utm_content=profile&utm_medium=member_android"],
   ["Instagram", "https://www.instagram.com/susiesculpts?igsh=bDZkd3lnd3J4OTlw"],
-  ["Google", "https://share.google/FV3eZee8jMbh0zwYd"],
+  ["Google", "https://www.google.com/search?q=Susie+Sculpts"],
   ["Facebook", "https://www.facebook.com/share/1HDw3mB8Ew/"],
   ["TikTok", "https://www.tiktok.com/@susiesculpts?_r=1&_t=ZT-98gx5ML4Rxd"],
 ] as const;
@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <p className="mb-3 text-xs font-medium uppercase tracking-widest text-gold">Contact</p>
             <ul className="space-y-2 text-xs font-light">
-              <li><a href="tel:+14804400909" className="transition-colors hover:text-cream">(480) 440-0909</a></li>
+              <li><a href="tel:+14805265656" className="transition-colors hover:text-cream">(480) 526-5656</a></li>
               <li><a href="mailto:susiesculpts@gmail.com" className="transition-colors hover:text-cream">susiesculpts@gmail.com</a></li>
             </ul>
             <p className="mb-2 mt-5 text-xs font-medium uppercase tracking-widest text-gold">Social Media</p>

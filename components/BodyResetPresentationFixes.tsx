@@ -50,14 +50,18 @@ function polishLeadHero() {
   if (heading) {
     heading.classList.remove("text-[38px]");
     heading.classList.add("text-[40px]");
+
+    const titleBlock = heading.parentElement;
+    if (titleBlock) titleBlock.classList.add("translate-y-3", "lg:translate-y-0");
   }
 
   const intro = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>
     paragraph.textContent?.trim().startsWith("Enter your information"),
   );
   if (intro) {
-    intro.innerHTML = '<span class="block">Answer five quick questions and receive Susie’s professional</span><span class="block">starting point recommendation.</span>';
-    intro.classList.add("max-w-2xl");
+    intro.innerHTML = '<span class="block whitespace-nowrap">Answer five quick questions and receive Susie’s</span><span class="block whitespace-nowrap">professional starting point recommendation.</span>';
+    intro.classList.remove("text-[14px]", "leading-relaxed");
+    intro.classList.add("max-w-none", "text-[12px]", "leading-[1.45]", "tracking-[-0.01em]", "sm:text-base");
   }
 
   const freeLine = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>

@@ -5,32 +5,6 @@ import { useEffect } from "react";
 const ultimateScheduleDisclaimer =
   "Designed as a one-week experience: two treatments per day, every other day, for three treatment days total. Susie will confirm the treatment order and schedule with you.";
 
-function compactRecommendationFootnote() {
-  const heading = Array.from(document.querySelectorAll<HTMLElement>("p, h2, h3, h4")).find(
-    (element) => element.textContent?.trim().toLowerCase() === "why this recommendation came up",
-  );
-
-  if (!heading) return;
-
-  const section = heading.closest("section");
-  if (!section || section.dataset.compactRecommendation === "true") return;
-
-  const reasons = Array.from(section.querySelectorAll("ul li"))
-    .map((item) => item.textContent?.trim() ?? "")
-    .filter(Boolean);
-
-  const reasonText = reasons.slice(0, 2).join(" ");
-  section.dataset.compactRecommendation = "true";
-  section.className = "border-t border-purple/15 px-1 pt-3";
-  section.innerHTML = `
-    <p class="font-sans text-[11px] font-light leading-relaxed text-muted/80 sm:text-xs">
-      <span class="font-medium text-purple/80">Why this recommendation:</span>
-      ${reasonText}
-      <span class="italic">This is a starting-point recommendation, not a diagnosis. Susie will confirm the right series and number of sessions after speaking with you.</span>
-    </p>
-  `;
-}
-
 function replaceUltimateAverageCopy() {
   Array.from(document.querySelectorAll<HTMLElement>("p")).forEach((paragraph) => {
     const text = paragraph.textContent?.trim().toLowerCase() ?? "";
@@ -62,9 +36,88 @@ function rewriteCheckoutButtons() {
   });
 }
 
+function polishLeadHero() {
+  const route = document.querySelector<HTMLElement>(".body-reset-route");
+  if (!route) return;
+
+  const heroImage = route.querySelector<HTMLImageElement>('img[alt="Woman looking thoughtfully in the mirror"]');
+  const heroSection = heroImage?.closest("section");
+  if (!heroImage || !heroSection) return;
+
+  heroImage.style.objectPosition = "50% 24%";
+
+  const heading = heroSection.querySelector<HTMLElement>("h1");
+  if (heading) {
+    heading.classList.remove("text-[38px]");
+    heading.classList.add("text-[40px]");
+  }
+
+  const intro = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>
+    paragraph.textContent?.trim().startsWith("Enter your information"),
+  );
+  if (intro) {
+    intro.innerHTML = '<span class="block">Answer five quick questions and receive Susie’s professional</span><span class="block">starting point recommendation.</span>';
+    intro.classList.add("max-w-2xl");
+  }
+
+  const freeLine = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>
+    paragraph.textContent?.trim().toLowerCase().startsWith("free."),
+  );
+  if (freeLine) freeLine.textContent = "Free. Private. No Pressure.";
+
+  const consentLabel = Array.from(heroSection.querySelectorAll<HTMLLabelElement>("label")).find((label) =>
+    label.textContent?.includes("follow-up messages about my evaluation"),
+  );
+  if (consentLabel && consentLabel.dataset.copyPolished !== "true") {
+    Array.from(consentLabel.childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE)
+      .forEach((node) => node.remove());
+    consentLabel.append(document.createTextNode("I agree to receive follow-up messages about my evaluation."));
+    consentLabel.dataset.copyPolished = "true";
+  }
+}
+
+function useSmartPunctuation() {
+  const route = document.querySelector<HTMLElement>(".body-reset-route");
+  if (!route) return;
+
+  const walker = document.createTreeWalker(route, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+  while (node) {
+    const value = node.nodeValue ?? "";
+    const polished = value
+      .replace(/\"YOU\"/g, "“YOU”")
+      .replace(/Susie's/g, "Susie’s");
+    if (polished !== value) node.nodeValue = polished;
+    node = walker.nextNode();
+  }
+}
+
+function useStarBullets() {
+  const route = document.querySelector<HTMLElement>(".body-reset-route");
+  if (!route) return;
+
+  Array.from(route.querySelectorAll<HTMLUListElement>("ul")).forEach((list) => {
+    list.classList.add("list-none");
+    Array.from(list.children).forEach((child) => {
+      if (!(child instanceof HTMLLIElement) || child.dataset.starBullet === "true") return;
+
+      child.classList.add("flex", "items-start", "gap-2");
+      const star = document.createElement("span");
+      star.textContent = "✦";
+      star.setAttribute("aria-hidden", "true");
+      star.className = "shrink-0 text-purple";
+      child.prepend(star);
+      child.dataset.starBullet = "true";
+    });
+  });
+}
+
 function applyBodyResetPresentationFixes() {
   if (window.location.pathname !== "/body-reset") return;
-  compactRecommendationFootnote();
+  polishLeadHero();
+  useSmartPunctuation();
+  useStarBullets();
   replaceUltimateAverageCopy();
   rewriteCheckoutButtons();
 }

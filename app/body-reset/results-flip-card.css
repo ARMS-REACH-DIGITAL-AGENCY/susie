@@ -144,4 +144,9 @@
   .body-reset-route .results-treatment-card > div > button > h3 {
     font-size: 1.75rem !important;
   }
+
+  /* The recommended card should use the same desktop content width as the treatment grid below. */
+  .body-reset-route main > div.max-w-5xl > section:first-child > div {
+    max-width: 100% !important;
+  }
 }

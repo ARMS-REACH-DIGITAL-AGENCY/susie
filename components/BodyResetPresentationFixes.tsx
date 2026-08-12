@@ -44,7 +44,15 @@ function polishLeadHero() {
   const heroSection = heroImage?.closest("section");
   if (!heroImage || !heroSection) return;
 
+  const main = heroSection.closest<HTMLElement>("main");
+  const heroFrame = heroImage.parentElement as HTMLElement | null;
+
   heroImage.style.objectPosition = "50% 24%";
+
+  if (window.matchMedia("(max-width: 1023px)").matches) {
+    if (main) main.style.paddingBottom = "0";
+    if (heroFrame) heroFrame.style.minHeight = "calc(100svh - 1rem)";
+  }
 
   const heading = heroSection.querySelector<HTMLElement>("h1");
   if (heading) {
@@ -52,7 +60,11 @@ function polishLeadHero() {
     heading.classList.add("text-[40px]");
 
     const titleBlock = heading.parentElement;
-    if (titleBlock) titleBlock.classList.add("translate-y-3", "lg:translate-y-0");
+    const contentBlock = titleBlock?.parentElement;
+    if (contentBlock && window.matchMedia("(max-width: 1023px)").matches) {
+      contentBlock.style.minHeight = "calc(100svh - 1rem)";
+      contentBlock.classList.remove("translate-y-3");
+    }
   }
 
   const intro = Array.from(heroSection.querySelectorAll<HTMLParagraphElement>("p")).find((paragraph) =>

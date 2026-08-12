@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EvaluationPageController from "@/components/EvaluationPageController";
 import EvaluationTrustSections from "@/components/EvaluationTrustSections";
+import BodyResetPresentationFixes from "@/components/BodyResetPresentationFixes";
 import ResultsCardScrollCoordinator from "./ResultsCardScrollCoordinator";
 import "./results-flip-card.css";
 
@@ -21,6 +22,7 @@ export default function BodyResetLayout({ children }: { children: React.ReactNod
     <>
       <Navbar />
       <EvaluationPageController />
+      <BodyResetPresentationFixes />
       <ResultsCardScrollCoordinator />
       <div className="body-reset-route [&>main]:!pt-0 [&>footer]:hidden">{children}</div>
       <EvaluationTrustSections />

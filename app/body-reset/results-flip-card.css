@@ -3,8 +3,9 @@
   --results-card-bottom: 76px;
 }
 
+/* Every recommendation/treatment flip card uses one shared footprint. */
 .body-reset-route .results-treatment-card {
-  height: calc(100dvh - var(--results-card-top) - var(--results-card-bottom));
+  height: 560px;
   min-height: 560px;
   scroll-margin-top: var(--results-card-top);
 }
@@ -145,7 +146,7 @@
     font-size: 1.75rem !important;
   }
 
-  /* The recommended card should use the same desktop content width as the treatment grid below. */
+  /* The recommended card uses the same desktop width as the treatment cards below. */
   .body-reset-route main > div.max-w-5xl > section:first-child > div {
     max-width: 100% !important;
   }

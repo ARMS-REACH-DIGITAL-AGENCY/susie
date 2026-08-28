@@ -46,7 +46,6 @@ function polishLeadHero() {
 
   if (window.matchMedia("(max-width: 1023px)").matches) {
     if (main) main.style.paddingBottom = "0";
-    if (heroFrame) heroFrame.style.minHeight = "calc(100svh - 1rem)";
   }
 
   const heading = heroSection.querySelector<HTMLElement>("h1");
@@ -57,7 +56,6 @@ function polishLeadHero() {
     const titleBlock = heading.parentElement;
     const contentBlock = titleBlock?.parentElement;
     if (contentBlock && window.matchMedia("(max-width: 1023px)").matches) {
-      contentBlock.style.minHeight = "calc(100svh - 1rem)";
       contentBlock.classList.remove("translate-y-3");
     }
   }
@@ -76,16 +74,6 @@ function polishLeadHero() {
   );
   if (freeLine) freeLine.textContent = "Free. Private. No Pressure.";
 
-  const consentLabel = Array.from(heroSection.querySelectorAll<HTMLLabelElement>("label")).find((label) =>
-    label.textContent?.includes("follow-up messages about my evaluation"),
-  );
-  if (consentLabel && consentLabel.dataset.copyPolished !== "true") {
-    Array.from(consentLabel.childNodes)
-      .filter((node) => node.nodeType === Node.TEXT_NODE)
-      .forEach((node) => node.remove());
-    consentLabel.append(document.createTextNode("I agree to receive follow-up messages about my evaluation."));
-    consentLabel.dataset.copyPolished = "true";
-  }
 }
 
 function useSmartPunctuation() {

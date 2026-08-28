@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <article className="mx-auto max-w-3xl px-4 sm:px-6">
           <p className="section-label mb-3">Privacy</p>
           <h1 className="mb-6 font-serif text-4xl font-light text-[#2c1f14] md:text-5xl">Privacy Policy</h1>
-          <p className="mb-8 text-sm font-light leading-relaxed text-muted">Last updated August 12, 2026.</p>
+          <p className="mb-8 text-sm font-light leading-relaxed text-muted">Last updated August 27, 2026.</p>
 
           <div className="space-y-7 text-[15px] font-light leading-relaxed text-muted md:text-base">
             <section>
@@ -30,12 +30,17 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Text messages and email</h2>
-              <p>If you expressly agree to receive follow-up messages, Susie Sculpts may contact you by text message or email about your evaluation, consultation, appointment, or related services. Consent to receive marketing messages is not a condition of purchase. Message and data rates may apply. Message frequency varies. You may reply STOP to opt out of text messages and HELP for help.</p>
+              <p>If you expressly agree to receive service or evaluation messages, Susie Sculpts may contact you by text message or email about your evaluation, treatment recommendation, purchases, appointments, customer service, or related services. If you separately agree to marketing messages, we may also send occasional text messages about special offers, discounts, and services. Consent is optional and is not a condition of purchase. Message and data rates may apply. Message frequency varies. You may reply STOP to opt out of text messages and HELP for help.</p>
             </section>
 
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Service providers</h2>
               <p>We may use service providers that help operate the website, forms, scheduling, communications, analytics, hosting, and customer relationship management. These providers may process information on our behalf as necessary to provide those services. We do not sell your personal information.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Mobile information and SMS consent</h2>
+              <p>No mobile information, including SMS opt-in data and consent, will be shared with third parties or affiliates for their marketing or promotional purposes. We may share this information only with service providers that support our messaging program, such as the platforms used to send or manage messages, and only as needed to provide those services.</p>
             </section>
 
             <section>

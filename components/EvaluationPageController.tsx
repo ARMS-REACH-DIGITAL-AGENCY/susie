@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const STORAGE_KEY = "susie-sculpts-evaluation-v2";
+const STORAGE_KEY = "susie-sculpts-evaluation-v3";
 
 type EvaluationState = {
   leadCaptured?: boolean;

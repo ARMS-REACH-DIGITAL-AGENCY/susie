@@ -125,4 +125,37 @@ body {
     padding-top: 0.65rem;
     padding-bottom: 0.65rem;
   }
+
+  .body-reset-page form details {
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .body-reset-page form details summary {
+    font-size: 0.6rem;
+    line-height: 1.35;
+  }
+
+  .body-reset-page form details > div {
+    margin-top: 0.55rem;
+  }
+
+  .body-reset-page form details label {
+    font-size: 0.58rem;
+    line-height: 1.35;
+  }
+
+  .body-reset-page form details label + label {
+    margin-top: 0.6rem !important;
+  }
+
+  .body-reset-page form details input[type="checkbox"] {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .body-reset-page form details + p {
+    font-size: 0.58rem;
+    line-height: 1.35;
+  }
 }

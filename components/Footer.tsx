@@ -36,6 +36,7 @@ export default function Footer() {
 
           <div>
             <p className="mb-3 text-xs font-medium uppercase tracking-widest text-gold">Contact</p>
+            <p className="mb-3 max-w-[240px] text-xs font-light leading-relaxed text-cream/50">Susie Sculpts | Gilbert, Arizona — serving Gilbert, Chandler, Queen Creek, Mesa &amp; the East Valley</p>
             <ul className="space-y-2 text-xs font-light">
               <li><a href="tel:+14805265656" className="transition-colors hover:text-cream">(480) 526-5656</a></li>
               <li><a href="mailto:susiesculpts@gmail.com" className="transition-colors hover:text-cream">susiesculpts@gmail.com</a></li>
@@ -64,6 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 space-y-3 border-t border-cream/10 pt-6">
+          <p className="text-xs font-light leading-relaxed text-cream/40">HEALTHY LIFESTYLES AZ, doing business as Susie Sculpts.</p>
           <p className="max-w-3xl text-xs font-light leading-relaxed text-cream/40"><strong className="font-medium text-cream/50">Disclaimer:</strong> Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary. Results are not guaranteed.</p>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-light text-cream/40">
             <Link href="/privacy" className="transition-colors hover:text-cream">Privacy Policy</Link>

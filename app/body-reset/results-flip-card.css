@@ -125,6 +125,14 @@
   overscroll-behavior-y: auto;
 }
 
+/* Give the evaluation landing moment enough vertical space to keep the
+   headline clear of the fixed navigation and lower the form beneath Susie's
+   face without pushing the initial CTA below the fold. */
+.evaluation-landing-active .body-reset-route > main > section:first-child > div,
+.evaluation-landing-active .body-reset-route > main > section:first-child > div > div.relative.z-10 {
+  min-height: calc(100svh + 7rem) !important;
+}
+
 @media (min-width: 768px) {
   .body-reset-route {
     --results-card-top: 88px;
@@ -149,5 +157,12 @@
   /* The recommended card uses the same desktop width as the treatment cards below. */
   .body-reset-route main > div.max-w-5xl > section:first-child > div {
     max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .evaluation-landing-active .body-reset-route > main > section:first-child > div,
+  .evaluation-landing-active .body-reset-route > main > section:first-child > div > div.relative.z-10 {
+    min-height: calc(100svh - 1rem) !important;
   }
 }

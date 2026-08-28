@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 space-y-3 border-t border-cream/10 pt-6">
-          <p className="text-xs font-light leading-relaxed text-cream/40">HEALTHY LIFESTYLES AZ, doing business as Susie Sculpts.</p>
+          <p className="text-xs font-light leading-relaxed text-cream/40">RHONDA S BUTE, doing business as HEALTHY LIFESTYLES AZ, operates Susie Sculpts.</p>
           <p className="max-w-3xl text-xs font-light leading-relaxed text-cream/40"><strong className="font-medium text-cream/50">Disclaimer:</strong> Services are wellness-focused and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary. Results are not guaranteed.</p>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-light text-cream/40">
             <Link href="/privacy" className="transition-colors hover:text-cream">Privacy Policy</Link>

@@ -46,7 +46,6 @@ function polishLeadHero() {
 
   if (window.matchMedia("(max-width: 1023px)").matches) {
     if (main) main.style.paddingBottom = "0";
-    if (heroFrame) heroFrame.style.minHeight = "calc(100svh - 1rem)";
   }
 
   const heading = heroSection.querySelector<HTMLElement>("h1");
@@ -57,7 +56,6 @@ function polishLeadHero() {
     const titleBlock = heading.parentElement;
     const contentBlock = titleBlock?.parentElement;
     if (contentBlock && window.matchMedia("(max-width: 1023px)").matches) {
-      contentBlock.style.minHeight = "calc(100svh - 1rem)";
       contentBlock.classList.remove("translate-y-3");
     }
   }

@@ -40,6 +40,11 @@ export default function TermsPage() {
             </section>
 
             <section>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Age requirement</h2>
+              <p>You must be at least 18 years old to opt in to the SMS program or purchase services through this website.</p>
+            </section>
+
+            <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Acceptable use</h2>
               <p>You agree not to misuse the website, attempt unauthorized access, interfere with website operation, submit unlawful or misleading information, or use the website in a manner that harms Susie Sculpts or other users.</p>
             </section>

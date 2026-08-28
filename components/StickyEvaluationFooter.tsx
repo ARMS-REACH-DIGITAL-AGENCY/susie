@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "susie-sculpts-evaluation-v2";
+const STORAGE_KEY = "susie-sculpts-evaluation-v3";
 const consultationUrl =
   "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 

@@ -44,6 +44,11 @@ export default function PrivacyPage() {
             </section>
 
             <section>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Data practices and security</h2>
+              <p>We retain personal information only as long as reasonably necessary for the purposes described in this policy, to meet legal and recordkeeping obligations, and to resolve disputes. We use reasonable administrative, technical, and physical safeguards designed to protect information from unauthorized access, use, or disclosure.</p>
+            </section>
+
+            <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Health and wellness information</h2>
               <p>Information submitted through this website is used for wellness and service-planning purposes. The website is not a medical service and is not intended for emergency or diagnostic use. Do not submit information through the website if you require emergency medical attention.</p>
             </section>

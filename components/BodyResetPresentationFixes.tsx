@@ -76,16 +76,6 @@ function polishLeadHero() {
   );
   if (freeLine) freeLine.textContent = "Free. Private. No Pressure.";
 
-  const consentLabel = Array.from(heroSection.querySelectorAll<HTMLLabelElement>("label")).find((label) =>
-    label.textContent?.includes("follow-up messages about my evaluation"),
-  );
-  if (consentLabel && consentLabel.dataset.copyPolished !== "true") {
-    Array.from(consentLabel.childNodes)
-      .filter((node) => node.nodeType === Node.TEXT_NODE)
-      .forEach((node) => node.remove());
-    consentLabel.append(document.createTextNode("I agree to receive follow-up messages about my evaluation."));
-    consentLabel.dataset.copyPolished = "true";
-  }
 }
 
 function useSmartPunctuation() {

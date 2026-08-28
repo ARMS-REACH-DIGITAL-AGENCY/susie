@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const STORAGE_KEY = "susie-sculpts-evaluation-v2";
+const STORAGE_KEY = "susie-sculpts-evaluation-v3";
 const consultationBookingUrl =
   "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 const desktopEvaluationActionClass =

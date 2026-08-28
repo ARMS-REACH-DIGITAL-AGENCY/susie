@@ -40,8 +40,8 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Age requirement</h2>
-              <p>You must be at least 18 years old to opt in to the SMS program or purchase services through this website.</p>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Age restriction (18+)</h2>
+              <p>You must be 18 years of age or older to use this SMS service.</p>
             </section>
 
             <section>

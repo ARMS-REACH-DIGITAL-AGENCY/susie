@@ -44,8 +44,8 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Data practices and security</h2>
-              <p>We retain personal information only as long as reasonably necessary for the purposes described in this policy, to meet legal and recordkeeping obligations, and to resolve disputes. We use reasonable administrative, technical, and physical safeguards designed to protect information from unauthorized access, use, or disclosure.</p>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Data security practices</h2>
+              <p>We use appropriate security measures to protect user data, including reasonable administrative, technical, and physical safeguards designed to protect information from unauthorized access, use, or disclosure. We retain personal information only as long as reasonably necessary for the purposes described in this policy, to meet legal and recordkeeping obligations, and to resolve disputes.</p>
             </section>
 
             <section>

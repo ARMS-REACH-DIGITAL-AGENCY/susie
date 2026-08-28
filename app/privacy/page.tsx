@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <article className="mx-auto max-w-3xl px-4 sm:px-6">
           <p className="section-label mb-3">Privacy</p>
           <h1 className="mb-6 font-serif text-4xl font-light text-[#2c1f14] md:text-5xl">Privacy Policy</h1>
-          <p className="mb-8 text-sm font-light leading-relaxed text-muted">Last updated August 27, 2026.</p>
+          <p className="mb-8 text-sm font-light leading-relaxed text-muted">Last updated August 28, 2026.</p>
 
           <div className="space-y-7 text-[15px] font-light leading-relaxed text-muted md:text-base">
             <section>
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Mobile information and SMS consent</h2>
-              <p>No mobile information, including SMS opt-in data and consent, will be shared with third parties or affiliates for their marketing or promotional purposes. We may share this information only with service providers that support our messaging program, such as the platforms used to send or manage messages, and only as needed to provide those services.</p>
+              <p>No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. Information sharing to subcontractors in support services, such as customer service, is permitted. All other use case categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
             </section>
 
             <section>

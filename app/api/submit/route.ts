@@ -17,6 +17,10 @@ function normalizeConsent(value: unknown): "Yes" | "No" {
   return "No";
 }
 
+function isConsentGranted(value: unknown): boolean {
+  return normalizeConsent(value) === "Yes";
+}
+
 function recommendationKeyFromTreatment(value: string): string {
   const treatment = value.toLowerCase();
   if (treatment.includes("lymphatic")) return "lymphatic";
@@ -42,6 +46,11 @@ export async function POST(req: NextRequest) {
     const lastName = normalizeString(body.last_name) || normalizeString(body.lastName);
     const email = normalizeString(body.email).toLowerCase();
     const phone = normalizeString(body.phone);
+    const serviceSmsConsent = normalizeConsent(body.service_sms_consent ?? body.serviceSmsConsent);
+    const marketingSmsConsent = normalizeConsent(body.marketing_sms_consent ?? body.marketingSmsConsent);
+    // Keep the existing `consent` value for HighLevel mappings that already use it.
+    // For the new form, it represents consent to either SMS category.
+    const consent = isConsentGranted(body.consent) || serviceSmsConsent === "Yes" || marketingSmsConsent === "Yes" ? "Yes" : "No";
 
     if (!firstName || !email) {
       return NextResponse.json(
@@ -97,7 +106,9 @@ export async function POST(req: NextRequest) {
         [firstName, lastName].filter(Boolean).join(" "),
       email,
       phone,
-      consent: normalizeConsent(body.consent),
+      consent,
+      service_sms_consent: serviceSmsConsent,
+      marketing_sms_consent: marketingSmsConsent,
       interest: normalizeString(body.interest) || symptoms,
       symptoms,
       previously_tried: previouslyTried,
@@ -137,6 +148,8 @@ export async function POST(req: NextRequest) {
       scoreSummary: canonicalPayload.score_summary,
       leadStage: canonicalPayload.lead_stage,
       funnelPath: canonicalPayload.funnel_path,
+      serviceSmsConsent: canonicalPayload.service_sms_consent,
+      marketingSmsConsent: canonicalPayload.marketing_sms_consent,
       raw_payload: JSON.stringify(canonicalPayload),
     };
 

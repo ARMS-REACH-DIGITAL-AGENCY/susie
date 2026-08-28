@@ -29,6 +29,11 @@ export default function PrivacyPage() {
             </section>
 
             <section>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Cookies and tracking information</h2>
+              <p>We and our service providers may use cookies and similar technologies to operate the website, remember preferences, understand how visitors use the site, measure website performance, and improve our services. These technologies may collect information such as browser type, device information, IP address, referring page, pages viewed, and the date and time of visits. You can manage or delete cookies through your browser settings; disabling cookies may affect some website features.</p>
+            </section>
+
+            <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Text messages and email</h2>
               <p>If you expressly agree to receive service or evaluation messages, Susie Sculpts may contact you by text message or email about your evaluation, treatment recommendation, purchases, appointments, customer service, or related services. If you separately agree to marketing messages, we may also send occasional text messages about special offers, discounts, and services. Consent is optional and is not a condition of purchase. Message and data rates may apply. Message frequency varies. You may reply STOP to opt out of text messages and HELP for help.</p>
             </section>

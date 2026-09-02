@@ -42,8 +42,17 @@ export async function POST(req: NextRequest) {
 
     // Accept both current camelCase website properties and the canonical ARMS
     // snake_case contract so this endpoint remains backward-compatible.
-    const firstName = normalizeString(body.first_name) || normalizeString(body.firstName);
-    const lastName = normalizeString(body.last_name) || normalizeString(body.lastName);
+    const submittedFullName = normalizeString(body.full_name) || normalizeString(body.fullName);
+    let firstName = normalizeString(body.first_name) || normalizeString(body.firstName);
+    let lastName = normalizeString(body.last_name) || normalizeString(body.lastName);
+    // The lead capture form now collects a single "Full Name*" field to save
+    // space. Split it into first/last so existing HighLevel mappings that use
+    // the standard First name / Last name contact fields keep working.
+    if (!firstName && submittedFullName) {
+      const nameParts = submittedFullName.split(/\s+/).filter(Boolean);
+      firstName = nameParts.shift() || "";
+      lastName = nameParts.join(" ");
+    }
     const email = normalizeString(body.email).toLowerCase();
     const phone = normalizeString(body.phone);
     const serviceSmsConsent = normalizeConsent(body.service_sms_consent ?? body.serviceSmsConsent);

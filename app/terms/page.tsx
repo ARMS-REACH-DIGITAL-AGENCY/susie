@@ -15,7 +15,7 @@ export default function TermsPage() {
         <article className="mx-auto max-w-3xl px-4 sm:px-6">
           <p className="section-label mb-3">Terms</p>
           <h1 className="mb-6 font-serif text-4xl font-light text-[#2c1f14] md:text-5xl">Terms &amp; Messaging Terms</h1>
-          <p className="mb-8 text-sm font-light leading-relaxed text-muted">Last updated August 12, 2026.</p>
+          <p className="mb-8 text-sm font-light leading-relaxed text-muted">Last updated August 28, 2026.</p>
 
           <div className="space-y-7 text-[15px] font-light leading-relaxed text-muted md:text-base">
             <section>
@@ -35,8 +35,13 @@ export default function TermsPage() {
 
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Text messaging terms</h2>
-              <p>When you provide your mobile number and expressly consent to follow-up messages, you authorize Susie Sculpts to send text messages related to your evaluation, consultation, appointments, service information, and, when permitted by your consent, promotional follow-up. Message frequency varies. Message and data rates may apply. Consent is not a condition of purchase.</p>
-              <p className="mt-3">Reply STOP to opt out of text messages. Reply HELP for help. Carriers are not liable for delayed or undelivered messages. You are responsible for providing a mobile number that you are authorized to use.</p>
+              <p>RHONDA S BUTE, doing business as HEALTHY LIFESTYLES AZ, operates Susie Sculpts. When you provide your mobile number and expressly consent to follow-up messages, you authorize us to send text messages related to your evaluation, consultation, appointments, service information, and, when permitted by your consent, promotional follow-up. Consent is not a condition of purchase.</p>
+              <p className="mt-3">You can cancel the SMS service at any time by texting STOP to (480) 526-5656. After you send STOP, we will send an SMS message confirming that you have been unsubscribed. After that, you will no longer receive SMS messages from us. To rejoin, sign up again as you did the first time.</p><p className="mt-3">For help, reply HELP or contact us at susiesculpts@gmail.com or (480) 526-5656. Message frequency may vary. Message and data rates may apply. Contact your wireless provider with questions about your text or data plan. Carriers are not liable for delayed or undelivered messages. You are responsible for providing a mobile number that you are authorized to use.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Age restriction (18+)</h2>
+              <p>You must be 18 years of age or older to use this SMS service.</p>
             </section>
 
             <section>

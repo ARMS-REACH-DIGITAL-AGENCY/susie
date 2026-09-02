@@ -14,6 +14,9 @@ const desktopEvaluationActionClass =
 export default function Navbar() {
   const pathname = usePathname();
   const isEvaluationPage = pathname === "/body-reset";
+  const headerClass = isEvaluationPage
+    ? "sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-stone/60"
+    : "fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-stone/60";
   const [menuOpen, setMenuOpen] = useState(false);
   const [isResultsPage, setIsResultsPage] = useState(false);
 
@@ -69,7 +72,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-stone/60">
+      <header className={headerClass}>
         <div className="max-w-6xl mx-auto px-3 sm:px-6 flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="flex items-center shrink-0" onClick={closeMenu}>
             <Image

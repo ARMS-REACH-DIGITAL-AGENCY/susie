@@ -22,7 +22,7 @@ export default function FAQ() {
             {open === i && <div className="px-5 pb-5"><p className="text-sm font-light leading-relaxed text-muted">{faq.a}</p></div>}
           </div>)}
         </div>
-        <div className="mt-7 text-center"><p className="mb-3 text-sm font-light text-muted">Still have questions? Susie is happy to talk.</p><a href="tel:+14805265655" className="btn-primary inline-flex min-h-[56px] items-center justify-center px-6">Call or Text Susie</a></div>
+        <div className="mt-7 text-center"><p className="mb-3 text-sm font-light text-muted">Still have questions? Susie is happy to talk.</p><a href="tel:+14805265656" className="btn-primary inline-flex min-h-[56px] items-center justify-center px-6">Call or Text Susie</a></div>
       </div>
     </section>
   );

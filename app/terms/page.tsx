@@ -36,7 +36,7 @@ export default function TermsPage() {
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Text messaging terms</h2>
               <p>RHONDA S BUTE, doing business as HEALTHY LIFESTYLES AZ, operates Susie Sculpts. When you provide your mobile number and expressly consent to follow-up messages, you authorize us to send text messages related to your evaluation, consultation, appointments, service information, and, when permitted by your consent, promotional follow-up. Consent is not a condition of purchase.</p>
-              <p className="mt-3">You can cancel the SMS service at any time by texting STOP to (480) 526-5655. After you send STOP, we will send an SMS message confirming that you have been unsubscribed. After that, you will no longer receive SMS messages from us. To rejoin, sign up again as you did the first time.</p><p className="mt-3">For help, reply HELP or contact us at susiesculpts@gmail.com or (480) 526-5655. Message frequency may vary. Message and data rates may apply. Contact your wireless provider with questions about your text or data plan. Carriers are not liable for delayed or undelivered messages. You are responsible for providing a mobile number that you are authorized to use.</p>
+              <p className="mt-3">You can cancel the SMS service at any time by texting STOP to (480) 526-5656. After you send STOP, we will send an SMS message confirming that you have been unsubscribed. After that, you will no longer receive SMS messages from us. To rejoin, sign up again as you did the first time.</p><p className="mt-3">For help, reply HELP or contact us at susiesculpts@gmail.com or (480) 526-5656. Message frequency may vary. Message and data rates may apply. Contact your wireless provider with questions about your text or data plan. Carriers are not liable for delayed or undelivered messages. You are responsible for providing a mobile number that you are authorized to use.</p>
             </section>
 
             <section>
@@ -56,7 +56,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Contact</h2>
-              <p>Questions about these terms may be sent to <a className="text-purple underline underline-offset-4" href="mailto:susiesculpts@gmail.com">susiesculpts@gmail.com</a> or <a className="text-purple underline underline-offset-4" href="tel:+14805265655">(480) 526-5655</a>.</p>
+              <p>Questions about these terms may be sent to <a className="text-purple underline underline-offset-4" href="mailto:susiesculpts@gmail.com">susiesculpts@gmail.com</a> or <a className="text-purple underline underline-offset-4" href="tel:+14805265656">(480) 526-5656</a>.</p>
             </section>
           </div>
         </article>

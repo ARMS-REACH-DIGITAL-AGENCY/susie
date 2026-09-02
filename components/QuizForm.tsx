@@ -352,7 +352,7 @@ export default function QuizForm() {
 
             {formState === "error" && (
               <p className="text-center text-sm text-red-500 font-sans font-light">
-                Something went wrong. Please try again or call Susie directly at (480)526-5656.
+                Something went wrong. Please try again or call Susie directly at (480) 526-5655.
               </p>
             )}
 

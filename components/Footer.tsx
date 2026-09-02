@@ -38,7 +38,7 @@ export default function Footer() {
             <p className="mb-3 text-xs font-medium uppercase tracking-widest text-gold">Contact</p>
             <p className="mb-3 max-w-[240px] text-xs font-light leading-relaxed text-cream/50">Susie Sculpts | Gilbert, Arizona — serving Gilbert, Chandler, Queen Creek, Mesa &amp; the East Valley</p>
             <ul className="space-y-2 text-xs font-light">
-              <li><a href="tel:+14805265656" className="transition-colors hover:text-cream">(480) 526-5656</a></li>
+              <li><a href="tel:+14805265655" className="transition-colors hover:text-cream">(480) 526-5655</a></li>
               <li><a href="mailto:susiesculpts@gmail.com" className="transition-colors hover:text-cream">susiesculpts@gmail.com</a></li>
             </ul>
             <p className="mt-3 max-w-[220px] text-[11px] font-light leading-relaxed text-cream/45">Typical response time: within one business day.</p>

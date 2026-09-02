@@ -65,7 +65,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="mb-2 font-serif text-2xl font-light text-[#2c1f14]">Contact</h2>
-              <p>For privacy questions or requests, contact Susie Sculpts at <a className="text-purple underline underline-offset-4" href="mailto:susiesculpts@gmail.com">susiesculpts@gmail.com</a> or <a className="text-purple underline underline-offset-4" href="tel:+14805265656">(480) 526-5656</a>.</p>
+              <p>For privacy questions or requests, contact Susie Sculpts at <a className="text-purple underline underline-offset-4" href="mailto:susiesculpts@gmail.com">susiesculpts@gmail.com</a> or <a className="text-purple underline underline-offset-4" href="tel:+14805265655">(480) 526-5655</a>.</p>
             </section>
           </div>
         </article>

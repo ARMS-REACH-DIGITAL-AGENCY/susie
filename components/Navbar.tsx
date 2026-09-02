@@ -138,7 +138,7 @@ export default function Navbar() {
             ) : (
               <Link href="/body-reset" onClick={closeMenu} className="mt-7 flex items-center justify-center rounded-sm bg-gold px-4 py-4 text-center font-sans text-xs font-semibold tracking-[0.12em] uppercase text-white shadow-sm transition-colors hover:bg-[#a88449]">See What Susie Says</Link>
             )}
-            <a href="tel:+14805265656" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple">Call or Text Susie</a>
+            <a href="tel:+14805265655" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm border border-purple/25 px-4 py-3 font-sans text-xs font-medium tracking-[0.12em] uppercase text-purple">Call or Text Susie</a>
             <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="mt-3 flex items-center justify-center rounded-sm bg-purple px-4 py-3 text-center font-sans text-xs font-medium tracking-[0.12em] uppercase text-white">Book Your Free Professional Consult</a>
           </aside>
         </div>

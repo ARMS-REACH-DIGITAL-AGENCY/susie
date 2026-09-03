@@ -55,6 +55,11 @@ body {
       text-align: justify;
       text-justify: inter-word;
     }
+
+    /* Reserve the right side of the hero image for Susie's face. */
+    .body-reset-page > section > div > .relative.z-10 > div:first-child {
+      max-width: 25rem;
+    }
   }
 }
 
@@ -157,5 +162,21 @@ body {
   .body-reset-page form details + p {
     font-size: 0.58rem;
     line-height: 1.35;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Keep the long evaluation form below the hero copy instead of covering the image. */
+  .body-reset-page > section > div > .relative.z-10 {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .body-reset-page > section > div > .relative.z-10 > form {
+    margin-top: 1.25rem !important;
+    max-width: none !important;
+    justify-self: auto !important;
   }
 }

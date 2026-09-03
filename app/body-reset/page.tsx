@@ -10,6 +10,7 @@ type Product = { count: number; price: number; duration: number | null; href: st
 type Offer = { key: Key; name: string; short: string; icon: string; description: string; included: string[]; benefits: string[]; products: Product[] };
 type Fields = { fullName: string; email: string; phone: string; serviceSmsConsent: boolean; marketingSmsConsent: boolean; symptoms: string[]; tried: string[]; goals: string[]; priority: string; urgency: string };
 type SavedState = { version: 3; leadCaptured: boolean; step: number; status: "quiz" | "results"; fields: Fields };
+type LegacySavedFields = Partial<Fields> & { firstName?: unknown };
 type RecommendationNote = { firstName: string; reasons: string[] };
 
 const STORAGE_KEY = "susie-sculpts-evaluation-v3";
@@ -290,8 +291,20 @@ export default function BodyResetPage() {
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") as SavedState | null;
-      if (saved?.version === 3) {
-        const savedFields = saved.fields.priority === REMOVED_PRIORITY ? { ...saved.fields, priority: "" } : saved.fields;
+      if (saved?.version === 3 && saved.fields) {
+        const legacyFields = saved.fields as LegacySavedFields;
+        const fullName = typeof legacyFields.fullName === "string"
+          ? legacyFields.fullName
+          : typeof legacyFields.firstName === "string"
+            ? legacyFields.firstName
+            : "";
+        // Preserve quiz progress saved before the form changed from First Name to Full Name.
+        const savedFields = {
+          ...emptyFields,
+          ...legacyFields,
+          fullName,
+          priority: legacyFields.priority === REMOVED_PRIORITY ? "" : legacyFields.priority ?? "",
+        };
         setLeadCaptured(saved.leadCaptured);
         setStep(saved.step);
         setStatus(saved.status === "results" ? "results" : "idle");
@@ -320,7 +333,7 @@ export default function BodyResetPage() {
   if (!hydrated) return <main className="min-h-screen bg-cream pt-20" />;
 
   if (status === "results") {
-    const firstName = fields.fullName.trim().split(/\s+/)[0] || "there";
+    const firstName = (fields.fullName || "").trim().split(/\s+/)[0] || "there";
     const others = offers
       .filter((offer) => offer.key !== result.key)
       .sort((a, b) => Number(a.key === "ultimate") - Number(b.key === "ultimate"));

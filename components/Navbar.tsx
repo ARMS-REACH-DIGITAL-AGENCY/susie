@@ -91,6 +91,7 @@ export default function Navbar() {
               <a href="/#treatments" className="hover:text-purple transition-colors whitespace-nowrap">Treatments</a>
               <a href={reviewsHref} className="hover:text-purple transition-colors whitespace-nowrap">Reviews</a>
               <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">FAQ</a>
+              <Link href="/blog" className="hover:text-purple transition-colors whitespace-nowrap">Blog</Link>
               <a href={consultationBookingUrl} target="_blank" rel="noopener noreferrer" className="hover:text-purple transition-colors whitespace-nowrap">Book Your Free Professional Consult</a>
               {isResultsPage ? (
                 <button
@@ -131,6 +132,7 @@ export default function Navbar() {
               <a href="/#treatments" onClick={closeMenu} className="border-b border-stone py-4">Treatments</a>
               <a href={reviewsHref} onClick={closeMenu} className="border-b border-stone py-4">Reviews</a>
               <a href={faqHref} onClick={closeMenu} className="border-b border-stone py-4">FAQ</a>
+              <Link href="/blog" onClick={closeMenu} className="border-b border-stone py-4">Blog</Link>
             </nav>
 
             {isResultsPage ? (

@@ -61,6 +61,7 @@ export default function Footer() {
           <div>
             <p className="mb-2 text-xs font-medium uppercase tracking-widest text-gold">Services</p>
             <p className="text-xs font-light leading-relaxed text-cream/50">Synergie Vacuum Massage · PEMF Wellness · EMShape Neo · Ultrasonic Cavitation &amp; RF · Holistic Wellness</p>
+            <Link href="/blog" className="mt-3 inline-block text-xs font-medium uppercase tracking-[0.12em] text-cream transition-colors hover:text-gold">Blog</Link>
           </div>
         </div>
 

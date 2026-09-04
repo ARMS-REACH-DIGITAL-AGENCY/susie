@@ -26,7 +26,8 @@ export default function ContentPortalPage() {
     event.preventDefault();
     setState({ type: "submitting" });
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const payload = Object.fromEntries(form.entries());
 
     try {
@@ -55,7 +56,7 @@ export default function ContentPortalPage() {
         type: "success",
         message: "Article submitted. It has been saved to Susie Sculpts as a draft for review.",
       });
-      event.currentTarget.reset();
+      formElement.reset();
     } catch {
       setState({
         type: "error",

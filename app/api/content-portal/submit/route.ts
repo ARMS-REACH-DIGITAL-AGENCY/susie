@@ -1,7 +1,7 @@
 import { createHash, timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 
-const ACCESS_KEY_SHA256 = "f0886bee642d9fc4eb35d7cd108bca4cd3b79a4325dab886654cd913b81442da";
+const ACCESS_KEY_SHA256 = "0ad7ace96937e2c01f321841a370cf9de833013ef03aeba9299f48631f3dba5d";
 const BRIDGE_ENDPOINT =
   "https://client-bridge.armsreachdigital.agency/api/susie-blog-draft";
 

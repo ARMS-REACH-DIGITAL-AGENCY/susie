@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/body-reset"],
+      disallow: ["/api/", "/body-reset", "/content-portal"],
     },
     sitemap: "https://www.susiesculpts.com/sitemap.xml",
     host: "https://www.susiesculpts.com",

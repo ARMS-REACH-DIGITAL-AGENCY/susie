@@ -38,7 +38,7 @@ function TreatmentDetails({ treatment }: { treatment: (typeof treatments)[number
       </div>
       <p className="mb-2.5 font-sans text-[13px] font-light leading-[1.45] text-muted md:mb-4 md:text-sm md:leading-relaxed">{treatment.description}</p>
       <ul className="mb-3 space-y-1 md:mb-5 md:space-y-1.5">{treatment.bullets.map((bullet) => <li key={bullet} className="flex items-start gap-2 font-sans text-[11px] font-light leading-snug text-muted md:text-xs"><span className="text-purple">✦</span><span>{bullet}</span></li>)}</ul>
-      <Link href="/body-reset" className="btn-primary mt-auto w-full py-3 text-center md:py-4" onClick={(event) => event.stopPropagation()}>See If This Is Right For You</Link>
+      <Link href="/treatments" className="btn-primary mt-auto w-full py-3 text-center md:py-4" onClick={(event) => event.stopPropagation()}>View Pricing &amp; Packages</Link>
     </div>
   );
 }

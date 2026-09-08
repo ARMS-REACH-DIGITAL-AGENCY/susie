@@ -1,4 +1,14 @@
+import Image from "next/image";
 import { treatmentOffers, type TreatmentOffer, type TreatmentProduct } from "@/lib/treatment-offers";
+
+const ultimateTreatmentLinks = [
+  ["Body Contouring", "contour"],
+  ["Fascia + Skin Revival", "fascia"],
+  ["Lymphatic Wellness", "lymphatic"],
+  ["Muscle + Strength + Tone", "muscle"],
+  ["Pelvic Floor Strengthening", "pelvic"],
+  ["PEMF Recovery + Wellness", "pemf"],
+] as const;
 
 function money(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -31,12 +41,25 @@ function purchaseLabel(offer: TreatmentOffer, product: TreatmentProduct) {
 
 function PricingOption({ offer, product }: { offer: TreatmentOffer; product: TreatmentProduct }) {
   const isSingle = product.count === 1;
+  const isUltimate = offer.key === "ultimate";
 
   return (
     <article className={`flex min-h-[186px] flex-col rounded-[14px] border p-3.5 ${isSingle ? "border-stone bg-white" : "border-purple/20 bg-purple/[0.025]"}`}>
       <p className="section-label mb-2 text-[10px]">{packageLabel(product)}</p>
       <p className="font-serif text-3xl font-light text-purple md:text-4xl">{money(product.price)}</p>
       <p className="mt-1.5 min-h-9 font-sans text-[10px] font-medium uppercase leading-relaxed tracking-[0.05em] text-muted">{packageDetail(offer, product)}</p>
+      {isUltimate && (
+        <ul className="mt-3 grid gap-1.5 border-t border-purple/10 pt-3 sm:grid-cols-2">
+          {ultimateTreatmentLinks.map(([label, key]) => (
+            <li key={key}>
+              <a href={`#${key}`} className="flex items-center gap-2 font-sans text-xs font-light text-muted transition-colors hover:text-purple">
+                <span className="text-purple">✦</span>
+                <span>{label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
       <a href={product.href} className={isSingle ? "btn-secondary mt-auto w-full px-2 py-2.5 text-[9px]" : "btn-primary mt-auto w-full px-2 py-2.5 text-[9px]"}>
         {purchaseLabel(offer, product)}
       </a>
@@ -50,9 +73,13 @@ function TreatmentRow({ offer }: { offer: TreatmentOffer }) {
       <div className="xl:grid xl:grid-cols-[245px_1fr] xl:gap-6">
         <header className="border-b border-stone pb-4 xl:border-b-0 xl:border-r xl:pr-6">
           <p className="section-label mb-2 text-[10px]">Treatment Series</p>
-          <h2 className="font-serif text-2xl font-light leading-tight text-[#2c1f14] md:text-3xl">{offer.name}</h2>
+          <div className="flex items-center gap-3">
+            <div className={`relative h-12 w-12 shrink-0 ${offer.key === "ultimate" ? "overflow-hidden rounded-full border border-purple/15 bg-white" : ""}`}>
+              <Image src={offer.icon} alt="" fill sizes="48px" className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain"} />
+            </div>
+            <h2 className="font-serif text-2xl font-light leading-tight text-[#2c1f14] md:text-3xl">{offer.name}</h2>
+          </div>
           <p className="mt-2 font-sans text-sm font-light leading-relaxed text-muted">{offer.description}</p>
-          {offer.key === "ultimate" && <p className="mt-3 rounded-[12px] border border-gold/25 bg-gold/5 p-3 font-sans text-xs font-light leading-relaxed text-muted">Six signature treatments intended as one complete starting experience.</p>}
         </header>
         <div className={`mt-4 grid gap-3 ${offer.products.length === 1 ? "grid-cols-1" : "grid-cols-2 md:grid-cols-4"} xl:mt-0`}>
           {offer.products.map((product) => <PricingOption key={`${offer.key}-${product.count}`} offer={offer} product={product} />)}

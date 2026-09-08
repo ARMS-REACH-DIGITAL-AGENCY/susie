@@ -18,22 +18,17 @@ export default function TreatmentsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-cream pt-24 md:pt-32">
-        <section className="border-b border-purple/10 bg-purple/5 py-14 md:py-20">
-          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+      <main className="min-h-screen bg-cream pb-4 pt-24 md:pt-28">
+        <section className="mx-auto max-w-6xl px-4 pb-8 sm:px-6 md:pb-10">
+          <div className="rounded-[20px] border border-purple/15 bg-white px-5 py-6 text-center shadow-[0_8px_24px_rgba(60,40,80,.05)] md:px-8 md:py-8">
             <p className="section-label">Treatments &amp; Pricing</p>
-            <h1 className="mt-4 font-serif text-4xl font-light leading-tight text-[#2c1f14] md:text-6xl">Choose the support that feels right for you.</h1>
-            <p className="mx-auto mt-5 max-w-2xl font-sans text-base font-light leading-relaxed text-muted md:text-lg">Explore every Susie Sculpts treatment series, compare package options, and purchase securely whenever you&apos;re ready.</p>
-            <a href="/body-reset" className="btn-secondary mt-7">Not sure where to begin? Take the Body Reset</a>
+            <h1 className="mt-3 font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-4xl">Select your treatment package.</h1>
+            <p className="mx-auto mt-3 max-w-2xl font-sans text-sm font-light leading-relaxed text-muted">Choose a series, select the package that fits your goals, and purchase securely. Not sure which treatment is right for you? Take the free Body Reset evaluation first.</p>
+            <a href="/body-reset" className="btn-secondary mt-5 px-5 py-3">Take the Body Reset</a>
           </div>
         </section>
 
-        <section className="pt-12 md:pt-16">
-          <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-            <p className="section-label">Your choice, your pace</p>
-            <h2 className="mt-3 font-serif text-3xl font-light leading-tight text-[#2c1f14] md:text-4xl">Tap a treatment to view its options.</h2>
-            <p className="mx-auto mt-3 max-w-2xl font-sans text-sm font-light leading-relaxed text-muted">Every card shows what the series supports, its available package sizes, the per-treatment value where applicable, and a secure purchase link. If you would rather talk it through, Susie&apos;s free Body Reset evaluation is always available.</p>
-          </div>
+        <section>
           <TreatmentPricingHub />
         </section>
       </main>

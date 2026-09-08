@@ -60,7 +60,7 @@ function PricingOption({ offer, product }: { offer: TreatmentOffer; product: Tre
           ))}
         </ul>
       )}
-      <a href={product.href} className={isSingle ? `btn-secondary ${isUltimate ? "mt-3" : "mt-auto"} w-full px-2 py-2.5 text-[9px]` : "btn-primary mt-auto w-full px-2 py-2.5 text-[9px]"}>
+      <a href={product.href} className={isUltimate ? "btn-primary mt-3 w-full px-2 py-2.5 text-[9px]" : isSingle ? "btn-secondary mt-auto w-full px-2 py-2.5 text-[9px]" : "btn-primary mt-auto w-full px-2 py-2.5 text-[9px]"}>
         {purchaseLabel(offer, product)}
       </a>
     </article>

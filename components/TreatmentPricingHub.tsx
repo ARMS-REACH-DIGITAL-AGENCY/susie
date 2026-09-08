@@ -70,14 +70,16 @@ function PricingOption({ offer, product }: { offer: TreatmentOffer; product: Tre
 function TreatmentRow({ offer }: { offer: TreatmentOffer }) {
   return (
     <section id={offer.key} className="section-anchor rounded-[20px] border border-purple/15 bg-white p-4 shadow-[0_8px_24px_rgba(60,40,80,.05)] md:p-5">
-      <div className="xl:grid xl:grid-cols-[245px_1fr] xl:gap-6">
+      <div className="xl:grid xl:grid-cols-[330px_1fr] xl:gap-6">
         <header className="border-b border-stone pb-4 xl:border-b-0 xl:border-r xl:pr-6">
-          <p className="section-label mb-2 text-[10px]">Treatment Series</p>
           <div className="flex items-center gap-3">
-            <div className={`relative h-12 w-12 shrink-0 ${offer.key === "ultimate" ? "overflow-hidden rounded-full border border-purple/15 bg-white" : ""}`}>
-              <Image src={offer.icon} alt="" fill sizes="48px" className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain"} />
+            <div className={`relative h-[clamp(2.25rem,10vw,3rem)] w-[clamp(2.25rem,10vw,3rem)] shrink-0 xl:h-[58px] xl:w-[58px] xl:basis-[58px] ${offer.key === "ultimate" ? "overflow-hidden rounded-full border border-purple/15 bg-white" : ""}`}>
+              <Image src={offer.icon} alt="" fill sizes="(min-width: 1280px) 58px, 48px" className={offer.key === "ultimate" ? "object-cover object-top" : "object-contain"} />
             </div>
-            <h2 className="font-serif text-2xl font-light leading-tight text-[#2c1f14] md:text-3xl">{offer.name}</h2>
+            <div className="min-w-0 flex-1 text-left">
+              <p className="section-label mb-1 text-[10px]">Treatment Series</p>
+              <h2 className="whitespace-nowrap font-serif text-[clamp(0.95rem,4vw,1.35rem)] font-light leading-[1.02] tracking-[-0.01em] text-[#2c1f14]">{offer.name}</h2>
+            </div>
           </div>
           <p className="mt-2 font-sans text-sm font-light leading-relaxed text-muted">{offer.description}</p>
         </header>

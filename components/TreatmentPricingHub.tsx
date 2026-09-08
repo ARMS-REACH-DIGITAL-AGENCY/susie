@@ -65,13 +65,6 @@ function TreatmentRow({ offer }: { offer: TreatmentOffer }) {
 export default function TreatmentPricingHub() {
   return (
     <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:pb-20">
-      <div className="mb-6 flex flex-wrap justify-center gap-2 md:mb-8">
-        {treatmentOffers.map((offer) => (
-          <a key={offer.key} href={`#${offer.key}`} className="rounded-full border border-purple/20 bg-white px-3 py-2 font-sans text-[10px] font-medium uppercase tracking-[0.1em] text-purple transition hover:border-purple hover:bg-purple hover:text-white">
-            {offer.short}
-          </a>
-        ))}
-      </div>
       <div className="space-y-5">
         {treatmentOffers.map((offer) => <TreatmentRow key={offer.key} offer={offer} />)}
       </div>

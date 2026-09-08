@@ -10,6 +10,15 @@ const consultationBookingUrl =
   "https://api.armsreachdigital.com/widget/booking/3yvXSJo59kMORz5W3H4e";
 const desktopEvaluationActionClass =
   "rounded-sm bg-purple px-3 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.13em] text-white transition-colors hover:bg-purple-dark whitespace-nowrap";
+const treatmentPricingLinks = [
+  ["Ultimate YOU", "/treatments#ultimate"],
+  ["Muscle + Tone", "/treatments#muscle"],
+  ["Body Contouring", "/treatments#contour"],
+  ["Fascia + Skin", "/treatments#fascia"],
+  ["Pelvic Floor", "/treatments#pelvic"],
+  ["Lymphatic", "/treatments#lymphatic"],
+  ["PEMF", "/treatments#pemf"],
+] as const;
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -88,7 +97,15 @@ export default function Navbar() {
           <div className="flex items-center gap-2 lg:gap-5">
             <nav className="hidden lg:flex items-center gap-4 font-sans text-[10px] font-medium tracking-[0.13em] uppercase text-muted">
               <a href={meetSusieHref} className="hover:text-purple transition-colors whitespace-nowrap">Meet Susie</a>
-              <a href="/#treatments" className="hover:text-purple transition-colors whitespace-nowrap">Treatments</a>
+              <div className="group relative">
+                <a href="/#treatments" className="hover:text-purple transition-colors whitespace-nowrap">Treatments</a>
+                <div className="invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="rounded-sm border border-purple/15 bg-white p-2 shadow-xl">
+                    <Link href="/treatments" className="block border-b border-stone px-3 py-2 text-[10px] font-semibold tracking-[0.12em] text-purple hover:bg-purple/5">VIEW ALL PRICING</Link>
+                    {treatmentPricingLinks.map(([label, href]) => <Link key={href} href={href} className="block px-3 py-2 text-[10px] tracking-[0.1em] text-muted hover:bg-purple/5 hover:text-purple">{label}</Link>)}
+                  </div>
+                </div>
+              </div>
               <a href={reviewsHref} className="hover:text-purple transition-colors whitespace-nowrap">Reviews</a>
               <a href={faqHref} className="hover:text-purple transition-colors whitespace-nowrap">FAQ</a>
               <Link href="/blog" className="hover:text-purple transition-colors whitespace-nowrap">Blog</Link>
@@ -130,6 +147,12 @@ export default function Navbar() {
               <Link href="/" onClick={closeMenu} className="border-b border-stone py-4">Home</Link>
               <a href={meetSusieHref} onClick={closeMenu} className="border-b border-stone py-4">Meet Susie</a>
               <a href="/#treatments" onClick={closeMenu} className="border-b border-stone py-4">Treatments</a>
+              <div className="border-b border-stone bg-white/40 px-3 py-3">
+                <Link href="/treatments" onClick={closeMenu} className="block pb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.13em] text-purple">View All Pricing</Link>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
+                  {treatmentPricingLinks.map(([label, href]) => <Link key={href} href={href} onClick={closeMenu} className="font-sans text-[10px] uppercase tracking-[0.08em] text-muted hover:text-purple">{label}</Link>)}
+                </div>
+              </div>
               <a href={reviewsHref} onClick={closeMenu} className="border-b border-stone py-4">Reviews</a>
               <a href={faqHref} onClick={closeMenu} className="border-b border-stone py-4">FAQ</a>
               <Link href="/blog" onClick={closeMenu} className="border-b border-stone py-4">Blog</Link>

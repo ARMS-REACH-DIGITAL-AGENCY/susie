@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const treatments = [
-  { title: "Lymphatic Wellness Series", tag: "Lymphatic", icon: "lymphatic", description: "A gentle treatment using controlled suction to support healthy lymphatic flow, circulation, and a lighter refreshed feeling.", bullets: ["Supports healthy lymphatic flow", "Supports circulation and wellness", "Helps you feel lighter and less puffy", "Supports healthy digestion and elimination"] },
-  { title: "PEMF Recovery and Wellness Series", tag: "PEMF", icon: "pemf", description: "Pulsed electromagnetic field sessions designed to support circulation, relaxation, recovery, energy, and whole-body wellness.", bullets: ["Supports recovery and relaxation", "Supports circulation", "Supports energy and clarity", "Pairs well with other treatments"] },
-  { title: "Muscle + Strength + Tone Series", tag: "Muscle", icon: "muscle", description: "A non-invasive treatment using electromagnetic technology to activate muscles, support tone, and help you feel stronger.", bullets: ["Muscle activation and tone", "Body contouring support", "Supports abdomen, thighs, and glutes", "No surgery or downtime"] },
-  { title: "Body Contouring Series", tag: "Contour", icon: "contour", description: "A gentle contouring approach that supports smoother, firmer-feeling skin and helps target stubborn areas without surgery.", bullets: ["Supports body contouring", "Supports firmer-feeling skin", "Targets stubborn areas", "Non-invasive treatment"] },
-  { title: "Fascia and Skin Revival Series", tag: "Fascia", icon: "fascia", description: "Focused bodywork designed to support circulation, fascia mobility, smoother-looking skin, and a refreshed feeling.", bullets: ["Supports skin texture and smoothness", "Supports circulation", "Targets visible texture", "Supports fascia mobility"] },
-  { title: "Pelvic Floor Strengthening Series", tag: "Pelvic", icon: "pelvic", description: "A non-invasive strengthening option focused on pelvic-floor and deep-core support, designed for comfort and privacy.", bullets: ["Supports pelvic-floor strength", "Supports deep-core engagement", "Fully clothed and private", "No downtime"] },
+  { title: "Lymphatic Wellness Series", tag: "Lymphatic", icon: "lymphatic", pricingAnchor: "lymphatic", description: "A gentle treatment using controlled suction to support healthy lymphatic flow, circulation, and a lighter refreshed feeling.", bullets: ["Supports healthy lymphatic flow", "Supports circulation and wellness", "Helps you feel lighter and less puffy", "Supports healthy digestion and elimination"] },
+  { title: "PEMF Recovery and Wellness Series", tag: "PEMF", icon: "pemf", pricingAnchor: "pemf", description: "Pulsed electromagnetic field sessions designed to support circulation, relaxation, recovery, energy, and whole-body wellness.", bullets: ["Supports recovery and relaxation", "Supports circulation", "Supports energy and clarity", "Pairs well with other treatments"] },
+  { title: "Muscle + Strength + Tone Series", tag: "Muscle", icon: "muscle", pricingAnchor: "muscle", description: "A non-invasive treatment using electromagnetic technology to activate muscles, support tone, and help you feel stronger.", bullets: ["Muscle activation and tone", "Body contouring support", "Supports abdomen, thighs, and glutes", "No surgery or downtime"] },
+  { title: "Body Contouring Series", tag: "Contour", icon: "contour", pricingAnchor: "contour", description: "A gentle contouring approach that supports smoother, firmer-feeling skin and helps target stubborn areas without surgery.", bullets: ["Supports body contouring", "Supports firmer-feeling skin", "Targets stubborn areas", "Non-invasive treatment"] },
+  { title: "Fascia and Skin Revival Series", tag: "Fascia", icon: "fascia", pricingAnchor: "fascia", description: "Focused bodywork designed to support circulation, fascia mobility, smoother-looking skin, and a refreshed feeling.", bullets: ["Supports skin texture and smoothness", "Supports circulation", "Targets visible texture", "Supports fascia mobility"] },
+  { title: "Pelvic Floor Strengthening Series", tag: "Pelvic", icon: "pelvic", pricingAnchor: "pelvic", description: "A non-invasive strengthening option focused on pelvic-floor and deep-core support, designed for comfort and privacy.", bullets: ["Supports pelvic-floor strength", "Supports deep-core engagement", "Fully clothed and private", "No downtime"] },
 ];
 
 const treatmentIconSources: Record<string, string> = {
@@ -27,13 +26,7 @@ function TreatmentIcon({ type, compact = false }: { type: string; compact?: bool
   return <span className={`relative block shrink-0 ${size}`} aria-hidden="true"><img src={treatmentIconSources[type]} alt="" className="h-full w-full object-contain" /></span>;
 }
 
-function TreatmentDetails({
-  treatment,
-  isBodyResetPage,
-}: {
-  treatment: (typeof treatments)[number];
-  isBodyResetPage: boolean;
-}) {
+function TreatmentDetails({ treatment }: { treatment: (typeof treatments)[number] }) {
   return (
     <div className="flex h-full flex-col">
       <div className="mb-2 flex items-start gap-3 md:mb-4">
@@ -45,13 +38,12 @@ function TreatmentDetails({
       </div>
       <p className="mb-2.5 font-sans text-[13px] font-light leading-[1.45] text-muted md:mb-4 md:text-sm md:leading-relaxed">{treatment.description}</p>
       <ul className="mb-3 space-y-1 md:mb-5 md:space-y-1.5">{treatment.bullets.map((bullet) => <li key={bullet} className="flex items-start gap-2 font-sans text-[11px] font-light leading-snug text-muted md:text-xs"><span className="text-purple">✦</span><span>{bullet}</span></li>)}</ul>
-      <Link href={isBodyResetPage ? "/treatments" : "/body-reset"} className="btn-primary mt-auto w-full py-3 text-center md:py-4" onClick={(event) => event.stopPropagation()}>{isBodyResetPage ? "View Pricing & Packages" : "See If This Is Right For You"}</Link>
+      <Link href={`/treatments#${treatment.pricingAnchor}`} className="btn-primary mt-auto w-full py-3 text-center md:py-4" onClick={(event) => event.stopPropagation()}>View Pricing &amp; Packages</Link>
     </div>
   );
 }
 
 export default function Services() {
-  const isBodyResetPage = usePathname() === "/body-reset";
   const [selected, setSelected] = useState(0);
   const [flippedCards, setFlippedCards] = useState<Set<number>>(() => new Set());
   const toggleCard = (index: number) => setFlippedCards((current) => { const next = new Set(current); next.has(index) ? next.delete(index) : next.add(index); return next; });
@@ -65,7 +57,7 @@ export default function Services() {
           <div className="grid grid-cols-6 gap-1 rounded-t-[18px] border border-purple/10 bg-cream/95 p-2">
             {treatments.map((treatment, index) => <button key={treatment.title} type="button" onClick={() => setSelected(index)} className={`flex min-h-[82px] flex-col items-center justify-center rounded-[10px] border px-0.5 py-1.5 ${selected === index ? "border-purple bg-purple/10" : "border-stone/80 bg-white/75"}`}><TreatmentIcon type={treatment.icon} compact /><span className="mt-1 text-[7px] font-medium uppercase text-purple">{treatment.tag}</span></button>)}
           </div>
-          <div className="rounded-b-[18px] border border-t-0 border-purple/15 bg-white p-3 shadow-[0_10px_28px_rgba(60,40,80,0.08)]"><TreatmentDetails treatment={treatments[selected]} isBodyResetPage={isBodyResetPage} /></div>
+          <div className="rounded-b-[18px] border border-t-0 border-purple/15 bg-white p-3 shadow-[0_10px_28px_rgba(60,40,80,0.08)]"><TreatmentDetails treatment={treatments[selected]} /></div>
         </div>
 
         <div className="hidden gap-5 md:grid md:grid-cols-2 xl:grid-cols-3">
@@ -74,7 +66,7 @@ export default function Services() {
             return <div key={treatment.title} role="button" tabIndex={0} onClick={() => toggleCard(index)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); toggleCard(index); } }} className="h-[430px] cursor-pointer rounded-[22px] outline-none [perspective:1200px]">
               <div className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}>
                 <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[22px] border border-purple/15 bg-gradient-to-br from-white via-cream to-purple/5 p-6 text-center shadow-[0_10px_28px_rgba(60,40,80,0.08)] [backface-visibility:hidden]"><p className="section-label mb-2">{treatment.tag}</p><TreatmentIcon type={treatment.icon} /><h3 className="mt-2 font-serif text-2xl font-light leading-tight text-[#2c1f14]">{treatment.title}</h3><p className="mt-4 text-xs font-medium uppercase tracking-[0.12em] text-purple/70">Tap to Learn More</p></div>
-                <div className="absolute inset-0 rounded-[22px] border border-purple/20 bg-white p-6 shadow-[0_10px_28px_rgba(60,40,80,0.10)] [backface-visibility:hidden] [transform:rotateY(180deg)]"><TreatmentDetails treatment={treatment} isBodyResetPage={isBodyResetPage} /></div>
+                <div className="absolute inset-0 rounded-[22px] border border-purple/20 bg-white p-6 shadow-[0_10px_28px_rgba(60,40,80,0.10)] [backface-visibility:hidden] [transform:rotateY(180deg)]"><TreatmentDetails treatment={treatment} /></div>
               </div>
             </div>;
           })}

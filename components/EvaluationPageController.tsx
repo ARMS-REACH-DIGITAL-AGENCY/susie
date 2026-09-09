@@ -67,19 +67,6 @@ export default function EvaluationPageController() {
     const style = document.createElement("style");
     style.id = "body-reset-responsive-hero";
     style.textContent = `
-      /* Keep quiz and results content below the fixed navigation. */
-      .evaluation-quiz-active .body-reset-route > main,
-      .evaluation-results-active .body-reset-route > main {
-        padding-top: 5rem !important;
-      }
-
-      @media (min-width: 768px) {
-        .evaluation-quiz-active .body-reset-route > main,
-        .evaluation-results-active .body-reset-route > main {
-          padding-top: 6rem !important;
-        }
-      }
-
       /* Results treatment cards: one card across at every width. */
       .evaluation-results-active #full-treatment-list > div.grid {
         grid-template-columns: minmax(0, 1fr) !important;

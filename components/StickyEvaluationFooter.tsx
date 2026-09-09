@@ -11,6 +11,7 @@ const consultationUrl =
 export default function StickyEvaluationFooter() {
   const pathname = usePathname();
   const isHomepage = pathname === "/";
+  const isTreatmentPricingPage = pathname === "/treatments";
   const isEvaluationPage = pathname === "/body-reset";
   const [evaluationComplete, setEvaluationComplete] = useState(false);
 
@@ -55,7 +56,7 @@ export default function StickyEvaluationFooter() {
 
   const resultsMode = isEvaluationPage && evaluationComplete;
 
-  if (!isHomepage && !resultsMode) return null;
+  if (!isHomepage && !isTreatmentPricingPage && !resultsMode) return null;
 
   const supportingLineClass =
     "font-sans text-[11px] font-light leading-none tracking-[0.025em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)] sm:text-[13px]";
